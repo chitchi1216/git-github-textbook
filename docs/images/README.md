@@ -33,6 +33,7 @@
 | `ch04-repositories-menu.png` | GitHub のダッシュボードで、自分のアイコンのメニューから「Repositories」を選ぶ（第4章。リポジトリ名は塗りつぶし済み） |
 | `ch04-repositories-new.png` | リポジトリの一覧の画面と、青い「New」ボタン（第4章） |
 | `ch04-new-repo.png` | 「Create a new repository」の画面（名前 `my-notes`、Private、Add README は Off）（第4章） |
+| `ch04-edit-file.png` | GitHub の画面で `hello.txt` を編集する画面（第4章のチャレンジ1） |
 | `ch04-quick-setup.png` | 作成直後のリポジトリの画面（Quick setup。第4章） |
 | `ch04-repo-after-push.png` | `push` のあとの GitHub のリポジトリ画面（メールアドレスは塗りつぶし。第4章） |
 | `ch04-browser-auth.png` | 第4章 | 初めて `git push` したときに開く、ログイン・許可の画面 |
@@ -57,8 +58,6 @@
 | `ch02-pwd-ls.png` | PowerShell で `pwd` と `ls` を打った画面（第2章と、第0章 0-10 で使用） |
 | `ch03-commit-editmsg.png` | `-m` なしの `git commit` で開く、メモ帳の画面（メールアドレスは塗りつぶし） |
 
-まだ必要な画像は、次のとおりです。
-
-- 第4章: `ch04-edit-file.png`（GitHub の画面で `hello.txt` を編集する画面）
+まだ必要な画像は、ありません（第4章まで、すべてそろいました）。
 
 本文では使っていない画像：`ch01-explorer-extension.png`（拡張子が表示されたエクスプローラー）。
