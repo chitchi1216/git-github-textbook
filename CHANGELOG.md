@@ -3,6 +3,10 @@
 版の付け方：`大.中.小`。章を追加したら「中」、誤字や表現の修正は「小」を上げる。
 版を上げるときは、`python3 tools/set_version.py 新しい版` を実行して、全ページのヘッダーを更新する。
 
+## 0.4.13（ドラフト）— 2026-10-11
+
+- 第4章 チャレンジ1: GitHub の画面で編集する写真を追加。「Commit changes」の画面の項目（Commit message、Extended description、Commit directly to the main branch）の説明を追加
+
 ## 0.4.12（ドラフト）— 2026-10-11
 
 - 第4章: 実機の写真を差し替え・追加（入力済みの作成画面、作成直後の Quick setup、`push` のあとの画面。メールアドレスは塗りつぶし）。Quick setup の3行のうち、`git branch -M main` は打たなくてよいことを追記。コミット数の説明を、実機の画面に合わせて修正

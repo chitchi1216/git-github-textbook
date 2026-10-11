@@ -7,7 +7,7 @@
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<header class="site"><a class="title" href="index.html">Git と GitHub 入門</a><span class="ver"><!--ver--><a href="https://github.com/chitchi1216/git-github-textbook/blob/main/CHANGELOG.md">版 0.4.12（ドラフト）</a> ・ 2026-10-11 ・ 作成者 <a href="https://github.com/chitchi1216">chitchi1216</a><!--/ver--></span></header>
+<header class="site"><a class="title" href="index.html">Git と GitHub 入門</a><span class="ver"><!--ver--><a href="https://github.com/chitchi1216/git-github-textbook/blob/main/CHANGELOG.md">版 0.4.13（ドラフト）</a> ・ 2026-10-11 ・ 作成者 <a href="https://github.com/chitchi1216">chitchi1216</a><!--/ver--></span></header>
 <main class="wrap">
   <p class="meta">第4章 ／ 目安 70〜90分</p>
   <h1>GitHub と連携する：送る・受け取る</h1>
@@ -341,7 +341,14 @@ third line</span></pre>
     <p>GitHub の画面（ブラウザ）で <code>hello.txt</code> を編集して、<code>fourth line</code> という4行目を足してください。そのあと、<code>my-notes</code> フォルダで、その変更を<strong>受け取って</strong>、中身を確かめましょう。</p>
     <details>
       <summary>ヒント</summary>
-      <p>GitHub のリポジトリ画面で <code>hello.txt</code> をクリックし、右上の<strong>鉛筆のマーク</strong>（Edit this file）を押すと、ブラウザで編集できます。編集後は、緑の <strong>「Commit changes」</strong>を押して、記録します。</p>
+      <p>GitHub のリポジトリ画面で <code>hello.txt</code> をクリックし、右上の<strong>鉛筆のマーク</strong>（Edit）を押すと、ブラウザで編集できます。最後の行の下に、<code>fourth line</code> と入力します。編集後は、右上の青い <strong>「Commit changes...」</strong>を押し、出てくる画面で、次のように記録します。</p>
+      <table>
+        <tr><th>画面の項目</th><th>入力・選択するもの</th></tr>
+        <tr><td><code>Commit message</code></td><td>コミットのメッセージ。最初から <code>Update hello.txt</code> と入っています。そのままでも、<code>Add fourth line</code> などに直しても構いません</td></tr>
+        <tr><td><code>Extended description</code></td><td>くわしい説明（任意）。<strong>空のままで構いません</strong></td></tr>
+        <tr><td><code>Commit directly to the main branch</code></td><td><strong>これを選んだまま</strong>にします（<code>main</code> に、直接記録する）。<code>Create a new branch for this commit and start a pull request</code> は、第6章で使うので、今回は選びません</td></tr>
+      </table>
+      <p>最後に、右下の青い<strong>「Commit changes」</strong>を押して、記録します。</p>
     </details>
     <details>
       <summary>こたえと解説</summary>
@@ -352,7 +359,7 @@ type hello.txt</code></pre>
       <p>4行目が、手元に届いていれば成功です。これは、<strong>「別のメンバーが、GitHub 上で変更した」場面</strong>と同じです。GitHub の画面で直接編集できることも、覚えておくと便利です。</p>
       <figure class="shot">
         <img src="images/ch04-edit-file.png" alt="GitHub の画面でファイルを編集し、Commit changes を押す画面" onerror="this.parentNode.classList.add('missing')">
-        <figcaption>GitHub の画面で編集する</figcaption>
+        <figcaption>GitHub の画面で編集する。ファイルの内容が、エディタに出ます。右上の青い「<strong>Commit changes...</strong>」を押すと、記録の画面が出ます。（この写真は、いくつか行を足した人のものなので、行の内容は、あなたの画面と違います）</figcaption>
       </figure>
     </details>
   </div>
