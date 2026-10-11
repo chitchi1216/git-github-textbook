@@ -7,7 +7,7 @@
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<header class="site"><a class="title" href="index.html">Git と GitHub 入門</a><span class="ver"><!--ver--><a href="https://github.com/chitchi1216/git-github-textbook/blob/main/CHANGELOG.md">版 0.4.2（ドラフト）</a> ・ 2026-10-11 ・ 作成者 <a href="https://github.com/chitchi1216">chitchi1216</a><!--/ver--></span></header>
+<header class="site"><a class="title" href="index.html">Git と GitHub 入門</a><span class="ver"><!--ver--><a href="https://github.com/chitchi1216/git-github-textbook/blob/main/CHANGELOG.md">版 0.4.3（ドラフト）</a> ・ 2026-10-11 ・ 作成者 <a href="https://github.com/chitchi1216">chitchi1216</a><!--/ver--></span></header>
 <main class="wrap">
   <p class="meta">第3章 ／ 目安 60〜80分</p>
   <h1>Git の基本：記録をつくる</h1>
@@ -185,10 +185,22 @@ Changes to be committed:
     「<code>testcommit</code> というファイルは、見つかりません」という意味です。Git は、<code>-m</code> がないと、メッセージを<strong>ファイルの名前</strong>だと思ってしまいます。<code>git commit -m "メッセージ"</code> と、<strong>メッセージの前に <code>-m</code></strong> を付けて、打ち直してください。
     <ul>
       <li>変更が何もないときに、<code>git commit</code> だけ打つと、<code>nothing to commit, working tree clean</code>（記録するものがない）と出ます。壊れてはいません。</li>
-      <li>変更を <code>add</code> したあとで、<code>-m</code> なしの <code>git commit</code> を打つと、<strong>メモ帳が開きます</strong>（第0章で、エディタをメモ帳にしたためです）。1行目に、メッセージを書いて、保存して閉じると、記録されます。<strong>何も書かずに閉じる</strong>と、<code>Aborting commit due to empty commit message.</code>（メッセージが空なので、中止）と出て、記録されません。これも、壊れてはいません。</li>
+      <li>変更を <code>add</code> したあとで、<code>-m</code> なしの <code>git commit</code> を打つと、<strong>メモ帳が開きます</strong>（第0章で、エディタをメモ帳にしたためです）。<strong>1行目に、メッセージを書いて</strong>、保存して閉じると、記録されます。<code>#</code> で始まる行は、説明なので、消さなくても構いません。<strong>何も書かずに閉じる</strong>と、<code>Aborting commit due to empty commit message.</code>（メッセージが空なので、中止）と出て、記録されません。これも、壊れてはいません。</li>
     </ul>
   </div>
-  <!-- TODO: Win11実機で確認：-m なしの git commit でメモ帳が開き、保存して閉じると記録されること -->
+  <figure class="shot">
+    <img src="images/ch03-commit-editmsg.png" alt="-m なしで git commit したときに開く、メモ帳の COMMIT_EDITMSG の画面" onerror="this.parentNode.classList.add('missing')">
+    <figcaption><code>-m</code> なしで <code>git commit</code> を打つと、メモ帳が開く（ファイル名は <code>COMMIT_EDITMSG</code>）。1行目にメッセージを書いて、保存して閉じる。（メールアドレスは、黒く塗りつぶしてあります）</figcaption>
+  </figure>
+  <div class="box">
+    <strong class="title">メモ帳が開いているときの、表示について</strong>
+    <ul>
+      <li>ターミナルに、<code>hint: Waiting for your editor to close the file...</code>（エディタが閉じるのを待っています）と出ます。<strong>メモ帳を閉じると、続きが進みます。</strong>ターミナルが止まっているように見えても、慌てないでください。</li>
+      <li>そのあと、<code>unix2dos: converting file …</code>、<code>dos2unix: converting file …</code> と出ることがあります。改行の形式を、自動で変換しているお知らせです。<strong>無視して構いません。</strong></li>
+      <li>メモ帳の上に、<strong>文字を装飾するボタン</strong>（<code>H1</code>、<code>B</code>、<code>I</code> など）が出ていても、<strong>使わない</strong>でください。書式のための記号が、文字として入ってしまうことがあります。</li>
+      <li>日本語のメッセージを書いても、そのまま記録できます。</li>
+    </ul>
+  </div>
   <div class="box warn">
     <strong class="title">「Committer: … configured automatically」と出たら</strong>
     コミットのあとに、次のような警告が出ることがあります。

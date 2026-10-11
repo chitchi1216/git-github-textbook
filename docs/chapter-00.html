@@ -7,7 +7,7 @@
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<header class="site"><a class="title" href="index.html">Git と GitHub 入門</a><span class="ver"><!--ver--><a href="https://github.com/chitchi1216/git-github-textbook/blob/main/CHANGELOG.md">版 0.4.2（ドラフト）</a> ・ 2026-10-11 ・ 作成者 <a href="https://github.com/chitchi1216">chitchi1216</a><!--/ver--></span></header>
+<header class="site"><a class="title" href="index.html">Git と GitHub 入門</a><span class="ver"><!--ver--><a href="https://github.com/chitchi1216/git-github-textbook/blob/main/CHANGELOG.md">版 0.4.3（ドラフト）</a> ・ 2026-10-11 ・ 作成者 <a href="https://github.com/chitchi1216">chitchi1216</a><!--/ver--></span></header>
 <main class="wrap">
   <p class="meta">第0章 ／ 目安 50〜70分</p>
   <h1>はじめに・準備</h1>
@@ -319,9 +319,16 @@ core.editor=notepad</span></pre>
   </div>
   <div class="box">
     <strong class="title">うまくいかないとき</strong>
-    <code>git : 用語 'git' は、コマンドレット…として認識されません</code> と表示されたら、Git が見つかっていません。PowerShell をいったん閉じて開き直してからもう一度試してください。それでもだめなら、月1回の集まりかチャットで質問してください。
+    <code>git</code> と打って、次のような赤い文字が出たら、Git が見つかっていません。
+<pre class="term"><span class="out">git : 用語 'git' は、コマンドレット、関数、スクリプト ファイル、または操作可能なプログラムの名前として認識されません。名前が正しく記述されていることを確認し、パスが含まれている場合はそのパスが正しいことを確認してから、再試行してください。
+発生場所 行:1 文字:1
++ git --version
++ ~~~
+    + CategoryInfo          : ObjectNotFound: (git:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException</span></pre>
+    PowerShell をいったん閉じて、開き直してから、もう一度試してください（インストールのあとは、開き直さないと、Git が見つからないことがあります）。それでもだめなら、月1回の集まりかチャットで質問してください。
+    <br>これは、<strong>コマンドの名前を打ち間違えたとき</strong>にも出る、同じ形のエラーです（たとえば <code>gitt</code> と打つと、<code>'gitt'</code> として、同じ文言が出ます）。落ち着いて、綴りを確かめましょう。
   </div>
-  <!-- TODO: Win11実機で確認：Git 未インストール時のエラー文言、core.editor=notepad で、-m なしの commit のときメモ帳が開くか -->
 
   <h2>確認クイズ</h2>
   <details>
