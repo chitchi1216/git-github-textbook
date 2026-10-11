@@ -127,3 +127,16 @@ details.coffee li { margin: .5em 0; }
 /* 図の中の「PowerShell 風パネル」は、ライト・ダークどちらでも暗い背景なので、文字は常に明るい色 */
 .d text.tw { fill: #f2f2f2; }
 .d text.tb { fill: #c0d4ee; }
+
+/* ---- チャレンジ ---- */
+.challenge { border: 2px dashed var(--accent); border-radius: 12px; padding: 12px 18px; margin: 1.6em 0; background: var(--accent-bg); }
+.challenge > .title { display: block; font-weight: bold; margin-bottom: .3em; }
+.challenge details { background: var(--bg); }
+.challenge .level { color: var(--warn-border); letter-spacing: .1em; }
+
+/* ---- フッター ---- */
+footer.site-foot { border-top: 1px solid var(--border); margin-top: 2em; padding: 16px; text-align: center; color: var(--muted); font-size: .88rem; }
+
+/* ---- 付録（コマンド一覧） ---- */
+table.cmds td:first-child { white-space: nowrap; }
+table.cmds .soon td { color: var(--muted); }

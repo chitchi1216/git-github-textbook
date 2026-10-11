@@ -236,7 +236,7 @@ Mode                 LastWriteTime         Length Name
 
   <h3>手順8：ターミナルから、メモ帳を起動する</h3>
 <pre><code>notepad memo.txt</code></pre>
-  <p>メモ帳が開きます。<code>hello</code> と書いて、保存してください（<code>Ctrl</code> + <code>S</code>）。保存したら、メモ帳を閉じます。</p>
+  <p>メモ帳が開きます（「新しいファイルを作成しますか？」と聞かれたら、「はい」）。<code>hello</code> と書いて、<strong>最後に <code>Enter</code> を押して改行</strong>してから、保存してください（<code>Ctrl</code> + <code>S</code>）。保存したら、メモ帳を閉じます。</p>
   <div class="box">
     <strong class="title">ターミナルからアプリを起動できる</strong>
     <code>notepad</code> や <code>explorer</code> のように、アプリの名前を打つと、そのアプリが起動します。<code>notepad memo.txt</code> は「メモ帳で <code>memo.txt</code> を開いて」という指示です。メモ帳を開いたままでも、ターミナルに戻って、次のコマンドを打てます。
@@ -260,7 +260,91 @@ cd ..</code></pre>
     <code>cd C:\work</code> と打てば、学習用フォルダに移動できます。毎回、ここから始めてください。
   </div>
 
-  <h2>2-5. 便利な使い方</h2>
+  <h2>2-5. チャレンジ：メモ帳を使わずに、ファイルを扱う</h2>
+  <p>ここまでで基本は終わりです。ここからは、力試しです。<strong>メモ帳を開かずに</strong>、ターミナルだけでファイルの中身を見たり、書き足したり、探したりしてみましょう。必須ではないので、気軽に挑戦してください。<code>C:\work\practice</code> にいる状態で始めます（<code>cd C:\work\practice</code> で移動できます）。</p>
+
+  <div class="challenge">
+    <strong class="title">🎯 チャレンジ1 <span class="level">★☆☆</span>　メモ帳を開かずに、中身を見る</strong>
+    <p><code>memo.txt</code> の中身を、<code>cat</code> ではなく <strong><code>type</code></strong> というコマンドで表示してみましょう。</p>
+    <details>
+      <summary>ヒント</summary>
+      <p><code>cat memo.txt</code> の <code>cat</code> を、<code>type</code> に変えるだけです。</p>
+    </details>
+    <details>
+      <summary>こたえと解説</summary>
+<pre><code>type memo.txt</code></pre>
+<pre class="term"><span class="ps">PS C:\work\practice&gt; type memo.txt</span>
+<span class="out">hello</span></pre>
+      <p><code>type</code> も <code>cat</code> も、同じ働きをします。PowerShell では、ひとつのコマンドに、いくつもの<strong>別名</strong>（エイリアス）がついています。<code>type</code> は、昔のコマンドプロンプトで使われていた名前です。</p>
+      <table>
+        <tr><th>本当の名前</th><th>別名</th><th>働き</th></tr>
+        <tr><td><code>Get-Content</code></td><td><code>cat</code>、<code>type</code></td><td>ファイルの中身を表示する</td></tr>
+        <tr><td><code>Get-ChildItem</code></td><td><code>ls</code>、<code>dir</code></td><td>フォルダの中身を一覧する</td></tr>
+        <tr><td><code>Get-Location</code></td><td><code>pwd</code></td><td>今いる場所を表示する</td></tr>
+        <tr><td><code>Set-Location</code></td><td><code>cd</code></td><td>フォルダを移動する</td></tr>
+      </table>
+    </details>
+  </div>
+
+  <div class="challenge">
+    <strong class="title">🎯 チャレンジ2 <span class="level">★★☆</span>　メモ帳を開かずに、書き足す</strong>
+    <p><code>memo.txt</code> の最後に、<code>second line</code> という1行を、<strong>メモ帳を開かずに</strong>書き足してみましょう。書き足したら、<code>type memo.txt</code> で確かめます。</p>
+    <details>
+      <summary>ヒント</summary>
+      <p>「追加する」という意味の英語は <code>Add</code> です。<code>Add-Content ファイル名 "書き足す文字"</code> という形で使います。文字は <code>"</code> で囲みます（半角です）。</p>
+    </details>
+    <details>
+      <summary>こたえと解説</summary>
+<pre><code>Add-Content memo.txt "second line"
+type memo.txt</code></pre>
+<pre class="term"><span class="ps">PS C:\work\practice&gt; Add-Content memo.txt "second line"</span>
+<span class="ps">PS C:\work\practice&gt; type memo.txt</span>
+<span class="out">hello
+second line</span></pre>
+      <div class="box warn">
+        <strong class="title">手順8で、最後に Enter を押した理由</strong>
+        <code>Add-Content</code> は、ファイルの<strong>最後の続き</strong>に文字を書き足します。もし <code>hello</code> のあとに改行がないと、<code>hellosecond line</code> のように、同じ行にくっついてしまいます。くっついてしまったら、メモ帳で開いて、直せます。
+      </div>
+      <div class="box warn">
+        <strong class="title">似たコマンド <code>Set-Content</code> は、上書きする</strong>
+        <code>Set-Content</code> は、ファイルの中身を<strong>全部入れ替えます</strong>。すでにあるファイルに使うと、元の内容が消えます。書き足したいときは <code>Add-Content</code> です。
+      </div>
+    </details>
+  </div>
+
+  <div class="challenge">
+    <strong class="title">🎯 チャレンジ3 <span class="level">★★☆</span>　文字を探す</strong>
+    <p>まず、次のコマンドで、2つのファイルを作ります。</p>
+<pre><code>Set-Content fruits.txt "apple","banana","cherry"
+Set-Content animals.txt "cat","dog","bird"</code></pre>
+    <p>この2つのファイルと <code>memo.txt</code> の中から、<strong>「apple」という文字が入った行</strong>を探してください。どのファイルの、何行目にありますか？ 次に、<code>second</code> という文字も探してみましょう。</p>
+    <details>
+      <summary>ヒント</summary>
+      <p>「文字列を選び出す」という意味の英語を、くっつけた名前のコマンドがあります。<code>Select-String 探す文字 ファイル名</code> という形で使います。ファイル名の代わりに <code>*.txt</code> と書くと、<strong>.txt で終わるファイルすべて</strong>が対象になります。</p>
+    </details>
+    <details>
+      <summary>こたえと解説</summary>
+<pre><code>Select-String apple *.txt
+Select-String second *.txt</code></pre>
+<pre class="term"><span class="ps">PS C:\work\practice&gt; Select-String apple *.txt</span>
+<span class="out">
+fruits.txt:1:apple
+</span><span class="ps">PS C:\work\practice&gt; Select-String second *.txt</span>
+<span class="out">
+memo.txt:2:second line
+</span></pre>
+      <p>表示は「<strong>ファイル名 : 行番号 : その行の内容</strong>」の形です。<code>apple</code> は <code>fruits.txt</code> の1行目、<code>second</code> は <code>memo.txt</code> の2行目にありました。</p>
+      <ul>
+        <li><code>*</code> は「何でも当てはまる」という意味の記号です（ワイルドカード）。</li>
+        <li>大文字と小文字は、区別されません。<code>Apple</code> で探しても見つかります。</li>
+        <li>メモ帳で1つずつファイルを開いて探すより、ずっと速く、数が増えるほど便利になります。Git でも、「どの変更に、この文字が入っているか」を探す場面があります。</li>
+      </ul>
+    </details>
+  </div>
+  <!-- TODO: Win11実機で確認：Add-Content / Select-String の表示形式、type の動作、Set-Content の複数行の挙動（Windows PowerShell 5.1 と PowerShell 7） -->
+  <p class="meta">チャレンジは、これからの章にも、時々入ります。</p>
+
+  <h2>2-6. 便利な使い方</h2>
   <table>
     <tr><th>操作</th><th>効果</th></tr>
     <tr><td><code>Tab</code> キー</td><td>途中まで打った名前を、自動で補ってくれる。<code>cd pra</code> と打って <code>Tab</code> を押すと <code>cd practice</code> になる。打ち間違いも減る</td></tr>
@@ -273,7 +357,7 @@ cd ..</code></pre>
     間違えたコマンドを打つと、赤い文字でエラーが出ます。ほとんどの場合、<strong>何も壊れていません</strong>。「打ち間違い（スペース、全角、名前の綴り）」をまず疑い、<code>↑</code> キーで前のコマンドを呼び出して直してみてください。
   </div>
 
-  <h2>2-6. 安全のために：消すコマンドは、まだ使わない</h2>
+  <h2>2-7. 安全のために：消すコマンドは、まだ使わない</h2>
   <p>この章で使ったコマンドは、すべて「見る・移動する・作る」だけで、何かを失うことはありません。</p>
   <p>ファイルやフォルダを消す <code>rm</code>（<code>Remove-Item</code>）というコマンドもありますが、<strong>エクスプローラーの「ごみ箱」と違い、消したものは元に戻せません。</strong>間違えると、大切なファイルが戻らなくなります。この教材では、必要になる時まで使いません。</p>
   <table>
@@ -282,6 +366,11 @@ cd ..</code></pre>
     <tr><td>移動・名前変更</td><td>ドラッグ、F2</td><td><code>mv</code></td><td>同じ名前があると上書きされる</td></tr>
     <tr><td>削除</td><td>Delete（ごみ箱へ）</td><td><code>rm</code></td><td><strong>元に戻せない</strong></td></tr>
   </table>
+
+  <div class="box">
+    <strong class="title">コマンドの早見表</strong>
+    この教材に出てくるコマンドは、<a href="appendix-commands.html">付録A「よく使うコマンド一覧」</a>に、まとめています。忘れたときは、そこを見てください。
+  </div>
 
   <h2>確認クイズ</h2>
   <details>
@@ -317,5 +406,10 @@ cd ..</code></pre>
     <span class="meta">第3章は準備中</span>
   </nav>
 </main>
+<footer class="site-foot">
+  この教材は GitHub で作られ、公開されています。
+  <a href="https://github.com/chitchi1216/git-github-textbook">ソースを見る</a> ／
+  <a href="https://github.com/chitchi1216/git-github-textbook/commits/main">変更の履歴を見る</a>
+</footer>
 </body>
 </html>

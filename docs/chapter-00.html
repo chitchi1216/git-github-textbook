@@ -21,7 +21,38 @@
     </ul>
   </div>
 
-  <h2>0-1. この教材でめざすこと（概要）</h2>
+  <h2>0-1. この教材も、GitHub で作られています</h2>
+  <p>最初に、ひとつ伝えておきます。<strong>この教材そのものが、GitHub を使って作られ、公開されています。</strong>あなたが今読んでいるページは、GitHub に置かれたファイルから作られています。</p>
+  <figure class="diagram">
+    <svg class="d" viewBox="0 0 640 150" role="img" aria-label="この教材が GitHub で作られ、公開される流れの図">
+      <defs><marker id="a01" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path class="arrowhead" d="M0 0 L10 5 L0 10 z"/></marker></defs>
+      <rect class="b1" x="10" y="30" width="130" height="80" rx="10"/>
+      <text class="t-md" x="75" y="64" text-anchor="middle">教材を書く</text>
+      <text class="t-sm" x="75" y="88" text-anchor="middle">自分のパソコン</text>
+      <rect class="b3" x="180" y="30" width="140" height="80" rx="10"/>
+      <text class="t-md" x="250" y="64" text-anchor="middle">GitHub</text>
+      <text class="t-sm" x="250" y="88" text-anchor="middle">ファイルと履歴を保存</text>
+      <rect class="b2" x="360" y="30" width="130" height="80" rx="10"/>
+      <text class="t-md" x="425" y="64" text-anchor="middle">GitHub Pages</text>
+      <text class="t-sm" x="425" y="88" text-anchor="middle">Web ページにする</text>
+      <rect class="b0" x="530" y="30" width="100" height="80" rx="10"/>
+      <text class="t-md" x="580" y="64" text-anchor="middle">あなた</text>
+      <text class="t-sm" x="580" y="88" text-anchor="middle">ブラウザ</text>
+      <path class="ln" d="M143 70 H176" marker-end="url(#a01)"/>
+      <path class="ln" d="M323 70 H356" marker-end="url(#a01)"/>
+      <path class="ln" d="M493 70 H526" marker-end="url(#a01)"/>
+      <text class="t-sm muted" x="160" y="24" text-anchor="middle">送る（push）</text>
+    </svg>
+    <figcaption>これから学ぶ「書く → GitHub に送る → 共有する」の流れを、この教材自身が使っている</figcaption>
+  </figure>
+  <ul>
+    <li>ページの下の「<strong>ソースを見る</strong>」から、教材のファイルを見られます。</li>
+    <li>「<strong>変更の履歴を見る</strong>」から、いつ、誰が、何を変えたかを見られます。これが、Git の「履歴」の実物です。</li>
+    <li>学習が進んだら、この教材の誤字や分かりにくい説明を、<strong>自分で直して提案する</strong>練習（Pull Request）にも使う予定です。</li>
+  </ul>
+  <p>今は、意味が分からなくて大丈夫です。「共同開発では、こういう道具が実際に使われているんだな」と知っておいてください。</p>
+
+  <h2>0-2. この教材でめざすこと（概要）</h2>
   <p>この教材は、<strong>Git と GitHub を使って、4人で一緒にものづくり（共同開発）ができるようになる</strong>ことをめざします。プログラミングの経験がなくても、パソコンの基本から順番に進められるように作ってあります。</p>
   <p>共同開発では、複数の人が同じファイルを少しずつ変更していきます。そのとき、<strong>誰が・いつ・何を変えたか</strong>を記録し、<strong>みんなの変更をひとつにまとめる</strong>仕組みが必要です。それを担うのが Git と GitHub です。</p>
   <figure class="diagram">
@@ -56,7 +87,7 @@
     <li>同じ場所を変更して衝突（コンフリクト）しても、自分たちで解消する</li>
   </ul>
 
-  <h2>0-2. 対象者</h2>
+  <h2>0-3. 対象者</h2>
   <table>
     <tr><th>想定する人</th><th>前提にしないこと（なくて大丈夫）</th></tr>
     <tr>
@@ -84,7 +115,7 @@
     <li><strong>メールアドレス</strong>（GitHub のアカウント登録に使います）</li>
   </ul>
 
-  <h2>0-3. 学び方</h2>
+  <h2>0-4. 学び方</h2>
   <ul>
     <li><strong>基本は自習。</strong>各章は、およそ40〜70分で終わる量です。</li>
     <li><strong>月に1回、みんなで集まってディスカッションします。</strong>各章の最後の「話し合おう」を題材にします。</li>
@@ -108,12 +139,16 @@
     <strong class="title">緑：安心してよいこと</strong>
     心配いらないこと、失敗しても大丈夫なことです。
   </div>
+  <div class="challenge">
+    <strong class="title">🎯 チャレンジ <span class="level">★☆☆</span></strong>
+    力試しの問題です。必須ではありません。星の数が難しさの目安で、ヒントとこたえも付いています。各章に、時々入ります。
+  </div>
   <details class="coffee">
     <summary>☕ コーヒーブレイク<span class="skip">（読み飛ばしてOK）</span></summary>
     <p>本筋から少し離れた、豆知識の読み物です。読まなくても先へ進めますが、「なぜそうなっているのか」に興味がわいたら開いてみてください。</p>
   </details>
 
-  <h2>0-4. 準備の流れ</h2>
+  <h2>0-5. 準備の流れ</h2>
   <figure class="diagram">
     <svg class="d" viewBox="0 0 640 110" role="img" aria-label="準備の3ステップ">
       <defs><marker id="a0" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path class="arrowhead" d="M0 0 L10 5 L0 10 z"/></marker></defs>
@@ -132,7 +167,7 @@
     <figcaption>準備は3ステップ。上から順に進めます</figcaption>
   </figure>
 
-  <h2>0-5. 登場するものを先に知る</h2>
+  <h2>0-6. 登場するものを先に知る</h2>
   <table>
     <tr><th>名前</th><th>一言でいうと</th></tr>
     <tr><td>Git</td><td>ファイルの変更履歴を記録する道具。自分のパソコンの中で動く</td></tr>
@@ -165,7 +200,7 @@
     <figcaption>Git は自分のパソコンの中、GitHub はインターネット上。2つの間で記録をやりとりする</figcaption>
   </figure>
 
-  <h2>0-6. GitHub アカウントを作る</h2>
+  <h2>0-7. GitHub アカウントを作る</h2>
   <ol>
     <li>ブラウザで <a href="https://github.com/signup">https://github.com/signup</a> を開く</li>
     <li>メールアドレス、パスワード、ユーザー名を入力する</li>
@@ -189,7 +224,7 @@
     <figcaption>登録後のプロフィール画面の例（ユーザー名 chitchi1216）</figcaption>
   </figure>
 
-  <h2>0-7. Git をインストールする</h2>
+  <h2>0-8. Git をインストールする</h2>
   <ol>
     <li><a href="https://git-scm.com/download/win">https://git-scm.com/download/win</a> を開き、64-bit 版のインストーラーをダウンロードする</li>
     <li>ダウンロードしたファイルを開き、基本的に <strong>すべて初期設定のまま「Next」</strong> を押して進める</li>
@@ -202,10 +237,10 @@
   </figure>
   <div class="box">
     <strong class="title">エディタの選択画面が出たら</strong>
-    インストールの途中で「Git が使う初期のエディタ」を選ぶ画面が出ることがあります。分からなければ、そのまま進んで大丈夫です。エディタは、次の 0-8 で、コマンドを使って「メモ帳」に設定します。
+    インストールの途中で「Git が使う初期のエディタ」を選ぶ画面が出ることがあります。分からなければ、そのまま進んで大丈夫です。エディタは、次の 0-9 で、コマンドを使って「メモ帳」に設定します。
   </div>
 
-  <h2>0-8. 「自分は誰か」と「使うエディタ」を Git に教える</h2>
+  <h2>0-9. 「自分は誰か」と「使うエディタ」を Git に教える</h2>
   <p>Git は変更を記録するとき、<strong>誰が変更したか</strong>も一緒に記録します。そのため、最初に名前とメールアドレスを登録します。あわせて、Git が文字の入力を求めるときに開く<strong>エディタ</strong>を、メモ帳に設定します。</p>
   <p>ここで初めて、ターミナルを使います。詳しい説明は第2章で行うので、今は「書かれた通りに打つ」だけで大丈夫です。</p>
   <ol>
@@ -275,5 +310,10 @@ core.editor=notepad</span></pre>
     <a href="chapter-01.html">第1章 パソコンの仕組み →</a>
   </nav>
 </main>
+<footer class="site-foot">
+  この教材は GitHub で作られ、公開されています。
+  <a href="https://github.com/chitchi1216/git-github-textbook">ソースを見る</a> ／
+  <a href="https://github.com/chitchi1216/git-github-textbook/commits/main">変更の履歴を見る</a>
+</footer>
 </body>
 </html>
