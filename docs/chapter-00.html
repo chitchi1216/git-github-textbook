@@ -7,7 +7,7 @@
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<header class="site"><a class="title" href="index.html">Git と GitHub 入門</a><span class="ver"><!--ver--><a href="https://github.com/chitchi1216/git-github-textbook/blob/main/CHANGELOG.md">版 0.4.7（ドラフト）</a> ・ 2026-10-11 ・ 作成者 <a href="https://github.com/chitchi1216">chitchi1216</a><!--/ver--></span></header>
+<header class="site"><a class="title" href="index.html">Git と GitHub 入門</a><span class="ver"><!--ver--><a href="https://github.com/chitchi1216/git-github-textbook/blob/main/CHANGELOG.md">版 0.4.8（ドラフト）</a> ・ 2026-10-11 ・ 作成者 <a href="https://github.com/chitchi1216">chitchi1216</a><!--/ver--></span></header>
 <main class="wrap">
   <p class="meta">第0章 ／ 目安 50〜70分</p>
   <h1>はじめに・準備</h1>
@@ -301,17 +301,13 @@ core.editor=notepad</span></pre>
       <li><code>user.email</code> がないと、第3章の <code>commit</code> のとき、<code>Committer: … configured automatically</code>（「自動で設定されました」）という警告が出ます。記録は、できますが、名前やメールが正しく残りません。</li>
     </ul>
   </div>
-  <figure class="shot">
-    <img src="images/ch00-git-config-ng.png" alt="git config --global --list の実行画面。user.name の行はあるが、user.email の行がない" onerror="this.parentNode.classList.add('missing')">
-    <figcaption>実際の画面の例（<strong>足りない状態</strong>）。<code>user.name</code> の値にメールアドレスが入り、<code>user.email</code> の行がない。この場合は、2行目の設定を、打ち直す。（WSL のパスとメールアドレスは、黒く塗りつぶしてあります）</figcaption>
-  </figure>
   <div class="box">
     <strong class="title">メールアドレスを、公開したくないとき</strong>
     記録（コミット）には、<code>user.email</code> のメールアドレスが残り、公開リポジトリでは、誰でも見られます。見せたくないときは、GitHub の <strong>Settings → Emails</strong> で、「Keep my email addresses private」をオンにすると、<code>…@users.noreply.github.com</code> という<strong>公開用の代わりのアドレス</strong>が表示されます。それを <code>user.email</code> に設定します。
   </div>
   <figure class="shot">
-    <img src="images/ch00-git-config.png" alt="git config --global --list を実行した画面" onerror="this.parentNode.classList.add('missing')">
-    <figcaption>実際の実行画面の例（メールアドレスは隠してあります）</figcaption>
+    <img src="images/ch00-git-config.png" alt="git config --global --list の実行画面。user.name、user.email、core.editor が表示されている" onerror="this.parentNode.classList.add('missing')">
+    <figcaption>実際の実行画面の例。<code>user.name</code>、<code>user.email</code>、<code>core.editor=notepad</code> の<strong>3行がそろっています</strong>（名前、メールアドレス、ほかの設定は、黒く塗りつぶしてあります）。この写真には、第3章で設定する <code>init.defaultBranch=main</code> の行もありますが、第0章の時点では、なくて構いません</figcaption>
   </figure>
   <div class="box">
     <strong class="title">なぜエディタをメモ帳にするの？</strong>
