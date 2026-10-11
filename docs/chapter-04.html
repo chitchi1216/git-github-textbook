@@ -7,7 +7,7 @@
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<header class="site"><a class="title" href="index.html">Git と GitHub 入門</a><span class="ver"><!--ver--><a href="https://github.com/chitchi1216/git-github-textbook/blob/main/CHANGELOG.md">版 0.4.14（ドラフト）</a> ・ 2026-10-11 ・ 作成者 <a href="https://github.com/chitchi1216">chitchi1216</a><!--/ver--></span></header>
+<header class="site"><a class="title" href="index.html">Git と GitHub 入門</a><span class="ver"><!--ver--><a href="https://github.com/chitchi1216/git-github-textbook/blob/main/CHANGELOG.md">版 0.4.15（ドラフト）</a> ・ 2026-10-11 ・ 作成者 <a href="https://github.com/chitchi1216">chitchi1216</a><!--/ver--></span></header>
 <main class="wrap">
   <p class="meta">第4章 ／ 目安 70〜90分</p>
   <h1>GitHub と連携する：送る・受け取る</h1>
@@ -238,6 +238,14 @@ Receiving objects: 100% (6/6), done.</span>
   <div class="box warn">
     <strong class="title"><code>clone</code> は、リポジトリの「外」で</strong>
     <code>clone</code> を、<code>my-notes</code> のような<strong>リポジトリの中</strong>で打ってはいけません。リポジトリの中に、リポジトリができてしまい、混乱のもとになります。<strong>必ず、<code>C:\work</code> に移動してから</strong>打ってください。
+  </div>
+  <div class="box warn">
+    <strong class="title">最後のフォルダ名（<code>my-notes-copy</code>）を、付け忘れない</strong>
+    <code>git clone URL</code> だけで、<strong>フォルダ名を付けない</strong>と、Git は、リポジトリと同じ名前（<code>my-notes</code>）の新しいフォルダを作ろうとします。今回は、<code>C:\work</code> に、第3章で作った <code>my-notes</code> が、すでにあるので、次のエラーになります。
+<pre class="term"><span class="ps">PS C:\work&gt; git clone https://github.com/chitchi1216/my-notes.git</span>
+<span class="out">fatal: destination path 'my-notes' already exists and is not an empty directory.</span></pre>
+    「<code>my-notes</code> という場所は、すでにあって、空ではありません」という意味です。<strong>壊れてはいません。</strong>URL のあとに、半角スペースを空けて、<strong>別の名前（<code>my-notes-copy</code>）</strong>を付けて、打ち直してください。
+<pre><code>git clone https://github.com/ユーザー名/my-notes.git my-notes-copy</code></pre>
   </div>
   <div class="box">
     <strong class="title"><code>git init</code> と <code>git clone</code> の違い</strong>
