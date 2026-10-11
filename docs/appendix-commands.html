@@ -7,7 +7,7 @@
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<header class="site"><a class="title" href="index.html">Git と GitHub 入門</a><span class="ver"><!--ver--><a href="https://github.com/chitchi1216/git-github-textbook/blob/main/CHANGELOG.md">版 0.4.0（ドラフト）</a> ・ 2026-10-11 ・ 作成者 <a href="https://github.com/chitchi1216">chitchi1216</a><!--/ver--></span></header>
+<header class="site"><a class="title" href="index.html">Git と GitHub 入門</a><span class="ver"><!--ver--><a href="https://github.com/chitchi1216/git-github-textbook/blob/main/CHANGELOG.md">版 0.4.1（ドラフト）</a> ・ 2026-10-11 ・ 作成者 <a href="https://github.com/chitchi1216">chitchi1216</a><!--/ver--></span></header>
 <main class="wrap">
   <p class="meta">付録A</p>
   <h1>よく使うコマンド一覧</h1>
@@ -48,7 +48,7 @@
   <h2>A-3. 見る・探す</h2>
   <table class="cmds">
     <tr><th>コマンド</th><th>もとの英語</th><th>意味</th><th>使用例</th><th>章</th></tr>
-    <tr><td><code>cat</code>（<code>type</code>）</td><td class="en-col">con<strong>cat</strong>enate（つなげる）／ type（打ち出す）</td><td>ファイルの中身を表示する</td><td><code>cat memo.txt</code></td><td><a href="chapter-02.html">第2章</a></td></tr>
+    <tr><td><code>cat</code>（<code>type</code>）</td><td class="en-col">con<strong>cat</strong>enate（つなげる）／ type（打ち出す）</td><td>ファイルの中身を表示する（日本語が文字化けするときは <code>-Encoding UTF8</code> を付ける）</td><td><code>cat memo.txt</code><br><code>cat memo.txt -Encoding UTF8</code></td><td><a href="chapter-02.html">第2章</a></td></tr>
     <tr><td><code>Select-String</code></td><td class="en-col">select string（文字列を選ぶ）</td><td>ファイルの中から、文字を探す</td><td><code>Select-String apple *.txt</code></td><td><a href="chapter-02.html">第2章</a></td></tr>
   </table>
 
@@ -127,7 +127,6 @@
     <tr><td><code>Select-String</code></td><td><code>sls</code></td><td>ファイルの中から、文字を探す</td></tr>
     <tr><td><code>Clear-Host</code></td><td><code>cls</code></td><td>画面をきれいにする</td></tr>
   </table>
-  <!-- TODO: Win11実機で確認：別名（sls、dir、type）の動作 -->
 
   <h2>A-9. パスの書き方（絶対パスと相対パス）</h2>
   <table class="cmds">

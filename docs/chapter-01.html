@@ -7,7 +7,7 @@
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<header class="site"><a class="title" href="index.html">Git と GitHub 入門</a><span class="ver"><!--ver--><a href="https://github.com/chitchi1216/git-github-textbook/blob/main/CHANGELOG.md">版 0.4.0（ドラフト）</a> ・ 2026-10-11 ・ 作成者 <a href="https://github.com/chitchi1216">chitchi1216</a><!--/ver--></span></header>
+<header class="site"><a class="title" href="index.html">Git と GitHub 入門</a><span class="ver"><!--ver--><a href="https://github.com/chitchi1216/git-github-textbook/blob/main/CHANGELOG.md">版 0.4.1（ドラフト）</a> ・ 2026-10-11 ・ 作成者 <a href="https://github.com/chitchi1216">chitchi1216</a><!--/ver--></span></header>
 <main class="wrap">
   <p class="meta">第1章 ／ 目安 40〜60分</p>
   <h1>パソコンの仕組み</h1>
@@ -150,11 +150,15 @@
     <tr><td>¥</td><td>円記号（半角）。\ と同じ文字</td><td class="ok">使える</td></tr>
     <tr><td>￥</td><td>円記号（全角）。別の文字</td><td class="ng">使えない</td></tr>
   </table>
+  <div class="box">
+    <strong class="title">実際に、「¥」に見える場所があります</strong>
+    エクスプローラーのアドレスバーをクリックすると、パスが <code>C:¥work</code> のように、<strong>「¥」で表示されます</strong>（Windows 11 の画面の文字は、日本語向けのフォントで描かれるためです）。これは <code>\</code> と同じ文字です。一方、PowerShell の画面では、<code>C:\work</code> と、<strong>「\」で表示されます</strong>。場所によって見た目が違いますが、<strong>同じ文字</strong>です。
+  </div>
   <div class="box warn">
     <strong class="title">全角の「￥」が入ってしまうとき</strong>
     日本語入力がオン（「あ」の状態）だと、¥ キーで全角の「￥」が入ることがあります。コマンドやパスを打つときは、<strong>半角/全角キーを押して、入力モードを「A」（半角英数）にしてから</strong>打ってください。画面右下の入力モード表示で確認できます。
   </div>
-  <!-- TODO: Win11実機で確認：¥キーの挙動、IME表示の位置 -->
+  <!-- TODO: Win11実機で確認：日本語入力（あ）のとき、¥ キーで全角の「￥」が入るか -->
 
   <details class="coffee">
     <summary>☕ コーヒーブレイク：なぜ「¥」と「\」は同じ文字なの？<span class="skip">（読み飛ばしてOK）</span></summary>
@@ -202,7 +206,6 @@
     <strong class="title">エクスプローラーで確認してみよう</strong>
     エクスプローラーの上のアドレスバーの空いている場所をクリックすると、今開いているフォルダのパスが文字で表示されます。いろいろなフォルダでやってみてください。
   </div>
-  <!-- TODO: Win11実機で確認：アドレスバーのクリック操作の挙動 -->
   <figure class="shot">
     <img src="images/ch01-explorer-address-bar.png" alt="エクスプローラーのアドレスバーをクリックしてパスが表示された画面" onerror="this.parentNode.classList.add('missing')">
     <figcaption>アドレスバーをクリックすると、パスが文字で表示される</figcaption>
@@ -210,7 +213,10 @@
 
   <h3>拡張子とは</h3>
   <p>ファイル名の最後の <code>.txt</code> や <code>.docx</code> が拡張子です。「このファイルは何の種類か」をパソコンに伝える目印です。初期設定では非表示のことがあります。エクスプローラーの「表示」メニューから「ファイル名拡張子」にチェックを入れて、表示しておきましょう。</p>
-  <!-- TODO: Win11実機で確認：メニューの場所 -->
+  <div class="box">
+    <strong class="title">「表示」メニューが見つからないときは</strong>
+    エクスプローラーの上の「<strong>…</strong>」（もっと見る）→「<strong>オプション</strong>」を開き、「フォルダー オプション」の<strong>「表示」タブ</strong>で、「<strong>登録されている拡張子は表示しない</strong>」の<strong>チェックを外して</strong>、「OK」を押します。拡張子が表示されるようになります。
+  </div>
   <figure class="shot">
     <img src="images/ch01-explorer-extension.png" alt="エクスプローラーの表示メニューでファイル名拡張子にチェックを入れる画面" onerror="this.parentNode.classList.add('missing')">
     <figcaption>「表示」→「表示」→「ファイル名拡張子」にチェックを入れる</figcaption>

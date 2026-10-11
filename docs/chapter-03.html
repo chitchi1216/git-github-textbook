@@ -7,7 +7,7 @@
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<header class="site"><a class="title" href="index.html">Git と GitHub 入門</a><span class="ver"><!--ver--><a href="https://github.com/chitchi1216/git-github-textbook/blob/main/CHANGELOG.md">版 0.4.0（ドラフト）</a> ・ 2026-10-11 ・ 作成者 <a href="https://github.com/chitchi1216">chitchi1216</a><!--/ver--></span></header>
+<header class="site"><a class="title" href="index.html">Git と GitHub 入門</a><span class="ver"><!--ver--><a href="https://github.com/chitchi1216/git-github-textbook/blob/main/CHANGELOG.md">版 0.4.1（ドラフト）</a> ・ 2026-10-11 ・ 作成者 <a href="https://github.com/chitchi1216">chitchi1216</a><!--/ver--></span></header>
 <main class="wrap">
   <p class="meta">第3章 ／ 目安 60〜80分</p>
   <h1>Git の基本：記録をつくる</h1>
@@ -82,7 +82,7 @@
     <ul>
       <li>入力モードは「半角英数」に。</li>
       <li><code>git</code> のあとは、<strong>半角スペース</strong>を入れます。<code>git status</code> のように、<code>git</code>・やること・対象を、スペースで区切ります。</li>
-      <li>表示される文章は、Windows の言語設定によって、<strong>英語か日本語</strong>になります。意味は同じです（下の対応表を参照）。</li>
+      <li>Git の表示は、<strong>英語</strong>であることが多いです（日本語で表示される環境もあります）。意味は同じです（下の対応表を参照）。</li>
     </ul>
   </div>
 
@@ -123,7 +123,7 @@ nothing to commit (create/copy files and use "git add" to track)</span></pre>
   <p><code>git status</code> は、<strong>「今、どういう状態か」を教えてくれる</strong>コマンドです。Git を使うときは、迷ったらまず <code>git status</code> を打ちます。何度打っても、安全です。</p>
   <p class="etym">💡 <code>status</code> は「状態」という意味です。</p>
   <table>
-    <tr><th>英語の表示</th><th>日本語で表示されるときの例</th><th>意味</th></tr>
+    <tr><th>英語の表示</th><th>日本語で表示される環境での例</th><th>意味</th></tr>
     <tr><td><code>On branch main</code></td><td><code>ブランチ main</code> など</td><td>今、<code>main</code> という枝にいる</td></tr>
     <tr><td><code>No commits yet</code></td><td><code>まだコミットがありません</code></td><td>記録が、まだ1つもない</td></tr>
     <tr><td><code>Untracked files</code></td><td><code>追跡されていないファイル</code></td><td>Git が、まだ記録の対象にしていないファイル</td></tr>
@@ -131,7 +131,6 @@ nothing to commit (create/copy files and use "git add" to track)</span></pre>
     <tr><td><code>Changes not staged for commit</code></td><td><code>コミットのためにステージされていない変更</code> など</td><td>変更したが、まだステージに並べていない</td></tr>
     <tr><td><code>nothing to commit, working tree clean</code></td><td><code>コミットするものはありません</code> など</td><td>記録していない変更は、ない</td></tr>
   </table>
-  <!-- TODO: Win11実機で確認：日本語表示の実際の文言（言語設定による）。上の日本語は例 -->
 
   <h3>手順4：ファイルを作る</h3>
   <p>メモ帳で、<code>hello.txt</code> を作ります。</p>
@@ -175,17 +174,29 @@ Changes to be committed:
   <p class="etym">💡 <code>commit</code> は「約束する」「確定する」という意味です。変更を、記録として確定します。<code>-m</code> は <strong>m</strong>essage（メッセージ）の頭文字です。</p>
   <div class="box warn">
     <strong class="title">メッセージは、まず英語（半角）で</strong>
-    日本語のメッセージは、Windows PowerShell の画面で、<strong>表示だけ</strong>文字化けすることがあります（記録そのものは壊れません）。この章では、英語で書きます。日本語を試すチャレンジは、あとにあります。
+    この章では、メッセージを英語で書きます。日本語のメッセージも、多くの環境では、そのまま使えて、正しく表示されます（チャレンジ3で試します）。ただし、環境によっては、<strong>表示だけ</strong>文字化けすることがあります（記録そのものは壊れません）。
+  </div>
+  <div class="box warn">
+    <strong class="title">「Committer: … configured automatically」と出たら</strong>
+    コミットのあとに、次のような警告が出ることがあります。
+<pre class="term"><span class="out"> Committer: （あなたの名前） &lt;（ユーザー名@パソコン名.local）&gt;
+Your name and email address were configured automatically
+based on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly:
+
+    git config --global user.name "Your Name"
+    git config --global user.email you@example.com</span></pre>
+    「名前とメールアドレスが、<strong>自動で設定されました</strong>。正しいか確認してください」という意味です。<strong>第0章の <code>user.name</code> と <code>user.email</code> の設定が、足りていません。</strong>よくあるのは、<code>user.email</code> を設定していない場合、<code>user.name</code> に、メールアドレスを入れてしまった場合です。<code>git config --global --list</code> で確かめて、第0章 0-10 の手順で、設定し直してください。
+    <br><strong>すでに作ったコミットの名前は、変わりません。</strong>練習用なので、そのまま続けて構いません（直したいときは、次のコミットから、正しい名前になります）。
   </div>
   <div class="box">
     <strong class="title">「Please tell me who you are」と出たら</strong>
-    「あなたは誰ですか？」というエラーです。第0章の、<code>user.name</code> と <code>user.email</code> の設定を、まだ行っていません。第0章 0-10 に戻って設定してから、もう一度 <code>git commit</code> を打ってください。
+    環境によっては、警告ではなく、「あなたは誰ですか？」というエラーで、コミットが止まることもあります。この場合も、第0章 0-10 の設定が必要です。設定してから、もう一度 <code>git commit</code> を打ってください。
   </div>
   <div class="box">
     <strong class="title">「LF will be replaced by CRLF」と出ても、気にしない</strong>
-    改行の種類（Windows と Mac / Linux で違う）についての、お知らせです。この教材では、気にしなくて構いません。
+    改行の種類（Windows と Mac / Linux で違う）についての、お知らせです。Git for Windows は、初期設定で、改行を自動で調整する設定（<code>core.autocrlf=true</code>）になっています。この警告は、出ない場合もあります。どちらでも、この教材では、気にしなくて構いません。
   </div>
-  <!-- TODO: Win11実機で確認：エラーメッセージの文言、LF/CRLF の警告が出る条件 -->
 
   <h3>手順7：履歴を見る（log）</h3>
 <pre><code>git log</code></pre>
@@ -209,6 +220,10 @@ Date:   Sun Oct 11 10:45:12 2026 +0900
     記録が多いと、一度に表示しきれず、画面が止まったように見えます。<strong>慌てず、キーボードの <code>q</code> を押す</strong>と、元の画面に戻ります。<code>↑</code> <code>↓</code> で、スクロールもできます。
   </div>
   <p class="etym">💡 <code>log</code> は「記録（ログ）」という意味です。</p>
+  <div class="box warn">
+    <strong class="title"><code>--oneline</code> の、ハイフンは2つ</strong>
+    <code>git log --oneline</code> の、<code>oneline</code> の前の<strong>ハイフンは、2つ</strong>です。<code>git log -oneline</code>（1つ）と打つと、<code>fatal: unrecognized argument: -oneline</code>（認識できない引数）というエラーになります。エラーが出たら、<code>↑</code> キーで直して、打ち直してください。
+  </div>
 
   <h3>手順8：もう一度、変更して、記録する</h3>
   <p>Git の本領は、「変更を重ねて記録する」ところです。<code>hello.txt</code> に、1行足してみましょう。</p>
@@ -331,12 +346,12 @@ type .git\HEAD</code></pre>
     </details>
     <details>
       <summary>こたえと解説</summary>
-      <p>正しく表示されれば、そのまま使えます。<strong>文字化け</strong>（意味の分からない文字）になったときは、Git の記録は正しくても、<strong>PowerShell の表示の設定</strong>が合っていないだけです。次のコマンドで、表示の設定を変えて、もう一度 <code>git log --oneline</code> を打ってみてください（今開いている PowerShell だけに効く、一時的な設定です）。</p>
+      <p>多くの環境では、日本語のメッセージが、<strong>そのまま正しく表示されます。</strong>そのまま使えます。</p>
+      <p>もし<strong>文字化け</strong>（意味の分からない文字）になったときは、Git の記録は正しくても、<strong>PowerShell の表示の設定</strong>が合っていないだけです。次のコマンドで、表示の設定を変えて、もう一度 <code>git log --oneline</code> を打ってみてください（今開いている PowerShell だけに効く、一時的な設定です）。</p>
 <pre><code>[Console]::OutputEncoding = [System.Text.Encoding]::UTF8</code></pre>
       <p>日本語のメッセージが使えると、チームで「何をしたか」を、日本語で共有できます。どちらを使うかは、チームで話し合って決めましょう。</p>
     </details>
   </div>
-  <!-- TODO: Win11実機で確認：日本語メッセージの表示（Windows PowerShell 5.1 / Windows Terminal）、OutputEncoding の効果、ls -Force、git log --grep の動作 -->
 
   <div class="box">
     <strong class="title">コマンドの早見表</strong>

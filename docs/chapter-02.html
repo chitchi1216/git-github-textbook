@@ -7,7 +7,7 @@
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<header class="site"><a class="title" href="index.html">Git と GitHub 入門</a><span class="ver"><!--ver--><a href="https://github.com/chitchi1216/git-github-textbook/blob/main/CHANGELOG.md">版 0.4.0（ドラフト）</a> ・ 2026-10-11 ・ 作成者 <a href="https://github.com/chitchi1216">chitchi1216</a><!--/ver--></span></header>
+<header class="site"><a class="title" href="index.html">Git と GitHub 入門</a><span class="ver"><!--ver--><a href="https://github.com/chitchi1216/git-github-textbook/blob/main/CHANGELOG.md">版 0.4.1（ドラフト）</a> ・ 2026-10-11 ・ 作成者 <a href="https://github.com/chitchi1216">chitchi1216</a><!--/ver--></span></header>
 <main class="wrap">
   <p class="meta">第2章 ／ 目安 50〜70分</p>
   <h1>ターミナル入門</h1>
@@ -87,7 +87,6 @@
     <p><strong>困ったときの目安</strong>　ネットの手順に「ターミナルで次を実行」とあったら、この教材では PowerShell に打てばよいことが多いです。ただし、Mac や Linux 向けの手順は、Windows の PowerShell では、そのままでは動かないことがあります。行の先頭（<code>PS</code> が付くか）を見て、自分がどのシェルにいるかを確認してください。</p>
     <p class="meta">※ 見た目や名前は、Windows のバージョンや設定で変わることがあります。</p>
   </details>
-  <!-- TODO: Win11実機で確認：「PowerShell」で検索して開くと Windows Terminal の中で動くか、Git Bash のプロンプトの形 -->
 
   <h2>2-2. エクスプローラーの操作とコマンドを見比べる</h2>
   <p>次の表は、「やりたいこと」を、エクスプローラーとターミナルで比べたものです。まずは眺めて、「あの操作の、文字での言い方だな」と対応づけてください。</p>
@@ -274,7 +273,7 @@ C:\Users\taro
 cd C:\work</code></pre>
 <pre class="term"><span class="ps">PS C:\Users\taro&gt; mkdir C:\work</span>
 <span class="out">
-    Directory: C:\
+    ディレクトリ: C:\
 
 Mode                 LastWriteTime         Length Name
 ----                 -------------         ------ ----
@@ -285,9 +284,11 @@ d-----        2026/10/11     10:30                work
   <p class="etym">💡 <code>mkdir</code> は <strong>m</strong>a<strong>k</strong>e <strong>dir</strong>ectory（ディレクトリを作る）、<code>cd</code> は <strong>c</strong>hange <strong>d</strong>irectory（ディレクトリを変える）の略です。</p>
   <div class="box">
     <strong class="title">「すでに存在します」と出たら</strong>
-    <code>work</code> フォルダがすでにある、という意味です。心配はいりません。そのまま次の <code>cd C:\work</code> に進んでください。<code>C:\work</code> を作れなかった場合は、第1章の「作れないときは」を見てください。
+    次のように、赤い文字で、エラーが出ます。
+<pre class="term"><span class="out">mkdir : 指定された名前 C:\work の項目は既に存在します。</span></pre>
+    これは、<code>work</code> フォルダがすでにある、という意味です。心配はいりません。そのまま次の <code>cd C:\work</code> に進んでください。<code>C:\work</code> を作れなかった場合は、第1章の「作れないときは」を見てください。
   </div>
-  <!-- TODO: Win11実機で確認：C:\work 作成時の権限、既に存在する場合のメッセージ -->
+  <!-- TODO: Win11実機で確認：C:\work を、新規に作成できるか（権限） -->
 
   <h3>手順3：中身を見る</h3>
 <pre><code>ls</code></pre>
@@ -298,13 +299,13 @@ d-----        2026/10/11     10:30                work
 <pre><code>mkdir practice</code></pre>
 <pre class="term"><span class="ps">PS C:\work&gt; mkdir practice</span>
 <span class="out">
-    Directory: C:\work
+    ディレクトリ: C:\work
 
 Mode                 LastWriteTime         Length Name
 ----                 -------------         ------ ----
 d-----        2026/10/11     10:31                practice
 </span></pre>
-  <p>表示のイメージです。日付や時刻は、人によって違います。</p>
+  <p>表示のイメージです。日付や時刻は、人によって違います。<strong>日本語の Windows では「ディレクトリ:」、英語の Windows では「Directory:」</strong>と表示されます。</p>
 
   <h3>手順5：フォルダの中に入る</h3>
 <pre><code>cd practice</code></pre>
@@ -316,7 +317,7 @@ d-----        2026/10/11     10:31                practice
 <pre><code>New-Item memo.txt</code></pre>
 <pre class="term"><span class="ps">PS C:\work\practice&gt; New-Item memo.txt</span>
 <span class="out">
-    Directory: C:\work\practice
+    ディレクトリ: C:\work\practice
 
 Mode                 LastWriteTime         Length Name
 ----                 -------------         ------ ----
@@ -338,10 +339,13 @@ Mode                 LastWriteTime         Length Name
     <code>notepad</code> や <code>explorer</code> のように、アプリの名前を打つと、そのアプリが起動します。<code>notepad memo.txt</code> は「メモ帳で <code>memo.txt</code> を開いて」という指示です。メモ帳を開いたままでも、ターミナルに戻って、次のコマンドを打てます。
   </div>
   <div class="box warn">
-    <strong class="title">ここでは英語（半角）で書く</strong>
-    Windows PowerShell では、日本語を含む文字ファイルを <code>cat</code> で表示すると、文字化けすることがあります。ファイルが壊れたわけではなく、表示の問題です。今回は半角の英語（<code>hello</code>）で試してください。
+    <strong class="title">日本語を書くと、<code>cat</code> で文字化けする（ファイルは壊れていない）</strong>
+    メモ帳で、日本語（たとえば「こんにちは」）を書いて保存し、<code>cat memo.txt</code> で表示すると、<code>縺薙ｓ縺ｫ縺｡縺ｯ</code> のような、意味の分からない文字になります。<strong>ファイルが壊れたのではなく、読み取りの文字コードが合っていないだけ</strong>です。メモ帳は、日本語を「UTF-8」という形式で保存しますが、Windows PowerShell（5.1）は、初期設定では、別の形式として読むためです。<br>
+    <strong>読むときに、<code>-Encoding UTF8</code> を付けると、正しく表示されます。</strong>
+<pre><code>cat memo.txt -Encoding UTF8</code></pre>
+    この章の手順では、半角の英語（<code>hello</code>）だけを使うので、影響はありません。
   </div>
-  <!-- TODO: Win11実機で確認：notepad で新規ファイルが開く挙動、文字化けの有無（Windows PowerShell 5.1 と PowerShell 7 の違い） -->
+  <!-- TODO: Win11実機で確認：notepad で、存在しないファイルを開いたときの「新しいファイルを作成しますか？」の文言 -->
 
   <h3>手順9：中身をターミナルで見て、ひとつ上へ戻る</h3>
 <pre><code>cat memo.txt
@@ -359,7 +363,7 @@ cd ..</code></pre>
 
   <details class="coffee">
     <summary>☕ コーヒーブレイク：「フォルダ」と「ディレクトリ」、OS によって呼び方が違う？<span class="skip">（読み飛ばしてOK）</span></summary>
-    <p>手順4で、<code>mkdir</code> というコマンドを使い、表示に <code>Directory:</code> と出ました。「フォルダを作ったのに、ディレクトリ？」と思った人もいるはずです。<strong>フォルダとディレクトリは、同じものの別名です。</strong>どちらの名前を使うかは、「画面で見るか」「文字で扱うか」と、時代と OS の歴史で決まっています。</p>
+    <p>手順4で、<code>mkdir</code> というコマンドを使い、表示に <code>ディレクトリ:</code>（英語の Windows では <code>Directory:</code>）と出ました。「フォルダを作ったのに、ディレクトリ？」と思った人もいるはずです。<strong>フォルダとディレクトリは、同じものの別名です。</strong>どちらの名前を使うかは、「画面で見るか」「文字で扱うか」と、時代と OS の歴史で決まっています。</p>
     <figure class="diagram">
       <svg class="d" viewBox="0 0 640 210" role="img" aria-label="画面で見るときはフォルダ、文字で扱うときはディレクトリと呼ぶ傾向を示す図">
         <defs><marker id="b5" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="arrowhead" d="M0 0 L10 5 L0 10 z"/></marker></defs>
@@ -373,7 +377,7 @@ cd ..</code></pre>
         <text class="t-sm muted" x="505" y="38" text-anchor="middle">文字で打つ・技術の資料</text>
         <text class="t-lg" x="505" y="80" text-anchor="middle">ディレクトリ</text>
         <text class="t-sm" x="505" y="110" text-anchor="middle">mkdir ＝ make directory</text>
-        <text class="t-sm" x="505" y="132" text-anchor="middle">表示の「Directory:」</text>
+        <text class="t-sm" x="505" y="132" text-anchor="middle">表示の「ディレクトリ:」</text>
         <text class="t-sm muted" x="505" y="154" text-anchor="middle">directory</text>
         <path class="ln" d="M264 89 H376" marker-start="url(#b5)" marker-end="url(#b5)"/>
         <text class="t-md" x="320" y="80" text-anchor="middle">同じもの</text>
@@ -406,7 +410,6 @@ cd ..</code></pre>
     </div>
     <p class="meta">※ 年代や経緯には諸説あります。Windows のバージョンや設定で、表示が変わることもあります。</p>
   </details>
-  <!-- TODO: Win11実機で確認：.git が自動で隠しフォルダになるか、PowerShell で cd C:/work が動くか -->
 
   <h2>2-6. チャレンジ：メモ帳を使わずに、ファイルを扱う</h2>
   <p>ここまでで基本は終わりです。ここからは、力試しです。<strong>メモ帳を開かずに</strong>、ターミナルだけでファイルの中身を見たり、書き足したり、探したりしてみましょう。必須ではないので、気軽に挑戦してください。<code>C:\work\practice</code> にいる状態で始めます（<code>cd C:\work\practice</code> で移動できます）。</p>
@@ -515,7 +518,6 @@ type C:\work\practice\memo.txt</code></pre>
     </details>
   </div>
 
-  <!-- TODO: Win11実機で確認：Add-Content / Select-String の表示形式、type の動作、Set-Content の複数行の挙動（Windows PowerShell 5.1 と PowerShell 7） -->
   <p class="meta">チャレンジは、これからの章にも、時々入ります。</p>
 
   <h2>2-7. 便利な使い方</h2>
