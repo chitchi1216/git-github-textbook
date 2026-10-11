@@ -7,7 +7,7 @@
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<header class="site"><a class="title" href="index.html">Git と GitHub 入門</a><span class="ver"><!--ver--><a href="https://github.com/chitchi1216/git-github-textbook/blob/main/CHANGELOG.md">版 0.4.20（ドラフト）</a> ・ 2026-10-11 ・ 作成者 <a href="https://github.com/chitchi1216">chitchi1216</a><!--/ver--></span></header>
+<header class="site"><a class="title" href="index.html">Git と GitHub 入門</a><span class="ver"><!--ver--><a href="https://github.com/chitchi1216/git-github-textbook/blob/main/CHANGELOG.md">版 0.4.21（ドラフト）</a> ・ 2026-10-11 ・ 作成者 <a href="https://github.com/chitchi1216">chitchi1216</a><!--/ver--></span></header>
 <main class="wrap">
   <p class="meta">第5章 ／ 目安 70〜90分</p>
   <h1>ブランチ：作業を枝分かれさせる</h1>
@@ -206,6 +206,17 @@ Fast-forward
 * 7b1e4d8 Add second line to hello.txt
 * 3f2a9c1 Add hello.txt</span></pre>
   <p class="etym">💡 <code>merge</code> は「併合する、合流させる」。<code>--graph</code> は「図にする」、<code>--all</code> は「すべての枝を」の意味です。</p>
+
+  <div class="box">
+    <strong class="title">コマンドの綴りを間違えると</strong>
+    <code>git merge</code> を <code>git marge</code> のように打ち間違えると、次のように、<strong>正しい綴りを、提案してくれます</strong>。
+<pre class="term"><span class="ps">PS C:\work\my-notes&gt; git marge add-notes</span>
+<span class="out">git: 'marge' is not a git command. See 'git --help'.
+
+The most similar command is
+        merge</span></pre>
+    「<code>marge</code> は、Git のコマンドではありません。いちばん似ているのは <code>merge</code> です」という意味です。壊れてはいません。<code>↑</code> キーで前のコマンドを呼び出して、直して、打ち直しましょう。
+  </div>
 
   <h3>手順6：役目を終えた枝を、片付ける</h3>
 <pre><code>git branch -d add-notes
