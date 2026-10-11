@@ -1,7 +1,7 @@
 /* 日本語フォントは「\」を「¥」の形で描くことがあるため、「\」だけ別フォントで描く */
 @font-face {
   font-family: "bs-fix";
-  src: local("Consolas"), local("Cascadia Mono"), local("Segoe UI"), local("Arial");
+  src: url("fonts/backslash.woff2") format("woff2"), local("Consolas"), local("Cascadia Mono");
   unicode-range: U+005C;
 }
 :root {
@@ -47,8 +47,8 @@ h1 { font-size: 1.8rem; line-height: 1.4; margin: 1.2em 0 .4em; }
 h2 { font-size: 1.35rem; margin: 2.2em 0 .6em; padding-bottom: .2em; border-bottom: 2px solid var(--border); }
 h3 { font-size: 1.1rem; margin: 1.6em 0 .4em; }
 a { color: var(--accent); }
-code { background: var(--code-bg); padding: .1em .4em; border-radius: 4px; font-family: Consolas, "Cascadia Mono", monospace; font-size: .92em; }
-pre { background: var(--code-bg); padding: 12px 14px; border-radius: 8px; overflow-x: auto; line-height: 1.6; }
+code { background: var(--code-bg); padding: .1em .4em; border-radius: 4px; font-family: "bs-fix", Consolas, "Cascadia Mono", monospace; font-size: .92em; }
+pre { font-family: "bs-fix", Consolas, "Cascadia Mono", monospace; background: var(--code-bg); padding: 12px 14px; border-radius: 8px; overflow-x: auto; line-height: 1.6; }
 pre code { padding: 0; background: none; }
 table { border-collapse: collapse; width: 100%; margin: 1em 0; font-size: .95rem; }
 th, td { border: 1px solid var(--border); padding: 8px 10px; text-align: left; vertical-align: top; }
@@ -80,7 +80,7 @@ figure.diagram svg { background: transparent; border: 1px solid var(--border); }
 .d .t-lg { font-size: 18px; font-weight: bold; }
 .d .t-md { font-size: 15px; font-weight: bold; }
 .d .t-sm { font-size: 13px; }
-.d .t-mono { font-family: Consolas, "Cascadia Mono", monospace; font-size: 17px; }
+.d .t-mono { font-family: "bs-fix", Consolas, "Cascadia Mono", monospace; font-size: 17px; }
 .d .muted { fill: var(--muted); }
 .d .b1 { fill: var(--accent-bg); stroke: var(--accent); stroke-width: 1.6; }
 .d .b2 { fill: var(--ok-bg); stroke: var(--ok-border); stroke-width: 1.6; }
@@ -123,3 +123,7 @@ details.coffee summary .skip { font-weight: normal; color: var(--muted); font-si
 details.coffee[open] summary { margin-bottom: .6em; }
 details.coffee ol, details.coffee ul { padding-left: 1.4em; }
 details.coffee li { margin: .5em 0; }
+
+/* 図の中の「PowerShell 風パネル」は、ライト・ダークどちらでも暗い背景なので、文字は常に明るい色 */
+.d text.tw { fill: #f2f2f2; }
+.d text.tb { fill: #c0d4ee; }
