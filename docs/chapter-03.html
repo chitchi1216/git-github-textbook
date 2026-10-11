@@ -7,7 +7,7 @@
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<header class="site"><a class="title" href="index.html">Git と GitHub 入門</a><span class="ver"><!--ver--><a href="https://github.com/chitchi1216/git-github-textbook/blob/main/CHANGELOG.md">版 0.4.19（ドラフト）</a> ・ 2026-10-11 ・ 作成者 <a href="https://github.com/chitchi1216">chitchi1216</a><!--/ver--></span></header>
+<header class="site"><a class="title" href="index.html">Git と GitHub 入門</a><span class="ver"><!--ver--><a href="https://github.com/chitchi1216/git-github-textbook/blob/main/CHANGELOG.md">版 0.4.20（ドラフト）</a> ・ 2026-10-11 ・ 作成者 <a href="https://github.com/chitchi1216">chitchi1216</a><!--/ver--></span></header>
 <main class="wrap">
   <p class="meta">第3章 ／ 目安 60〜80分</p>
   <h1>Git の基本：記録をつくる</h1>
@@ -184,6 +184,7 @@ Changes to be committed:
 <span class="out">error: pathspec 'testcommit' did not match any file(s) known to git</span></pre>
     「<code>testcommit</code> というファイルは、見つかりません」という意味です。Git は、<code>-m</code> がないと、メッセージを<strong>ファイルの名前</strong>だと思ってしまいます。<code>git commit -m "メッセージ"</code> と、<strong>メッセージの前に <code>-m</code></strong> を付けて、打ち直してください。
     <ul>
+      <li><code>-m</code> は付けたのに、<strong>メッセージを書き忘れる</strong>（<code>git commit -m</code> で終わる）と、<code>error: switch `m' requires a value</code>（「<code>-m</code> には、値が必要です」）と出ます。<code>git commit -m ""</code>（空のメッセージ）と打っても、同じエラーになります。<code>-m</code> のあとに、<code>" "</code> で囲んだメッセージを書いて、打ち直してください。</li>
       <li>変更が何もないときに、<code>git commit</code> だけ打つと、<code>nothing to commit, working tree clean</code>（記録するものがない）と出ます。壊れてはいません。</li>
       <li>変更を <code>add</code> したあとで、<code>-m</code> なしの <code>git commit</code> を打つと、<strong>メモ帳が開きます</strong>（第0章で、エディタをメモ帳にしたためです）。<strong>1行目に、メッセージを書いて</strong>、保存して閉じると、記録されます。<code>#</code> で始まる行は、説明なので、消さなくても構いません。<strong>何も書かずに閉じる</strong>と、<code>Aborting commit due to empty commit message.</code>（メッセージが空なので、中止）と出て、記録されません。これも、壊れてはいません。</li>
     </ul>
