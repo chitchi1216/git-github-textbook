@@ -7,7 +7,7 @@
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<header class="site"><a class="title" href="index.html">Git と GitHub 入門</a><span class="ver"><!--ver--><a href="https://github.com/chitchi1216/git-github-textbook/blob/main/CHANGELOG.md">版 0.4.5（ドラフト）</a> ・ 2026-10-11 ・ 作成者 <a href="https://github.com/chitchi1216">chitchi1216</a><!--/ver--></span></header>
+<header class="site"><a class="title" href="index.html">Git と GitHub 入門</a><span class="ver"><!--ver--><a href="https://github.com/chitchi1216/git-github-textbook/blob/main/CHANGELOG.md">版 0.4.6（ドラフト）</a> ・ 2026-10-11 ・ 作成者 <a href="https://github.com/chitchi1216">chitchi1216</a><!--/ver--></span></header>
 <main class="wrap">
   <p class="meta">第2章 ／ 目安 50〜70分</p>
   <h1>ターミナル入門</h1>
@@ -158,6 +158,10 @@
   <p>ターミナルで一番大切なのは、<strong>「今、どのフォルダにいるか」</strong>です。エクスプローラーでは、開いているフォルダが画面に見えているので、意識しなくても分かります。ターミナルでは、文字でしか分かりません。</p>
   <p>現在地は、行の先頭に表示されます。この部分を<strong>プロンプト</strong>といいます。</p>
 <pre class="term"><span class="ps">PS C:\work&gt; </span><span class="out">← ここが現在地（C:\work にいる）</span></pre>
+  <figure class="shot">
+    <img src="images/ch02-pwd-ls.png" alt="PowerShell で pwd と ls を打った実際の画面。プロンプトの C:\work\my-notes と、pwd の結果が同じ" onerror="this.parentNode.classList.add('missing')">
+    <figcaption>実際の PowerShell の画面の例。行の先頭（プロンプト）の <code>C:\work\my-notes</code> が現在地で、<code>pwd</code> の結果と同じです（フォルダの名前は、あなたの画面では違います）。<code>ls</code> は、フォルダの中身を一覧します。日本語の Windows では、「ディレクトリ」と表示されます</figcaption>
+  </figure>
   <p>コマンドは、<strong>今いるフォルダに対して</strong>実行されます。たとえば <code>mkdir practice</code> は、今いるフォルダの中に <code>practice</code> フォルダを作ります。「どこにいるか分からなくなった」ときは、<code>pwd</code> を打てば確認できます。</p>
   <figure class="diagram">
     <svg class="d" viewBox="0 0 640 200" role="img" aria-label="cd で中へ入り、cd .. で戻る図">
