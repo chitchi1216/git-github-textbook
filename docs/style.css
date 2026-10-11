@@ -145,3 +145,9 @@ table.cmds .soon td { color: var(--muted); }
 header.site { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline; gap: 4px 16px; }
 header.site .ver { color: var(--muted); font-size: .8rem; }
 header.site .ver a { color: var(--muted); font-weight: normal; text-decoration: underline; }
+
+/* ---- コマンド名の由来 ---- */
+p.etym { color: var(--muted); font-size: .92rem; border-left: 3px solid var(--border); padding-left: .8em; margin: .6em 0; }
+.en { color: var(--muted); font-size: .85em; }
+
+table.cmds td.en-col { color: var(--muted); font-size: .88rem; }
