@@ -7,7 +7,7 @@
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<header class="site"><a class="title" href="index.html">Git と GitHub 入門</a><span class="ver"><!--ver--><a href="https://github.com/chitchi1216/git-github-textbook/blob/main/CHANGELOG.md">版 0.4.11（ドラフト）</a> ・ 2026-10-11 ・ 作成者 <a href="https://github.com/chitchi1216">chitchi1216</a><!--/ver--></span></header>
+<header class="site"><a class="title" href="index.html">Git と GitHub 入門</a><span class="ver"><!--ver--><a href="https://github.com/chitchi1216/git-github-textbook/blob/main/CHANGELOG.md">版 0.4.12（ドラフト）</a> ・ 2026-10-11 ・ 作成者 <a href="https://github.com/chitchi1216">chitchi1216</a><!--/ver--></span></header>
 <main class="wrap">
   <p class="meta">第4章 ／ 目安 70〜90分</p>
   <h1>GitHub と連携する：送る・受け取る</h1>
@@ -137,8 +137,8 @@
     <figcaption>リポジトリの一覧の画面。右側の、青い「<strong>New</strong>」ボタンを押す</figcaption>
   </figure>
   <figure class="shot">
-    <img src="images/ch04-new-repo.png" alt="GitHub の Create a new repository 画面。Repository name、Choose visibility、Add README などの項目がある" onerror="this.parentNode.classList.add('missing')">
-    <figcaption>「Create a new repository」の画面。<code>my-notes</code> と入力し、<strong>「Choose visibility」を「Private」に変えて</strong>、<strong>「Add README」は「Off」のまま</strong>、右下の「Create repository」を押す。（この写真は、公開範囲が初期値の「Public」のままです）</figcaption>
+    <img src="images/ch04-new-repo.png" alt="Create a new repository の画面。名前に my-notes を入力し、Private を選び、Add README は Off のまま" onerror="this.parentNode.classList.add('missing')">
+    <figcaption>入力したあとの画面。<code>my-notes</code> と入力すると、「<strong>my-notes is available.</strong>」（その名前は使えます）と出ます。<strong>「Private」を選び</strong>、<strong>「Add README」は「Off」のまま</strong>で、右下の「Create repository」を押します（押すと「Creating repository…」と表示されます）</figcaption>
   </figure>
   <table>
     <tr><th>画面の表示（英語）</th><th>意味</th></tr>
@@ -154,7 +154,15 @@
     <strong class="title">「Add README」を Off のままにする理由</strong>
     今回は、すでにあるローカルのリポジトリ（<code>my-notes</code>）を、GitHub に送ります。GitHub 側に先にファイルがあると、記録が食い違って、送れなくなります。<strong>空のまま</strong>作ってください。
   </div>
-  <p>作ると、<strong>「…or push an existing repository from the command line」</strong>（既存のリポジトリを、コマンドで送る）という見出しのところに、3行のコマンドが出ます。その1行目の URL を、使います。</p>
+  <p>作ると、次のような画面になります。<strong>「…or push an existing repository from the command line」</strong>（既存のリポジトリを、コマンドで送る）という見出しのところに、3行のコマンドが出ます。その1行目の URL を、使います。</p>
+  <figure class="shot">
+    <img src="images/ch04-quick-setup.png" alt="作成直後のリポジトリの画面。Quick setup と、push an existing repository from the command line のコマンドが表示されている" onerror="this.parentNode.classList.add('missing')">
+    <figcaption>作成直後の画面。名前の横に「<strong>Private</strong>」と出ています。上の「Quick setup」の <strong>HTTPS</strong>（SSH ではなく）が選ばれている URL の、右端のコピーのボタンを押すと、URL をコピーできます。下の「…or push an existing repository from the command line」の3行が、これから打つコマンドです</figcaption>
+  </figure>
+  <div class="box">
+    <strong class="title">画面の3行のうち、打つのは2行（1行目と3行目）</strong>
+    <code>git remote add origin …</code>（1行目）と、<code>git push -u origin main</code>（3行目）を使います。2行目の <code>git branch -M main</code> は、枝の名前を <code>main</code> にするコマンドですが、第3章の設定で、すでに <code>main</code> なので、<strong>打たなくて構いません</strong>（打っても、害はありません）。
+  </div>
 
   <h3>手順3：ローカルと、リモートを結びつける</h3>
   <p>PowerShell で、第3章の <code>my-notes</code> に移動します。そして、GitHub に表示された URL をコピーして、次のコマンドを打ちます（<code>ユーザー名</code> は、自分の GitHub ユーザー名です）。</p>
@@ -201,11 +209,12 @@ nothing to commit, working tree clean</span></pre>
   <p>ブラウザで、<code>https://github.com/ユーザー名/my-notes</code> を開き直して（<code>F5</code> で再読み込み）、次のことを確認してください。</p>
   <ul>
     <li><code>hello.txt</code> がある</li>
-    <li>「<strong>2 Commits</strong>」と書かれている（クリックすると、<code>git log</code> と同じ履歴が見える）</li>
+    <li>名前の横に「<strong>Private</strong>」と出ている</li>
+    <li>「<strong>Commits</strong>」の数が、自分が作ったコミットの数と同じ（第3章と第4章の手順どおりなら、<strong>2 Commits</strong>）。クリックすると、<code>git log</code> と同じ履歴が見える</li>
   </ul>
   <figure class="shot">
     <img src="images/ch04-repo-after-push.png" alt="push 後の GitHub のリポジトリ画面。hello.txt と、コミット数が表示されている" onerror="this.parentNode.classList.add('missing')">
-    <figcaption>push のあとの、GitHub のリポジトリ画面</figcaption>
+    <figcaption><code>push</code> のあとの、GitHub のリポジトリ画面。<code>hello.txt</code> と、最新のコミットのメッセージ、「<strong>3 Commits</strong>」（コミットの数）が見えます（この写真は、コミットを3つ作った人のものです）。記録した人の名前（<code>user.name</code>）が、左上に出るので、第0章の設定が大切です。（メールアドレスは、黒く塗りつぶしてあります）</figcaption>
   </figure>
 
   <h3>手順6：clone で、もう一人の自分を作る</h3>
