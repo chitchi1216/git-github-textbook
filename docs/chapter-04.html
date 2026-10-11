@@ -7,7 +7,7 @@
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<header class="site"><a class="title" href="index.html">Git と GitHub 入門</a><span class="ver"><!--ver--><a href="https://github.com/chitchi1216/git-github-textbook/blob/main/CHANGELOG.md">版 0.4.10（ドラフト）</a> ・ 2026-10-11 ・ 作成者 <a href="https://github.com/chitchi1216">chitchi1216</a><!--/ver--></span></header>
+<header class="site"><a class="title" href="index.html">Git と GitHub 入門</a><span class="ver"><!--ver--><a href="https://github.com/chitchi1216/git-github-textbook/blob/main/CHANGELOG.md">版 0.4.11（ドラフト）</a> ・ 2026-10-11 ・ 作成者 <a href="https://github.com/chitchi1216">chitchi1216</a><!--/ver--></span></header>
 <main class="wrap">
   <p class="meta">第4章 ／ 目安 70〜90分</p>
   <h1>GitHub と連携する：送る・受け取る</h1>
@@ -118,20 +118,40 @@
   <p>他の人の変更を取り込む <code>git pull</code> の「動き方」を決める設定です。今は、「後で出てくる、つまずきを防ぐための設定」と思って、そのまま打ってください（第5章で意味が分かります）。</p>
 
   <h3>手順2：GitHub に、空のリポジトリを作る（ブラウザで）</h3>
+  <p>GitHub の画面は、<strong>英語</strong>で表示されます。<strong>英語と日本語の対応</strong>を、下に書いておきます。</p>
   <ol>
     <li>ブラウザで <a href="https://github.com">https://github.com</a> を開き、ログインする</li>
-    <li>右上の <strong><code>＋</code></strong> → <strong>「New repository」</strong>（新しいリポジトリ）をクリックする</li>
-    <li><strong>「Repository name」</strong>に <code>my-notes</code> と入力する</li>
-    <li>公開範囲は <strong>「Private」</strong>（自分だけが見られる）を選ぶ</li>
-    <li><strong>「Add a README file」などには、チェックを入れない</strong>（すべて空のまま）</li>
-    <li>緑の <strong>「Create repository」</strong>をクリックする</li>
+    <li>右上の<strong>自分のアイコン</strong>（丸い写真）をクリックし、メニューから<strong>「Repositories」</strong>（リポジトリの一覧）を選ぶ</li>
+    <li>一覧の画面の右側にある、青い<strong>「New」</strong>ボタンをクリックする（右上の <code>＋</code> → 「New repository」からも、同じ画面に行ける）</li>
+    <li><strong>「Repository name」</strong>に <code>my-notes</code> と入力する（<strong>「Owner」</strong>は、自分のユーザー名のままでよい）</li>
+    <li><strong>「Choose visibility」</strong>は、初期値が「Public」（誰でも見られる）です。<strong>「Private」（自分だけが見られる）に変える</strong></li>
+    <li><strong>「Add README」は「Off」のまま</strong>にする。<strong>「Add .gitignore」は「No .gitignore」、「Add license」は「No license」のまま</strong>にする（すべて空のまま）</li>
+    <li>右下の青い<strong>「Create repository」</strong>をクリックする</li>
   </ol>
   <figure class="shot">
-    <img src="images/ch04-new-repo.png" alt="GitHub の New repository 画面。名前に my-notes、Private を選び、README にはチェックを入れない" onerror="this.parentNode.classList.add('missing')">
-    <figcaption>New repository の画面。README などには、チェックを入れない</figcaption>
+    <img src="images/ch04-repositories-menu.png" alt="GitHub のダッシュボード。右上の自分のアイコンをクリックして開いたメニューで、Repositories を選ぶ" onerror="this.parentNode.classList.add('missing')">
+    <figcaption>右上の自分のアイコン（赤い矢印）をクリックし、メニューから「<strong>Repositories</strong>」（赤い丸）を選ぶ。（ほかのリポジトリの名前は、黒く塗りつぶしてあります）</figcaption>
   </figure>
+  <figure class="shot">
+    <img src="images/ch04-repositories-new.png" alt="Repositories の一覧の画面。右側に、青い New ボタンがある" onerror="this.parentNode.classList.add('missing')">
+    <figcaption>リポジトリの一覧の画面。右側の、青い「<strong>New</strong>」ボタンを押す</figcaption>
+  </figure>
+  <figure class="shot">
+    <img src="images/ch04-new-repo.png" alt="GitHub の Create a new repository 画面。Repository name、Choose visibility、Add README などの項目がある" onerror="this.parentNode.classList.add('missing')">
+    <figcaption>「Create a new repository」の画面。<code>my-notes</code> と入力し、<strong>「Choose visibility」を「Private」に変えて</strong>、<strong>「Add README」は「Off」のまま</strong>、右下の「Create repository」を押す。（この写真は、公開範囲が初期値の「Public」のままです）</figcaption>
+  </figure>
+  <table>
+    <tr><th>画面の表示（英語）</th><th>意味</th></tr>
+    <tr><td><code>Create a new repository</code></td><td>新しいリポジトリを作る</td></tr>
+    <tr><td><code>Owner</code></td><td>持ち主（自分のユーザー名）</td></tr>
+    <tr><td><code>Repository name</code></td><td>リポジトリの名前</td></tr>
+    <tr><td><code>Description</code></td><td>説明（空でよい）</td></tr>
+    <tr><td><code>Choose visibility</code> / <code>Public</code> / <code>Private</code></td><td>公開範囲を選ぶ／誰でも見られる／自分（と招待した人）だけ</td></tr>
+    <tr><td><code>Add README</code> / <code>Add .gitignore</code> / <code>Add license</code></td><td>README を足す／記録しないファイルの指定を足す／ライセンスを足す（今回はすべて足さない）</td></tr>
+    <tr><td><code>Create repository</code></td><td>リポジトリを作る（実行ボタン）</td></tr>
+  </table>
   <div class="box warn">
-    <strong class="title">README にチェックを入れない理由</strong>
+    <strong class="title">「Add README」を Off のままにする理由</strong>
     今回は、すでにあるローカルのリポジトリ（<code>my-notes</code>）を、GitHub に送ります。GitHub 側に先にファイルがあると、記録が食い違って、送れなくなります。<strong>空のまま</strong>作ってください。
   </div>
   <p>作ると、<strong>「…or push an existing repository from the command line」</strong>（既存のリポジトリを、コマンドで送る）という見出しのところに、3行のコマンドが出ます。その1行目の URL を、使います。</p>
@@ -399,7 +419,7 @@ Merge made by the 'ort' strategy.
       </div>
     </details>
   </div>
-  <!-- TODO: Win11実機で確認：clone/push/pull の表示、メモ帳が開く挙動（core.editor=notepad）、rejected の文言、GitHub の画面の文言 -->
+  <!-- TODO: Win11実機で確認：clone/push/pull の表示、pull のあとにメモ帳が開く挙動（core.editor=notepad）、rejected の文言、GitHub の「Edit this file」「Commit changes」の画面 -->
 
   <h2>4-5. うまくいかないとき</h2>
   <table>

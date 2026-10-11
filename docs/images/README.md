@@ -30,6 +30,9 @@
 | `ch04-new-repo.png` | 第4章 | GitHub の「New repository」画面（名前 `my-notes`、Private、README にチェックなし） |
 | `ch04-repo-after-push.png` | 第4章 | `git push` のあとの、GitHub のリポジトリ画面（`hello.txt` とコミット数が見える） |
 | `ch00-github-signup.png` | GitHub のトップページ（日本語表示）。「GitHub に登録」の入口 |
+| `ch04-repositories-menu.png` | GitHub のダッシュボードで、自分のアイコンのメニューから「Repositories」を選ぶ（第4章。リポジトリ名は塗りつぶし済み） |
+| `ch04-repositories-new.png` | リポジトリの一覧の画面と、青い「New」ボタン（第4章） |
+| `ch04-new-repo.png` | 「Create a new repository」の画面（第4章） |
 | `ch04-browser-auth.png` | 第4章 | 初めて `git push` したときに開く、ログイン・許可の画面 |
 | `ch04-edit-file.png` | 第4章 | GitHub の画面で `hello.txt` を編集して、「Commit changes」を押す画面 |
 
@@ -47,7 +50,6 @@
 | `ch02-input-mode.png` | 入力モード表示（「A」と「あ」） |
 | `ch04-browser-auth.png` | ブラウザの GitHub サインイン画面（第4章の認証） |
 | `ch00-powershell-open.png` | Windows の検索で「powershell」と入力した画面（第0章） |
-| `ch01-explorer-extension.png` | 拡張子が表示されているエクスプローラー（第1章） |
 | `ch02-explorer-vs-powershell.png` | エクスプローラーと PowerShell を並べた画面（第2章） |
 | `ch02-notepad.png` | メモ帳で `memo.txt` を開いた画面（第2章） |
 | `ch02-pwd-ls.png` | PowerShell で `pwd` と `ls` を打った画面（第2章と、第0章 0-10 で使用） |
@@ -55,8 +57,6 @@
 
 まだ必要な画像は、次のとおりです。
 
-- 第4章: `ch04-new-repo.png`、`ch04-repo-after-push.png`、`ch04-edit-file.png`
-
-なお、`ch00-git-config-ng.png`（`user.email` の行がない失敗例）は、今は本文で使っていません。
+- 第4章: `ch04-repo-after-push.png`、`ch04-edit-file.png`
 
 本文では使っていない画像：`ch01-explorer-extension.png`（拡張子が表示されたエクスプローラー）。
