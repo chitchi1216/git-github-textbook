@@ -84,6 +84,40 @@
     <tr><td><code>Documents</code></td><td>その中の Documents フォルダ</td></tr>
     <tr><td><code>memo.txt</code></td><td>最後がファイル。<code>.txt</code> が拡張子</td></tr>
   </table>
+  <h3>「¥」と「\」は同じ文字（混乱しやすいところ）</h3>
+  <p>パスの区切りに使う「\」は、<strong>バックスラッシュ</strong>という記号です。日本語のパソコンでは、フォントによって「<strong>¥</strong>」（円記号）の形で表示されます。見た目が違うだけで、<strong>中身は同じ文字</strong>です。キーボードで「¥」と書かれたキーを押すと入力できます。</p>
+  <figure class="diagram">
+    <svg class="d" viewBox="0 0 640 176" role="img" aria-label="円記号とバックスラッシュは同じ文字で、全角の円記号は別の文字であることを示す図">
+      <rect class="b2" x="14" y="24" width="170" height="112" rx="12"/>
+      <text class="t-mono" x="99" y="76" text-anchor="middle" style="font-size:34px">¥</text>
+      <text class="t-sm" x="99" y="102" text-anchor="middle">円記号（半角）</text>
+      <text class="t-sm muted" x="99" y="124" text-anchor="middle">フォントによる見た目</text>
+      <text class="t-lg" x="212" y="84" text-anchor="middle">＝</text>
+      <rect class="b2" x="238" y="24" width="170" height="112" rx="12"/>
+      <text class="t-mono" x="323" y="76" text-anchor="middle" style="font-size:34px">\</text>
+      <text class="t-sm" x="323" y="104" text-anchor="middle">バックスラッシュ</text>
+      <text class="t-sm muted" x="323" y="124" text-anchor="middle">どちらも同じ文字</text>
+      <text class="t-lg" x="436" y="84" text-anchor="middle">≠</text>
+      <rect class="b3" x="462" y="24" width="164" height="112" rx="12"/>
+      <text class="t-mono" x="544" y="76" text-anchor="middle" style="font-size:34px">￥</text>
+      <text class="t-sm" x="544" y="104" text-anchor="middle">全角の円記号</text>
+      <text class="t-sm muted" x="544" y="124" text-anchor="middle">別の文字（使えない）</text>
+      <text class="t-sm muted" x="320" y="164" text-anchor="middle">見た目が「¥」でも「\」でも、パスの区切りとして使える。使えないのは全角の「￥」だけ</text>
+    </svg>
+    <figcaption>「¥」と「\」は同じ。「￥」（全角）だけが別物</figcaption>
+  </figure>
+  <table class="ok-ng">
+    <tr><th>見た目</th><th>名前</th><th>パスやコマンドで使える？</th></tr>
+    <tr><td>\</td><td>バックスラッシュ</td><td class="ok">使える</td></tr>
+    <tr><td>¥</td><td>円記号（半角）。\ と同じ文字</td><td class="ok">使える</td></tr>
+    <tr><td>￥</td><td>円記号（全角）。別の文字</td><td class="ng">使えない</td></tr>
+  </table>
+  <div class="box warn">
+    <strong class="title">全角の「￥」が入ってしまうとき</strong>
+    日本語入力がオン（「あ」の状態）だと、¥ キーで全角の「￥」が入ることがあります。コマンドやパスを打つときは、<strong>半角/全角キーを押して、入力モードを「A」（半角英数）にしてから</strong>打ってください。画面右下の入力モード表示で確認できます。
+  </div>
+  <!-- TODO: Win11実機で確認：¥キーの挙動、IME表示の位置 -->
+
   <div class="box">
     <strong class="title">エクスプローラーで確認してみよう</strong>
     エクスプローラーの上のアドレスバーの空いている場所をクリックすると、今開いているフォルダのパスが文字で表示されます。いろいろなフォルダでやってみてください。
