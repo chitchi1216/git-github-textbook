@@ -30,6 +30,7 @@
 | `ch02-notepad.png` | 第2章 | PowerShell から `notepad memo.txt` を実行して、メモ帳が開いた画面（ターミナルとメモ帳が並ぶように） |
 | `ch04-new-repo.png` | 第4章 | GitHub の「New repository」画面（名前 `my-notes`、Private、README にチェックなし） |
 | `ch04-repo-after-push.png` | 第4章 | `git push` のあとの、GitHub のリポジトリ画面（`hello.txt` とコミット数が見える） |
+| `ch00-github-signup.png` | GitHub のトップページ（日本語表示）。「GitHub に登録」の入口 |
 | `ch04-browser-auth.png` | 第4章 | 初めて `git push` したときに開く、ログイン・許可の画面 |
 | `ch04-edit-file.png` | 第4章 | GitHub の画面で `hello.txt` を編集して、「Commit changes」を押す画面 |
 
