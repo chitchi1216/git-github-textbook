@@ -38,6 +38,8 @@
 | `ch04-clone.png` | `git clone` と `git log --oneline` の画面（第4章 手順6） |
 | `ch04-commit-push.png` | コピー側の `add` / `commit` / `push` の画面（第4章 手順7） |
 | `ch04-pull.png` | `git pull` の画面（`Fast-forward`。第4章 手順8） |
+| `ch04-fetch-status.png` | `git fetch` → `git status`（behind の表示）→ `git pull`（第4章 チャレンジ2） |
+| `ch04-push-rejected.png` | `push` の拒否（rejected）と、`pull` のあとの `push`（第4章 チャレンジ3） |
 | `ch04-quick-setup.png` | 作成直後のリポジトリの画面（Quick setup。第4章） |
 | `ch04-repo-after-push.png` | `push` のあとの GitHub のリポジトリ画面（メールアドレスは塗りつぶし。第4章） |
 | `ch04-browser-auth.png` | 第4章 | 初めて `git push` したときに開く、ログイン・許可の画面 |
