@@ -7,7 +7,7 @@
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<header class="site"><a class="title" href="index.html">Git と GitHub 入門</a><span class="ver"><!--ver--><a href="https://github.com/chitchi1216/git-github-textbook/blob/main/CHANGELOG.md">版 0.2.0（ドラフト）</a> ・ 2026-10-11 ・ 作成者 <a href="https://github.com/chitchi1216">chitchi1216</a><!--/ver--></span></header>
+<header class="site"><a class="title" href="index.html">Git と GitHub 入門</a><span class="ver"><!--ver--><a href="https://github.com/chitchi1216/git-github-textbook/blob/main/CHANGELOG.md">版 0.3.0（ドラフト）</a> ・ 2026-10-11 ・ 作成者 <a href="https://github.com/chitchi1216">chitchi1216</a><!--/ver--></span></header>
 <main class="wrap">
   <p class="meta">付録A</p>
   <h1>よく使うコマンド一覧</h1>
@@ -72,10 +72,11 @@
     <tr><td><code>git config --global core.editor</code></td><td class="en-col">config ＝ configuration（設定）</td><td>Git が使うエディタを、メモ帳にする</td><td><code>git config --global core.editor notepad</code></td><td><a href="chapter-00.html">第0章</a></td></tr>
     <tr><td><code>git config --global --list</code></td><td class="en-col">config ＝ configuration（設定）、list（一覧）</td><td>登録した設定を確認する</td><td><code>git config --global --list</code></td><td><a href="chapter-00.html">第0章</a></td></tr>
     <tr><td><code>git config --global init.defaultBranch</code></td><td class="en-col">config ＝ configuration（設定）、branch（枝）</td><td>最初の枝の名前を、main にする（一度だけ）</td><td><code>git config --global init.defaultBranch main</code></td><td><a href="chapter-03.html">第3章</a></td></tr>
+    <tr><td><code>git config --global pull.rebase false</code></td><td class="en-col">config ＝ configuration（設定）、rebase（別の方法）</td><td>git pull で、他の人の変更を「合わせる（merge）」方法に決める（一度だけ）</td><td><code>git config --global pull.rebase false</code></td><td><a href="chapter-04.html">第4章</a></td></tr>
   </table>
 
   <h2>A-6. Git の基本操作</h2>
-  <p>第3章のコマンドを載せています。第4章以降も、順番に追加していきます。</p>
+  <p>第3章・第4章のコマンドを載せています。第5章以降も、順番に追加していきます。</p>
   <table class="cmds">
     <tr><th>コマンド</th><th>もとの英語</th><th>意味</th><th>使用例</th><th>章</th></tr>
     <tr><td><code>git --version</code></td><td class="en-col">version（版）</td><td>Git のバージョンを表示する（インストールの確認）</td><td><code>git --version</code></td><td><a href="chapter-03.html">第3章</a></td></tr>
@@ -87,7 +88,13 @@
     <tr><td><code>git log --oneline</code></td><td class="en-col">oneline（1行）</td><td>履歴を、1つ1行で表示する</td><td><code>git log --oneline</code></td><td><a href="chapter-03.html">第3章</a></td></tr>
     <tr><td><code>git log --grep</code></td><td class="en-col"><strong>grep</strong>（文字を探す）</td><td>メッセージの中から、文字を探す</td><td><code>git log --oneline --grep=second</code></td><td><a href="chapter-03.html">第3章</a></td></tr>
     <tr><td><code>git diff</code></td><td class="en-col"><strong>diff</strong>erence（違い）</td><td>前の記録から、何が変わったかを表示する</td><td><code>git diff</code></td><td><a href="chapter-03.html">第3章</a></td></tr>
-    <tr class="soon"><td>（準備中）</td><td class="en-col">—</td><td>GitHub から取ってくる、GitHub に送る、受け取る　など</td><td>—</td><td>第4章</td></tr>
+    <tr><td><code>git remote add origin</code></td><td class="en-col"><strong>remote</strong>（離れた）、add（追加）、origin（もと）</td><td>GitHub のリポジトリを、origin という名前で登録する</td><td><code>git remote add origin https://github.com/ユーザー名/my-notes.git</code></td><td><a href="chapter-04.html">第4章</a></td></tr>
+    <tr><td><code>git remote -v</code></td><td class="en-col"><strong>v</strong>erbose（くわしく）</td><td>登録したリモートの URL を表示する</td><td><code>git remote -v</code></td><td><a href="chapter-04.html">第4章</a></td></tr>
+    <tr><td><code>git push -u origin main</code></td><td class="en-col">push（押し出す）、<strong>u</strong>pstream（上流）</td><td>初めて GitHub に送る。以降は git push だけで済む</td><td><code>git push -u origin main</code></td><td><a href="chapter-04.html">第4章</a></td></tr>
+    <tr><td><code>git push</code></td><td class="en-col">push（押し出す）</td><td>自分の記録を、GitHub に送る</td><td><code>git push</code></td><td><a href="chapter-04.html">第4章</a></td></tr>
+    <tr><td><code>git pull</code></td><td class="en-col">pull（引っ張る）</td><td>GitHub の記録を、自分のパソコンに受け取る（fetch ＋ merge）</td><td><code>git pull</code></td><td><a href="chapter-04.html">第4章</a></td></tr>
+    <tr><td><code>git fetch</code></td><td class="en-col">fetch（取ってくる）</td><td>GitHub の最新情報を取ってくるだけ。手元のファイルは変わらない</td><td><code>git fetch</code></td><td><a href="chapter-04.html">第4章</a></td></tr>
+    <tr><td><code>git clone</code></td><td class="en-col">clone（複製）</td><td>GitHub のリポジトリを、履歴ごと、まるごと複製する</td><td><code>git clone https://github.com/ユーザー名/my-notes.git my-notes-copy</code></td><td><a href="chapter-04.html">第4章</a></td></tr>
     <tr class="soon"><td>（準備中）</td><td class="en-col">—</td><td>ブランチを作る、切り替える、取り込む　など</td><td>—</td><td>第5章</td></tr>
   </table>
 

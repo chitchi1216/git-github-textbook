@@ -1,0 +1,459 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>第4章 GitHub と連携する | Git と GitHub 入門</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="site"><a class="title" href="index.html">Git と GitHub 入門</a><span class="ver"><!--ver--><a href="https://github.com/chitchi1216/git-github-textbook/blob/main/CHANGELOG.md">版 0.3.0（ドラフト）</a> ・ 2026-10-11 ・ 作成者 <a href="https://github.com/chitchi1216">chitchi1216</a><!--/ver--></span></header>
+<main class="wrap">
+  <p class="meta">第4章 ／ 目安 70〜90分</p>
+  <h1>GitHub と連携する：送る・受け取る</h1>
+
+  <div class="box">
+    <strong class="title">この章でできるようになること</strong>
+    <ul class="goals">
+      <li>ローカルとリモートの違いを、説明できる</li>
+      <li>自分のパソコンの記録を、GitHub に送れる（<code>push</code>）</li>
+      <li>GitHub の記録を、コピーして取ってこれる（<code>clone</code>）</li>
+      <li>GitHub での変更を、自分のパソコンに受け取れる（<code>pull</code>）</li>
+    </ul>
+  </div>
+
+  <h2>4-1. ローカルとリモート</h2>
+  <p>第3章で作った記録は、<strong>自分のパソコンの中だけ</strong>にありました。これを<strong>ローカルリポジトリ</strong>といいます。GitHub に置く、インターネット上のリポジトリは<strong>リモートリポジトリ</strong>です。この章では、2つの間で記録をやりとりします。</p>
+  <figure class="diagram">
+    <svg class="d" viewBox="0 0 640 270" role="img" aria-label="ローカルリポジトリとリモートリポジトリの間の push、pull、clone の図">
+      <defs><marker id="d1" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path class="arrowhead" d="M0 0 L10 5 L0 10 z"/></marker></defs>
+      <rect class="b1" x="10" y="20" width="220" height="130" rx="14"/>
+      <text class="t-md" x="120" y="50" text-anchor="middle">あなたのパソコン</text>
+      <text class="t-lg" x="120" y="86" text-anchor="middle">ローカル</text>
+      <text class="t-sm" x="120" y="112" text-anchor="middle">リポジトリ</text>
+      <text class="t-sm muted" x="120" y="134" text-anchor="middle">C:\work\my-notes</text>
+      <rect class="b3" x="410" y="20" width="220" height="130" rx="14"/>
+      <text class="t-md" x="520" y="50" text-anchor="middle">インターネットの向こう</text>
+      <text class="t-lg" x="520" y="86" text-anchor="middle">リモート</text>
+      <text class="t-sm" x="520" y="112" text-anchor="middle">リポジトリ（GitHub）</text>
+      <text class="t-sm muted" x="520" y="134" text-anchor="middle">名前は origin</text>
+      <path class="ln" d="M234 66 H406" marker-end="url(#d1)"/>
+      <path class="ln" d="M406 112 H234" marker-end="url(#d1)"/>
+      <text class="t-md" x="320" y="58" text-anchor="middle">push（送る）</text>
+      <text class="t-md" x="320" y="136" text-anchor="middle">pull（受け取る）</text>
+      <rect class="b0" x="10" y="190" width="220" height="64" rx="14"/>
+      <text class="t-md" x="120" y="216" text-anchor="middle">新しいコピー</text>
+      <text class="t-sm muted" x="120" y="238" text-anchor="middle">別のフォルダ・別のパソコン</text>
+      <path class="ln" d="M520 154 V222 H234" marker-end="url(#d1)"/>
+      <text class="t-md" x="380" y="212" text-anchor="middle">clone（丸ごと複製）</text>
+    </svg>
+    <figcaption>push で送り、pull で受け取る。clone は、リモートの丸ごとのコピーを作る</figcaption>
+  </figure>
+  <table>
+    <tr><th>言葉</th><th>意味</th><th>名前の由来</th></tr>
+    <tr><td>リモート（remote）</td><td>離れた場所にあるリポジトリ。GitHub 上のもの</td><td>remote ＝ 遠く離れた</td></tr>
+    <tr><td><code>origin</code></td><td>リモートに付ける、いつもの名前（「GitHub の、あのリポジトリ」の呼び名）</td><td>origin ＝ もと、起点</td></tr>
+    <tr><td><code>push</code></td><td>自分の記録を、リモートに送る</td><td>push ＝ 押し出す</td></tr>
+    <tr><td><code>pull</code></td><td>リモートの記録を、自分のパソコンに受け取る</td><td>pull ＝ 引っ張る</td></tr>
+    <tr><td><code>clone</code></td><td>リモートを、まるごと自分のパソコンに複製する</td><td>clone ＝ 複製</td></tr>
+  </table>
+
+  <h2>4-2. GitHub に「自分だ」と伝える仕組み</h2>
+  <p>GitHub に記録を送るには、「これは自分だ」と GitHub に伝える（<strong>認証</strong>する）必要があります。GitHub は、Git での操作に、<strong>パスワードを使えません</strong>。代わりに、Git for Windows に入っている「<strong>Git Credential Manager</strong>」が、ブラウザを開いて、ログインを手伝ってくれます。</p>
+  <ol>
+    <li>初めて <code>git push</code> を打つと、<strong>ブラウザの画面</strong>（またはウィンドウ）が開く</li>
+    <li>GitHub に、ログインする</li>
+    <li>「許可しますか？」と聞かれたら、<strong>許可（Authorize）</strong>する</li>
+    <li>ターミナルに戻ると、送信が進んでいる</li>
+  </ol>
+  <p>一度許可すると、パソコンが覚えてくれるので、次からは聞かれません。</p>
+  <figure class="shot">
+    <img src="images/ch04-browser-auth.png" alt="初めて push したときに開く、GitHub のログイン・許可の画面" onerror="this.parentNode.classList.add('missing')">
+    <figcaption>初めて push したときに開く、ログインと許可の画面</figcaption>
+  </figure>
+  <div class="box warn">
+    <strong class="title">GitHub のパスワードを、ターミナルに打たない</strong>
+    ターミナルで「Password:」と聞かれても、GitHub のパスワードは<strong>使えません</strong>。ブラウザのログイン画面を使います。画面が開かないときは、第4章の「うまくいかないとき」を見てください。
+  </div>
+  <div class="box">
+    <strong class="title">「二要素認証」を求められることがあります</strong>
+    GitHub は、アカウントを守るために、ログインのとき、パスワードのほかに「スマートフォンのアプリのコード」などの確認（二要素認証）を求めることがあります。案内に従って設定してください。
+  </div>
+  <!-- TODO: Win11実機で確認：Git Credential Manager の画面、二要素認証の求められ方（GitHub の現在の仕様） -->
+
+  <h2>4-3. 実際にやってみよう</h2>
+  <p>この章では、<strong>一人で、「二人分」の動きを体験</strong>します。同じ GitHub のリポジトリから、フォルダを2つ作って、<strong>「あなた」と「もう一人のあなた（別のパソコン役）」</strong>のように使い分けます。</p>
+  <figure class="diagram">
+    <svg class="d" viewBox="0 0 640 330" role="img" aria-label="2つのフォルダと GitHub の間の、push、clone、push、pull の順番の図">
+      <defs><marker id="d2" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path class="arrowhead" d="M0 0 L10 5 L0 10 z"/></marker></defs>
+      <rect class="b3" x="200" y="14" width="240" height="84" rx="14"/>
+      <text class="t-lg" x="320" y="50" text-anchor="middle">GitHub</text>
+      <text class="t-sm" x="320" y="76" text-anchor="middle">リモートリポジトリ（origin）</text>
+      <rect class="b1" x="10" y="220" width="250" height="96" rx="14"/>
+      <text class="t-md" x="135" y="250" text-anchor="middle">あなた</text>
+      <text class="t-mono" x="135" y="278" text-anchor="middle" style="font-size:14px">C:\work\my-notes</text>
+      <text class="t-sm muted" x="135" y="302" text-anchor="middle">（第3章で作ったもの）</text>
+      <rect class="b2" x="380" y="220" width="250" height="96" rx="14"/>
+      <text class="t-md" x="505" y="250" text-anchor="middle">もう一人のあなた</text>
+      <text class="t-mono" x="505" y="278" text-anchor="middle" style="font-size:14px">C:\work\my-notes-copy</text>
+      <text class="t-sm muted" x="505" y="302" text-anchor="middle">（clone で作る）</text>
+      <path class="ln" d="M70 216 L214 100" marker-end="url(#d2)"/>
+      <text class="t-sm" x="52" y="150" text-anchor="end">① push</text>
+      <path class="ln" d="M278 100 L196 216" marker-end="url(#d2)"/>
+      <text class="t-sm" x="262" y="188">④ pull</text>
+      <path class="ln" d="M404 100 L548 216" marker-end="url(#d2)"/>
+      <text class="t-sm" x="494" y="146">② clone</text>
+      <path class="ln" d="M450 216 L368 100" marker-end="url(#d2)"/>
+      <text class="t-sm" x="396" y="196" text-anchor="end">③ push</text>
+    </svg>
+    <figcaption>① 送る → ② 複製する → ③ コピー側で変えて送る → ④ 元の側で受け取る</figcaption>
+  </figure>
+  <div class="box warn">
+    <strong class="title">演習は <code>C:\work</code> の中で</strong>
+    これまでと同じく、OneDrive の外にある <code>C:\work</code> の中で行います。
+  </div>
+
+  <h3>手順1：設定を1つ足す（一度だけ）</h3>
+<pre><code>git config --global pull.rebase false</code></pre>
+  <p>他の人の変更を取り込む <code>git pull</code> の「動き方」を決める設定です。今は、「後で出てくる、つまずきを防ぐための設定」と思って、そのまま打ってください（第5章で意味が分かります）。</p>
+
+  <h3>手順2：GitHub に、空のリポジトリを作る（ブラウザで）</h3>
+  <ol>
+    <li>ブラウザで <a href="https://github.com">https://github.com</a> を開き、ログインする</li>
+    <li>右上の <strong><code>＋</code></strong> → <strong>「New repository」</strong>（新しいリポジトリ）をクリックする</li>
+    <li><strong>「Repository name」</strong>に <code>my-notes</code> と入力する</li>
+    <li>公開範囲は <strong>「Private」</strong>（自分だけが見られる）を選ぶ</li>
+    <li><strong>「Add a README file」などには、チェックを入れない</strong>（すべて空のまま）</li>
+    <li>緑の <strong>「Create repository」</strong>をクリックする</li>
+  </ol>
+  <figure class="shot">
+    <img src="images/ch04-new-repo.png" alt="GitHub の New repository 画面。名前に my-notes、Private を選び、README にはチェックを入れない" onerror="this.parentNode.classList.add('missing')">
+    <figcaption>New repository の画面。README などには、チェックを入れない</figcaption>
+  </figure>
+  <div class="box warn">
+    <strong class="title">README にチェックを入れない理由</strong>
+    今回は、すでにあるローカルのリポジトリ（<code>my-notes</code>）を、GitHub に送ります。GitHub 側に先にファイルがあると、記録が食い違って、送れなくなります。<strong>空のまま</strong>作ってください。
+  </div>
+  <p>作ると、<strong>「…or push an existing repository from the command line」</strong>（既存のリポジトリを、コマンドで送る）という見出しのところに、3行のコマンドが出ます。その1行目の URL を、使います。</p>
+
+  <h3>手順3：ローカルと、リモートを結びつける</h3>
+  <p>PowerShell で、第3章の <code>my-notes</code> に移動します。そして、GitHub に表示された URL をコピーして、次のコマンドを打ちます（<code>ユーザー名</code> は、自分の GitHub ユーザー名です）。</p>
+<pre><code>cd C:\work\my-notes
+git remote add origin https://github.com/ユーザー名/my-notes.git
+git remote -v</code></pre>
+<pre class="term"><span class="ps">PS C:\work&gt; cd C:\work\my-notes</span>
+<span class="ps">PS C:\work\my-notes&gt; git remote add origin https://github.com/chitchi1216/my-notes.git</span>
+<span class="ps">PS C:\work\my-notes&gt; git remote -v</span>
+<span class="out">origin  https://github.com/chitchi1216/my-notes.git (fetch)
+origin  https://github.com/chitchi1216/my-notes.git (push)</span></pre>
+  <p>「<code>origin</code> という名前で、この URL のリモートを登録する」という意味です。<code>git remote -v</code> で、登録を確認できます（<code>fetch</code> は受け取り用、<code>push</code> は送信用で、同じ URL が2行出ます）。</p>
+  <p class="etym">💡 <code>remote add</code> ＝「リモートを追加する」。<code>-v</code> は <strong>v</strong>erbose（くわしく）の頭文字です。</p>
+  <div class="box">
+    <strong class="title">URL は、コピーして貼り付ける</strong>
+    URL は長いので、<strong>GitHub の画面の「コピー」ボタン</strong>で、コピーしましょう。PowerShell に貼り付けるには、<strong>右クリック</strong>するか、<code>Ctrl</code> + <code>V</code> を押します。<code>ユーザー名</code> の部分を、間違えやすいところです。
+  </div>
+
+  <h3>手順4：GitHub に送る（push）</h3>
+<pre><code>git push -u origin main</code></pre>
+  <p>初めてのときは、<strong>ブラウザが開く</strong>ので、ログインして許可してください（4-2）。送信が進むと、次のように表示されます（途中の行は、人によって違います）。</p>
+<pre class="term"><span class="ps">PS C:\work\my-notes&gt; git push -u origin main</span>
+<span class="out">Enumerating objects: 6, done.
+Counting objects: 100% (6/6), done.
+Delta compression using up to 8 threads
+Compressing objects: 100% (3/3), done.
+Writing objects: 100% (6/6), 480 bytes | 480.00 KiB/s, done.
+Total 6 (delta 0), reused 0 (delta 0), pack-reused 0
+To https://github.com/chitchi1216/my-notes.git
+ * [new branch]      main -&gt; main
+branch 'main' set up to track 'origin/main'.</span></pre>
+  <p><code>[new branch] main -&gt; main</code> と出れば、送信できています。これで、<strong>2つのコミットが、GitHub に上がりました。</strong></p>
+  <p class="etym">💡 <code>git push -u origin main</code> ＝「<code>origin</code> に、<code>main</code> を送る」。<code>-u</code> は、<strong>u</strong>pstream（上流）の頭文字で、「今後は、この組み合わせを覚えて」という意味です。<strong>一度付ければ、次からは <code>git push</code> だけ</strong>で済みます。</p>
+  <p>状態を見てみましょう。</p>
+<pre><code>git status</code></pre>
+<pre class="term"><span class="ps">PS C:\work\my-notes&gt; git status</span>
+<span class="out">On branch main
+Your branch is up to date with 'origin/main'.
+
+nothing to commit, working tree clean</span></pre>
+  <p><code>Your branch is up to date with 'origin/main'</code> は、「自分の <code>main</code> は、GitHub の <code>main</code> と同じです」という意味です。</p>
+
+  <h3>手順5：GitHub の画面で、確かめる</h3>
+  <p>ブラウザで、<code>https://github.com/ユーザー名/my-notes</code> を開き直して（<code>F5</code> で再読み込み）、次のことを確認してください。</p>
+  <ul>
+    <li><code>hello.txt</code> がある</li>
+    <li>「<strong>2 Commits</strong>」と書かれている（クリックすると、<code>git log</code> と同じ履歴が見える）</li>
+  </ul>
+  <figure class="shot">
+    <img src="images/ch04-repo-after-push.png" alt="push 後の GitHub のリポジトリ画面。hello.txt と、コミット数が表示されている" onerror="this.parentNode.classList.add('missing')">
+    <figcaption>push のあとの、GitHub のリポジトリ画面</figcaption>
+  </figure>
+
+  <h3>手順6：clone で、もう一人の自分を作る</h3>
+  <p>次に、同じリポジトリを、<strong>別のフォルダ</strong>に複製します。まず、<strong><code>C:\work</code> に移動してから</strong>、<code>clone</code> します。</p>
+<pre><code>cd C:\work
+git clone https://github.com/ユーザー名/my-notes.git my-notes-copy
+cd my-notes-copy
+git log --oneline</code></pre>
+<pre class="term"><span class="ps">PS C:\work&gt; git clone https://github.com/chitchi1216/my-notes.git my-notes-copy</span>
+<span class="out">Cloning into 'my-notes-copy'...
+remote: Enumerating objects: 6, done.
+remote: Counting objects: 100% (6/6), done.
+remote: Compressing objects: 100% (3/3), done.
+remote: Total 6 (delta 0), reused 0 (delta 0), pack-reused 0
+Receiving objects: 100% (6/6), done.</span>
+<span class="ps">PS C:\work&gt; cd my-notes-copy</span>
+<span class="ps">PS C:\work\my-notes-copy&gt; git log --oneline</span>
+<span class="out">7b1e4d8 (HEAD -&gt; main, origin/main, origin/HEAD) Add second line to hello.txt
+3f2a9c1 Add hello.txt</span></pre>
+  <p>履歴も、ファイルも、<strong>そっくりそのまま複製</strong>されました。<code>git clone URL 新しいフォルダ名</code> の形で、<strong>新しいフォルダ</strong>が作られます。<code>my-notes-copy</code> は、もう一人のあなたの、作業場所です。</p>
+  <div class="box warn">
+    <strong class="title"><code>clone</code> は、リポジトリの「外」で</strong>
+    <code>clone</code> を、<code>my-notes</code> のような<strong>リポジトリの中</strong>で打ってはいけません。リポジトリの中に、リポジトリができてしまい、混乱のもとになります。<strong>必ず、<code>C:\work</code> に移動してから</strong>打ってください。
+  </div>
+  <div class="box">
+    <strong class="title"><code>git init</code> と <code>git clone</code> の違い</strong>
+    <code>git init</code> は、<strong>手元のフォルダを、新しいリポジトリにする</strong>ものです。<code>git clone</code> は、<strong>すでにあるリポジトリ（GitHub など）を、まるごと複製する</strong>ものです。clone すると、<code>origin</code> の設定も、自動で済みます。
+  </div>
+
+  <h3>手順7：コピー側で変更して、push する</h3>
+  <p><code>my-notes-copy</code> にいる状態で、<code>hello.txt</code> に3行目を足して、記録し、GitHub に送ります。</p>
+<pre><code>notepad hello.txt</code></pre>
+  <p><code>third line</code> と1行足して、<strong>最後に Enter で改行</strong>して保存し、閉じます。続けて、次を打ちます。</p>
+<pre><code>git add hello.txt
+git commit -m "Add third line"
+git push</code></pre>
+<pre class="term"><span class="ps">PS C:\work\my-notes-copy&gt; git add hello.txt</span>
+<span class="ps">PS C:\work\my-notes-copy&gt; git commit -m "Add third line"</span>
+<span class="out">[main c5d2e8a] Add third line
+ 1 file changed, 1 insertion(+)</span>
+<span class="ps">PS C:\work\my-notes-copy&gt; git push</span>
+<span class="out">Enumerating objects: 5, done.
+Counting objects: 100% (5/5), done.
+Writing objects: 100% (3/3), 280 bytes | 280.00 KiB/s, done.
+Total 3 (delta 0), reused 0 (delta 0), pack-reused 0
+To https://github.com/chitchi1216/my-notes.git
+   7b1e4d8..c5d2e8a  main -&gt; main</span></pre>
+  <p>今回は、<code>git push</code> だけで送れました。<code>clone</code> で作ったフォルダは、<code>-u</code> に当たる設定が、最初から入っているためです。</p>
+
+  <h3>手順8：元の側で、受け取る（pull）</h3>
+  <p>今度は、<strong>最初のフォルダ <code>my-notes</code></strong> に戻ります。ここでは、まだ3行目のことを知りません。</p>
+<pre><code>cd C:\work\my-notes
+type hello.txt
+git pull
+type hello.txt</code></pre>
+<pre class="term"><span class="ps">PS C:\work\my-notes&gt; type hello.txt</span>
+<span class="out">hello git
+second line</span>
+<span class="ps">PS C:\work\my-notes&gt; git pull</span>
+<span class="out">remote: Enumerating objects: 5, done.
+remote: Counting objects: 100% (5/5), done.
+remote: Total 3 (delta 0), reused 0 (delta 0), pack-reused 0
+Unpacking objects: 100% (3/3), done.
+From https://github.com/chitchi1216/my-notes
+   7b1e4d8..c5d2e8a  main       -&gt; origin/main
+Updating 7b1e4d8..c5d2e8a
+Fast-forward
+ hello.txt | 1 +
+ 1 file changed, 1 insertion(+)</span>
+<span class="ps">PS C:\work\my-notes&gt; type hello.txt</span>
+<span class="out">hello git
+second line
+third line</span></pre>
+  <p>3行目が、<strong>受け取れました</strong>。「<code>Fast-forward</code>」は、「自分の記録を、そのまま先に進めただけ」という意味で、最も単純な受け取り方です。</p>
+  <div class="box ok">
+    <strong class="title">これが、共同開発の基本のくり返し</strong>
+    <strong>あなたが変更して push → 他の人が pull で受け取る</strong>。4人のチームでも、この動きが、基本です。次の章からは、これを「ブランチ」と組み合わせて、安全に行う方法を学びます。
+  </div>
+  <p class="etym">💡 <code>pull</code> は、<strong>fetch</strong>（取ってくる）と <strong>merge</strong>（合わせる）を、続けて行うコマンドです。<code>merge</code> は、第5章で学びます。</p>
+
+  <h3>ここまでの流れ（まとめ）</h3>
+  <table>
+    <tr><th>やりたいこと</th><th>コマンド</th></tr>
+    <tr><td>GitHub のリポジトリを、自分のパソコンに複製する（最初の1回）</td><td><code>git clone URL</code></td></tr>
+    <tr><td>手元のリポジトリを、初めて GitHub に結びつける</td><td><code>git remote add origin URL</code> → <code>git push -u origin main</code></td></tr>
+    <tr><td>自分の記録を、GitHub に送る</td><td><code>git push</code></td></tr>
+    <tr><td>GitHub の記録を、自分のパソコンに受け取る</td><td><code>git pull</code></td></tr>
+  </table>
+  <div class="box warn">
+    <strong class="title">GitHub に送ったものは、消しても履歴に残る</strong>
+    パスワードや、他人に見せたくない情報を、ファイルに書いて <code>push</code> しないでください。あとでファイルから消しても、<strong>過去の履歴の中に、残り続けます。</strong>Private のリポジトリでも、共同作業者には見えます。
+  </div>
+
+  <details class="coffee">
+    <summary>☕ コーヒーブレイク：Git は「分散型」。GitHub が消えても、記録は残る？<span class="skip">（読み飛ばしてOK）</span></summary>
+    <p>手順6で <code>clone</code> したとき、<strong>履歴まで、まるごと複製</strong>されたことに気づきましたか？ これは、Git の大きな特徴です。Git は<strong>「分散型」</strong>と呼ばれる仕組みで、<strong>全員のパソコンの中に、完全な履歴のコピー</strong>があります。</p>
+    <figure class="diagram">
+      <svg class="d" viewBox="0 0 640 230" role="img" aria-label="4人のパソコンがそれぞれ完全な履歴を持ち、GitHub を介してやりとりする図">
+        <defs><marker id="d3" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="arrowhead" d="M0 0 L10 5 L0 10 z"/></marker></defs>
+        <rect class="b3" x="230" y="86" width="180" height="58" rx="12"/>
+        <text class="t-md" x="320" y="112" text-anchor="middle">GitHub</text>
+        <text class="t-sm" x="320" y="132" text-anchor="middle">みんなの集合場所</text>
+        <rect class="b1" x="14" y="14" width="150" height="56" rx="10"/><text class="t-sm" x="89" y="38" text-anchor="middle">あなた</text><text class="t-sm muted" x="89" y="58" text-anchor="middle">完全な履歴</text>
+        <rect class="b1" x="476" y="14" width="150" height="56" rx="10"/><text class="t-sm" x="551" y="38" text-anchor="middle">メンバー B</text><text class="t-sm muted" x="551" y="58" text-anchor="middle">完全な履歴</text>
+        <rect class="b1" x="14" y="160" width="150" height="56" rx="10"/><text class="t-sm" x="89" y="184" text-anchor="middle">メンバー C</text><text class="t-sm muted" x="89" y="204" text-anchor="middle">完全な履歴</text>
+        <rect class="b1" x="476" y="160" width="150" height="56" rx="10"/><text class="t-sm" x="551" y="184" text-anchor="middle">メンバー D</text><text class="t-sm muted" x="551" y="204" text-anchor="middle">完全な履歴</text>
+        <path class="ln" d="M164 56 L232 96 M476 56 L408 96 M164 174 L232 134 M476 174 L408 134" marker-start="url(#d3)" marker-end="url(#d3)"/>
+      </svg>
+      <figcaption>全員が完全なコピーを持っている。GitHub は、受け渡しの場所</figcaption>
+    </figure>
+    <ul>
+      <li><strong>もしものときに強い。</strong>GitHub のサービスが止まっても、誰かのパソコンに、全部の履歴が残っています。</li>
+      <li><strong>ネットがなくても作業できる。</strong><code>commit</code> や <code>log</code> は、自分のパソコンだけで動きます。インターネットが必要なのは、<code>push</code> と <code>pull</code> のときだけです。</li>
+      <li><strong>GitHub だけが Git の置き場ではない。</strong>GitLab、Bitbucket など、同じ仕組みの別のサービスもあります。<code>origin</code> を差し替えれば、同じ Git で使えます。</li>
+    </ul>
+    <p class="meta">※ 「GitHub の名前」の由来など、細かい経緯には諸説あります。</p>
+  </details>
+
+  <h2>4-4. チャレンジ</h2>
+  <p>必須ではありません。手順8までが終わった状態から始めます。</p>
+
+  <div class="challenge">
+    <strong class="title">🎯 チャレンジ1 <span class="level">★☆☆</span>　GitHub の画面で編集して、pull で受け取る</strong>
+    <p>GitHub の画面（ブラウザ）で <code>hello.txt</code> を編集して、<code>fourth line</code> という4行目を足してください。そのあと、<code>my-notes</code> フォルダで、その変更を<strong>受け取って</strong>、中身を確かめましょう。</p>
+    <details>
+      <summary>ヒント</summary>
+      <p>GitHub のリポジトリ画面で <code>hello.txt</code> をクリックし、右上の<strong>鉛筆のマーク</strong>（Edit this file）を押すと、ブラウザで編集できます。編集後は、緑の <strong>「Commit changes」</strong>を押して、記録します。</p>
+    </details>
+    <details>
+      <summary>こたえと解説</summary>
+      <p>GitHub で「Commit changes」を押すと、<strong>GitHub 側に新しいコミット</strong>ができます。そのあと、手元で次を打ちます。</p>
+<pre><code>cd C:\work\my-notes
+git pull
+type hello.txt</code></pre>
+      <p>4行目が、手元に届いていれば成功です。これは、<strong>「別のメンバーが、GitHub 上で変更した」場面</strong>と同じです。GitHub の画面で直接編集できることも、覚えておくと便利です。</p>
+      <figure class="shot">
+        <img src="images/ch04-edit-file.png" alt="GitHub の画面でファイルを編集し、Commit changes を押す画面" onerror="this.parentNode.classList.add('missing')">
+        <figcaption>GitHub の画面で編集する</figcaption>
+      </figure>
+    </details>
+  </div>
+
+  <div class="challenge">
+    <strong class="title">🎯 チャレンジ2 <span class="level">★★☆</span>　「遅れている」ことを、確かめる</strong>
+    <p><code>pull</code> を打つ前に、「<strong>GitHub のほうが、自分より進んでいるか</strong>」を確かめる方法があります。チャレンジ1の編集を、もう一度、別の内容（<code>fifth line</code>）で行い、そのあと、<strong><code>pull</code> はまだ打たずに</strong>、<code>git fetch</code> と <code>git status</code> を打って、表示を読んでください。</p>
+    <details>
+      <summary>ヒント</summary>
+      <p><code>fetch</code> は、「GitHub の最新の情報を、取ってくるだけ」のコマンドです。自分のファイルは、まだ変わりません。</p>
+    </details>
+    <details>
+      <summary>こたえと解説</summary>
+<pre><code>git fetch
+git status</code></pre>
+<pre class="term"><span class="ps">PS C:\work\my-notes&gt; git status</span>
+<span class="out">On branch main
+Your branch is behind 'origin/main' by 1 commit, and can be fast-forwarded.
+  (use "git pull" to update your local branch)
+
+nothing to commit, working tree clean</span></pre>
+      <p><code>behind 'origin/main' by 1 commit</code> は、「GitHub の <code>main</code> より、1コミット遅れています」という意味です。<strong>「<code>fetch</code> で確認 → <code>pull</code> で受け取る」</strong>と、2段階に分けると、受け取る前に、状況を確かめられます。</p>
+      <table>
+        <tr><th>コマンド</th><th>働き</th><th>手元のファイル</th></tr>
+        <tr><td><code>git fetch</code></td><td>GitHub の最新情報を、取ってくるだけ</td><td>変わらない</td></tr>
+        <tr><td><code>git pull</code></td><td>取ってきて、手元に合わせる</td><td>変わる</td></tr>
+      </table>
+    </details>
+  </div>
+
+  <div class="challenge">
+    <strong class="title">🎯 チャレンジ3 <span class="level">★★★</span>　push が「拒否」されたら</strong>
+    <p>共同開発で、一番よく出会うエラーです。次の手順で、わざと起こして、直してみましょう。</p>
+    <div class="box">
+      <strong class="title">始める前に</strong>
+      チャレンジ1・2をやった人は、<strong>先に、<code>my-notes</code> と <code>my-notes-copy</code> の両方で <code>git pull</code> を打って</strong>、2つのフォルダを最新にしてから始めてください。最新でないと、手順1でも、拒否されてしまいます。
+    </div>
+    <ol>
+      <li><code>my-notes-copy</code> で、<code>copy.txt</code> という新しいファイルを作って（<code>New-Item copy.txt</code>）、<code>add</code>・<code>commit</code>・<strong><code>push</code></strong> する。</li>
+      <li><code>my-notes</code>（<strong>まだ <code>pull</code> していない</strong>）で、<code>hello.txt</code> に <code>edit in original</code> と1行足して、<code>add</code>・<code>commit</code> する。</li>
+      <li><code>my-notes</code> で、<code>git push</code> を打つ。</li>
+    </ol>
+    <p>3で、何が起きますか？ どうすれば、送れるようになりますか？</p>
+    <details>
+      <summary>ヒント</summary>
+      <p>エラーメッセージの <code>hint:</code> の行に、答えが書いてあります。「GitHub には、自分が持っていない記録がある」と読めます。</p>
+    </details>
+    <details>
+      <summary>こたえと解説</summary>
+<pre class="term"><span class="ps">PS C:\work\my-notes&gt; git push</span>
+<span class="out">To https://github.com/chitchi1216/my-notes.git
+ ! [rejected]        main -&gt; main (fetch first)
+error: failed to push some refs to 'https://github.com/chitchi1216/my-notes.git'
+hint: Updates were rejected because the remote contains work that you do not
+hint: have locally. This is usually caused by another repository pushing to
+hint: the same ref. If you want to integrate the remote changes, use
+hint: 'git pull' before pushing again.</span></pre>
+      <p><code>rejected</code>（拒否された）と出ます。<strong>GitHub に、自分の知らない新しい記録（<code>copy.txt</code> のコミット）があるため</strong>です。GitHub は、「先に、その記録を取り込んでから、送って」と言っています。<strong>壊れてはいません。</strong>次のように、直します。</p>
+<pre><code>git pull
+git push</code></pre>
+      <p><code>git pull</code> を打つと、<strong>メモ帳が開く</strong>ことがあります。<code>Merge branch 'main' of …</code> という1行が書かれた、<strong>「2つの流れを、合わせた」記録のメッセージ</strong>です。何も変えずに、<strong>保存して（<code>Ctrl</code> + <code>S</code>）、メモ帳を閉じて</strong>ください。すると、合わせる作業が終わります。そのあと <code>git push</code> で、送れます。</p>
+<pre class="term"><span class="ps">PS C:\work\my-notes&gt; git pull</span>
+<span class="out">From https://github.com/chitchi1216/my-notes
+   c5d2e8a..5a13927  main       -&gt; origin/main
+Merge made by the 'ort' strategy.
+ copy.txt | 1 +
+ 1 file changed, 1 insertion(+)
+ create mode 100644 copy.txt</span></pre>
+      <p>「<code>Merge made by …</code>」は、<strong>2つの別々の変更が、ひとつに合わさった</strong>ことを表します（第5章で、くわしく学びます）。今回は、別々のファイル（<code>hello.txt</code> と <code>copy.txt</code>）を変えたので、自動で合わさりました。<strong>同じファイルの同じ場所</strong>を変えると、自動では合わせられず、「コンフリクト」になります（第7章）。</p>
+      <div class="box warn">
+        <strong class="title"><code>git push --force</code> は、使わない</strong>
+        ネットで、「拒否されたら <code>git push --force</code>」という手順を見かけることがあります。これは、<strong>GitHub の記録を、強制的に上書きして、他の人の記録を消してしまう</strong>危険な方法です。この教材では、使いません。拒否されたら、<code>git pull</code> してから <code>git push</code> です。
+      </div>
+    </details>
+  </div>
+  <!-- TODO: Win11実機で確認：clone/push/pull の表示、メモ帳が開く挙動（core.editor=notepad）、rejected の文言、GitHub の画面の文言 -->
+
+  <h2>4-5. うまくいかないとき</h2>
+  <table>
+    <tr><th>こんなとき</th><th>確認すること</th></tr>
+    <tr><td>ブラウザが開かず、ログインできない</td><td>ターミナルに、ログイン用のウィンドウが隠れていないか。それでも出なければ、PowerShell を閉じて、もう一度 <code>git push</code> を打つ。管理者や、集まりの場で相談</td></tr>
+    <tr><td><code>Authentication failed</code>（認証に失敗）</td><td>ログインした GitHub アカウントが、正しいか。このリポジトリを持っている人と、同じアカウントか</td></tr>
+    <tr><td><code>Repository not found</code>（見つからない）</td><td>URL の <code>ユーザー名</code> や、リポジトリ名の綴りを確認する。<code>git remote -v</code> で、登録した URL を見る</td></tr>
+    <tr><td><code>remote origin already exists</code></td><td><code>origin</code> は、すでに登録済み。<code>git remote -v</code> で、URL が正しいか確かめる</td></tr>
+    <tr><td><code>rejected</code>（拒否）</td><td>チャレンジ3を見る。<code>git pull</code> してから、<code>git push</code></td></tr>
+    <tr><td>どこにいるか分からない</td><td><code>pwd</code> で場所を、<code>git status</code> で状態を確かめる</td></tr>
+  </table>
+  <div class="box">
+    <strong class="title">コマンドの早見表</strong>
+    この章のコマンドは、<a href="appendix-commands.html">付録A「よく使うコマンド一覧」</a>にも載せています。
+  </div>
+
+  <h2>確認クイズ</h2>
+  <details>
+    <summary>Q1. <code>git push</code> と <code>git pull</code> は、それぞれ、どちらの向きですか？</summary>
+    <p><code>push</code> は、自分のパソコン → GitHub（送る）。<code>pull</code> は、GitHub → 自分のパソコン（受け取る）。</p>
+  </details>
+  <details>
+    <summary>Q2. <code>git init</code> と <code>git clone</code> の違いは？</summary>
+    <p><code>git init</code> は、手元のフォルダを、新しいリポジトリにする。<code>git clone</code> は、すでにあるリポジトリを、履歴ごと、まるごと複製する。</p>
+  </details>
+  <details>
+    <summary>Q3. <code>origin</code> とは何ですか？</summary>
+    <p>リモートリポジトリ（GitHub 上のリポジトリ）に付ける、いつもの名前。「もと」という意味。</p>
+  </details>
+  <details>
+    <summary>Q4. 手元のリポジトリを GitHub に送るとき、GitHub 側のリポジトリを、空のまま作るのはなぜですか？</summary>
+    <p>GitHub 側に先にファイル（README など）があると、記録が食い違って、送れなくなるため。</p>
+  </details>
+  <details>
+    <summary>Q5. <code>push</code> が <code>rejected</code> されたとき、どうすればよいですか？ また、やってはいけないことは？</summary>
+    <p><code>git pull</code> で、GitHub の新しい記録を取り込んでから、<code>git push</code> する。<code>git push --force</code>（強制的に上書きする）は、他の人の記録を消す危険があるので、使わない。</p>
+  </details>
+
+  <h2>話し合おう（月1回の集まり用）</h2>
+  <ul>
+    <li>初めて <code>push</code> したとき、どんな気持ちでしたか？ GitHub の画面に自分の記録が出たとき、どう感じましたか？</li>
+    <li>「GitHub に送ったものは、消しても履歴に残る」ことを、どう思いますか？ チームで、気をつけるルールを決めるなら、何を入れますか？</li>
+    <li>「<code>pull</code> を、いつ打つか」のルールを、4人のチームで決めるなら、どうしますか？（作業を始める前、など）</li>
+  </ul>
+
+  <nav class="pager">
+    <a href="chapter-03.html">← 第3章 Git の基本</a>
+    <span class="meta">第5章は準備中</span>
+  </nav>
+</main>
+<footer class="site-foot">
+  この教材は GitHub で作られ、公開されています。
+  <a href="https://github.com/chitchi1216/git-github-textbook">ソースを見る</a> ／
+  <a href="https://github.com/chitchi1216/git-github-textbook/commits/main">変更の履歴を見る</a>
+</footer>
+</body>
+</html>
