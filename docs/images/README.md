@@ -28,3 +28,8 @@
 | `ch02-explorer-vs-powershell.png` | 第2章 | 同じフォルダ（`practice`）を、エクスプローラーと PowerShell で並べた画面（アドレスバーとプロンプトが両方写るように） |
 | `ch02-input-mode.png` | 第0章・第2章 | 画面右下の入力モード表示（「A」と「あ」の両方）。半角英数の確認に使う |
 | `ch02-notepad.png` | 第2章 | PowerShell から `notepad memo.txt` を実行して、メモ帳が開いた画面（ターミナルとメモ帳が並ぶように） |
+| `ch04-new-repo.png` | 第4章 | GitHub の「New repository」画面（名前 `my-notes`、Private、README にチェックなし） |
+| `ch04-repo-after-push.png` | 第4章 | `git push` のあとの、GitHub のリポジトリ画面（`hello.txt` とコミット数が見える） |
+| `ch04-browser-auth.png` | 第4章 | 初めて `git push` したときに開く、ログイン・許可の画面 |
+| `ch04-edit-file.png` | 第4章 | GitHub の画面で `hello.txt` を編集して、「Commit changes」を押す画面 |
+
