@@ -140,3 +140,8 @@ footer.site-foot { border-top: 1px solid var(--border); margin-top: 2em; padding
 /* ---- 付録（コマンド一覧） ---- */
 table.cmds td:first-child { white-space: nowrap; }
 table.cmds .soon td { color: var(--muted); }
+
+/* ---- ヘッダー（版・作成者） ---- */
+header.site { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline; gap: 4px 16px; }
+header.site .ver { color: var(--muted); font-size: .8rem; }
+header.site .ver a { color: var(--muted); font-weight: normal; text-decoration: underline; }

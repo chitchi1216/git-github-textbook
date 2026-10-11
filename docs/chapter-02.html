@@ -7,7 +7,7 @@
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<header class="site"><a href="index.html">Git と GitHub 入門</a></header>
+<header class="site"><a class="title" href="index.html">Git と GitHub 入門</a><span class="ver"><!--ver--><a href="https://github.com/chitchi1216/git-github-textbook/blob/main/CHANGELOG.md">版 0.1.0（ドラフト）</a> ・ 2026-10-11 ・ 作成者 <a href="https://github.com/chitchi1216">chitchi1216</a><!--/ver--></span></header>
 <main class="wrap">
   <p class="meta">第2章 ／ 目安 50〜70分</p>
   <h1>ターミナル入門</h1>
@@ -259,6 +259,57 @@ cd ..</code></pre>
     <strong class="title">次に PowerShell を開いたら</strong>
     <code>cd C:\work</code> と打てば、学習用フォルダに移動できます。毎回、ここから始めてください。
   </div>
+
+  <details class="coffee">
+    <summary>☕ コーヒーブレイク：「フォルダ」と「ディレクトリ」、OS によって呼び方が違う？<span class="skip">（読み飛ばしてOK）</span></summary>
+    <p>手順4で、<code>mkdir</code> というコマンドを使い、表示に <code>Directory:</code> と出ました。「フォルダを作ったのに、ディレクトリ？」と思った人もいるはずです。<strong>フォルダとディレクトリは、同じものの別名です。</strong>どちらの名前を使うかは、「画面で見るか」「文字で扱うか」と、時代と OS の歴史で決まっています。</p>
+    <figure class="diagram">
+      <svg class="d" viewBox="0 0 640 210" role="img" aria-label="画面で見るときはフォルダ、文字で扱うときはディレクトリと呼ぶ傾向を示す図">
+        <defs><marker id="b5" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="arrowhead" d="M0 0 L10 5 L0 10 z"/></marker></defs>
+        <rect class="b1" x="10" y="14" width="250" height="150" rx="12"/>
+        <text class="t-sm muted" x="135" y="38" text-anchor="middle">画面で見る・クリックする</text>
+        <text class="t-lg" x="135" y="80" text-anchor="middle">📁 フォルダ</text>
+        <text class="t-sm" x="135" y="110" text-anchor="middle">エクスプローラー（Windows）</text>
+        <text class="t-sm" x="135" y="132" text-anchor="middle">Finder（Mac）</text>
+        <text class="t-sm muted" x="135" y="154" text-anchor="middle">folder</text>
+        <rect class="b3" x="380" y="14" width="250" height="150" rx="12"/>
+        <text class="t-sm muted" x="505" y="38" text-anchor="middle">文字で打つ・技術の資料</text>
+        <text class="t-lg" x="505" y="80" text-anchor="middle">ディレクトリ</text>
+        <text class="t-sm" x="505" y="110" text-anchor="middle">mkdir ＝ make directory</text>
+        <text class="t-sm" x="505" y="132" text-anchor="middle">表示の「Directory:」</text>
+        <text class="t-sm muted" x="505" y="154" text-anchor="middle">directory</text>
+        <path class="ln" d="M264 89 H376" marker-start="url(#b5)" marker-end="url(#b5)"/>
+        <text class="t-md" x="320" y="80" text-anchor="middle">同じもの</text>
+        <text class="t-sm muted" x="320" y="198" text-anchor="middle">どちらも「ファイルを入れる入れ物」。呼び方が違うだけ</text>
+      </svg>
+      <figcaption>画面ではフォルダ、コマンドや技術資料ではディレクトリと呼ばれることが多い</figcaption>
+    </figure>
+    <h3>なぜ、2つの呼び方があるの？</h3>
+    <ol>
+      <li><strong>「ディレクトリ」は、コンピューターの世界で古くからある言葉です。</strong>もとは「名簿」「電話帳」のような意味で、「どのファイルが、どこにあるか」の一覧のことでした。UNIX など、文字で操作する OS で、広く使われてきました。MS-DOS にも <code>mkdir</code>（make directory）などのコマンドがあり、Windows のコマンドが今もその名前を引き継いでいます。</li>
+      <li><strong>「フォルダ」は、画面で操作する時代に生まれた言葉です。</strong>1980年代、机の上の書類を紙ばさみ（フォルダ）に入れて整理するたとえで、マウスで操作する画面が作られました。Windows も、1990年代半ばごろから、画面では「フォルダ」と呼ぶようになりました。</li>
+      <li><strong>その結果、同じものを、場面によって呼び分けるようになりました。</strong>エクスプローラーを見ているときは「フォルダ」、コマンドや、Git などの技術資料を読むときは「ディレクトリ」と書かれていることが多いです。</li>
+    </ol>
+    <h3>OS による、ほかの違い</h3>
+    <p>呼び名だけでなく、Windows と Mac / Linux では、パスの書き方も違います。ネットの資料や Git の説明には、Mac / Linux の書き方が多く出てくるので、読み替えられると便利です。</p>
+    <table>
+      <tr><th>項目</th><th>Windows</th><th>Mac / Linux</th></tr>
+      <tr><td>パスの区切り</td><td><code>\</code>（または <code>¥</code>）</td><td><code>/</code>（スラッシュ）</td></tr>
+      <tr><td>いちばん上</td><td>ドライブ（<code>C:</code> など）</td><td>ルート（<code>/</code>）ひとつだけ</td></tr>
+      <tr><td>自分のフォルダの例</td><td><code>C:\Users\taro</code></td><td>Mac は <code>/Users/taro</code>、Linux は <code>/home/taro</code></td></tr>
+      <tr><td>隠しファイル</td><td>「隠す」という設定（属性）で隠す</td><td>名前の先頭が <code>.</code>（ドット）のものは、隠しファイル</td></tr>
+    </table>
+    <div class="box">
+      <strong class="title">Git の資料では、<code>/</code> が出てきても大丈夫</strong>
+      Git は、もともと Linux 向けに作られたため、資料のパスは <code>docs/index.html</code> のように <code>/</code> で書かれています。Git は、Windows でも <code>/</code> を理解できます。PowerShell でも <code>cd C:/work</code> のように、<code>/</code> で書いて動くことが多いです。パスの書き方の違いで、手順が動かないことはあまりありません。ただし、ネットで見つけたコマンドは、<strong>意味が分からないまま打たない</strong>でください（特に、消す・上書きするものは危険です）。
+    </div>
+    <div class="box">
+      <strong class="title"><code>.git</code> も、この「隠しファイル」の仲間</strong>
+      第3章で出てくる、Git の記録を保存する <code>.git</code> は、名前の先頭が <code>.</code> です。Mac / Linux では、これで隠しファイルになります。Git は Windows でも、<code>.git</code> を隠しフォルダにします。エクスプローラーで見えなくても、そこにあります。
+    </div>
+    <p class="meta">※ 年代や経緯には諸説あります。Windows のバージョンや設定で、表示が変わることもあります。</p>
+  </details>
+  <!-- TODO: Win11実機で確認：.git が自動で隠しフォルダになるか、PowerShell で cd C:/work が動くか -->
 
   <h2>2-5. チャレンジ：メモ帳を使わずに、ファイルを扱う</h2>
   <p>ここまでで基本は終わりです。ここからは、力試しです。<strong>メモ帳を開かずに</strong>、ターミナルだけでファイルの中身を見たり、書き足したり、探したりしてみましょう。必須ではないので、気軽に挑戦してください。<code>C:\work\practice</code> にいる状態で始めます（<code>cd C:\work\practice</code> で移動できます）。</p>
