@@ -3,6 +3,10 @@
 版の付け方：`大.中.小`。章を追加したら「中」、誤字や表現の修正は「小」を上げる。
 版を上げるときは、`python3 tools/set_version.py 新しい版` を実行して、全ページのヘッダーを更新する。
 
+## 0.4.17（ドラフト）— 2026-10-11
+
+- 第4章・第5章: `pull` / `merge` でメモ帳が開くときの、ターミナルのお知らせ（`hint: Waiting for your editor to close the file...`、`unix2dos` / `dos2unix`）を、画面例と説明に追加（実機の表示に合わせた）
+
 ## 0.4.16（ドラフト）— 2026-10-11
 
 - 第4章: 手順6〜8（`clone`、`commit` / `push`、`pull`）の実機の画面の写真を追加。画面例を、実機の表示（`(from 0)`、`Delta compression` の行、`Unpacking objects` の詳細）に合わせた
