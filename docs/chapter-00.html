@@ -7,7 +7,7 @@
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<header class="site"><a class="title" href="index.html">Git と GitHub 入門</a><span class="ver"><!--ver--><a href="https://github.com/chitchi1216/git-github-textbook/blob/main/CHANGELOG.md">版 0.4.1（ドラフト）</a> ・ 2026-10-11 ・ 作成者 <a href="https://github.com/chitchi1216">chitchi1216</a><!--/ver--></span></header>
+<header class="site"><a class="title" href="index.html">Git と GitHub 入門</a><span class="ver"><!--ver--><a href="https://github.com/chitchi1216/git-github-textbook/blob/main/CHANGELOG.md">版 0.4.2（ドラフト）</a> ・ 2026-10-11 ・ 作成者 <a href="https://github.com/chitchi1216">chitchi1216</a><!--/ver--></span></header>
 <main class="wrap">
   <p class="meta">第0章 ／ 目安 50〜70分</p>
   <h1>はじめに・準備</h1>
@@ -244,7 +244,7 @@
     <li>ダウンロードしたファイルを開き、基本的に <strong>すべて初期設定のまま「Next」</strong> を押して進める</li>
     <li>最後に「Install」→「Finish」</li>
   </ol>
-  <!-- TODO: Win11実機で確認：インストーラーの設問と推奨選択 -->
+  <!-- TODO: Win11実機で確認：インストーラーの2画面目以降（特に、Git が使うエディタを選ぶ画面と、最初の枝の名前を選ぶ画面）の初期値 -->
   <figure class="shot">
     <img src="images/ch00-git-installer.png" alt="Git のインストーラー画面" onerror="this.parentNode.classList.add('missing')">
     <figcaption>Git のインストーラー。迷ったら初期設定のまま「Next」</figcaption>
@@ -269,6 +269,10 @@
     <strong class="title">コマンドは必ず「半角英数」で打つ</strong>
     日本語入力がオン（「あ」の状態）のままだと、スペースや記号（「"」「-」）が<strong>全角</strong>になり、コマンドが動きません。打つ前に <code>半角/全角</code> キーを押し、画面右下（時計の左あたり）に、「A」か「あ」と表示されています。「A」になっていることを確認してください。名前の部分に日本語を入れるときだけ、一時的に日本語入力にします。
   </div>
+  <figure class="shot">
+    <img src="images/ch02-input-mode.png" alt="画面右下の入力モード表示。上が「A」、下が「あ」" onerror="this.parentNode.classList.add('missing')">
+    <figcaption>画面右下の入力モード表示。上が「A」（半角英数）、下が「あ」（日本語）。打つ前に、「A」になっているか確かめる</figcaption>
+  </figure>
   <p>次の3行を、<strong>1行ずつ</strong>入力して Enter を押します。<strong>1行目と2行目は、中身が違います。</strong>取り違えないでください。</p>
   <table>
     <tr><th>行</th><th>設定する項目</th><th>「 」の中に入れるもの</th></tr>
@@ -297,6 +301,10 @@ core.editor=notepad</span></pre>
       <li><code>user.email</code> がないと、第3章の <code>commit</code> のとき、<code>Committer: … configured automatically</code>（「自動で設定されました」）という警告が出ます。記録は、できますが、名前やメールが正しく残りません。</li>
     </ul>
   </div>
+  <figure class="shot">
+    <img src="images/ch00-git-config-ng.png" alt="git config --global --list の実行画面。user.name の行はあるが、user.email の行がない" onerror="this.parentNode.classList.add('missing')">
+    <figcaption>実際の画面の例（<strong>足りない状態</strong>）。<code>user.name</code> の値にメールアドレスが入り、<code>user.email</code> の行がない。この場合は、2行目の設定を、打ち直す。（WSL のパスとメールアドレスは、黒く塗りつぶしてあります）</figcaption>
+  </figure>
   <div class="box">
     <strong class="title">メールアドレスを、公開したくないとき</strong>
     記録（コミット）には、<code>user.email</code> のメールアドレスが残り、公開リポジトリでは、誰でも見られます。見せたくないときは、GitHub の <strong>Settings → Emails</strong> で、「Keep my email addresses private」をオンにすると、<code>…@users.noreply.github.com</code> という<strong>公開用の代わりのアドレス</strong>が表示されます。それを <code>user.email</code> に設定します。

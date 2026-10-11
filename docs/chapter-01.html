@@ -7,7 +7,7 @@
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<header class="site"><a class="title" href="index.html">Git と GitHub 入門</a><span class="ver"><!--ver--><a href="https://github.com/chitchi1216/git-github-textbook/blob/main/CHANGELOG.md">版 0.4.1（ドラフト）</a> ・ 2026-10-11 ・ 作成者 <a href="https://github.com/chitchi1216">chitchi1216</a><!--/ver--></span></header>
+<header class="site"><a class="title" href="index.html">Git と GitHub 入門</a><span class="ver"><!--ver--><a href="https://github.com/chitchi1216/git-github-textbook/blob/main/CHANGELOG.md">版 0.4.2（ドラフト）</a> ・ 2026-10-11 ・ 作成者 <a href="https://github.com/chitchi1216">chitchi1216</a><!--/ver--></span></header>
 <main class="wrap">
   <p class="meta">第1章 ／ 目安 40〜60分</p>
   <h1>パソコンの仕組み</h1>
@@ -84,7 +84,7 @@
     <strong class="title"><code>C:\work</code> を作れないときは</strong>
     会社や学校のパソコンなどで <code>C:\work</code> を作れない場合は、<code>C:\Users\自分の名前\work</code> でも構いません（デスクトップやドキュメントの<strong>外</strong>に作ります）。その場合は、以降の <code>C:\work</code> を、自分のフォルダに読み替えてください。
   </div>
-  <!-- TODO: Win11実機で確認：OneDrive 同期状態のアイコン、C:\work を標準ユーザーで作成できるか -->
+  <!-- TODO: Win11実機で確認：OneDrive 同期状態のアイコン（雲のマーク）の見え方 -->
 
   <p class="meta">※ フォルダのことを、「ディレクトリ」と呼ぶ場面もあります。同じものです（第2章のコーヒーブレイクで説明します）。</p>
 
@@ -156,9 +156,8 @@
   </div>
   <div class="box warn">
     <strong class="title">全角の「￥」が入ってしまうとき</strong>
-    日本語入力がオン（「あ」の状態）だと、¥ キーで全角の「￥」が入ることがあります。コマンドやパスを打つときは、<strong>半角/全角キーを押して、入力モードを「A」（半角英数）にしてから</strong>打ってください。画面右下の入力モード表示で確認できます。
+    日本語入力がオン（「あ」の状態）だと、¥ キーを押すと、<strong>全角の「￥」が入ります</strong>。コマンドやパスを打つときは、<strong>半角/全角キーを押して、入力モードを「A」（半角英数）にしてから</strong>打ってください。画面右下の入力モード表示で確認できます。
   </div>
-  <!-- TODO: Win11実機で確認：日本語入力（あ）のとき、¥ キーで全角の「￥」が入るか -->
 
   <details class="coffee">
     <summary>☕ コーヒーブレイク：なぜ「¥」と「\」は同じ文字なの？<span class="skip">（読み飛ばしてOK）</span></summary>
@@ -217,6 +216,10 @@
     <strong class="title">「表示」メニューが見つからないときは</strong>
     エクスプローラーの上の「<strong>…</strong>」（もっと見る）→「<strong>オプション</strong>」を開き、「フォルダー オプション」の<strong>「表示」タブ</strong>で、「<strong>登録されている拡張子は表示しない</strong>」の<strong>チェックを外して</strong>、「OK」を押します。拡張子が表示されるようになります。
   </div>
+  <figure class="shot">
+    <img src="images/ch01-folder-options.png" alt="フォルダー オプションの「表示」タブ。「登録されている拡張子は表示しない」のチェックを外す" onerror="this.parentNode.classList.add('missing')">
+    <figcaption>「フォルダー オプション」の「表示」タブ。「登録されている拡張子は表示しない」の<strong>チェックを外す</strong>（この画面は、外れている＝拡張子が表示される状態）</figcaption>
+  </figure>
   <figure class="shot">
     <img src="images/ch01-explorer-extension.png" alt="エクスプローラーの表示メニューでファイル名拡張子にチェックを入れる画面" onerror="this.parentNode.classList.add('missing')">
     <figcaption>「表示」→「表示」→「ファイル名拡張子」にチェックを入れる</figcaption>
