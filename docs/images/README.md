@@ -45,6 +45,7 @@
 | `ch01-explorer-address-bar.png` | エクスプローラーのアドレスバー（パスが `¥` で表示される） |
 | `ch01-folder-options.png` | 「フォルダー オプション」の「表示」タブ（拡張子の設定） |
 | `ch02-input-mode.png` | 入力モード表示（「A」と「あ」） |
+| `ch04-browser-auth.png` | ブラウザの GitHub サインイン画面（第4章の認証） |
 | `ch03-commit-editmsg.png` | `-m` なしの `git commit` で開く、メモ帳の画面（メールアドレスは塗りつぶし） |
 
 まだ必要な画像は、上の表の「`ch00-github-signup.png`」「`ch00-powershell-open.png`」「`ch00-git-config.png`（3行そろった正しい状態）」「`ch01-explorer-extension.png`」「`ch02-explorer-vs-powershell.png`」「`ch02-notepad.png`」と、第4章の4枚です。
