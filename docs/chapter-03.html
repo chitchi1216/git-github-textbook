@@ -1,0 +1,386 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>第3章 Git の基本 | Git と GitHub 入門</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="site"><a class="title" href="index.html">Git と GitHub 入門</a><span class="ver"><!--ver--><a href="https://github.com/chitchi1216/git-github-textbook/blob/main/CHANGELOG.md">版 0.2.0（ドラフト）</a> ・ 2026-10-11 ・ 作成者 <a href="https://github.com/chitchi1216">chitchi1216</a><!--/ver--></span></header>
+<main class="wrap">
+  <p class="meta">第3章 ／ 目安 60〜80分</p>
+  <h1>Git の基本：記録をつくる</h1>
+
+  <div class="box">
+    <strong class="title">この章でできるようになること</strong>
+    <ul class="goals">
+      <li>Git が「何をする道具か」を、自分の言葉で説明できる</li>
+      <li>フォルダを Git で管理し、変更を「記録（コミット）」できる</li>
+      <li>記録の一覧（履歴）を見て、変更の中身を確かめられる</li>
+    </ul>
+  </div>
+
+  <h2>3-1. Git は「変更の記録を残す道具」</h2>
+  <p>第0章で、Git は「ファイルの変更履歴を記録する道具」と説明しました。具体的には、こんな場面で役に立ちます。</p>
+  <ul>
+    <li>「<code>報告書_最終.docx</code>」「<code>報告書_最終_修正版.docx</code>」「<code>報告書_最終_本当に最終.docx</code>」……のように、<strong>ファイルを何個も作らなくて済む。</strong>1つのファイルのまま、過去の状態に戻れる。</li>
+    <li>「いつ、誰が、なぜ、変えたのか」が、<strong>記録として残る。</strong></li>
+    <li>複数人で作業しても、<strong>お互いの変更をまとめられる</strong>（第5章以降）。</li>
+  </ul>
+  <p>この章では、まず一人で、Git の基本の流れを体験します。</p>
+
+  <h3>この章で使う言葉</h3>
+  <table>
+    <tr><th>言葉</th><th>意味</th></tr>
+    <tr><td>リポジトリ（repository）</td><td>Git が記録を保管する「倉庫」。フォルダの中の <code>.git</code> という隠しフォルダに作られる</td></tr>
+    <tr><td>コミット（commit）</td><td>変更を「ひとまとまりの記録」として、リポジトリに保存すること。また、その記録そのもの</td></tr>
+    <tr><td>履歴</td><td>コミットの一覧。「いつ・誰が・何を変えたか」の並び</td></tr>
+    <tr><td>ステージ</td><td>次のコミットに入れる変更を、並べておく場所</td></tr>
+  </table>
+
+  <h2>3-2. 3つの場所：作業フォルダ・ステージ・リポジトリ</h2>
+  <p>Git を理解する一番の近道は、<strong>ファイルがいる「3つの場所」</strong>を知ることです。</p>
+  <figure class="diagram">
+    <svg class="d" viewBox="0 0 640 250" role="img" aria-label="作業フォルダ、ステージ、リポジトリの3つの場所と、add と commit の矢印の図">
+      <defs><marker id="c1" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path class="arrowhead" d="M0 0 L10 5 L0 10 z"/></marker></defs>
+      <rect class="b1" x="10" y="36" width="170" height="120" rx="12"/>
+      <text class="t-md" x="95" y="68" text-anchor="middle">作業フォルダ</text>
+      <text class="t-sm" x="95" y="94" text-anchor="middle">いま、ファイルを</text>
+      <text class="t-sm" x="95" y="114" text-anchor="middle">編集している場所</text>
+      <text class="t-sm muted" x="95" y="142" text-anchor="middle">（ふつうのフォルダ）</text>
+      <rect class="b3" x="235" y="36" width="170" height="120" rx="12"/>
+      <text class="t-md" x="320" y="68" text-anchor="middle">ステージ</text>
+      <text class="t-sm" x="320" y="94" text-anchor="middle">次の記録に入れる</text>
+      <text class="t-sm" x="320" y="114" text-anchor="middle">変更を並べる場所</text>
+      <text class="t-sm muted" x="320" y="142" text-anchor="middle">（準備中の置き場）</text>
+      <rect class="b2" x="460" y="36" width="170" height="120" rx="12"/>
+      <text class="t-md" x="545" y="68" text-anchor="middle">リポジトリ</text>
+      <text class="t-sm" x="545" y="94" text-anchor="middle">記録（履歴）を</text>
+      <text class="t-sm" x="545" y="114" text-anchor="middle">しまっておく倉庫</text>
+      <text class="t-sm muted" x="545" y="142" text-anchor="middle">（.git フォルダ）</text>
+      <path class="ln" d="M184 96 H231" marker-end="url(#c1)"/>
+      <path class="ln" d="M409 96 H456" marker-end="url(#c1)"/>
+      <text class="t-mono" x="207" y="86" text-anchor="middle" style="font-size:13px">add</text>
+      <text class="t-mono" x="432" y="86" text-anchor="middle" style="font-size:13px">commit</text>
+      <text class="t-sm muted" x="320" y="196" text-anchor="middle">写真にたとえると…</text>
+      <text class="t-sm" x="95" y="222" text-anchor="middle">みんなが自由に動く</text>
+      <text class="t-sm" x="320" y="222" text-anchor="middle">写る人を、並ばせる</text>
+      <text class="t-sm" x="545" y="222" text-anchor="middle">撮影して、アルバムへ</text>
+    </svg>
+    <figcaption>変更は、<code>add</code> でステージに並べ、<code>commit</code> でリポジトリに記録する</figcaption>
+  </figure>
+  <div class="box">
+    <strong class="title">なぜ、2段階（add と commit）なの？</strong>
+    いくつかのファイルを変更したとき、<strong>「どの変更を、ひとつの記録にまとめるか」を選べる</strong>ようにするためです。たとえば、3つのファイルを変更しても、関係のある2つだけを <code>add</code> して、1つの記録にできます。写真で「写る人だけを並ばせてから、シャッターを押す」のと同じです。
+  </div>
+
+  <h2>3-3. 実際にやってみよう</h2>
+  <p>練習用のフォルダ <code>my-notes</code> を作り、Git で管理します。<strong>場所は、学習用フォルダ <code>C:\work</code> の中</strong>です（OneDrive の外）。</p>
+  <div class="box warn">
+    <strong class="title">打つ前に確認</strong>
+    <ul>
+      <li>入力モードは「半角英数」に。</li>
+      <li><code>git</code> のあとは、<strong>半角スペース</strong>を入れます。<code>git status</code> のように、<code>git</code>・やること・対象を、スペースで区切ります。</li>
+      <li>表示される文章は、Windows の言語設定によって、<strong>英語か日本語</strong>になります。意味は同じです（下の対応表を参照）。</li>
+    </ul>
+  </div>
+
+  <h3>手順1：準備する</h3>
+  <p>PowerShell を開き、学習用フォルダに移動します。次に、Git が使えるか確認します。</p>
+<pre><code>cd C:\work
+git --version</code></pre>
+<pre class="term"><span class="ps">PS C:\work&gt; git --version</span>
+<span class="out">git version 2.xx.x.windows.1</span></pre>
+  <p><code>git version …</code> と表示されれば OK です（数字は、人によって違います）。表示されないときは、第0章の「うまくいかないとき」を見てください。</p>
+  <p>次に、これから作るリポジトリの「最初の枝の名前」を <code>main</code> にする設定をします。<strong>この設定は、一度だけ</strong>で大丈夫です。</p>
+<pre><code>git config --global init.defaultBranch main</code></pre>
+  <p class="etym">💡 「枝（ブランチ）」は第5章で学びます。今は、「GitHub の標準に、名前をそろえる設定」と思ってください。</p>
+
+  <h3>手順2：フォルダを作って、リポジトリにする</h3>
+<pre><code>mkdir my-notes
+cd my-notes
+git init</code></pre>
+<pre class="term"><span class="ps">PS C:\work&gt; mkdir my-notes</span>
+<span class="ps">PS C:\work&gt; cd my-notes</span>
+<span class="ps">PS C:\work\my-notes&gt; git init</span>
+<span class="out">Initialized empty Git repository in C:/work/my-notes/.git/</span></pre>
+  <p>「空の Git リポジトリを作りました」という意味です。これで、<code>my-notes</code> フォルダが、Git の管理対象になりました。</p>
+  <p class="etym">💡 <code>init</code> は <strong>init</strong>ialize（初期化する）の略です。</p>
+  <div class="box warn">
+    <strong class="title"><code>git init</code> は、場所を確かめてから</strong>
+    <code>git init</code> は、<strong>今いるフォルダ</strong>を、Git の管理対象にします。<code>C:\work</code> や、ユーザーフォルダのような「大きな場所」で打つと、その中のすべてのフォルダが対象になってしまいます。<strong>必ず、プロンプトで場所を確認してから</strong>打ってください。また、<code>git init</code> は、フォルダごとに<strong>1回だけ</strong>です。
+  </div>
+
+  <h3>手順3：状態を確認する</h3>
+<pre><code>git status</code></pre>
+<pre class="term"><span class="ps">PS C:\work\my-notes&gt; git status</span>
+<span class="out">On branch main
+
+No commits yet
+
+nothing to commit (create/copy files and use "git add" to track)</span></pre>
+  <p><code>git status</code> は、<strong>「今、どういう状態か」を教えてくれる</strong>コマンドです。Git を使うときは、迷ったらまず <code>git status</code> を打ちます。何度打っても、安全です。</p>
+  <p class="etym">💡 <code>status</code> は「状態」という意味です。</p>
+  <table>
+    <tr><th>英語の表示</th><th>日本語で表示されるときの例</th><th>意味</th></tr>
+    <tr><td><code>On branch main</code></td><td><code>ブランチ main</code> など</td><td>今、<code>main</code> という枝にいる</td></tr>
+    <tr><td><code>No commits yet</code></td><td><code>まだコミットがありません</code></td><td>記録が、まだ1つもない</td></tr>
+    <tr><td><code>Untracked files</code></td><td><code>追跡されていないファイル</code></td><td>Git が、まだ記録の対象にしていないファイル</td></tr>
+    <tr><td><code>Changes to be committed</code></td><td><code>コミット予定の変更</code> など</td><td>ステージに並んでいる（次のコミットに入る）変更</td></tr>
+    <tr><td><code>Changes not staged for commit</code></td><td><code>コミットのためにステージされていない変更</code> など</td><td>変更したが、まだステージに並べていない</td></tr>
+    <tr><td><code>nothing to commit, working tree clean</code></td><td><code>コミットするものはありません</code> など</td><td>記録していない変更は、ない</td></tr>
+  </table>
+  <!-- TODO: Win11実機で確認：日本語表示の実際の文言（言語設定による）。上の日本語は例 -->
+
+  <h3>手順4：ファイルを作る</h3>
+  <p>メモ帳で、<code>hello.txt</code> を作ります。</p>
+<pre><code>notepad hello.txt</code></pre>
+  <p>「新しいファイルを作成しますか？」と聞かれたら「はい」。<code>hello git</code> と書き、<strong>最後に Enter で改行</strong>して保存（<code>Ctrl</code> + <code>S</code>）、メモ帳を閉じます。もう一度、状態を見ます。</p>
+<pre><code>git status</code></pre>
+<pre class="term"><span class="ps">PS C:\work\my-notes&gt; git status</span>
+<span class="out">On branch main
+
+No commits yet
+
+Untracked files:
+  (use "git add &lt;file&gt;..." to include in what will be committed)
+        hello.txt
+
+nothing added to commit but untracked files present (use "git add" to track)</span></pre>
+  <p><code>Untracked files</code>（追跡されていないファイル）に、<code>hello.txt</code> が出ました。「新しいファイルがあるけれど、まだ記録の対象にしていないよ」という意味です。親切に、次にすることも教えてくれています（<code>use "git add" to track</code>）。</p>
+
+  <h3>手順5：ステージに並べる（add）</h3>
+<pre><code>git add hello.txt
+git status</code></pre>
+<pre class="term"><span class="ps">PS C:\work\my-notes&gt; git add hello.txt</span>
+<span class="ps">PS C:\work\my-notes&gt; git status</span>
+<span class="out">On branch main
+
+No commits yet
+
+Changes to be committed:
+  (use "git rm --cached &lt;file&gt;..." to unstage)
+        new file:   hello.txt</span></pre>
+  <p>表示が、<code>Changes to be committed</code>（コミットされる変更）に変わりました。<code>hello.txt</code> が<strong>ステージに並んだ</strong>のです。まだ記録はされていません。</p>
+  <p class="etym">💡 <code>add</code> は「追加する」。ステージに、追加します。</p>
+
+  <h3>手順6：記録する（commit）</h3>
+<pre><code>git commit -m "Add hello.txt"</code></pre>
+<pre class="term"><span class="ps">PS C:\work\my-notes&gt; git commit -m "Add hello.txt"</span>
+<span class="out">[main (root-commit) 3f2a9c1] Add hello.txt
+ 1 file changed, 1 insertion(+)
+ create mode 100644 hello.txt</span></pre>
+  <p>これが、<strong>最初のコミット（記録）</strong>です。<code>-m</code> のあとの <code>" "</code> の中は、<strong>「何をしたか」を書くメッセージ</strong>です。あとで履歴を見たとき、このメッセージで内容が分かります。</p>
+  <p class="etym">💡 <code>commit</code> は「約束する」「確定する」という意味です。変更を、記録として確定します。<code>-m</code> は <strong>m</strong>essage（メッセージ）の頭文字です。</p>
+  <div class="box warn">
+    <strong class="title">メッセージは、まず英語（半角）で</strong>
+    日本語のメッセージは、Windows PowerShell の画面で、<strong>表示だけ</strong>文字化けすることがあります（記録そのものは壊れません）。この章では、英語で書きます。日本語を試すチャレンジは、あとにあります。
+  </div>
+  <div class="box">
+    <strong class="title">「Please tell me who you are」と出たら</strong>
+    「あなたは誰ですか？」というエラーです。第0章の、<code>user.name</code> と <code>user.email</code> の設定を、まだ行っていません。第0章 0-10 に戻って設定してから、もう一度 <code>git commit</code> を打ってください。
+  </div>
+  <div class="box">
+    <strong class="title">「LF will be replaced by CRLF」と出ても、気にしない</strong>
+    改行の種類（Windows と Mac / Linux で違う）についての、お知らせです。この教材では、気にしなくて構いません。
+  </div>
+  <!-- TODO: Win11実機で確認：エラーメッセージの文言、LF/CRLF の警告が出る条件 -->
+
+  <h3>手順7：履歴を見る（log）</h3>
+<pre><code>git log</code></pre>
+<pre class="term"><span class="ps">PS C:\work\my-notes&gt; git log</span>
+<span class="out">commit 3f2a9c1e5b7d4a8c0f6e2b9d1a3c5e7f8b0d4a6c (HEAD -&gt; main)
+Author: chitchi1216 &lt;chitchi1216@example.com&gt;
+Date:   Sun Oct 11 10:45:12 2026 +0900
+
+    Add hello.txt</span></pre>
+  <p>記録の一覧が出ます。1つの記録（コミット）には、次の情報が入っています。</p>
+  <table>
+    <tr><th>項目</th><th>意味</th></tr>
+    <tr><td><code>commit 3f2a9c1e…</code></td><td>この記録の<strong>ID</strong>（長い英数字）。世界中で、重ならない番号。先頭の7文字ほどで、区別できる</td></tr>
+    <tr><td><code>(HEAD -&gt; main)</code></td><td>「今、ここにいる」という目印。<code>main</code> の、いちばん新しい記録</td></tr>
+    <tr><td><code>Author</code></td><td>記録した人（第0章で設定した名前とメール）</td></tr>
+    <tr><td><code>Date</code></td><td>記録した日時</td></tr>
+    <tr><td>最後の行</td><td>コミットのときに書いた、メッセージ</td></tr>
+  </table>
+  <div class="box warn">
+    <strong class="title">画面が止まって、「:」や「(END)」と出たら <code>q</code> を押す</strong>
+    記録が多いと、一度に表示しきれず、画面が止まったように見えます。<strong>慌てず、キーボードの <code>q</code> を押す</strong>と、元の画面に戻ります。<code>↑</code> <code>↓</code> で、スクロールもできます。
+  </div>
+  <p class="etym">💡 <code>log</code> は「記録（ログ）」という意味です。</p>
+
+  <h3>手順8：もう一度、変更して、記録する</h3>
+  <p>Git の本領は、「変更を重ねて記録する」ところです。<code>hello.txt</code> に、1行足してみましょう。</p>
+<pre><code>notepad hello.txt</code></pre>
+  <p><code>second line</code> と1行足して、最後に Enter で改行して保存し、メモ帳を閉じます。そして、状態と、変更の中身を見ます。</p>
+<pre><code>git status
+git diff</code></pre>
+<pre class="term"><span class="ps">PS C:\work\my-notes&gt; git status</span>
+<span class="out">On branch main
+Changes not staged for commit:
+  (use "git add &lt;file&gt;..." to update what will be committed)
+  (use "git restore &lt;file&gt;..." to discard changes in working directory)
+        modified:   hello.txt
+
+no changes added to commit (use "git add" and/or "git commit -a")</span>
+<span class="ps">PS C:\work\my-notes&gt; git diff</span>
+<span class="out">diff --git a/hello.txt b/hello.txt
+index 3b18e51..a1b2c3d 100644
+--- a/hello.txt
++++ b/hello.txt
+@@ -1 +1,2 @@
+ hello git
++second line</span></pre>
+  <p><code>modified</code>（変更された）と出ました。<code>git diff</code> は、<strong>「前の記録から、何が変わったか」</strong>を見せてくれます。<code>+</code> が付いた行が、<strong>足された行</strong>です（消された行は <code>-</code> で表示されます）。</p>
+  <p class="etym">💡 <code>diff</code> は <strong>diff</strong>erence（違い、差分）の略です。</p>
+  <p>変更を、ステージに並べて、記録します。</p>
+<pre><code>git add hello.txt
+git commit -m "Add second line to hello.txt"
+git log --oneline</code></pre>
+<pre class="term"><span class="ps">PS C:\work\my-notes&gt; git add hello.txt</span>
+<span class="ps">PS C:\work\my-notes&gt; git commit -m "Add second line to hello.txt"</span>
+<span class="out">[main 7b1e4d8] Add second line to hello.txt
+ 1 file changed, 1 insertion(+)</span>
+<span class="ps">PS C:\work\my-notes&gt; git log --oneline</span>
+<span class="out">7b1e4d8 (HEAD -&gt; main) Add second line to hello.txt
+3f2a9c1 Add hello.txt</span></pre>
+  <p><code>--oneline</code> を付けると、<strong>1つの記録を1行</strong>で表示します。履歴が長くなったとき、全体を見渡すのに便利です。記録が、2つに増えました。</p>
+  <figure class="diagram">
+    <svg class="d" viewBox="0 0 640 160" role="img" aria-label="2つのコミットが時間順に並んだ履歴の図">
+      <defs><marker id="c2" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path class="arrowhead" d="M0 0 L10 5 L0 10 z"/></marker></defs>
+      <rect class="b0" x="20" y="40" width="240" height="70" rx="10"/>
+      <text class="t-mono" x="140" y="68" text-anchor="middle" style="font-size:15px">3f2a9c1</text>
+      <text class="t-sm" x="140" y="92" text-anchor="middle">Add hello.txt</text>
+      <rect class="b2" x="330" y="40" width="290" height="70" rx="10"/>
+      <text class="t-mono" x="475" y="68" text-anchor="middle" style="font-size:15px">7b1e4d8</text>
+      <text class="t-sm" x="475" y="92" text-anchor="middle">Add second line to hello.txt</text>
+      <path class="ln" d="M264 75 H326" marker-end="url(#c2)"/>
+      <text class="t-sm muted" x="295" y="64" text-anchor="middle">時間</text>
+      <text class="t-sm muted" x="140" y="136" text-anchor="middle">古い記録</text>
+      <text class="t-sm" x="475" y="136" text-anchor="middle">いちばん新しい記録（HEAD → main）</text>
+    </svg>
+    <figcaption>コミットは、時間順に連なる。この連なりが「履歴」</figcaption>
+  </figure>
+
+  <h3>ここまでの流れ（まとめ）</h3>
+  <ol>
+    <li>ファイルを作る・変える（メモ帳など）</li>
+    <li><code>git status</code> で、状態を確かめる</li>
+    <li><code>git add ファイル名</code> で、ステージに並べる</li>
+    <li><code>git commit -m "メッセージ"</code> で、記録する</li>
+    <li><code>git log --oneline</code> で、履歴を見る</li>
+  </ol>
+  <p>この<strong>「変える → add → commit」</strong>が、Git の基本のくり返しです。</p>
+
+  <details class="coffee">
+    <summary>☕ コーヒーブレイク：Git は、誰が、何のために作ったの？<span class="skip">（読み飛ばしてOK）</span></summary>
+    <p>Git は、<strong>2005年</strong>に、<strong>Linux カーネル</strong>（世界中で使われている OS の中心部分）を開発するために、リーナス・トーバルズ（Linus Torvalds）が作りました。Linux の開発には、世界中の何千人もが関わっています。「大勢が、同時に、同じファイルを変更しても、混乱しない」仕組みが、どうしても必要だったのです。</p>
+    <p>Git が速く、大きなプロジェクトにも強いのは、そうした厳しい使い方を前提に作られたからです。今では、Linux だけでなく、世界中の、ほとんどのソフトウェア開発で使われています。</p>
+    <p><strong>「git」という名前の由来</strong>は、英語の俗語で「いやなやつ」「つまらないやつ」といった意味だとされています。作者が、自分のことを冗談めかして呼んだ名前だ、という話が有名です。</p>
+    <p class="meta">※ 経緯や由来には、諸説あります。詳しく知りたい人は「Git の歴史」「Linus Torvalds Git」で調べてみてください。</p>
+  </details>
+
+  <h2>3-4. チャレンジ</h2>
+  <p>必須ではありません。気軽に挑戦してください。<code>C:\work\my-notes</code> にいる状態で始めます。</p>
+
+  <div class="challenge">
+    <strong class="title">🎯 チャレンジ1 <span class="level">★☆☆</span>　<code>.git</code> の中を、のぞいてみる</strong>
+    <p><code>.git</code> は隠しフォルダなので、ふつうの <code>ls</code> では見えません。<strong>隠しフォルダも含めて</strong>一覧を表示し、<code>.git</code> の中身と、<code>.git</code> の中の <code>HEAD</code> というファイルの中身を見てください。</p>
+    <details>
+      <summary>ヒント</summary>
+      <p>隠しファイルも出すには、<code>ls</code> のあとに <code>-Force</code> を付けます。<code>HEAD</code> の中身は、第2章で学んだ、ファイルの中身を見るコマンドで見られます。</p>
+    </details>
+    <details>
+      <summary>こたえと解説</summary>
+<pre><code>ls -Force
+ls .git
+type .git\HEAD</code></pre>
+<pre class="term"><span class="ps">PS C:\work\my-notes&gt; type .git\HEAD</span>
+<span class="out">ref: refs/heads/main</span></pre>
+      <p><code>.git</code> の中には、<code>HEAD</code>、<code>config</code>、<code>objects</code> などが入っています。<code>HEAD</code> には、「今いるのは <code>main</code> という枝」と書かれています。<strong>Git の記録は、すべてこのフォルダの中の、ただのファイル</strong>です。<code>-Force</code> は「強制的に（隠しも）」という意味です。</p>
+      <div class="box warn">
+        <strong class="title"><code>.git</code> の中は、触らない</strong>
+        見るだけにしてください。<code>.git</code> を消したり、中のファイルを書き換えたりすると、<strong>履歴がすべて失われる</strong>ことがあります。
+      </div>
+    </details>
+  </div>
+
+  <div class="challenge">
+    <strong class="title">🎯 チャレンジ2 <span class="level">★★☆</span>　履歴の中から、探す</strong>
+    <p>第2章で、ファイルの中から文字を探しました。<strong>コミットのメッセージの中から</strong>、<code>second</code> という文字を含むコミットを探してください。</p>
+    <details>
+      <summary>ヒント</summary>
+      <p><code>git log</code> に、<code>--grep=探す文字</code> を付けます。見やすくするために、<code>--oneline</code> も一緒に付けましょう。</p>
+    </details>
+    <details>
+      <summary>こたえと解説</summary>
+<pre><code>git log --oneline --grep=second</code></pre>
+<pre class="term"><span class="ps">PS C:\work\my-notes&gt; git log --oneline --grep=second</span>
+<span class="out">7b1e4d8 Add second line to hello.txt</span></pre>
+      <p>メッセージに <code>second</code> が入っている記録だけが、出てきます。履歴が何百件にもなると、こうした検索が役に立ちます。<strong>メッセージを、あとで探せるように、具体的に書く</strong>ことが大切な理由でもあります。</p>
+    </details>
+  </div>
+
+  <div class="challenge">
+    <strong class="title">🎯 チャレンジ3 <span class="level">★★☆</span>　日本語のコミットメッセージを試す</strong>
+    <p><code>hello.txt</code> に、もう1行足して（半角英数でよい）、<strong>日本語のメッセージ</strong>でコミットしてみましょう。たとえば、<code>git commit -m "3行目を追加"</code> です。そのあと、<code>git log --oneline</code> で、日本語が正しく表示されるか確かめてください。</p>
+    <details>
+      <summary>ヒント</summary>
+      <p>コミットするときは、日本語入力に切り替えて、メッセージの部分だけ日本語にします。<code>git add</code> を、お忘れなく。</p>
+    </details>
+    <details>
+      <summary>こたえと解説</summary>
+      <p>正しく表示されれば、そのまま使えます。<strong>文字化け</strong>（意味の分からない文字）になったときは、Git の記録は正しくても、<strong>PowerShell の表示の設定</strong>が合っていないだけです。次のコマンドで、表示の設定を変えて、もう一度 <code>git log --oneline</code> を打ってみてください（今開いている PowerShell だけに効く、一時的な設定です）。</p>
+<pre><code>[Console]::OutputEncoding = [System.Text.Encoding]::UTF8</code></pre>
+      <p>日本語のメッセージが使えると、チームで「何をしたか」を、日本語で共有できます。どちらを使うかは、チームで話し合って決めましょう。</p>
+    </details>
+  </div>
+  <!-- TODO: Win11実機で確認：日本語メッセージの表示（Windows PowerShell 5.1 / Windows Terminal）、OutputEncoding の効果、ls -Force、git log --grep の動作 -->
+
+  <div class="box">
+    <strong class="title">コマンドの早見表</strong>
+    この章のコマンドは、<a href="appendix-commands.html">付録A「よく使うコマンド一覧」</a>にも載せています。
+  </div>
+
+  <h2>確認クイズ</h2>
+  <details>
+    <summary>Q1. ファイルを、作業フォルダから、ステージに並べるコマンドは？</summary>
+    <p><code>git add ファイル名</code>。（ステージに並べるだけで、まだ記録はされない）</p>
+  </details>
+  <details>
+    <summary>Q2. <code>git commit -m "…"</code> の、<code>-m</code> のあとに書くものは何ですか？</summary>
+    <p>「何をしたか」を表す、メッセージ。あとで履歴を見たとき、記録の内容が分かるようにするため。</p>
+  </details>
+  <details>
+    <summary>Q3. どんな状態か分からなくなったとき、まず打つコマンドは？</summary>
+    <p><code>git status</code>。何度打っても安全で、今の状態と、次にできることを教えてくれる。</p>
+  </details>
+  <details>
+    <summary>Q4. <code>git log</code> の画面が止まって、戻れなくなったときは？</summary>
+    <p><code>q</code> キーを押す。</p>
+  </details>
+  <details>
+    <summary>Q5. なぜ、<code>git init</code> を打つ前に、プロンプトで場所を確認するのですか？</summary>
+    <p><code>git init</code> は、今いるフォルダを Git の管理対象にするため。<code>C:\work</code> のような大きな場所で打つと、その中のすべてのフォルダが対象になってしまう。</p>
+  </details>
+
+  <h2>話し合おう（月1回の集まり用）</h2>
+  <ul>
+    <li>Git の「add と commit の2段階」は、どんな場面で便利だと思いますか？</li>
+    <li>コミットメッセージを、日本語と英語のどちらで書くか、チームのルールを決めるなら、どうしますか？ その理由は？</li>
+    <li>「変更の記録を残す」ことが、仕事や日常のどんな場面で役に立ちそうですか？</li>
+  </ul>
+
+  <nav class="pager">
+    <a href="chapter-02.html">← 第2章 ターミナル入門</a>
+    <span class="meta">第4章は準備中</span>
+  </nav>
+</main>
+<footer class="site-foot">
+  この教材は GitHub で作られ、公開されています。
+  <a href="https://github.com/chitchi1216/git-github-textbook">ソースを見る</a> ／
+  <a href="https://github.com/chitchi1216/git-github-textbook/commits/main">変更の履歴を見る</a>
+</footer>
+</body>
+</html>

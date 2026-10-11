@@ -7,7 +7,7 @@
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<header class="site"><a class="title" href="index.html">Git と GitHub 入門</a><span class="ver"><!--ver--><a href="https://github.com/chitchi1216/git-github-textbook/blob/main/CHANGELOG.md">版 0.1.2（ドラフト）</a> ・ 2026-10-11 ・ 作成者 <a href="https://github.com/chitchi1216">chitchi1216</a><!--/ver--></span></header>
+<header class="site"><a class="title" href="index.html">Git と GitHub 入門</a><span class="ver"><!--ver--><a href="https://github.com/chitchi1216/git-github-textbook/blob/main/CHANGELOG.md">版 0.2.0（ドラフト）</a> ・ 2026-10-11 ・ 作成者 <a href="https://github.com/chitchi1216">chitchi1216</a><!--/ver--></span></header>
 <main class="wrap">
   <p class="meta">付録A</p>
   <h1>よく使うコマンド一覧</h1>
@@ -31,6 +31,7 @@
     <tr><td><code>cd ..</code></td><td class="en-col">change directory（ひとつ上へ）</td><td>ひとつ上のフォルダへ戻る</td><td><code>cd ..</code></td><td><a href="chapter-02.html">第2章</a></td></tr>
     <tr><td><code>cd C:\work</code></td><td class="en-col">change directory（絶対パスで指定）</td><td>学習用フォルダへ移動する（どこからでも使える）</td><td><code>cd C:\work</code></td><td><a href="chapter-02.html">第2章</a></td></tr>
     <tr><td><code>cls</code></td><td class="en-col"><strong>cl</strong>ear <strong>s</strong>creen（画面を消す）</td><td>画面をきれいにする（ファイルは消えない）</td><td><code>cls</code></td><td><a href="chapter-02.html">第2章</a></td></tr>
+    <tr><td><code>ls -Force</code></td><td class="en-col"><strong>force</strong>（強制的に＝隠しも）</td><td>隠しファイル・隠しフォルダも含めて、一覧する</td><td><code>ls -Force</code></td><td><a href="chapter-03.html">第3章</a></td></tr>
   </table>
 
   <h2>A-2. 作る・編集する</h2>
@@ -70,12 +71,22 @@
     <tr><td><code>git config --global user.email</code></td><td class="en-col">config ＝ configuration（設定）</td><td>自分のメールアドレスを登録する</td><td><code>git config --global user.email "メールアドレス"</code></td><td><a href="chapter-00.html">第0章</a></td></tr>
     <tr><td><code>git config --global core.editor</code></td><td class="en-col">config ＝ configuration（設定）</td><td>Git が使うエディタを、メモ帳にする</td><td><code>git config --global core.editor notepad</code></td><td><a href="chapter-00.html">第0章</a></td></tr>
     <tr><td><code>git config --global --list</code></td><td class="en-col">config ＝ configuration（設定）、list（一覧）</td><td>登録した設定を確認する</td><td><code>git config --global --list</code></td><td><a href="chapter-00.html">第0章</a></td></tr>
+    <tr><td><code>git config --global init.defaultBranch</code></td><td class="en-col">config ＝ configuration（設定）、branch（枝）</td><td>最初の枝の名前を、main にする（一度だけ）</td><td><code>git config --global init.defaultBranch main</code></td><td><a href="chapter-03.html">第3章</a></td></tr>
   </table>
 
   <h2>A-6. Git の基本操作</h2>
-  <p>第3章以降で、順番に追加していきます。</p>
+  <p>第3章のコマンドを載せています。第4章以降も、順番に追加していきます。</p>
   <table class="cmds">
-    <tr class="soon"><td>（準備中）</td><td class="en-col">—</td><td>記録を始める、状態を見る、記録する、履歴を見る　など</td><td>—</td><td>第3章</td></tr>
+    <tr><th>コマンド</th><th>もとの英語</th><th>意味</th><th>使用例</th><th>章</th></tr>
+    <tr><td><code>git --version</code></td><td class="en-col">version（版）</td><td>Git のバージョンを表示する（インストールの確認）</td><td><code>git --version</code></td><td><a href="chapter-03.html">第3章</a></td></tr>
+    <tr><td><code>git init</code></td><td class="en-col"><strong>init</strong>ialize（初期化する）</td><td>今のフォルダを、Git のリポジトリにする（フォルダごとに1回だけ）</td><td><code>git init</code></td><td><a href="chapter-03.html">第3章</a></td></tr>
+    <tr><td><code>git status</code></td><td class="en-col">status（状態）</td><td>今の状態を表示する。迷ったら、まずこれ</td><td><code>git status</code></td><td><a href="chapter-03.html">第3章</a></td></tr>
+    <tr><td><code>git add</code></td><td class="en-col">add（追加する）</td><td>変更を、ステージに並べる</td><td><code>git add hello.txt</code></td><td><a href="chapter-03.html">第3章</a></td></tr>
+    <tr><td><code>git commit -m</code></td><td class="en-col">commit（確定する）、<strong>m</strong>essage</td><td>ステージの変更を、メッセージ付きで記録する</td><td><code>git commit -m "Add hello.txt"</code></td><td><a href="chapter-03.html">第3章</a></td></tr>
+    <tr><td><code>git log</code></td><td class="en-col">log（記録）</td><td>履歴を表示する（画面が止まったら q）</td><td><code>git log</code></td><td><a href="chapter-03.html">第3章</a></td></tr>
+    <tr><td><code>git log --oneline</code></td><td class="en-col">oneline（1行）</td><td>履歴を、1つ1行で表示する</td><td><code>git log --oneline</code></td><td><a href="chapter-03.html">第3章</a></td></tr>
+    <tr><td><code>git log --grep</code></td><td class="en-col"><strong>grep</strong>（文字を探す）</td><td>メッセージの中から、文字を探す</td><td><code>git log --oneline --grep=second</code></td><td><a href="chapter-03.html">第3章</a></td></tr>
+    <tr><td><code>git diff</code></td><td class="en-col"><strong>diff</strong>erence（違い）</td><td>前の記録から、何が変わったかを表示する</td><td><code>git diff</code></td><td><a href="chapter-03.html">第3章</a></td></tr>
     <tr class="soon"><td>（準備中）</td><td class="en-col">—</td><td>GitHub から取ってくる、GitHub に送る、受け取る　など</td><td>—</td><td>第4章</td></tr>
     <tr class="soon"><td>（準備中）</td><td class="en-col">—</td><td>ブランチを作る、切り替える、取り込む　など</td><td>—</td><td>第5章</td></tr>
   </table>
