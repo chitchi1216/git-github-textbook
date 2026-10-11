@@ -26,3 +26,5 @@
 | `ch00-git-config.png` | 第0章 | PowerShell で `git config --global --list` を実行した画面（メールは隠す） |
 | `ch01-explorer-address-bar.png` | 第1章 | エクスプローラーのアドレスバーをクリックし、パスが文字で表示された画面 |
 | `ch01-explorer-extension.png` | 第1章 | 「表示」メニューで「ファイル名拡張子」にチェックを入れる画面 |
+| `ch02-explorer-vs-powershell.png` | 第2章 | 同じフォルダ（`practice`）を、エクスプローラーと PowerShell で並べた画面（アドレスバーとプロンプトが両方写るように） |
+| `ch02-input-mode.png` | 第0章・第2章 | 画面右下の入力モード表示（「A」と「あ」の両方）。半角英数の確認に使う |
