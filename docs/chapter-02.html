@@ -7,7 +7,7 @@
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<header class="site"><a class="title" href="index.html">Git と GitHub 入門</a><span class="ver"><!--ver--><a href="https://github.com/chitchi1216/git-github-textbook/blob/main/CHANGELOG.md">版 0.1.0（ドラフト）</a> ・ 2026-10-11 ・ 作成者 <a href="https://github.com/chitchi1216">chitchi1216</a><!--/ver--></span></header>
+<header class="site"><a class="title" href="index.html">Git と GitHub 入門</a><span class="ver"><!--ver--><a href="https://github.com/chitchi1216/git-github-textbook/blob/main/CHANGELOG.md">版 0.1.1（ドラフト）</a> ・ 2026-10-11 ・ 作成者 <a href="https://github.com/chitchi1216">chitchi1216</a><!--/ver--></span></header>
 <main class="wrap">
   <p class="meta">第2章 ／ 目安 50〜70分</p>
   <h1>ターミナル入門</h1>
@@ -108,6 +108,26 @@
   <!-- TODO: Win11実機で確認：右クリックメニューの文言、ダブルクリックでメモ帳が開くか -->
   <p>表にある <code>.</code>（ドット1つ）は「今いるフォルダ」、<code>..</code>（ドット2つ）は「ひとつ上のフォルダ」を表す、特別な書き方です。</p>
 
+  <h3>コマンドの名前は、英語の省略形</h3>
+  <p>コマンドの名前は、<strong>英語の省略形</strong>です。元の英語と意味を知ると、「なぜ、この名前なのか」が分かり、覚えやすくなります。</p>
+  <table>
+    <tr><th>コマンド</th><th>もとの英語</th><th>意味</th></tr>
+    <tr><td><code>pwd</code></td><td><strong>p</strong>rint <strong>w</strong>orking <strong>d</strong>irectory</td><td>作業中のディレクトリを、表示する</td></tr>
+    <tr><td><code>cd</code></td><td><strong>c</strong>hange <strong>d</strong>irectory</td><td>ディレクトリを、変える（移動する）</td></tr>
+    <tr><td><code>ls</code></td><td><strong>l</strong>i<strong>s</strong>t</td><td>一覧にする</td></tr>
+    <tr><td><code>mkdir</code></td><td><strong>m</strong>a<strong>k</strong>e <strong>dir</strong>ectory</td><td>ディレクトリを、作る</td></tr>
+    <tr><td><code>cp</code></td><td><strong>c</strong>o<strong>p</strong>y</td><td>コピーする</td></tr>
+    <tr><td><code>mv</code></td><td><strong>m</strong>o<strong>v</strong>e</td><td>移動する（名前の変更にも使う）</td></tr>
+    <tr><td><code>rm</code></td><td><strong>r</strong>e<strong>m</strong>ove</td><td>取り除く（削除する）</td></tr>
+    <tr><td><code>cls</code></td><td><strong>cl</strong>ear <strong>s</strong>creen</td><td>画面を、消す（きれいにする）</td></tr>
+    <tr><td><code>cat</code></td><td>con<strong>cat</strong>enate</td><td>つなげる。ファイルの中身をつないで、表示する</td></tr>
+    <tr><td><code>type</code></td><td>type</td><td>文字を打ち出す。ファイルの中身を、表示する</td></tr>
+  </table>
+  <div class="box">
+    <strong class="title">PowerShell 本来の名前は「動詞-名詞」</strong>
+    <code>pwd</code> や <code>ls</code> のような短い名前は、もともと Mac / Linux の世界で使われてきたものです。PowerShell 本来の名前は、<code>Get-Content</code>（内容を取得する）、<code>Set-Content</code>（内容を設定する＝置き換える）、<code>Add-Content</code>（内容を追加する）、<code>New-Item</code>（新しい項目）、<code>Select-String</code>（文字列を選ぶ）のように、<strong>「動詞-名詞」</strong>の形です。英語の意味のとおりに働くので、見ただけで何をするか想像できます。
+  </div>
+
   <h3>同じ操作を、2つの画面で並べてみる</h3>
   <p><code>C:\work\practice</code> というフォルダを開いている状態を、2つの画面で並べると、次のように対応します。</p>
   <figure class="diagram">
@@ -155,7 +175,78 @@
     <figcaption>フォルダの出入りは、<code>cd</code> で行う</figcaption>
   </figure>
 
-  <h2>2-4. 実際にやってみよう</h2>
+  <h2>2-4. 絶対パスと相対パス</h2>
+  <p>パスには、書き方が<strong>2種類</strong>あります。ここを区別できると、「<code>cd</code> がうまくいかない」ことが、ぐっと減ります。</p>
+  <figure class="diagram">
+    <svg class="d" viewBox="0 0 640 230" role="img" aria-label="絶対パスは住所、相対パスは道案内にたとえた図">
+      <rect class="b1" x="10" y="14" width="300" height="200" rx="12"/>
+      <text class="t-lg" x="160" y="48" text-anchor="middle">絶対パス</text>
+      <text class="t-sm muted" x="160" y="70" text-anchor="middle">住所のようなもの</text>
+      <text class="t-sm" x="160" y="104" text-anchor="middle">「東京都千代田区…」</text>
+      <text class="t-sm" x="160" y="126" text-anchor="middle">どこから聞かれても、同じ場所</text>
+      <text class="t-mono" x="160" y="170" text-anchor="middle" style="font-size:15px">C:\work\practice</text>
+      <text class="t-sm muted" x="160" y="198" text-anchor="middle">ドライブ（C:）から全部書く</text>
+      <rect class="b3" x="330" y="14" width="300" height="200" rx="12"/>
+      <text class="t-lg" x="480" y="48" text-anchor="middle">相対パス</text>
+      <text class="t-sm muted" x="480" y="70" text-anchor="middle">道案内のようなもの</text>
+      <text class="t-sm" x="480" y="104" text-anchor="middle">「そこの角を右へ曲がって…」</text>
+      <text class="t-sm" x="480" y="126" text-anchor="middle">今いる場所が違えば、行き先も変わる</text>
+      <text class="t-mono" x="480" y="170" text-anchor="middle" style="font-size:15px">practice</text>
+      <text class="t-sm muted" x="480" y="198" text-anchor="middle">今いる場所から、どう行くかを書く</text>
+    </svg>
+    <figcaption>絶対パスは「住所」、相対パスは「今いる場所からの道案内」</figcaption>
+  </figure>
+  <table>
+    <tr><th></th><th>絶対パス</th><th>相対パス</th></tr>
+    <tr><td>書き方</td><td>ドライブ名（<code>C:</code>）から、全部書く</td><td>今いる場所からの行き方を書く</td></tr>
+    <tr><td>例</td><td><code>C:\work\practice</code></td><td><code>practice</code>、<code>..</code>、<code>.\memo.txt</code></td></tr>
+    <tr><td>今いる場所が変わると</td><td><strong>同じ場所を指す</strong></td><td><strong>指す場所が変わる</strong></td></tr>
+    <tr><td>長所</td><td>どこにいても、確実に使える</td><td>短く書ける</td></tr>
+    <tr><td>短所</td><td>長くなる</td><td>今いる場所を間違えると、動かない</td></tr>
+  </table>
+  <div class="box">
+    <strong class="title">見分け方</strong>
+    <code>C:</code> のようなドライブ名から<strong>始まっていれば、絶対パス</strong>。そうでなければ、相対パスです。
+  </div>
+
+  <h3>同じコマンドでも、今いる場所で結果が変わる</h3>
+  <p>次の表で、<code>cd</code> に、絶対パスと相対パスを渡したときの違いを見てみましょう。</p>
+  <table>
+    <tr><th>打つコマンド</th><th>種類</th><th>今 <code>C:\work</code> にいるとき</th><th>今 <code>C:\Users\taro</code> にいるとき</th></tr>
+    <tr><td><code>cd practice</code></td><td style="white-space:nowrap">相対</td><td><code>C:\work\practice</code> へ移動できる</td><td><strong>エラー</strong>（そこに <code>practice</code> がない）</td></tr>
+    <tr><td><code>cd C:\work\practice</code></td><td style="white-space:nowrap">絶対</td><td>移動できる</td><td>移動できる</td></tr>
+    <tr><td><code>cd ..</code></td><td style="white-space:nowrap">相対</td><td><code>C:\</code> へ移動</td><td><code>C:\Users</code> へ移動</td></tr>
+  </table>
+  <figure class="diagram">
+    <svg class="d" viewBox="0 0 640 256" role="img" aria-label="フォルダの木の上に現在地を示し、相対パスと絶対パスの行き方を示す図">
+      <defs><marker id="b6" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path class="arrowhead" d="M0 0 L10 5 L0 10 z"/></marker></defs>
+      <path class="ln" d="M32 40 V196 M32 64 H50 M32 196 H50"/>
+      <path class="ln" d="M70 74 V104 M70 104 H92"/>
+      <text class="t-md" x="12" y="32">💽 C:\</text>
+      <rect class="b2" x="52" y="46" width="130" height="28" rx="6"/>
+      <text class="t-sm" x="60" y="66">📁 work  ← 今ここ</text>
+      <text class="t-sm" x="96" y="110">📁 practice</text>
+      <text class="t-sm" x="56" y="202">📁 Users</text>
+      <path class="ln" d="M160 100 C230 100 230 62 330 62" marker-end="url(#b6)"/>
+      <rect class="b3" x="334" y="34" width="296" height="56" rx="8"/>
+      <text class="t-mono" x="346" y="58" style="font-size:15px">cd practice</text>
+      <text class="t-sm muted" x="346" y="79">相対：ここから見て、隣のフォルダへ</text>
+      <rect class="b1" x="334" y="100" width="296" height="56" rx="8"/>
+      <text class="t-mono" x="346" y="124" style="font-size:15px">cd C:\work\practice</text>
+      <text class="t-sm muted" x="346" y="145">絶対：ドライブから全部書く</text>
+      <rect class="b0" x="334" y="166" width="296" height="56" rx="8"/>
+      <text class="t-mono" x="346" y="190" style="font-size:15px">cd ..</text>
+      <text class="t-sm muted" x="346" y="211">相対：ひとつ上（C:\）へ</text>
+      <text class="t-sm muted" x="320" y="244" text-anchor="middle">「今ここ」が変わると、相対パスの行き先も変わる。絶対パスは変わらない</text>
+    </svg>
+    <figcaption>いま <code>C:\work</code> にいる場合の、3通りの行き方</figcaption>
+  </figure>
+  <div class="box">
+    <strong class="title">この教材のページ内リンクも、相対パス</strong>
+    この教材のページどうしのリンク（<code>chapter-01.html</code> など）や、画像の場所（<code>images/…</code>）は、<strong>相対パス</strong>で書かれています。「このページから見て、隣にあるファイル」という書き方なので、どこに置いても、まとめて動かせるのが長所です。Git の手順書や README でも、<code>docs/index.html</code> のような相対パスが、よく使われます。
+  </div>
+
+  <h2>2-5. 実際にやってみよう</h2>
   <p>次の手順で、学習用フォルダ <code>C:\work</code> を作り、その中に <code>practice</code> フォルダとファイルを作ります。ここで作るフォルダは、第3章以降でも使います。</p>
   <div class="box warn">
     <strong class="title">打つ前に確認</strong>
@@ -176,6 +267,7 @@ Path
 C:\Users\taro
 </span></pre>
   <p>PowerShell を開いた直後は、自分のユーザーフォルダ（<code>C:\Users\自分の名前</code>）にいます（<code>taro</code> の部分は、人によって違います）。ここは演習には使いません。</p>
+  <p class="etym">💡 <code>pwd</code> は <strong>p</strong>rint <strong>w</strong>orking <strong>d</strong>irectory（作業中のディレクトリを表示する）の略です。</p>
 
   <h3>手順2：学習用フォルダ <code>C:\work</code> を作って、移動する</h3>
 <pre><code>mkdir C:\work
@@ -190,6 +282,7 @@ d-----        2026/10/11     10:30                work
 </span><span class="ps">PS C:\Users\taro&gt; cd C:\work</span>
 <span class="ps">PS C:\work&gt; </span></pre>
   <p>プロンプトが <code>PS C:\work&gt;</code> に変わりました。<code>C:\work</code> のように、ドライブ（<code>C:</code>）から全部書いたパスは、<strong>今どこにいても使えます</strong>。</p>
+  <p class="etym">💡 <code>mkdir</code> は <strong>m</strong>a<strong>k</strong>e <strong>dir</strong>ectory（ディレクトリを作る）、<code>cd</code> は <strong>c</strong>hange <strong>d</strong>irectory（ディレクトリを変える）の略です。</p>
   <div class="box">
     <strong class="title">「すでに存在します」と出たら</strong>
     <code>work</code> フォルダがすでにある、という意味です。心配はいりません。そのまま次の <code>cd C:\work</code> に進んでください。<code>C:\work</code> を作れなかった場合は、第1章の「作れないときは」を見てください。
@@ -199,6 +292,7 @@ d-----        2026/10/11     10:30                work
   <h3>手順3：中身を見る</h3>
 <pre><code>ls</code></pre>
   <p>今いるフォルダの中の、フォルダとファイルの一覧が出ます。作ったばかりの <code>C:\work</code> は空なので、何も表示されません。</p>
+  <p class="etym">💡 <code>ls</code> は <strong>l</strong>i<strong>s</strong>t（一覧にする）の略です。</p>
 
   <h3>手順4：フォルダを作る</h3>
 <pre><code>mkdir practice</code></pre>
@@ -229,10 +323,12 @@ Mode                 LastWriteTime         Length Name
 -a----        2026/10/11     10:32              0 memo.txt
 </span></pre>
   <p><code>Length</code> が <code>0</code> なのは、中身が空のファイルだからです。</p>
+  <p class="etym">💡 <code>New-Item</code> は「新しい項目」という意味です。フォルダも、ファイルも、「項目（Item）」です。</p>
 
   <h3>手順7：エクスプローラーで確かめる</h3>
 <pre><code>explorer .</code></pre>
   <p>最後の <code>.</code>（ドット）を忘れないでください。エクスプローラーが開き、<code>practice</code> フォルダの中に <code>memo.txt</code> があるはずです。<strong>ターミナルで作ったものが、エクスプローラーにも見える</strong>ことを確認してください。確認できたら、エクスプローラーは閉じて構いません。</p>
+  <p class="etym">💡 <code>explorer</code> は、エクスプローラーを起動するコマンドです。最後の <code>.</code> は「今いる場所」を表します。</p>
 
   <h3>手順8：ターミナルから、メモ帳を起動する</h3>
 <pre><code>notepad memo.txt</code></pre>
@@ -255,6 +351,7 @@ cd ..</code></pre>
 <span class="ps">PS C:\work\practice&gt; cd ..</span>
 <span class="ps">PS C:\work&gt; </span></pre>
   <p>プロンプトが <code>C:\work</code> に戻れば完了です。メモ帳で書いた内容が、ターミナルでも読めました。</p>
+  <p class="etym">💡 <code>cat</code> は con<strong>cat</strong>enate（つなげる）の略です。ファイルの中身を、つないで表示します。</p>
   <div class="box">
     <strong class="title">次に PowerShell を開いたら</strong>
     <code>cd C:\work</code> と打てば、学習用フォルダに移動できます。毎回、ここから始めてください。
@@ -311,7 +408,7 @@ cd ..</code></pre>
   </details>
   <!-- TODO: Win11実機で確認：.git が自動で隠しフォルダになるか、PowerShell で cd C:/work が動くか -->
 
-  <h2>2-5. チャレンジ：メモ帳を使わずに、ファイルを扱う</h2>
+  <h2>2-6. チャレンジ：メモ帳を使わずに、ファイルを扱う</h2>
   <p>ここまでで基本は終わりです。ここからは、力試しです。<strong>メモ帳を開かずに</strong>、ターミナルだけでファイルの中身を見たり、書き足したり、探したりしてみましょう。必須ではないので、気軽に挑戦してください。<code>C:\work\practice</code> にいる状態で始めます（<code>cd C:\work\practice</code> で移動できます）。</p>
 
   <div class="challenge">
@@ -392,10 +489,36 @@ memo.txt:2:second line
       </ul>
     </details>
   </div>
+  <div class="challenge">
+    <strong class="title">🎯 チャレンジ4 <span class="level">★★☆</span>　相対パスと絶対パスで、同じファイルを読む</strong>
+    <p><code>C:\work\practice</code> にいる状態で、<code>memo.txt</code> を、次の2通りの書き方で表示してください。</p>
+    <ol>
+      <li><strong>相対パス</strong>で表示する</li>
+      <li><strong>絶対パス</strong>で表示する</li>
+    </ol>
+    <p>次に、<code>cd C:\</code> で <code>C:\</code> に移動してから、<strong>同じ2つのコマンドをもう一度</strong>打ってみましょう。結果は、同じでしょうか？ 違うなら、なぜでしょうか？</p>
+    <details>
+      <summary>ヒント</summary>
+      <p>相対パスは「今いる場所から」の書き方です。<code>C:\</code> の中に、<code>memo.txt</code> はあるでしょうか。</p>
+    </details>
+    <details>
+      <summary>こたえと解説</summary>
+<pre><code>type memo.txt
+type C:\work\practice\memo.txt</code></pre>
+      <p><code>C:\work\practice</code> にいるときは、どちらも同じ結果（<code>memo.txt</code> の中身）になります。</p>
+      <p><code>C:\</code> に移動してから、もう一度打つと、次のようになります。</p>
+      <ul>
+        <li><code>type memo.txt</code>（相対）→ <strong>エラー。</strong>今いる <code>C:\</code> の中に、<code>memo.txt</code> がないためです。</li>
+        <li><code>type C:\work\practice\memo.txt</code>（絶対）→ <strong>表示できる。</strong>どこにいても、同じ場所を指すためです。</li>
+      </ul>
+      <p>最後に、<code>cd C:\work</code> で、学習用フォルダに戻っておきましょう。</p>
+    </details>
+  </div>
+
   <!-- TODO: Win11実機で確認：Add-Content / Select-String の表示形式、type の動作、Set-Content の複数行の挙動（Windows PowerShell 5.1 と PowerShell 7） -->
   <p class="meta">チャレンジは、これからの章にも、時々入ります。</p>
 
-  <h2>2-6. 便利な使い方</h2>
+  <h2>2-7. 便利な使い方</h2>
   <table>
     <tr><th>操作</th><th>効果</th></tr>
     <tr><td><code>Tab</code> キー</td><td>途中まで打った名前を、自動で補ってくれる。<code>cd pra</code> と打って <code>Tab</code> を押すと <code>cd practice</code> になる。打ち間違いも減る</td></tr>
@@ -408,7 +531,7 @@ memo.txt:2:second line
     間違えたコマンドを打つと、赤い文字でエラーが出ます。ほとんどの場合、<strong>何も壊れていません</strong>。「打ち間違い（スペース、全角、名前の綴り）」をまず疑い、<code>↑</code> キーで前のコマンドを呼び出して直してみてください。
   </div>
 
-  <h2>2-7. 安全のために：消すコマンドは、まだ使わない</h2>
+  <h2>2-8. 安全のために：消すコマンドは、まだ使わない</h2>
   <p>この章で使ったコマンドは、すべて「見る・移動する・作る」だけで、何かを失うことはありません。</p>
   <p>ファイルやフォルダを消す <code>rm</code>（<code>Remove-Item</code>）というコマンドもありますが、<strong>エクスプローラーの「ごみ箱」と違い、消したものは元に戻せません。</strong>間違えると、大切なファイルが戻らなくなります。この教材では、必要になる時まで使いません。</p>
   <table>
@@ -441,7 +564,15 @@ memo.txt:2:second line
     <p>打ち間違い。<code>cd</code> と <code>practice</code> の間の半角スペース、全角の文字や記号が混ざっていないか、<code>practice</code> フォルダがある場所（現在地）にいるか、を確認する。</p>
   </details>
   <details>
-    <summary>Q5. 演習を、デスクトップではなく <code>C:\work</code> で行うのはなぜですか？</summary>
+    <summary>Q5. <code>C:\work</code> にいるときと、<code>C:\Users\taro</code> にいるときで、<code>cd practice</code> の結果は同じですか？ また、その理由は？</summary>
+    <p>同じにならない。<code>practice</code> は相対パス（今いる場所からの書き方）なので、今いる場所が変わると、指す場所が変わる。<code>C:\work</code> にいれば移動できるが、<code>C:\Users\taro</code> にいると、そこに <code>practice</code> がないのでエラーになる。</p>
+  </details>
+  <details>
+    <summary>Q6. 次のうち、絶対パスはどれですか？　① <code>C:\work\practice</code>　② <code>practice</code>　③ <code>..</code></summary>
+    <p>①。ドライブ名（<code>C:</code>）から始まっているものが絶対パス。②と③は、今いる場所からの書き方なので、相対パス。</p>
+  </details>
+  <details>
+    <summary>Q7. 演習を、デスクトップではなく <code>C:\work</code> で行うのはなぜですか？</summary>
     <p>デスクトップなどは、OneDrive が自動で同期していることがあり、Git の記録とぶつかって問題が起きる原因になるため。</p>
   </details>
 
