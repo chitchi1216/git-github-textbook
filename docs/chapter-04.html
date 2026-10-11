@@ -7,7 +7,7 @@
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<header class="site"><a class="title" href="index.html">Git と GitHub 入門</a><span class="ver"><!--ver--><a href="https://github.com/chitchi1216/git-github-textbook/blob/main/CHANGELOG.md">版 0.4.17（ドラフト）</a> ・ 2026-10-11 ・ 作成者 <a href="https://github.com/chitchi1216">chitchi1216</a><!--/ver--></span></header>
+<header class="site"><a class="title" href="index.html">Git と GitHub 入門</a><span class="ver"><!--ver--><a href="https://github.com/chitchi1216/git-github-textbook/blob/main/CHANGELOG.md">版 0.4.18（ドラフト）</a> ・ 2026-10-11 ・ 作成者 <a href="https://github.com/chitchi1216">chitchi1216</a><!--/ver--></span></header>
 <main class="wrap">
   <p class="meta">第4章 ／ 目安 70〜90分</p>
   <h1>GitHub と連携する：送る・受け取る</h1>
@@ -407,6 +407,10 @@ Your branch is behind 'origin/main' by 1 commit, and can be fast-forwarded.
   (use "git pull" to update your local branch)
 
 nothing to commit, working tree clean</span></pre>
+      <figure class="shot">
+        <img src="images/ch04-fetch-status.png" alt="git fetch、git status、git pull を実行した実際の画面。status に behind と出ている" onerror="this.parentNode.classList.add('missing')">
+        <figcaption>実際の画面の例。<code>git fetch</code> のあと、<code>git status</code> に「<strong>Your branch is behind 'origin/main' by 1 commit, and can be fast-forwarded.</strong>」と出ています。続けて <code>git pull</code> を打つと、<code>Fast-forward</code> で追いつきます</figcaption>
+      </figure>
       <p><code>behind 'origin/main' by 1 commit</code> は、「GitHub の <code>main</code> より、1コミット遅れています」という意味です。<strong>「<code>fetch</code> で確認 → <code>pull</code> で受け取る」</strong>と、2段階に分けると、受け取る前に、状況を確かめられます。</p>
       <table>
         <tr><th>コマンド</th><th>働き</th><th>手元のファイル</th></tr>
@@ -442,7 +446,12 @@ error: failed to push some refs to 'https://github.com/chitchi1216/my-notes.git'
 hint: Updates were rejected because the remote contains work that you do not
 hint: have locally. This is usually caused by another repository pushing to
 hint: the same ref. If you want to integrate the remote changes, use
-hint: 'git pull' before pushing again.</span></pre>
+hint: 'git pull' before pushing again.
+hint: See the 'Note about fast-forwards' in 'git push --help' for details.</span></pre>
+      <figure class="shot">
+        <img src="images/ch04-push-rejected.png" alt="push が rejected で拒否され、pull のあとにもう一度 push して成功した実際の画面" onerror="this.parentNode.classList.add('missing')">
+        <figcaption>実際の画面の例。<code>git push</code> が、赤い文字で<strong>「! [rejected] main -&gt; main (fetch first)」</strong>と拒否されています。<code>git pull</code> のあと（メモ帳を閉じたあと）に、もう一度 <code>git push</code> を打つと、<code>main -&gt; main</code> で送れています</figcaption>
+      </figure>
       <p><code>rejected</code>（拒否された）と出ます。<strong>GitHub に、自分の知らない新しい記録（<code>copy.txt</code> のコミット）があるため</strong>です。GitHub は、「先に、その記録を取り込んでから、送って」と言っています。<strong>壊れてはいません。</strong>次のように、直します。</p>
 <pre><code>git pull
 git push</code></pre>
@@ -463,7 +472,6 @@ Merge made by the 'ort' strategy.
       </div>
     </details>
   </div>
-  <!-- TODO: Win11実機で確認：チャレンジ2（fetch → status）、チャレンジ3（rejected の文言、pull のあとにメモ帳が開く挙動） -->
 
   <h2>4-5. うまくいかないとき</h2>
   <table>
