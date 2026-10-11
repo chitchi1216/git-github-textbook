@@ -7,7 +7,7 @@
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<header class="site"><a class="title" href="index.html">Git と GitHub 入門</a><span class="ver"><!--ver--><a href="https://github.com/chitchi1216/git-github-textbook/blob/main/CHANGELOG.md">版 0.4.16（ドラフト）</a> ・ 2026-10-11 ・ 作成者 <a href="https://github.com/chitchi1216">chitchi1216</a><!--/ver--></span></header>
+<header class="site"><a class="title" href="index.html">Git と GitHub 入門</a><span class="ver"><!--ver--><a href="https://github.com/chitchi1216/git-github-textbook/blob/main/CHANGELOG.md">版 0.4.17（ドラフト）</a> ・ 2026-10-11 ・ 作成者 <a href="https://github.com/chitchi1216">chitchi1216</a><!--/ver--></span></header>
 <main class="wrap">
   <p class="meta">第4章 ／ 目安 70〜90分</p>
   <h1>GitHub と連携する：送る・受け取る</h1>
@@ -446,10 +446,12 @@ hint: 'git pull' before pushing again.</span></pre>
       <p><code>rejected</code>（拒否された）と出ます。<strong>GitHub に、自分の知らない新しい記録（<code>copy.txt</code> のコミット）があるため</strong>です。GitHub は、「先に、その記録を取り込んでから、送って」と言っています。<strong>壊れてはいません。</strong>次のように、直します。</p>
 <pre><code>git pull
 git push</code></pre>
-      <p><code>git pull</code> を打つと、<strong>メモ帳が開く</strong>ことがあります。<code>Merge branch 'main' of …</code> という1行が書かれた、<strong>「2つの流れを、合わせた」記録のメッセージ</strong>です。何も変えずに、<strong>保存して（<code>Ctrl</code> + <code>S</code>）、メモ帳を閉じて</strong>ください。すると、合わせる作業が終わります。そのあと <code>git push</code> で、送れます。</p>
+      <p><code>git pull</code> を打つと、<strong>メモ帳が開く</strong>ことがあります。<code>Merge branch 'main' of …</code> という1行が書かれた、<strong>「2つの流れを、合わせた」記録のメッセージ</strong>です。何も変えずに、<strong>保存して（<code>Ctrl</code> + <code>S</code>）、メモ帳を閉じて</strong>ください。すると、合わせる作業が終わります。メモ帳が開いている間は、ターミナルに <code>hint: Waiting for your editor to close the file...</code>（エディタが閉じるのを待っています）と出て、閉じると <code>unix2dos</code> / <code>dos2unix</code> の行が出ます。第3章と同じ、<strong>無視してよいお知らせ</strong>です。そのあと <code>git push</code> で、送れます。</p>
 <pre class="term"><span class="ps">PS C:\work\my-notes&gt; git pull</span>
 <span class="out">From https://github.com/chitchi1216/my-notes
    c5d2e8a..5a13927  main       -&gt; origin/main
+hint: Waiting for your editor to close the file... unix2dos: converting file C:/work/my-notes/.git/MERGE_MSG to DOS format...
+dos2unix: converting file C:/work/my-notes/.git/MERGE_MSG to Unix format...
 Merge made by the 'ort' strategy.
  copy.txt | 1 +
  1 file changed, 1 insertion(+)
