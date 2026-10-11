@@ -7,7 +7,7 @@
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<header class="site"><a class="title" href="index.html">Git と GitHub 入門</a><span class="ver"><!--ver--><a href="https://github.com/chitchi1216/git-github-textbook/blob/main/CHANGELOG.md">版 0.4.15（ドラフト）</a> ・ 2026-10-11 ・ 作成者 <a href="https://github.com/chitchi1216">chitchi1216</a><!--/ver--></span></header>
+<header class="site"><a class="title" href="index.html">Git と GitHub 入門</a><span class="ver"><!--ver--><a href="https://github.com/chitchi1216/git-github-textbook/blob/main/CHANGELOG.md">版 0.4.16（ドラフト）</a> ・ 2026-10-11 ・ 作成者 <a href="https://github.com/chitchi1216">chitchi1216</a><!--/ver--></span></header>
 <main class="wrap">
   <p class="meta">第4章 ／ 目安 70〜90分</p>
   <h1>GitHub と連携する：送る・受け取る</h1>
@@ -190,7 +190,7 @@ Counting objects: 100% (6/6), done.
 Delta compression using up to 8 threads
 Compressing objects: 100% (3/3), done.
 Writing objects: 100% (6/6), 480 bytes | 480.00 KiB/s, done.
-Total 6 (delta 0), reused 0 (delta 0), pack-reused 0
+Total 6 (delta 0), reused 0 (delta 0), pack-reused 0 (from 0)
 To https://github.com/chitchi1216/my-notes.git
  * [new branch]      main -&gt; main
 branch 'main' set up to track 'origin/main'.</span></pre>
@@ -228,13 +228,17 @@ git log --oneline</code></pre>
 remote: Enumerating objects: 6, done.
 remote: Counting objects: 100% (6/6), done.
 remote: Compressing objects: 100% (3/3), done.
-remote: Total 6 (delta 0), reused 0 (delta 0), pack-reused 0
+remote: Total 6 (delta 0), reused 0 (delta 0), pack-reused 0 (from 0)
 Receiving objects: 100% (6/6), done.</span>
 <span class="ps">PS C:\work&gt; cd my-notes-copy</span>
 <span class="ps">PS C:\work\my-notes-copy&gt; git log --oneline</span>
 <span class="out">7b1e4d8 (HEAD -&gt; main, origin/main, origin/HEAD) Add second line to hello.txt
 3f2a9c1 Add hello.txt</span></pre>
   <p>履歴も、ファイルも、<strong>そっくりそのまま複製</strong>されました。<code>git clone URL 新しいフォルダ名</code> の形で、<strong>新しいフォルダ</strong>が作られます。<code>my-notes-copy</code> は、もう一人のあなたの、作業場所です。</p>
+  <figure class="shot">
+    <img src="images/ch04-clone.png" alt="git clone と git log --oneline を実行した実際の画面" onerror="this.parentNode.classList.add('missing')">
+    <figcaption>実際の画面の例（手順6）。<code>Cloning into 'my-notes-copy'...</code> のあと、<code>git log --oneline</code> で、<code>my-notes</code> と<strong>同じ履歴</strong>（<code>origin/main</code> などの目印つき）が見えます。数字や、記録のメッセージは、人によって違います</figcaption>
+  </figure>
   <div class="box warn">
     <strong class="title"><code>clone</code> は、リポジトリの「外」で</strong>
     <code>clone</code> を、<code>my-notes</code> のような<strong>リポジトリの中</strong>で打ってはいけません。リポジトリの中に、リポジトリができてしまい、混乱のもとになります。<strong>必ず、<code>C:\work</code> に移動してから</strong>打ってください。
@@ -266,11 +270,17 @@ git push</code></pre>
 <span class="ps">PS C:\work\my-notes-copy&gt; git push</span>
 <span class="out">Enumerating objects: 5, done.
 Counting objects: 100% (5/5), done.
+Delta compression using up to 8 threads
+Compressing objects: 100% (2/2), done.
 Writing objects: 100% (3/3), 280 bytes | 280.00 KiB/s, done.
-Total 3 (delta 0), reused 0 (delta 0), pack-reused 0
+Total 3 (delta 0), reused 0 (delta 0), pack-reused 0 (from 0)
 To https://github.com/chitchi1216/my-notes.git
    7b1e4d8..c5d2e8a  main -&gt; main</span></pre>
   <p>今回は、<code>git push</code> だけで送れました。<code>clone</code> で作ったフォルダは、<code>-u</code> に当たる設定が、最初から入っているためです。</p>
+  <figure class="shot">
+    <img src="images/ch04-commit-push.png" alt="コピー側で git add、git commit、git push を実行した実際の画面" onerror="this.parentNode.classList.add('missing')">
+    <figcaption>実際の画面の例（手順7）。<code>git add</code> → <code>git commit -m</code> → <code>git push</code>。最後の <code>36e3099..b94797c  main -&gt; main</code> は、「GitHub の <code>main</code> が、<code>36e3099</code> から <code>b94797c</code> まで進んだ」という意味です。ID は、人によって違います</figcaption>
+  </figure>
 
   <h3>手順8：元の側で、受け取る（pull）</h3>
   <p>今度は、<strong>最初のフォルダ <code>my-notes</code></strong> に戻ります。ここでは、まだ3行目のことを知りません。</p>
@@ -284,8 +294,8 @@ second line</span>
 <span class="ps">PS C:\work\my-notes&gt; git pull</span>
 <span class="out">remote: Enumerating objects: 5, done.
 remote: Counting objects: 100% (5/5), done.
-remote: Total 3 (delta 0), reused 0 (delta 0), pack-reused 0
-Unpacking objects: 100% (3/3), done.
+remote: Total 3 (delta 0), reused 0 (delta 0), pack-reused 0 (from 0)
+Unpacking objects: 100% (3/3), 294 bytes | 14.00 KiB/s, done.
 From https://github.com/chitchi1216/my-notes
    7b1e4d8..c5d2e8a  main       -&gt; origin/main
 Updating 7b1e4d8..c5d2e8a
@@ -297,6 +307,10 @@ Fast-forward
 second line
 third line</span></pre>
   <p>3行目が、<strong>受け取れました</strong>。「<code>Fast-forward</code>」は、「自分の記録を、そのまま先に進めただけ」という意味で、最も単純な受け取り方です。</p>
+  <figure class="shot">
+    <img src="images/ch04-pull.png" alt="元のフォルダで git pull を実行した実際の画面。Fast-forward と出ている" onerror="this.parentNode.classList.add('missing')">
+    <figcaption>実際の画面の例（手順8）。<code>Updating 36e3099..b94797c</code> と <code>Fast-forward</code> が出て、<code>hello.txt</code> が1行増えた（<code>1 +</code>）ことが分かります</figcaption>
+  </figure>
   <div class="box ok">
     <strong class="title">これが、共同開発の基本のくり返し</strong>
     <strong>あなたが変更して push → 他の人が pull で受け取る</strong>。4人のチームでも、この動きが、基本です。次の章からは、これを「ブランチ」と組み合わせて、安全に行う方法を学びます。
@@ -447,7 +461,7 @@ Merge made by the 'ort' strategy.
       </div>
     </details>
   </div>
-  <!-- TODO: Win11実機で確認：clone/push/pull の表示、pull のあとにメモ帳が開く挙動（core.editor=notepad）、rejected の文言、GitHub の「Edit this file」「Commit changes」の画面 -->
+  <!-- TODO: Win11実機で確認：チャレンジ2（fetch → status）、チャレンジ3（rejected の文言、pull のあとにメモ帳が開く挙動） -->
 
   <h2>4-5. うまくいかないとき</h2>
   <table>
