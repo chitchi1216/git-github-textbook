@@ -3,52 +3,141 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>第0章 準備 | Git と GitHub 入門</title>
+<title>第0章 はじめに・準備 | Git と GitHub 入門</title>
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
 <header class="site"><a href="index.html">Git と GitHub 入門</a></header>
 <main class="wrap">
-  <p class="meta">第0章 ／ 目安 40〜60分</p>
-  <h1>準備：アカウントとソフトを用意する</h1>
+  <p class="meta">第0章 ／ 目安 50〜70分</p>
+  <h1>はじめに・準備</h1>
 
   <div class="box">
     <strong class="title">この章でできるようになること</strong>
     <ul class="goals">
+      <li>この教材の目的、対象者、進め方が分かる</li>
       <li>GitHub のアカウントを作る</li>
-      <li>Git と VS Code をパソコンに入れる</li>
-      <li>Git に「自分は誰か」を教える</li>
+      <li>Git をパソコンに入れ、「自分は誰か」を教える</li>
     </ul>
   </div>
 
+  <h2>0-1. この教材でめざすこと（概要）</h2>
+  <p>この教材は、<strong>Git と GitHub を使って、4人で一緒にものづくり（共同開発）ができるようになる</strong>ことをめざします。プログラミングの経験がなくても、パソコンの基本から順番に進められるように作ってあります。</p>
+  <p>共同開発では、複数の人が同じファイルを少しずつ変更していきます。そのとき、<strong>誰が・いつ・何を変えたか</strong>を記録し、<strong>みんなの変更をひとつにまとめる</strong>仕組みが必要です。それを担うのが Git と GitHub です。</p>
   <figure class="diagram">
-    <svg class="d" viewBox="0 0 640 110" role="img" aria-label="準備の4ステップ">
-      <defs><marker id="a0" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path class="arrowhead" d="M0 0 L10 5 L0 10 z"/></marker></defs>
-      <rect class="b1" x="10" y="20" width="130" height="72" rx="10"/>
-      <rect class="b1" x="170" y="20" width="130" height="72" rx="10"/>
-      <rect class="b1" x="330" y="20" width="130" height="72" rx="10"/>
-      <rect class="b2" x="490" y="20" width="140" height="72" rx="10"/>
-      <text class="t-sm muted" x="75" y="14" text-anchor="middle">STEP 1</text>
-      <text class="t-sm muted" x="235" y="14" text-anchor="middle">STEP 2</text>
-      <text class="t-sm muted" x="395" y="14" text-anchor="middle">STEP 3</text>
-      <text class="t-sm muted" x="560" y="14" text-anchor="middle">STEP 4</text>
-      <text class="t-md" x="75" y="50" text-anchor="middle">GitHub の</text><text class="t-md" x="75" y="72" text-anchor="middle">アカウント作成</text>
-      <text class="t-md" x="235" y="50" text-anchor="middle">Git を</text><text class="t-md" x="235" y="72" text-anchor="middle">インストール</text>
-      <text class="t-md" x="395" y="50" text-anchor="middle">VS Code を</text><text class="t-md" x="395" y="72" text-anchor="middle">インストール</text>
-      <text class="t-md" x="560" y="50" text-anchor="middle">名前とメールを</text><text class="t-md" x="560" y="72" text-anchor="middle">Git に登録</text>
-      <path class="ln" d="M142 56 H166" marker-end="url(#a0)"/>
-      <path class="ln" d="M302 56 H326" marker-end="url(#a0)"/>
-      <path class="ln" d="M462 56 H486" marker-end="url(#a0)"/>
+    <svg class="d" viewBox="0 0 640 150" role="img" aria-label="学習の3つの段階">
+      <defs><marker id="a00" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path class="arrowhead" d="M0 0 L10 5 L0 10 z"/></marker></defs>
+      <rect class="b1" x="10" y="22" width="190" height="104" rx="12"/>
+      <text class="t-sm muted" x="105" y="16" text-anchor="middle">STEP 1　第0〜2章</text>
+      <text class="t-md" x="105" y="60" text-anchor="middle">土台をつくる</text>
+      <text class="t-sm" x="105" y="84" text-anchor="middle">準備・パソコンの仕組み</text>
+      <text class="t-sm" x="105" y="104" text-anchor="middle">ターミナルに慣れる</text>
+      <rect class="b2" x="225" y="22" width="190" height="104" rx="12"/>
+      <text class="t-sm muted" x="320" y="16" text-anchor="middle">STEP 2　第3〜4章</text>
+      <text class="t-md" x="320" y="60" text-anchor="middle">Git を一人で使う</text>
+      <text class="t-sm" x="320" y="84" text-anchor="middle">記録する（commit）</text>
+      <text class="t-sm" x="320" y="104" text-anchor="middle">GitHub に送る（push）</text>
+      <rect class="b3" x="440" y="22" width="190" height="104" rx="12"/>
+      <text class="t-sm muted" x="535" y="16" text-anchor="middle">STEP 3　第5〜8章</text>
+      <text class="t-md" x="535" y="60" text-anchor="middle">チームで開発する</text>
+      <text class="t-sm" x="535" y="84" text-anchor="middle">ブランチ・Pull Request</text>
+      <text class="t-sm" x="535" y="104" text-anchor="middle">コンフリクト解消</text>
+      <path class="ln" d="M203 74 H221" marker-end="url(#a00)"/>
+      <path class="ln" d="M418 74 H436" marker-end="url(#a00)"/>
     </svg>
-    <figcaption>この章の流れ。上から順に進めます</figcaption>
+    <figcaption>学習の全体像。3つの段階で、一人から4人の共同開発へ進む</figcaption>
+  </figure>
+  <h3>最終ゴール</h3>
+  <p>次のことが、4人でできるようになります。</p>
+  <ul>
+    <li>共有の置き場（GitHub のリポジトリ）に、自分の変更を送る</li>
+    <li>他の人の変更を、自分のパソコンに取り込む</li>
+    <li>自分の作業を別の枝（ブランチ）で進め、Pull Request で他の人に確認してもらってから取り込む</li>
+    <li>同じ場所を変更して衝突（コンフリクト）しても、自分たちで解消する</li>
+  </ul>
+
+  <h2>0-2. 対象者</h2>
+  <table>
+    <tr><th>想定する人</th><th>前提にしないこと（なくて大丈夫）</th></tr>
+    <tr>
+      <td>
+        <ul>
+          <li>普段、エクスプローラーでファイルやフォルダを扱っている</li>
+          <li>Windows 11 のパソコンを使える</li>
+          <li>共同開発を、これから始めたい</li>
+        </ul>
+      </td>
+      <td>
+        <ul>
+          <li>プログラミングの経験</li>
+          <li>ターミナル（黒い画面）を使った経験</li>
+          <li>Git や GitHub の知識</li>
+          <li>英語が得意であること</li>
+        </ul>
+      </td>
+    </tr>
+  </table>
+  <h3>用意するもの</h3>
+  <ul>
+    <li><strong>Windows 11 のパソコン</strong>（自分でソフトをインストールできるもの。会社や学校のパソコンは、管理者に確認してください）</li>
+    <li><strong>インターネットに接続できる環境</strong></li>
+    <li><strong>メールアドレス</strong>（GitHub のアカウント登録に使います）</li>
+  </ul>
+
+  <h2>0-3. 学び方</h2>
+  <ul>
+    <li><strong>基本は自習。</strong>各章は、およそ40〜70分で終わる量です。</li>
+    <li><strong>月に1回、みんなで集まってディスカッションします。</strong>各章の最後の「話し合おう」を題材にします。</li>
+    <li><strong>使う道具は、Windows 11 に入っているものを中心にします。</strong>ターミナルは PowerShell、文章を書くのは「メモ帳」です。高機能なエディタ（VS Code）は、必要になってから導入します。</li>
+  </ul>
+  <div class="box ok">
+    <strong class="title">約束：壊しても大丈夫</strong>
+    この教材の練習は、練習用のフォルダの中だけで行います。失敗してもパソコンは壊れません。エラーが出たら、それは「うまくいかない例」として学べるチャンスです。分からないことは、そのままにせず、集まりで質問してください。
+  </div>
+
+  <h3>教材の読み方：ボックスの色の意味</h3>
+  <div class="box">
+    <strong class="title">青：ポイント</strong>
+    覚えておくと役に立つこと、補足です。
+  </div>
+  <div class="box warn">
+    <strong class="title">黄：注意</strong>
+    つまずきやすい点、間違えやすい点です。ここは立ち止まって読んでください。
+  </div>
+  <div class="box ok">
+    <strong class="title">緑：安心してよいこと</strong>
+    心配いらないこと、失敗しても大丈夫なことです。
+  </div>
+  <details class="coffee">
+    <summary>☕ コーヒーブレイク<span class="skip">（読み飛ばしてOK）</span></summary>
+    <p>本筋から少し離れた、豆知識の読み物です。読まなくても先へ進めますが、「なぜそうなっているのか」に興味がわいたら開いてみてください。</p>
+  </details>
+
+  <h2>0-4. 準備の流れ</h2>
+  <figure class="diagram">
+    <svg class="d" viewBox="0 0 640 110" role="img" aria-label="準備の3ステップ">
+      <defs><marker id="a0" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path class="arrowhead" d="M0 0 L10 5 L0 10 z"/></marker></defs>
+      <rect class="b1" x="10" y="20" width="190" height="72" rx="10"/>
+      <rect class="b1" x="225" y="20" width="190" height="72" rx="10"/>
+      <rect class="b2" x="440" y="20" width="190" height="72" rx="10"/>
+      <text class="t-sm muted" x="105" y="14" text-anchor="middle">STEP 1</text>
+      <text class="t-sm muted" x="320" y="14" text-anchor="middle">STEP 2</text>
+      <text class="t-sm muted" x="535" y="14" text-anchor="middle">STEP 3</text>
+      <text class="t-md" x="105" y="50" text-anchor="middle">GitHub の</text><text class="t-md" x="105" y="72" text-anchor="middle">アカウント作成</text>
+      <text class="t-md" x="320" y="50" text-anchor="middle">Git を</text><text class="t-md" x="320" y="72" text-anchor="middle">インストール</text>
+      <text class="t-md" x="535" y="50" text-anchor="middle">名前・メール・エディタを</text><text class="t-md" x="535" y="72" text-anchor="middle">Git に登録</text>
+      <path class="ln" d="M203 56 H221" marker-end="url(#a0)"/>
+      <path class="ln" d="M418 56 H436" marker-end="url(#a0)"/>
+    </svg>
+    <figcaption>準備は3ステップ。上から順に進めます</figcaption>
   </figure>
 
-  <h2>0-1. 登場するものを先に知る</h2>
+  <h2>0-5. 登場するものを先に知る</h2>
   <table>
     <tr><th>名前</th><th>一言でいうと</th></tr>
     <tr><td>Git</td><td>ファイルの変更履歴を記録する道具。自分のパソコンの中で動く</td></tr>
     <tr><td>GitHub</td><td>Git の記録をインターネット上に置いて、みんなで共有するサービス</td></tr>
-    <tr><td>VS Code</td><td>文章やプログラムを書くための高機能なメモ帳（エディタ）</td></tr>
+    <tr><td>メモ帳</td><td>文字を書くための、Windows 標準のアプリ。この教材では、ファイルの編集に使う</td></tr>
   </table>
   <p>「Git」と「GitHub」は名前が似ていますが、別のものです。次の図で関係をつかんでください。</p>
 
@@ -76,7 +165,7 @@
     <figcaption>Git は自分のパソコンの中、GitHub はインターネット上。2つの間で記録をやりとりする</figcaption>
   </figure>
 
-  <h2>0-2. GitHub アカウントを作る</h2>
+  <h2>0-6. GitHub アカウントを作る</h2>
   <ol>
     <li>ブラウザで <a href="https://github.com/signup">https://github.com/signup</a> を開く</li>
     <li>メールアドレス、パスワード、ユーザー名を入力する</li>
@@ -100,7 +189,7 @@
     <figcaption>登録後のプロフィール画面の例（ユーザー名 chitchi1216）</figcaption>
   </figure>
 
-  <h2>0-3. Git をインストールする</h2>
+  <h2>0-7. Git をインストールする</h2>
   <ol>
     <li><a href="https://git-scm.com/download/win">https://git-scm.com/download/win</a> を開き、64-bit 版のインストーラーをダウンロードする</li>
     <li>ダウンロードしたファイルを開き、基本的に <strong>すべて初期設定のまま「Next」</strong> を押して進める</li>
@@ -111,21 +200,13 @@
     <img src="images/ch00-git-installer.png" alt="Git のインストーラー画面" onerror="this.parentNode.classList.add('missing')">
     <figcaption>Git のインストーラー。迷ったら初期設定のまま「Next」</figcaption>
   </figure>
+  <div class="box">
+    <strong class="title">エディタの選択画面が出たら</strong>
+    インストールの途中で「Git が使う初期のエディタ」を選ぶ画面が出ることがあります。分からなければ、そのまま進んで大丈夫です。エディタは、次の 0-8 で、コマンドを使って「メモ帳」に設定します。
+  </div>
 
-  <h2>0-4. VS Code をインストールする</h2>
-  <ol>
-    <li><a href="https://code.visualstudio.com/">https://code.visualstudio.com/</a> からダウンロードする</li>
-    <li>インストール中に「PATH への追加」にチェックが入っていることを確認する</li>
-    <li>インストールできたら、スタートメニューから「Visual Studio Code」を起動する</li>
-  </ol>
-  <!-- TODO: Win11実機で確認：インストーラーのチェック項目名 -->
-  <figure class="shot">
-    <img src="images/ch00-vscode-installer.png" alt="VS Code のインストーラーで追加タスクを選ぶ画面" onerror="this.parentNode.classList.add('missing')">
-    <figcaption>VS Code のインストーラー。「PATH への追加」にチェックが入っているか確認する</figcaption>
-  </figure>
-
-  <h2>0-5. 「自分は誰か」を Git に教える</h2>
-  <p>Git は変更を記録するとき、<strong>誰が変更したか</strong>も一緒に記録します。そのため、最初に名前とメールアドレスを登録します。</p>
+  <h2>0-8. 「自分は誰か」と「使うエディタ」を Git に教える</h2>
+  <p>Git は変更を記録するとき、<strong>誰が変更したか</strong>も一緒に記録します。そのため、最初に名前とメールアドレスを登録します。あわせて、Git が文字の入力を求めるときに開く<strong>エディタ</strong>を、メモ帳に設定します。</p>
   <p>ここで初めて、ターミナルを使います。詳しい説明は第2章で行うので、今は「書かれた通りに打つ」だけで大丈夫です。</p>
   <ol>
     <li>キーボードの <code>Windows</code> キーを押し、「PowerShell」と入力して Enter を押す</li>
@@ -140,16 +221,18 @@
     日本語入力がオン（「あ」の状態）のままだと、スペースや記号（「"」「-」）が<strong>全角</strong>になり、コマンドが動きません。打つ前に <code>半角/全角</code> キーを押し、画面右下の入力モード表示が「A」になっていることを確認してください。名前の部分に日本語を入れるときだけ、一時的に日本語入力にします。
   </div>
   <!-- TODO: Win11実機で確認：入力モード表示の位置と見た目 -->
-  <p>次の2行を<strong>1行ずつ</strong>入力して Enter を押します（「" "」の中は自分の名前とメールアドレスに置き換える）。</p>
+  <p>次の3行を<strong>1行ずつ</strong>入力して Enter を押します（「" "」の中は自分の名前とメールアドレスに置き換える）。3行目は、そのまま打ちます。</p>
 <pre><code>git config --global user.name "あなたの名前"
-git config --global user.email "GitHubに登録したメールアドレス"</code></pre>
+git config --global user.email "GitHubに登録したメールアドレス"
+git config --global core.editor notepad</code></pre>
   <p>何も表示されなければ成功です。続けて、設定を確認します。</p>
 <pre><code>git config --global --list</code></pre>
-  <p>次のように、入力した名前とメールアドレスが表示されれば完了です（表示のイメージ）。</p>
+  <p>次のように、入力した内容が表示されれば完了です（表示のイメージ）。</p>
   <figure>
 <pre class="term"><span class="ps">PS C:\Users\taro&gt; git config --global --list</span>
 <span class="out">user.name=chitchi1216
-user.email=chitchi1216@example.com</span></pre>
+user.email=chitchi1216@example.com
+core.editor=notepad</span></pre>
     <figcaption>表示のイメージ。名前とメールアドレスは、自分で入力した内容になる</figcaption>
   </figure>
   <figure class="shot">
@@ -157,10 +240,14 @@ user.email=chitchi1216@example.com</span></pre>
     <figcaption>実際の実行画面の例（メールアドレスは隠してあります）</figcaption>
   </figure>
   <div class="box">
+    <strong class="title">なぜエディタをメモ帳にするの？</strong>
+    Git の初期設定のエディタは、初心者には操作が難しい別のエディタ（Vim）になることがあります。うっかり開くと、閉じ方が分からず困る場面が多いので、使い慣れたメモ帳に先に設定しておきます。
+  </div>
+  <div class="box">
     <strong class="title">うまくいかないとき</strong>
     <code>git : 用語 'git' は、コマンドレット…として認識されません</code> と表示されたら、Git が見つかっていません。PowerShell をいったん閉じて開き直してからもう一度試してください。それでもだめなら、月1回の集まりかチャットで質問してください。
   </div>
-  <!-- TODO: Win11実機で確認：エラーメッセージの文言 -->
+  <!-- TODO: Win11実機で確認：エラーメッセージの文言、core.editor=notepad でコミット時にメモ帳が開くか -->
 
   <h2>確認クイズ</h2>
   <details>
@@ -171,11 +258,16 @@ user.email=chitchi1216@example.com</span></pre>
     <summary>Q2. なぜ最初に名前とメールアドレスを登録するのですか？</summary>
     <p>Git が変更を記録するとき、誰が変更したかも一緒に記録するため。</p>
   </details>
+  <details>
+    <summary>Q3. コマンドを打つとき、日本語入力はどうしておくべきですか？</summary>
+    <p>半角英数（入力モード「A」）にしておく。日本語入力のままだと、スペースや記号が全角になり、コマンドが動かなくなる。</p>
+  </details>
 
   <h2>話し合おう（月1回の集まり用）</h2>
   <ul>
     <li>インストールや設定で、つまずいたところはありましたか？</li>
     <li>GitHub のユーザー名はどんな基準でつけましたか？</li>
+    <li>共同開発に、期待していること、不安なことは何ですか？</li>
   </ul>
 
   <nav class="pager">

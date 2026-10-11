@@ -18,6 +18,7 @@
       <li>ターミナルが何かを、エクスプローラーと比べて説明できる</li>
       <li>「今いる場所」を確認し、フォルダを移動できる</li>
       <li>フォルダとファイルを、コマンドで作れる</li>
+      <li>ターミナルから、メモ帳を起動して、ファイルを編集できる</li>
     </ul>
   </div>
 
@@ -46,7 +47,47 @@
     <strong class="title">なぜ、わざわざ文字で操作するの？</strong>
     Git は、コマンドを打って使う道具だからです。「何をしたか」が文字で残るので、手順を人に伝えたり、同じ操作を正確に繰り返したりしやすくなります。難しいものではなく、「同じことを、別の言い方でお願いしているだけ」と考えてください。
   </div>
-  <p>この教材では、<strong>PowerShell</strong>（パワーシェル）というターミナルを使います。Windows 11 に最初から入っています。</p>
+  <p>この教材では、Windows 11 に最初から入っている <strong>PowerShell</strong>（パワーシェル）を使います。以降、「ターミナルを開く」と書いたら、PowerShell を開くことを指します。</p>
+
+  <details class="coffee">
+    <summary>☕ コーヒーブレイク：ターミナル？ コマンドプロンプト？ シェル？ 呼び名がたくさんある理由<span class="skip">（読み飛ばしてOK）</span></summary>
+    <p>調べ物をしていると、「ターミナル」「コンソール」「シェル」「コマンドプロンプト」「PowerShell」「CLI」……と、似た言葉がたくさん出てきます。実は、<strong>3つの階層に分けて考えると、整理できます</strong>。</p>
+    <figure class="diagram">
+      <svg class="d" viewBox="0 0 640 270" role="img" aria-label="ターミナル、シェル、コマンドの入れ子の関係図">
+        <defs><marker id="b4" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path class="arrowhead" d="M0 0 L10 5 L0 10 z"/></marker></defs>
+        <rect class="b0" x="10" y="8" width="620" height="254" rx="14"/>
+        <text class="t-md" x="28" y="34">① ターミナル（窓）</text>
+        <text class="t-sm muted" x="28" y="54">文字を打ち込み、結果を表示するだけの画面。例：Windows Terminal</text>
+        <rect class="b1" x="28" y="68" width="584" height="128" rx="10"/>
+        <text class="t-md" x="46" y="94">② シェル（受付係）</text>
+        <text class="t-sm muted" x="46" y="114">打った命令を受け取って、パソコンに伝える係</text>
+        <rect class="b3" x="46" y="128" width="170" height="52" rx="8"/>
+        <text class="t-md" x="131" y="159" text-anchor="middle">PowerShell</text>
+        <rect class="b0" x="235" y="128" width="170" height="52" rx="8"/>
+        <text class="t-sm" x="320" y="159" text-anchor="middle">コマンドプロンプト</text>
+        <rect class="b0" x="424" y="128" width="170" height="52" rx="8"/>
+        <text class="t-sm" x="509" y="159" text-anchor="middle">Git Bash</text>
+        <path class="ln" d="M320 200 V216" marker-end="url(#b4)"/>
+        <rect class="b2" x="120" y="218" width="400" height="36" rx="8"/>
+        <text class="t-sm" x="320" y="241" text-anchor="middle">③ コマンド（ls・cd・git など）が実行され、Windows が動く</text>
+      </svg>
+      <figcaption>窓（ターミナル）の中に、受付係（シェル）がいて、命令を実行してくれる</figcaption>
+    </figure>
+    <table>
+      <tr><th>呼び名</th><th>意味</th><th>見分け方の例（行の先頭）</th></tr>
+      <tr><td>ターミナル（端末）</td><td>文字で操作する<strong>窓</strong>。昔は、大型コンピューターにつなぐ専用の機械（キーボードと画面）のことだった</td><td>—</td></tr>
+      <tr><td>コンソール</td><td>ターミナルとほぼ同じ意味で使われる言葉</td><td>—</td></tr>
+      <tr><td>シェル</td><td>窓の中にいて、打った命令を受け取る<strong>係</strong>。名前は「貝殻」。パソコンの中心部（OS）を、殻のように包む窓口、という意味</td><td>—</td></tr>
+      <tr><td>コマンドプロンプト</td><td>Windows に古くからあるシェル（<code>cmd</code> ともいう）。昔の MS-DOS の流れをくむ</td><td><code>C:\Users\taro&gt;</code></td></tr>
+      <tr><td>PowerShell</td><td>コマンドプロンプトより新しい、Windows のシェル。<strong>この教材で使う</strong></td><td><code>PS C:\Users\taro&gt;</code></td></tr>
+      <tr><td>Git Bash</td><td>Git と一緒にインストールされる、Mac や Linux と同じ種類のシェル</td><td><code>taro@PC MINGW64 ~</code> のような形</td></tr>
+      <tr><td>CLI</td><td>「コマンドラインインターフェース」の略。文字で操作する方式全体のこと。マウスで操作する方式は GUI という</td><td>—</td></tr>
+    </table>
+    <p><strong>なぜ、こんなに呼び名があるの？</strong>　もともと別々のものだった「窓」と「受付係」が、時代とともに組み合わせを変えながら使われてきたためです。今の Windows 11 では、「Windows Terminal」という1つの窓の中で、PowerShell やコマンドプロンプト、Git Bash を、タブで切り替えて使えます。</p>
+    <p><strong>困ったときの目安</strong>　ネットの手順に「ターミナルで次を実行」とあったら、この教材では PowerShell に打てばよいことが多いです。ただし、Mac や Linux 向けの手順は、Windows の PowerShell では、そのままでは動かないことがあります。行の先頭（<code>PS</code> が付くか）を見て、自分がどのシェルにいるかを確認してください。</p>
+    <p class="meta">※ 見た目や名前は、Windows のバージョンや設定で変わることがあります。</p>
+  </details>
+  <!-- TODO: Win11実機で確認：「PowerShell」で検索して開くと Windows Terminal の中で動くか、Git Bash のプロンプトの形 -->
 
   <h2>2-2. エクスプローラーの操作とコマンドを見比べる</h2>
   <p>次の表は、「やりたいこと」を、エクスプローラーとターミナルで比べたものです。まずは眺めて、「あの操作の、文字での言い方だな」と対応づけてください。</p>
@@ -56,37 +97,37 @@
     <tr><td>中身を一覧で見る</td><td>フォルダを開くと、自然に表示される</td><td><code>ls</code></td></tr>
     <tr><td>フォルダの中に入る</td><td>フォルダをダブルクリック</td><td><code>cd フォルダ名</code></td></tr>
     <tr><td>ひとつ上のフォルダに戻る</td><td>「↑」ボタンを押す</td><td><code>cd ..</code></td></tr>
-    <tr><td>自分のユーザーフォルダに戻る</td><td>アドレスバーに <code>C:\Users\自分の名前</code> と入力</td><td><code>cd ~</code></td></tr>
+    <tr><td>学習用フォルダへ移動する</td><td>アドレスバーに <code>C:\work</code> と入力して Enter</td><td><code>cd C:\work</code></td></tr>
     <tr><td>新しいフォルダを作る</td><td>右クリック → 新規作成 → フォルダー</td><td><code>mkdir フォルダ名</code></td></tr>
     <tr><td>空のテキストファイルを作る</td><td>右クリック → 新規作成 → テキスト ドキュメント</td><td><code>New-Item ファイル名.txt</code></td></tr>
-    <tr><td>ファイルの中身を見る</td><td>ダブルクリックで、アプリで開く</td><td><code>cat ファイル名.txt</code></td></tr>
+    <tr><td>ファイルを編集する</td><td>ダブルクリックで、メモ帳で開く</td><td><code>notepad ファイル名.txt</code></td></tr>
+    <tr><td>ファイルの中身を見る</td><td>ダブルクリックで開く</td><td><code>cat ファイル名.txt</code></td></tr>
     <tr><td>今のフォルダをエクスプローラーで開く</td><td>（もともとエクスプローラーなので不要）</td><td><code>explorer .</code></td></tr>
-    <tr><td>今のフォルダを VS Code で開く</td><td>フォルダを右クリック → 「Code で開く」</td><td><code>code .</code></td></tr>
     <tr><td>画面をきれいにする</td><td>—</td><td><code>cls</code></td></tr>
   </table>
-  <!-- TODO: Win11実機で確認：右クリックメニューの文言（「Code で開く」は VS Code の設定による）、cd ~ の動作 -->
+  <!-- TODO: Win11実機で確認：右クリックメニューの文言、ダブルクリックでメモ帳が開くか -->
   <p>表にある <code>.</code>（ドット1つ）は「今いるフォルダ」、<code>..</code>（ドット2つ）は「ひとつ上のフォルダ」を表す、特別な書き方です。</p>
 
   <h3>同じ操作を、2つの画面で並べてみる</h3>
-  <p><code>C:\Users\taro\practice</code> というフォルダを開いている状態を、2つの画面で並べると、次のように対応します。</p>
+  <p><code>C:\work\practice</code> というフォルダを開いている状態を、2つの画面で並べると、次のように対応します。</p>
   <figure class="diagram">
     <svg class="d" viewBox="0 0 640 270" role="img" aria-label="エクスプローラーの画面とターミナルの画面の対応図">
       <defs><marker id="b2" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="arrowhead" d="M0 0 L10 5 L0 10 z"/></marker></defs>
       <text class="t-md" x="150" y="20" text-anchor="middle">エクスプローラー</text>
       <rect class="b0" x="10" y="30" width="280" height="200" rx="8"/>
       <rect class="b1" x="22" y="42" width="256" height="30" rx="6"/>
-      <text class="t-sm" x="32" y="62" style="font-family:Consolas,monospace">C:\Users\taro\practice</text>
+      <text class="t-sm" x="32" y="62" style="font-family:'bs-fix',Consolas,monospace">C:\work\practice</text>
       <text class="t-sm" x="30" y="104">📄 memo.txt</text>
       <text class="t-sm" x="30" y="132">📁 notes</text>
       <text class="t-sm muted" x="30" y="214">アドレスバー ＝ 今いる場所</text>
       <text class="t-md" x="490" y="20" text-anchor="middle">PowerShell</text>
       <rect x="350" y="30" width="280" height="200" rx="8" fill="#012456" stroke="#5b6877" stroke-width="1.4"/>
       <rect x="362" y="42" width="256" height="30" rx="6" fill="#0a3a80" stroke="#8fb4ff" stroke-width="1.6"/>
-      <text class="tw" x="372" y="62" style="font-family:Consolas,monospace;font-size:13px">PS C:\Users\taro\practice&gt;</text>
-      <text x="370" y="104" class="tw" style="font-family:Consolas,monospace;font-size:13px">PS ...\practice&gt; ls</text>
-      <text x="370" y="130" class="tb" style="font-family:Consolas,monospace;font-size:13px">  memo.txt</text>
-      <text x="370" y="152" class="tb" style="font-family:Consolas,monospace;font-size:13px">  notes</text>
-      <text x="370" y="214" class="tb" style="font-family:Consolas,monospace;font-size:13px">プロンプト ＝ 今いる場所</text>
+      <text class="tw" x="372" y="62" style="font-family:'bs-fix',Consolas,monospace;font-size:13px">PS C:\work\practice&gt;</text>
+      <text class="tw" x="370" y="104" style="font-family:'bs-fix',Consolas,monospace;font-size:13px">PS ...\practice&gt; ls</text>
+      <text class="tb" x="370" y="130" style="font-family:'bs-fix',Consolas,monospace;font-size:13px">  memo.txt</text>
+      <text class="tb" x="370" y="152" style="font-family:'bs-fix',Consolas,monospace;font-size:13px">  notes</text>
+      <text class="tb" x="370" y="214" style="font-family:'bs-fix',Consolas,monospace;font-size:13px">プロンプト ＝ 今いる場所</text>
       <path class="ln" d="M294 57 H346" marker-start="url(#b2)" marker-end="url(#b2)"/>
       <text class="t-sm" x="320" y="250" text-anchor="middle">どちらも「今いる場所」を、いつも画面に出している</text>
     </svg>
@@ -97,15 +138,15 @@
   <h2>2-3. 「現在地」を意識する</h2>
   <p>ターミナルで一番大切なのは、<strong>「今、どのフォルダにいるか」</strong>です。エクスプローラーでは、開いているフォルダが画面に見えているので、意識しなくても分かります。ターミナルでは、文字でしか分かりません。</p>
   <p>現在地は、行の先頭に表示されます。この部分を<strong>プロンプト</strong>といいます。</p>
-<pre class="term"><span class="ps">PS C:\Users\taro&gt; </span><span class="out">← ここが現在地（C:\Users\taro にいる）</span></pre>
+<pre class="term"><span class="ps">PS C:\work&gt; </span><span class="out">← ここが現在地（C:\work にいる）</span></pre>
   <p>コマンドは、<strong>今いるフォルダに対して</strong>実行されます。たとえば <code>mkdir practice</code> は、今いるフォルダの中に <code>practice</code> フォルダを作ります。「どこにいるか分からなくなった」ときは、<code>pwd</code> を打てば確認できます。</p>
   <figure class="diagram">
     <svg class="d" viewBox="0 0 640 200" role="img" aria-label="cd で中へ入り、cd .. で戻る図">
       <defs><marker id="b3" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path class="arrowhead" d="M0 0 L10 5 L0 10 z"/></marker></defs>
       <rect class="b1" x="14" y="30" width="250" height="56" rx="10"/>
-      <text class="t-mono" x="139" y="64" text-anchor="middle" style="font-size:15px">C:\Users\taro</text>
+      <text class="t-mono" x="139" y="64" text-anchor="middle" style="font-size:16px">C:\work</text>
       <rect class="b2" x="376" y="110" width="250" height="56" rx="10"/>
-      <text class="t-mono" x="501" y="144" text-anchor="middle" style="font-size:15px">C:\Users\taro\practice</text>
+      <text class="t-mono" x="501" y="144" text-anchor="middle" style="font-size:16px">C:\work\practice</text>
       <path class="ln" d="M264 58 H500 V104" marker-end="url(#b3)"/>
       <text class="t-sm" x="380" y="48" text-anchor="middle">cd practice（中に入る）</text>
       <path class="ln" d="M376 138 H139 V92" marker-end="url(#b3)"/>
@@ -115,10 +156,14 @@
   </figure>
 
   <h2>2-4. 実際にやってみよう</h2>
-  <p>次の手順で、<code>practice</code> フォルダを作り、その中にファイルを作ります。ここで作る <code>practice</code> フォルダは、第3章以降でも使います。</p>
+  <p>次の手順で、学習用フォルダ <code>C:\work</code> を作り、その中に <code>practice</code> フォルダとファイルを作ります。ここで作るフォルダは、第3章以降でも使います。</p>
   <div class="box warn">
     <strong class="title">打つ前に確認</strong>
     入力モードを「半角英数」にしてください（第0章を参照）。コマンドと、その後ろの文字の間は<strong>半角スペース</strong>を1つ入れます。<code>cd..</code> のようにスペースがないと動きません。
+  </div>
+  <div class="box ok">
+    <strong class="title">演習は OneDrive の外で</strong>
+    この章の演習は、すべて <code>C:\work</code> の中で行います。デスクトップやドキュメントの中では行いません（第1章を参照）。
   </div>
 
   <h3>手順1：PowerShell を開き、今いる場所を確認する</h3>
@@ -130,69 +175,97 @@ Path
 ----
 C:\Users\taro
 </span></pre>
-  <p><code>C:\Users\自分の名前</code> と表示されれば OK です（<code>taro</code> の部分は、人によって違います）。</p>
+  <p>PowerShell を開いた直後は、自分のユーザーフォルダ（<code>C:\Users\自分の名前</code>）にいます（<code>taro</code> の部分は、人によって違います）。ここは演習には使いません。</p>
 
-  <h3>手順2：中身を見る</h3>
-<pre><code>ls</code></pre>
-  <p>今いるフォルダの中の、フォルダとファイルの一覧が出ます。エクスプローラーで同じフォルダを開いた時の中身と、見比べてみてください。</p>
-
-  <h3>手順3：フォルダを作る</h3>
-<pre><code>mkdir practice</code></pre>
-<pre class="term"><span class="ps">PS C:\Users\taro&gt; mkdir practice</span>
+  <h3>手順2：学習用フォルダ <code>C:\work</code> を作って、移動する</h3>
+<pre><code>mkdir C:\work
+cd C:\work</code></pre>
+<pre class="term"><span class="ps">PS C:\Users\taro&gt; mkdir C:\work</span>
 <span class="out">
-    Directory: C:\Users\taro
+    Directory: C:\
 
 Mode                 LastWriteTime         Length Name
 ----                 -------------         ------ ----
-d-----        2026/10/11     10:30                practice
+d-----        2026/10/11     10:30                work
+</span><span class="ps">PS C:\Users\taro&gt; cd C:\work</span>
+<span class="ps">PS C:\work&gt; </span></pre>
+  <p>プロンプトが <code>PS C:\work&gt;</code> に変わりました。<code>C:\work</code> のように、ドライブ（<code>C:</code>）から全部書いたパスは、<strong>今どこにいても使えます</strong>。</p>
+  <div class="box">
+    <strong class="title">「すでに存在します」と出たら</strong>
+    <code>work</code> フォルダがすでにある、という意味です。心配はいりません。そのまま次の <code>cd C:\work</code> に進んでください。<code>C:\work</code> を作れなかった場合は、第1章の「作れないときは」を見てください。
+  </div>
+  <!-- TODO: Win11実機で確認：C:\work 作成時の権限、既に存在する場合のメッセージ -->
+
+  <h3>手順3：中身を見る</h3>
+<pre><code>ls</code></pre>
+  <p>今いるフォルダの中の、フォルダとファイルの一覧が出ます。作ったばかりの <code>C:\work</code> は空なので、何も表示されません。</p>
+
+  <h3>手順4：フォルダを作る</h3>
+<pre><code>mkdir practice</code></pre>
+<pre class="term"><span class="ps">PS C:\work&gt; mkdir practice</span>
+<span class="out">
+    Directory: C:\work
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d-----        2026/10/11     10:31                practice
 </span></pre>
   <p>表示のイメージです。日付や時刻は、人によって違います。</p>
 
-  <h3>手順4：フォルダの中に入る</h3>
+  <h3>手順5：フォルダの中に入る</h3>
 <pre><code>cd practice</code></pre>
-<pre class="term"><span class="ps">PS C:\Users\taro&gt; cd practice</span>
-<span class="ps">PS C:\Users\taro\practice&gt; </span></pre>
-  <p>プロンプトが <code>C:\Users\taro\practice</code> に変わりました。現在地が移動した合図です。</p>
+<pre class="term"><span class="ps">PS C:\work&gt; cd practice</span>
+<span class="ps">PS C:\work\practice&gt; </span></pre>
+  <p>プロンプトが <code>C:\work\practice</code> に変わりました。現在地が移動した合図です。</p>
 
-  <h3>手順5：ファイルを作る</h3>
+  <h3>手順6：ファイルを作る</h3>
 <pre><code>New-Item memo.txt</code></pre>
-<pre class="term"><span class="ps">PS C:\Users\taro\practice&gt; New-Item memo.txt</span>
+<pre class="term"><span class="ps">PS C:\work\practice&gt; New-Item memo.txt</span>
 <span class="out">
-    Directory: C:\Users\taro\practice
+    Directory: C:\work\practice
 
 Mode                 LastWriteTime         Length Name
 ----                 -------------         ------ ----
--a----        2026/10/11     10:31              0 memo.txt
+-a----        2026/10/11     10:32              0 memo.txt
 </span></pre>
   <p><code>Length</code> が <code>0</code> なのは、中身が空のファイルだからです。</p>
 
-  <h3>手順6：エクスプローラーで確かめる</h3>
+  <h3>手順7：エクスプローラーで確かめる</h3>
 <pre><code>explorer .</code></pre>
-  <p>最後の <code>.</code>（ドット）を忘れないでください。エクスプローラーが開き、<code>practice</code> フォルダの中に <code>memo.txt</code> があるはずです。<strong>ターミナルで作ったものが、エクスプローラーにも見える</strong>ことを確認してください。</p>
+  <p>最後の <code>.</code>（ドット）を忘れないでください。エクスプローラーが開き、<code>practice</code> フォルダの中に <code>memo.txt</code> があるはずです。<strong>ターミナルで作ったものが、エクスプローラーにも見える</strong>ことを確認してください。確認できたら、エクスプローラーは閉じて構いません。</p>
 
-  <h3>手順7：VS Code で開く</h3>
-<pre><code>code .</code></pre>
-  <p>VS Code が起動し、<code>practice</code> フォルダが開きます。<code>memo.txt</code> に <code>hello</code> と書いて、保存してください（<code>Ctrl</code> + <code>S</code>）。</p>
+  <h3>手順8：ターミナルから、メモ帳を起動する</h3>
+<pre><code>notepad memo.txt</code></pre>
+  <p>メモ帳が開きます。<code>hello</code> と書いて、保存してください（<code>Ctrl</code> + <code>S</code>）。保存したら、メモ帳を閉じます。</p>
+  <div class="box">
+    <strong class="title">ターミナルからアプリを起動できる</strong>
+    <code>notepad</code> や <code>explorer</code> のように、アプリの名前を打つと、そのアプリが起動します。<code>notepad memo.txt</code> は「メモ帳で <code>memo.txt</code> を開いて」という指示です。メモ帳を開いたままでも、ターミナルに戻って、次のコマンドを打てます。
+  </div>
   <div class="box warn">
     <strong class="title">ここでは英語（半角）で書く</strong>
     Windows PowerShell では、日本語を含む文字ファイルを <code>cat</code> で表示すると、文字化けすることがあります。ファイルが壊れたわけではなく、表示の問題です。今回は半角の英語（<code>hello</code>）で試してください。
   </div>
-  <!-- TODO: Win11実機で確認：文字化けの有無（Windows PowerShell 5.1 と PowerShell 7 の違い）、code . の動作 -->
+  <!-- TODO: Win11実機で確認：notepad で新規ファイルが開く挙動、文字化けの有無（Windows PowerShell 5.1 と PowerShell 7 の違い） -->
 
-  <h3>手順8：中身をターミナルで見て、元の場所へ戻る</h3>
+  <h3>手順9：中身をターミナルで見て、ひとつ上へ戻る</h3>
 <pre><code>cat memo.txt
 cd ..</code></pre>
-<pre class="term"><span class="ps">PS C:\Users\taro\practice&gt; cat memo.txt</span>
+<pre class="term"><span class="ps">PS C:\work\practice&gt; cat memo.txt</span>
 <span class="out">hello</span>
-<span class="ps">PS C:\Users\taro\practice&gt; cd ..</span>
-<span class="ps">PS C:\Users\taro&gt; </span></pre>
-  <p>プロンプトが <code>C:\Users\taro</code> に戻れば完了です。</p>
+<span class="ps">PS C:\work\practice&gt; cd ..</span>
+<span class="ps">PS C:\work&gt; </span></pre>
+  <p>プロンプトが <code>C:\work</code> に戻れば完了です。メモ帳で書いた内容が、ターミナルでも読めました。</p>
+  <div class="box">
+    <strong class="title">次に PowerShell を開いたら</strong>
+    <code>cd C:\work</code> と打てば、学習用フォルダに移動できます。毎回、ここから始めてください。
+  </div>
 
   <h2>2-5. 便利な使い方</h2>
   <table>
     <tr><th>操作</th><th>効果</th></tr>
     <tr><td><code>Tab</code> キー</td><td>途中まで打った名前を、自動で補ってくれる。<code>cd pra</code> と打って <code>Tab</code> を押すと <code>cd practice</code> になる。打ち間違いも減る</td></tr>
     <tr><td><code>↑</code> キー</td><td>前に打ったコマンドを呼び出す。何度も押すと、さらに前のコマンドが出る</td></tr>
+    <tr><td><code>cd C:\work</code></td><td>今どこにいても、学習用フォルダに戻れる</td></tr>
     <tr><td><code>cls</code></td><td>画面をきれいにする（ファイルやフォルダは消えない）</td></tr>
   </table>
   <div class="box">
@@ -216,8 +289,8 @@ cd ..</code></pre>
     <p><code>pwd</code>。プロンプト（行の先頭）にも、現在地が表示されている。</p>
   </details>
   <details>
-    <summary>Q2. <code>C:\Users\taro\practice</code> にいるとき、<code>C:\Users\taro</code> に戻るコマンドは？</summary>
-    <p><code>cd ..</code>。（<code>cd</code> と <code>..</code> の間に、半角スペースを入れる）</p>
+    <summary>Q2. <code>C:\work\practice</code> にいるとき、<code>C:\work</code> に戻るコマンドは？</summary>
+    <p><code>cd ..</code>。（<code>cd</code> と <code>..</code> の間に、半角スペースを入れる）。<code>cd C:\work</code> でも戻れる。</p>
   </details>
   <details>
     <summary>Q3. ターミナルで作ったフォルダは、エクスプローラーで見えますか？</summary>
@@ -226,6 +299,10 @@ cd ..</code></pre>
   <details>
     <summary>Q4. <code>cd practice</code> が動かないとき、まず疑うことは？</summary>
     <p>打ち間違い。<code>cd</code> と <code>practice</code> の間の半角スペース、全角の文字や記号が混ざっていないか、<code>practice</code> フォルダがある場所（現在地）にいるか、を確認する。</p>
+  </details>
+  <details>
+    <summary>Q5. 演習を、デスクトップではなく <code>C:\work</code> で行うのはなぜですか？</summary>
+    <p>デスクトップなどは、OneDrive が自動で同期していることがあり、Git の記録とぶつかって問題が起きる原因になるため。</p>
   </details>
 
   <h2>話し合おう（月1回の集まり用）</h2>
