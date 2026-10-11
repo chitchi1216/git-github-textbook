@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>第0章 準備 | Git と GitHub 入門</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="site"><a href="index.html">Git と GitHub 入門</a></header>
+<main class="wrap">
+  <p class="meta">第0章 ／ 目安 40〜60分</p>
+  <h1>準備：アカウントとソフトを用意する</h1>
+
+  <div class="box">
+    <strong class="title">この章でできるようになること</strong>
+    <ul class="goals">
+      <li>GitHub のアカウントを作る</li>
+      <li>Git と VS Code をパソコンに入れる</li>
+      <li>Git に「自分は誰か」を教える</li>
+    </ul>
+  </div>
+
+  <h2>0-1. 登場するものを先に知る</h2>
+  <table>
+    <tr><th>名前</th><th>一言でいうと</th></tr>
+    <tr><td>Git</td><td>ファイルの変更履歴を記録する道具。自分のパソコンの中で動く</td></tr>
+    <tr><td>GitHub</td><td>Git の記録をインターネット上に置いて、みんなで共有するサービス</td></tr>
+    <tr><td>VS Code</td><td>文章やプログラムを書くための高機能なメモ帳（エディタ）</td></tr>
+  </table>
+  <p>「Git」と「GitHub」は名前が似ていますが、別のものです。この教材を通して、その違いも分かるようになります。</p>
+
+  <h2>0-2. GitHub アカウントを作る</h2>
+  <ol>
+    <li>ブラウザで <a href="https://github.com/signup">https://github.com/signup</a> を開く</li>
+    <li>メールアドレス、パスワード、ユーザー名を入力する</li>
+    <li>メールに届く確認コードを入力する</li>
+  </ol>
+  <div class="screenshot">（スクリーンショットを後で追加：サインアップ画面）</div>
+  <div class="box warn">
+    <strong class="title">ユーザー名は後から見られます</strong>
+    ユーザー名は共同開発で他のメンバーにも表示されます。本名でなくてもよいので、チームの中で誰か分かる名前にしてください。
+  </div>
+  <div class="box warn">
+    <strong class="title">パスワードは使い回さない</strong>
+    他のサービスと同じパスワードにしないでください。パスワード管理アプリの利用もおすすめです。
+  </div>
+
+  <h2>0-3. Git をインストールする</h2>
+  <ol>
+    <li><a href="https://git-scm.com/download/win">https://git-scm.com/download/win</a> を開き、64-bit 版のインストーラーをダウンロードする</li>
+    <li>ダウンロードしたファイルを開き、基本的に <strong>すべて初期設定のまま「Next」</strong> を押して進める</li>
+    <li>最後に「Install」→「Finish」</li>
+  </ol>
+  <!-- TODO: Win11実機で確認：インストーラーの設問と推奨選択 -->
+  <div class="screenshot">（スクリーンショットを後で追加：インストーラー）</div>
+
+  <h2>0-4. VS Code をインストールする</h2>
+  <ol>
+    <li><a href="https://code.visualstudio.com/">https://code.visualstudio.com/</a> からダウンロードする</li>
+    <li>インストール中に「PATH への追加」にチェックが入っていることを確認する</li>
+    <li>インストールできたら、スタートメニューから「Visual Studio Code」を起動する</li>
+  </ol>
+  <!-- TODO: Win11実機で確認：インストーラーのチェック項目名 -->
+
+  <h2>0-5. 「自分は誰か」を Git に教える</h2>
+  <p>Git は変更を記録するとき、<strong>誰が変更したか</strong>も一緒に記録します。そのため、最初に名前とメールアドレスを登録します。</p>
+  <p>ここで初めて、ターミナルを使います。詳しい説明は第2章で行うので、今は「書かれた通りに打つ」だけで大丈夫です。</p>
+  <ol>
+    <li>キーボードの <code>Windows</code> キーを押し、「PowerShell」と入力して Enter を押す</li>
+    <li>青か黒の画面が開くので、次の2行を<strong>1行ずつ</strong>入力して Enter を押す（「" "」の中は自分の名前に置き換える）</li>
+  </ol>
+<pre><code>git config --global user.name "あなたの名前"
+git config --global user.email "GitHubに登録したメールアドレス"</code></pre>
+  <p>何も表示されなければ成功です。続けて、設定を確認します。</p>
+<pre><code>git config --global --list</code></pre>
+  <p>入力した名前とメールアドレスが表示されれば完了です。</p>
+  <div class="box">
+    <strong class="title">うまくいかないとき</strong>
+    <code>git : 用語 'git' は、コマンドレット…として認識されません</code> と表示されたら、Git が見つかっていません。PowerShell をいったん閉じて開き直してからもう一度試してください。それでもだめなら、月1回の集まりかチャットで質問してください。
+  </div>
+  <!-- TODO: Win11実機で確認：エラーメッセージの文言 -->
+
+  <h2>確認クイズ</h2>
+  <details>
+    <summary>Q1. Git と GitHub の違いは何ですか？</summary>
+    <p>Git は変更履歴を記録する道具で、自分のパソコンの中で動く。GitHub は、その記録をインターネット上に置いて共有するサービス。</p>
+  </details>
+  <details>
+    <summary>Q2. なぜ最初に名前とメールアドレスを登録するのですか？</summary>
+    <p>Git が変更を記録するとき、誰が変更したかも一緒に記録するため。</p>
+  </details>
+
+  <h2>話し合おう（月1回の集まり用）</h2>
+  <ul>
+    <li>インストールや設定で、つまずいたところはありましたか？</li>
+    <li>GitHub のユーザー名はどんな基準でつけましたか？</li>
+  </ul>
+
+  <nav class="pager">
+    <a href="index.html">← 目次</a>
+    <a href="chapter-01.html">第1章 パソコンの仕組み →</a>
+  </nav>
+</main>
+</body>
+</html>
