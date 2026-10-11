@@ -7,7 +7,7 @@
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<header class="site"><a class="title" href="index.html">Git と GitHub 入門</a><span class="ver"><!--ver--><a href="https://github.com/chitchi1216/git-github-textbook/blob/main/CHANGELOG.md">版 0.4.13（ドラフト）</a> ・ 2026-10-11 ・ 作成者 <a href="https://github.com/chitchi1216">chitchi1216</a><!--/ver--></span></header>
+<header class="site"><a class="title" href="index.html">Git と GitHub 入門</a><span class="ver"><!--ver--><a href="https://github.com/chitchi1216/git-github-textbook/blob/main/CHANGELOG.md">版 0.4.14（ドラフト）</a> ・ 2026-10-11 ・ 作成者 <a href="https://github.com/chitchi1216">chitchi1216</a><!--/ver--></span></header>
 <main class="wrap">
   <p class="meta">第4章 ／ 目安 70〜90分</p>
   <h1>GitHub と連携する：送る・受け取る</h1>
@@ -344,11 +344,15 @@ third line</span></pre>
       <p>GitHub のリポジトリ画面で <code>hello.txt</code> をクリックし、右上の<strong>鉛筆のマーク</strong>（Edit）を押すと、ブラウザで編集できます。最後の行の下に、<code>fourth line</code> と入力します。編集後は、右上の青い <strong>「Commit changes...」</strong>を押し、出てくる画面で、次のように記録します。</p>
       <table>
         <tr><th>画面の項目</th><th>入力・選択するもの</th></tr>
-        <tr><td><code>Commit message</code></td><td>コミットのメッセージ。最初から <code>Update hello.txt</code> と入っています。そのままでも、<code>Add fourth line</code> などに直しても構いません</td></tr>
-        <tr><td><code>Extended description</code></td><td>くわしい説明（任意）。<strong>空のままで構いません</strong></td></tr>
+        <tr><td><code>Commit message</code></td><td>コミットのメッセージ。<strong>最初から、メッセージが入っています</strong>（GitHub が、変更の内容から提案してくれます。<code>Add fourth line to hello.txt</code> や <code>Update hello.txt</code> など）。内容が合っていれば、<strong>そのままで構いません</strong>。自分で書き直しても構いません</td></tr>
+        <tr><td><code>Extended description</code></td><td>くわしい説明（任意）。<strong>空のままで構いません</strong>（「Add an optional extended description…」という、薄い文字は、入力の例です）</td></tr>
         <tr><td><code>Commit directly to the main branch</code></td><td><strong>これを選んだまま</strong>にします（<code>main</code> に、直接記録する）。<code>Create a new branch for this commit and start a pull request</code> は、第6章で使うので、今回は選びません</td></tr>
       </table>
       <p>最後に、右下の青い<strong>「Commit changes」</strong>を押して、記録します。</p>
+      <figure class="shot">
+        <img src="images/ch04-commit-dialog.png" alt="Commit changes の画面。Commit message にメッセージが入り、Commit directly to the main branch が選ばれている" onerror="this.parentNode.classList.add('missing')">
+        <figcaption>「Commit changes...」を押すと出る画面。<strong>Commit message</strong> には、提案されたメッセージが入っています。<strong>Extended description</strong> は空のまま。<strong>「Commit directly to the main branch」</strong>が選ばれているのを確認して、右下の「Commit changes」を押します。「新しい枝を作って、pull request を始める」のほうは、選びません</figcaption>
+      </figure>
     </details>
     <details>
       <summary>こたえと解説</summary>

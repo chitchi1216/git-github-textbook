@@ -34,6 +34,7 @@
 | `ch04-repositories-new.png` | リポジトリの一覧の画面と、青い「New」ボタン（第4章） |
 | `ch04-new-repo.png` | 「Create a new repository」の画面（名前 `my-notes`、Private、Add README は Off）（第4章） |
 | `ch04-edit-file.png` | GitHub の画面で `hello.txt` を編集する画面（第4章のチャレンジ1） |
+| `ch04-commit-dialog.png` | GitHub の「Commit changes」の画面（第4章のチャレンジ1） |
 | `ch04-quick-setup.png` | 作成直後のリポジトリの画面（Quick setup。第4章） |
 | `ch04-repo-after-push.png` | `push` のあとの GitHub のリポジトリ画面（メールアドレスは塗りつぶし。第4章） |
 | `ch04-browser-auth.png` | 第4章 | 初めて `git push` したときに開く、ログイン・許可の画面 |
