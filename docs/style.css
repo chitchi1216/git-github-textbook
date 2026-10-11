@@ -96,3 +96,13 @@ figure.shot.missing::before {
 pre.term { background: #012456; color: #f2f2f2; border-radius: 8px; padding: 14px 16px; line-height: 1.6; }
 pre.term .ps { color: #f2f2f2; }
 pre.term .out { color: #c0d4ee; }
+
+@media (prefers-color-scheme: dark) {
+  .d .b1 { fill: #27406b; stroke: #8fb4ff; }
+  .d .b2 { fill: #22523a; stroke: #6fd08f; }
+  .d .b3 { fill: #5f4a17; stroke: #e8b04a; }
+  .d .b0 { fill: #313b48; stroke: #5b6877; }
+  .d .ln { stroke: #aab6c4; }
+  .d .arrowhead { fill: #aab6c4; }
+  .d .muted { fill: #b4bfcc; }
+}
