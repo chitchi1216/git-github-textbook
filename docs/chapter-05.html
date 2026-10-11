@@ -7,7 +7,7 @@
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<header class="site"><a class="title" href="index.html">Git と GitHub 入門</a><span class="ver"><!--ver--><a href="https://github.com/chitchi1216/git-github-textbook/blob/main/CHANGELOG.md">版 0.4.18（ドラフト）</a> ・ 2026-10-11 ・ 作成者 <a href="https://github.com/chitchi1216">chitchi1216</a><!--/ver--></span></header>
+<header class="site"><a class="title" href="index.html">Git と GitHub 入門</a><span class="ver"><!--ver--><a href="https://github.com/chitchi1216/git-github-textbook/blob/main/CHANGELOG.md">版 0.4.19（ドラフト）</a> ・ 2026-10-11 ・ 作成者 <a href="https://github.com/chitchi1216">chitchi1216</a><!--/ver--></span></header>
 <main class="wrap">
   <p class="meta">第5章 ／ 目安 70〜90分</p>
   <h1>ブランチ：作業を枝分かれさせる</h1>
@@ -96,6 +96,21 @@ git branch</code></pre>
   main</span></pre>
   <p><code>add-notes</code> という枝を作って、<strong>そこに移りました</strong>。<code>*</code> が <code>add-notes</code> に移っています。</p>
   <p class="etym">💡 <code>switch</code> は「切り替える」。<code>-c</code> は <strong>c</strong>reate（作る）の頭文字で、「作ってから、切り替える」という意味です。</p>
+  <div class="box warn">
+    <strong class="title">「a branch named 'add-notes' already exists」と出たら</strong>
+    <code>git switch -c add-notes</code> で、次のエラーが出ることがあります。
+<pre class="term"><span class="ps">PS C:\work\my-notes&gt; git switch -c add-notes</span>
+<span class="out">fatal: a branch named 'add-notes' already exists</span></pre>
+    「<code>add-notes</code> という名前のブランチが、すでにあります」という意味です。以前に、この手順を試して、作ってあったときに出ます。<strong>壊れてはいません。</strong>（<code>-c</code> は「新しく作る」なので、同じ名前があると、エラーになります。）
+    <p>まず、状況を確かめます。</p>
+<pre><code>git branch -v
+git log --oneline --graph --all</code></pre>
+    <ul>
+      <li><strong>合流済み</strong>のとき（<code>add-notes</code> が、<code>main</code> と同じコミットを指している）：<code>git branch -d add-notes</code> で片付けてから、もう一度 <code>git switch -c add-notes</code> を打ちます。</li>
+      <li><strong>まだ合流していない</strong>とき（<code>-d</code> が <code>not fully merged</code> と止める）：無理に消さずに、<strong>別の名前</strong>（たとえば <code>add-notes2</code>）で、作り直します。以降の <code>add-notes</code> は、<code>add-notes2</code> に読み替えてください。</li>
+    </ul>
+    すでにあるブランチに<strong>移るだけ</strong>なら、<code>-c</code> を付けずに、<code>git switch add-notes</code> と打ちます。
+  </div>
   <div class="box">
     <strong class="title">ブランチの名前の付け方</strong>
     名前には、<strong>半角の英数字とハイフン（<code>-</code>）</strong>を使います。スペースは使えません。「何をする枝か」が分かる名前にします（例：<code>add-notes</code>、<code>fix-typo</code>）。
