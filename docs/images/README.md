@@ -24,7 +24,6 @@
 | `ch00-powershell-open.png` | 第0章 | スタートメニューで「PowerShell」と入力した画面 |
 | `ch00-git-config.png` | 第0章 | PowerShell で `git config --global --list` を実行した画面（メールは隠す） |
 | `ch01-explorer-address-bar.png` | 第1章 | エクスプローラーのアドレスバーをクリックし、パスが文字で表示された画面 |
-| `ch01-explorer-extension.png` | 第1章 | 「表示」メニューで「ファイル名拡張子」にチェックを入れる画面 |
 | `ch02-explorer-vs-powershell.png` | 第2章 | 同じフォルダ（`practice`）を、エクスプローラーと PowerShell で並べた画面（アドレスバーとプロンプトが両方写るように） |
 | `ch02-input-mode.png` | 第0章・第2章 | 画面右下の入力モード表示（「A」と「あ」の両方）。半角英数の確認に使う |
 | `ch02-notepad.png` | 第2章 | PowerShell から `notepad memo.txt` を実行して、メモ帳が開いた画面（ターミナルとメモ帳が並ぶように） |
@@ -44,7 +43,7 @@
 | `ch00-github-profile.png` | GitHub のプロフィール画面（`chitchi1216`） |
 | `ch00-git-config.png` | `git config --global --list` の正しい状態（3行そろっている。マスク済み。第0章 0-10） |
 | `ch01-explorer-address-bar.png` | エクスプローラーのアドレスバー（パスが `¥` で表示される） |
-| `ch01-folder-options.png` | 「フォルダー オプション」の「表示」タブ（拡張子の設定） |
+| `ch01-folder-options.png` | 「フォルダー オプション」の「表示」タブ（赤枠：「登録されている拡張子は表示しない」にチェックを入れない） |
 | `ch02-input-mode.png` | 入力モード表示（「A」と「あ」） |
 | `ch04-browser-auth.png` | ブラウザの GitHub サインイン画面（第4章の認証） |
 | `ch00-powershell-open.png` | Windows の検索で「powershell」と入力した画面（第0章） |
@@ -59,3 +58,5 @@
 - 第4章: `ch04-new-repo.png`、`ch04-repo-after-push.png`、`ch04-edit-file.png`
 
 なお、`ch00-git-config-ng.png`（`user.email` の行がない失敗例）は、今は本文で使っていません。
+
+本文では使っていない画像：`ch01-explorer-extension.png`（拡張子が表示されたエクスプローラー）。
