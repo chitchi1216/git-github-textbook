@@ -151,3 +151,7 @@ p.etym { color: var(--muted); font-size: .92rem; border-left: 3px solid var(--bo
 .en { color: var(--muted); font-size: .85em; }
 
 table.cmds td.en-col { color: var(--muted); font-size: .88rem; }
+
+/* ---- ボタン風リンク ---- */
+a.btn { display: inline-block; background: var(--accent); color: #fff; text-decoration: none; font-weight: bold; padding: 10px 22px; border-radius: 8px; margin: .4em 0; }
+@media (prefers-color-scheme: dark) { a.btn { color: #0b1220; } }
