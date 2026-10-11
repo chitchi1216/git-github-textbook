@@ -115,3 +115,11 @@ pre.term .out { color: #c0d4ee; }
 
 table.ok-ng td.ok { color: var(--ok-border); font-weight: bold; }
 table.ok-ng td.ng { color: #d64545; font-weight: bold; }
+
+/* ---- コーヒーブレイク ---- */
+details.coffee { border: 1px solid var(--warn-border); background: var(--warn-bg); border-radius: 10px; padding: 8px 16px; margin: 1.6em 0; }
+details.coffee summary { cursor: pointer; font-weight: bold; }
+details.coffee summary .skip { font-weight: normal; color: var(--muted); font-size: .85rem; margin-left: .5em; }
+details.coffee[open] summary { margin-bottom: .6em; }
+details.coffee ol, details.coffee ul { padding-left: 1.4em; }
+details.coffee li { margin: .5em 0; }
