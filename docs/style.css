@@ -67,3 +67,32 @@ nav.pager { display: flex; justify-content: space-between; gap: 12px; margin-top
 .toc .desc { display: block; color: var(--muted); font-size: .88rem; }
 .toc li.soon a { color: var(--muted); pointer-events: none; }
 .tag { font-size: .75rem; border: 1px solid var(--border); border-radius: 999px; padding: 0 8px; margin-left: .6em; color: var(--muted); }
+
+/* ---- 図解 (SVG) ---- */
+figure.diagram svg { background: transparent; border: 1px solid var(--border); }
+.d text { fill: var(--fg); font-family: "Yu Gothic UI", "Meiryo", system-ui, sans-serif; font-size: 14px; }
+.d .t-lg { font-size: 18px; font-weight: bold; }
+.d .t-md { font-size: 15px; font-weight: bold; }
+.d .t-sm { font-size: 13px; }
+.d .t-mono { font-family: Consolas, "Cascadia Mono", monospace; font-size: 17px; }
+.d .muted { fill: var(--muted); }
+.d .b1 { fill: var(--accent-bg); stroke: var(--accent); stroke-width: 1.6; }
+.d .b2 { fill: var(--ok-bg); stroke: var(--ok-border); stroke-width: 1.6; }
+.d .b3 { fill: var(--warn-bg); stroke: var(--warn-border); stroke-width: 1.6; }
+.d .b0 { fill: var(--code-bg); stroke: var(--border); stroke-width: 1.4; }
+.d .ln { stroke: var(--muted); stroke-width: 1.8; fill: none; }
+.d .arrowhead { fill: var(--muted); }
+
+/* ---- スクリーンショット差し込み枠 ---- */
+figure.shot img { display: block; max-width: 100%; height: auto; margin: 0 auto; border: 1px solid var(--border); border-radius: 8px; }
+figure.shot.missing img { display: none; }
+figure.shot.missing::before {
+  content: "（スクリーンショットを準備中）";
+  display: block; border: 2px dashed var(--border); border-radius: 8px;
+  padding: 28px 12px; text-align: center; color: var(--muted); font-size: .9rem;
+}
+
+/* ---- ターミナル表示のイメージ ---- */
+pre.term { background: #012456; color: #f2f2f2; border-radius: 8px; padding: 14px 16px; line-height: 1.6; }
+pre.term .ps { color: #f2f2f2; }
+pre.term .out { color: #c0d4ee; }
