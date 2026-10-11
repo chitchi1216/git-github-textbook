@@ -47,14 +47,15 @@
 | `ch01-folder-options.png` | 「フォルダー オプション」の「表示」タブ（拡張子の設定） |
 | `ch02-input-mode.png` | 入力モード表示（「A」と「あ」） |
 | `ch04-browser-auth.png` | ブラウザの GitHub サインイン画面（第4章の認証） |
+| `ch00-powershell-open.png` | Windows の検索で「powershell」と入力した画面（第0章） |
+| `ch01-explorer-extension.png` | 拡張子が表示されているエクスプローラー（第1章） |
+| `ch02-explorer-vs-powershell.png` | エクスプローラーと PowerShell を並べた画面（第2章） |
+| `ch02-notepad.png` | メモ帳で `memo.txt` を開いた画面（第2章） |
 | `ch02-pwd-ls.png` | PowerShell で `pwd` と `ls` を打った画面（第2章と、第0章 0-10 で使用） |
 | `ch03-commit-editmsg.png` | `-m` なしの `git commit` で開く、メモ帳の画面（メールアドレスは塗りつぶし） |
 
 まだ必要な画像は、次のとおりです。
 
-- 第0章: `ch00-powershell-open.png`（スタートメニューで「PowerShell」と入力した画面。任意）
-- 第1章: `ch01-explorer-extension.png`（エクスプローラーの「表示」メニューで、ファイル名拡張子にチェックを入れる画面）
-- 第2章: `ch02-explorer-vs-powershell.png`（エクスプローラーと PowerShell を並べた画面）、`ch02-notepad.png`（`notepad memo.txt` でメモ帳が開いた画面）
 - 第4章: `ch04-new-repo.png`、`ch04-repo-after-push.png`、`ch04-edit-file.png`
 
 なお、`ch00-git-config-ng.png`（`user.email` の行がない失敗例）は、今は本文で使っていません。
