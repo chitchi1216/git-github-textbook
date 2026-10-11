@@ -7,7 +7,7 @@
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<header class="site"><a class="title" href="index.html">Git と GitHub 入門</a><span class="ver"><!--ver--><a href="https://github.com/chitchi1216/git-github-textbook/blob/main/CHANGELOG.md">版 0.4.8（ドラフト）</a> ・ 2026-10-11 ・ 作成者 <a href="https://github.com/chitchi1216">chitchi1216</a><!--/ver--></span></header>
+<header class="site"><a class="title" href="index.html">Git と GitHub 入門</a><span class="ver"><!--ver--><a href="https://github.com/chitchi1216/git-github-textbook/blob/main/CHANGELOG.md">版 0.4.9（ドラフト）</a> ・ 2026-10-11 ・ 作成者 <a href="https://github.com/chitchi1216">chitchi1216</a><!--/ver--></span></header>
 <main class="wrap">
   <p class="meta">第2章 ／ 目安 50〜70分</p>
   <h1>ターミナル入門</h1>
@@ -152,7 +152,10 @@
     </svg>
     <figcaption>アドレスバーに当たるものが、PowerShell では行の先頭の「プロンプト」</figcaption>
   </figure>
-  <!-- TODO: 実機のスクリーンショットに差し替える（images/ch02-explorer-vs-powershell.png） -->
+  <figure class="shot">
+    <img src="images/ch02-explorer-vs-powershell.png" alt="エクスプローラーと PowerShell を並べた実際の画面。どちらも C:\work\practice を表示している" onerror="this.parentNode.classList.add('missing')">
+    <figcaption>実際の画面の例。エクスプローラーと PowerShell で、<strong>同じ <code>C:\work\practice</code> の中身</strong>（<code>fruits.txt</code> と <code>memo.txt</code>）が見えています。エクスプローラーのアドレスバーは、<code>PC › (C:) › work › practice</code> のように<strong>矢印で区切って</strong>表示され（クリックすると、文字のパスに変わります）、タブには <code>C:¥work¥practice</code> と、<strong>「¥」で</strong>出ています。PowerShell 側は、<code>ls</code> の結果が、同じファイルを示しています</figcaption>
+  </figure>
 
   <h2>2-3. 「現在地」を意識する</h2>
   <p>ターミナルで一番大切なのは、<strong>「今、どのフォルダにいるか」</strong>です。エクスプローラーでは、開いているフォルダが画面に見えているので、意識しなくても分かります。ターミナルでは、文字でしか分かりません。</p>
@@ -261,7 +264,7 @@
   </div>
 
   <h3>手順1：PowerShell を開き、今いる場所を確認する</h3>
-  <p><code>Windows</code> キーを押し、「PowerShell」と入力して Enter。開いたら、次のコマンドを打って Enter を押します。</p>
+  <p><code>Windows</code> キーを押し、「PowerShell」と入力して、検索結果から<strong>「Windows PowerShell」</strong>を選んで Enter。（第0章を参照）開いたら、次のコマンドを打って Enter を押します。</p>
 <pre><code>pwd</code></pre>
 <pre class="term"><span class="ps">PS C:\Users\taro&gt; pwd</span>
 <span class="out">
@@ -337,6 +340,10 @@ Mode                 LastWriteTime         Length Name
   <h3>手順8：ターミナルから、メモ帳を起動する</h3>
 <pre><code>notepad memo.txt</code></pre>
   <p>メモ帳が開きます。<code>hello</code> と書いて、<strong>最後に <code>Enter</code> を押して改行</strong>してから、保存してください（<code>Ctrl</code> + <code>S</code>）。保存したら、メモ帳を閉じます。</p>
+  <figure class="shot">
+    <img src="images/ch02-notepad.png" alt="メモ帳で memo.txt を開いた画面。右下に UTF-8 と表示されている" onerror="this.parentNode.classList.add('missing')">
+    <figcaption><code>notepad memo.txt</code> で開いたメモ帳の例（この写真は、日本語の行と <code>second line</code> の行も書いてあります）。上に装飾のボタンが並んでいますが、<strong>使いません</strong>。右下の<strong>「UTF-8」</strong>は、保存するときの文字の形式で、あとの「文字化け」の話に関係します</figcaption>
+  </figure>
   <div class="box">
     <strong class="title">ターミナルからアプリを起動できる</strong>
     <code>notepad</code> や <code>explorer</code> のように、アプリの名前を打つと、そのアプリが起動します。<code>notepad memo.txt</code> は「メモ帳で <code>memo.txt</code> を開いて」という指示です。メモ帳を開いたままでも、ターミナルに戻って、次のコマンドを打てます。
