@@ -7,7 +7,7 @@
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<header class="site"><a class="title" href="index.html">Git と GitHub 入門</a><span class="ver"><!--ver--><a href="https://github.com/chitchi1216/git-github-textbook/blob/main/CHANGELOG.md">版 0.4.0（ドラフト）</a> ・ 2026-10-11 ・ 作成者 <a href="https://github.com/chitchi1216">chitchi1216</a><!--/ver--></span></header>
+<header class="site"><a class="title" href="index.html">Git と GitHub 入門</a><span class="ver"><!--ver--><a href="https://github.com/chitchi1216/git-github-textbook/blob/main/CHANGELOG.md">版 0.4.1（ドラフト）</a> ・ 2026-10-11 ・ 作成者 <a href="https://github.com/chitchi1216">chitchi1216</a><!--/ver--></span></header>
 <main class="wrap">
   <p class="meta">第0章 ／ 目安 50〜70分</p>
   <h1>はじめに・準備</h1>
@@ -259,7 +259,7 @@
   <p>ここで初めて、ターミナルを使います。詳しい説明は第2章で行うので、今は「書かれた通りに打つ」だけで大丈夫です。</p>
   <ol>
     <li>キーボードの <code>Windows</code> キーを押し、「PowerShell」と入力して Enter を押す</li>
-    <li>青か黒の画面が開く。これがターミナルです</li>
+    <li>タブの付いた窓（Windows Terminal）が開き、文字を打つ画面が出る。これがターミナルです（色は、設定によって人それぞれです）</li>
   </ol>
   <figure class="shot">
     <img src="images/ch00-powershell-open.png" alt="スタートメニューで PowerShell を検索した画面" onerror="this.parentNode.classList.add('missing')">
@@ -267,10 +267,15 @@
   </figure>
   <div class="box warn">
     <strong class="title">コマンドは必ず「半角英数」で打つ</strong>
-    日本語入力がオン（「あ」の状態）のままだと、スペースや記号（「"」「-」）が<strong>全角</strong>になり、コマンドが動きません。打つ前に <code>半角/全角</code> キーを押し、画面右下の入力モード表示が「A」になっていることを確認してください。名前の部分に日本語を入れるときだけ、一時的に日本語入力にします。
+    日本語入力がオン（「あ」の状態）のままだと、スペースや記号（「"」「-」）が<strong>全角</strong>になり、コマンドが動きません。打つ前に <code>半角/全角</code> キーを押し、画面右下（時計の左あたり）に、「A」か「あ」と表示されています。「A」になっていることを確認してください。名前の部分に日本語を入れるときだけ、一時的に日本語入力にします。
   </div>
-  <!-- TODO: Win11実機で確認：入力モード表示の位置と見た目 -->
-  <p>次の3行を<strong>1行ずつ</strong>入力して Enter を押します（「" "」の中は自分の名前とメールアドレスに置き換える）。3行目は、そのまま打ちます。</p>
+  <p>次の3行を、<strong>1行ずつ</strong>入力して Enter を押します。<strong>1行目と2行目は、中身が違います。</strong>取り違えないでください。</p>
+  <table>
+    <tr><th>行</th><th>設定する項目</th><th>「 」の中に入れるもの</th></tr>
+    <tr><td style="white-space:nowrap">1行目</td><td><code>user.name</code></td><td><strong>名前</strong>（ニックネームでよい。例：<code>chitchi1216</code>）。<strong>メールアドレスではありません</strong></td></tr>
+    <tr><td style="white-space:nowrap">2行目</td><td><code>user.email</code></td><td><strong>メールアドレス</strong>（GitHub に登録したもの）</td></tr>
+    <tr><td style="white-space:nowrap">3行目</td><td><code>core.editor</code></td><td>そのまま（<code>notepad</code>）</td></tr>
+  </table>
 <pre><code>git config --global user.name "あなたの名前"
 git config --global user.email "GitHubに登録したメールアドレス"
 git config --global core.editor notepad</code></pre>
@@ -284,6 +289,18 @@ user.email=chitchi1216@example.com
 core.editor=notepad</span></pre>
     <figcaption>表示のイメージ。名前とメールアドレスは、自分で入力した内容になる</figcaption>
   </figure>
+  <div class="box warn">
+    <strong class="title">3行そろっているか、確かめる</strong>
+    <code>git config --global --list</code> の表示に、<code>user.name=…</code>、<code>user.email=…</code>、<code>core.editor=notepad</code> の<strong>3行すべて</strong>があることを確認してください（ほかの行が混ざっていても構いません）。
+    <ul>
+      <li><code>user.name</code> に<strong>メールアドレスが入っている</strong>、または <code>user.email</code> の行が<strong>ない</strong>ときは、1行目と2行目を取り違えています。<strong>正しい内容で、もう一度同じコマンドを打てば、上書きされます。</strong></li>
+      <li><code>user.email</code> がないと、第3章の <code>commit</code> のとき、<code>Committer: … configured automatically</code>（「自動で設定されました」）という警告が出ます。記録は、できますが、名前やメールが正しく残りません。</li>
+    </ul>
+  </div>
+  <div class="box">
+    <strong class="title">メールアドレスを、公開したくないとき</strong>
+    記録（コミット）には、<code>user.email</code> のメールアドレスが残り、公開リポジトリでは、誰でも見られます。見せたくないときは、GitHub の <strong>Settings → Emails</strong> で、「Keep my email addresses private」をオンにすると、<code>…@users.noreply.github.com</code> という<strong>公開用の代わりのアドレス</strong>が表示されます。それを <code>user.email</code> に設定します。
+  </div>
   <figure class="shot">
     <img src="images/ch00-git-config.png" alt="git config --global --list を実行した画面" onerror="this.parentNode.classList.add('missing')">
     <figcaption>実際の実行画面の例（メールアドレスは隠してあります）</figcaption>
@@ -296,7 +313,7 @@ core.editor=notepad</span></pre>
     <strong class="title">うまくいかないとき</strong>
     <code>git : 用語 'git' は、コマンドレット…として認識されません</code> と表示されたら、Git が見つかっていません。PowerShell をいったん閉じて開き直してからもう一度試してください。それでもだめなら、月1回の集まりかチャットで質問してください。
   </div>
-  <!-- TODO: Win11実機で確認：エラーメッセージの文言、core.editor=notepad でコミット時にメモ帳が開くか -->
+  <!-- TODO: Win11実機で確認：Git 未インストール時のエラー文言、core.editor=notepad で、-m なしの commit のときメモ帳が開くか -->
 
   <h2>確認クイズ</h2>
   <details>
