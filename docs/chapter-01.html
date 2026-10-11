@@ -49,11 +49,42 @@
     </svg>
     <figcaption>フォルダ（📁）の中にフォルダやファイル（📄）が入っている。いちばん上が C ドライブ</figcaption>
   </figure>
+  <h3>OneDrive と「学習用フォルダ」</h3>
+  <p>Windows 11 では、<strong>OneDrive</strong>（ワンドライブ）というサービスが、「デスクトップ」「ドキュメント」「ピクチャ」の中身を自動でインターネット上にバックアップしていることがあります。この場合、これらのフォルダの実体は <code>C:\Users\taro\OneDrive\…</code> の中に移っています。</p>
+  <figure class="diagram">
+    <svg class="d" viewBox="0 0 640 230" role="img" aria-label="OneDrive の対象になりうるフォルダと、学習用フォルダ C:\work の対比図">
+      <rect class="b0" x="10" y="20" width="370" height="196" rx="12"/>
+      <text class="t-md" x="195" y="48" text-anchor="middle">C:\Users\taro\ の中</text>
+      <rect class="b3" x="30" y="66" width="330" height="40" rx="8"/>
+      <text class="t-sm" x="46" y="91">📁 Desktop（デスクトップ）　☁</text>
+      <rect class="b3" x="30" y="114" width="330" height="40" rx="8"/>
+      <text class="t-sm" x="46" y="139">📁 Documents（ドキュメント）　☁</text>
+      <rect class="b3" x="30" y="162" width="330" height="40" rx="8"/>
+      <text class="t-sm" x="46" y="187">📁 Pictures（ピクチャ）　☁</text>
+      <text class="t-sm muted" x="195" y="12" text-anchor="middle">☁ ＝ OneDrive が自動で同期していることがある</text>
+      <rect class="b2" x="420" y="20" width="210" height="196" rx="12"/>
+      <text class="t-lg" x="525" y="62" text-anchor="middle">📁 C:\work</text>
+      <text class="t-md" x="525" y="96" text-anchor="middle">学習用フォルダ</text>
+      <text class="t-sm" x="525" y="126" text-anchor="middle">OneDrive の対象外</text>
+      <text class="t-sm" x="525" y="148" text-anchor="middle">パスが短く、日本語を</text>
+      <text class="t-sm" x="525" y="168" text-anchor="middle">含まない</text>
+      <text class="t-sm muted" x="525" y="198" text-anchor="middle">（第2章で作ります）</text>
+    </svg>
+    <figcaption>演習は、OneDrive の影響を受けない <code>C:\work</code> で行う</figcaption>
+  </figure>
   <div class="box warn">
-    <strong class="title">「デスクトップ」「ドキュメント」の場所は人によって違う</strong>
-    OneDrive でバックアップを有効にしていると、デスクトップやドキュメントの実体が <code>C:\Users\taro\OneDrive\…</code> の中に移っていることがあります。この教材の演習では、場所の違いに左右されないよう、自分のユーザーフォルダ（<code>C:\Users\taro</code>）の直下を使います。
+    <strong class="title">演習は OneDrive の外で行います</strong>
+    Git は、変更の記録を <code>.git</code> という隠しフォルダに、小さなファイルをたくさん作って保存します。これが OneDrive の同期と重なると、同期の競合が起きたり、記録が壊れる原因になったりすることがあります。そのため、この教材の演習は、すべて <strong>OneDrive の外にある学習用フォルダ <code>C:\work</code></strong> で行います。デスクトップやドキュメントの中では行わないでください。
   </div>
-  <!-- TODO: Win11実機で確認：OneDrive 設定時のフォルダの実体 -->
+  <div class="box">
+    <strong class="title">OneDrive の中にいるか、確かめるには</strong>
+    パスの中に <code>OneDrive</code> という文字があれば、OneDrive の中です。エクスプローラーで、フォルダやファイルの横に雲のマークが付いていても、同期の対象です。<code>C:\work</code> のような、<code>C:\Users</code> の外のフォルダには付きません。
+  </div>
+  <div class="box">
+    <strong class="title"><code>C:\work</code> を作れないときは</strong>
+    会社や学校のパソコンなどで <code>C:\work</code> を作れない場合は、<code>C:\Users\自分の名前\work</code> でも構いません（デスクトップやドキュメントの<strong>外</strong>に作ります）。その場合は、以降の <code>C:\work</code> を、自分のフォルダに読み替えてください。
+  </div>
+  <!-- TODO: Win11実機で確認：OneDrive 同期状態のアイコン、C:\work を標準ユーザーで作成できるか -->
 
   <h2>1-2. パス：ファイルの住所</h2>
   <p>ファイルやフォルダの場所を文字で表したものを<strong>パス</strong>といいます。住所と同じで、一番大きな単位から順にたどります。</p>
@@ -187,7 +218,7 @@
     <svg class="d" viewBox="0 0 560 250" role="img" aria-label="アプリ・OS・部品の層の図">
       <defs><marker id="a4" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="arrowhead" d="M0 0 L10 5 L0 10 z"/></marker></defs>
       <rect class="b1" x="20" y="16" width="160" height="52" rx="10"/><text class="t-md" x="100" y="48" text-anchor="middle">ブラウザ</text>
-      <rect class="b1" x="200" y="16" width="160" height="52" rx="10"/><text class="t-md" x="280" y="48" text-anchor="middle">VS Code</text>
+      <rect class="b1" x="200" y="16" width="160" height="52" rx="10"/><text class="t-md" x="280" y="48" text-anchor="middle">メモ帳</text>
       <rect class="b1" x="380" y="16" width="160" height="52" rx="10"/><text class="t-md" x="460" y="48" text-anchor="middle">エクスプローラー</text>
       <rect class="b3" x="20" y="92" width="520" height="56" rx="10"/>
       <text class="t-md" x="280" y="116" text-anchor="middle">OS（Windows 11）</text>
@@ -203,7 +234,7 @@
     <figcaption>アプリは OS にお願いして、部品を動かしてもらう</figcaption>
   </figure>
   <p><strong>OS</strong>（オペレーティングシステム）は、パソコン全体の管理役です。この教材では Windows 11 のことです。画面の表示、ファイルの管理、キーボードやマウスの受付などを担当します。</p>
-  <p><strong>アプリ</strong>（Word、ブラウザ、VS Code など）は、OS にお願いしてファイルを読み書きしたり、画面に表示したりして動きます。エクスプローラーも、ファイルを見せてくれるアプリの一つです。</p>
+  <p><strong>アプリ</strong>（Word、ブラウザ、メモ帳など）は、OS にお願いしてファイルを読み書きしたり、画面に表示したりして動きます。エクスプローラーも、ファイルを見せてくれるアプリの一つです。</p>
 
   <h2>1-4. プログラムとソースコード</h2>
   <p>アプリの正体は<strong>プログラム</strong>です。プログラムは、人間が書いた「ソースコード」から作られます。そして、<strong>ソースコードは、ただのテキストファイル</strong>です。メモ帳で開ける文字の並びで、特別なものではありません。</p>
