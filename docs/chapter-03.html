@@ -7,7 +7,7 @@
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<header class="site"><a class="title" href="index.html">Git と GitHub 入門</a><span class="ver"><!--ver--><a href="https://github.com/chitchi1216/git-github-textbook/blob/main/CHANGELOG.md">版 0.4.1（ドラフト）</a> ・ 2026-10-11 ・ 作成者 <a href="https://github.com/chitchi1216">chitchi1216</a><!--/ver--></span></header>
+<header class="site"><a class="title" href="index.html">Git と GitHub 入門</a><span class="ver"><!--ver--><a href="https://github.com/chitchi1216/git-github-textbook/blob/main/CHANGELOG.md">版 0.4.2（ドラフト）</a> ・ 2026-10-11 ・ 作成者 <a href="https://github.com/chitchi1216">chitchi1216</a><!--/ver--></span></header>
 <main class="wrap">
   <p class="meta">第3章 ／ 目安 60〜80分</p>
   <h1>Git の基本：記録をつくる</h1>
@@ -133,9 +133,10 @@ nothing to commit (create/copy files and use "git add" to track)</span></pre>
   </table>
 
   <h3>手順4：ファイルを作る</h3>
-  <p>メモ帳で、<code>hello.txt</code> を作ります。</p>
-<pre><code>notepad hello.txt</code></pre>
-  <p>「新しいファイルを作成しますか？」と聞かれたら「はい」。<code>hello git</code> と書き、<strong>最後に Enter で改行</strong>して保存（<code>Ctrl</code> + <code>S</code>）、メモ帳を閉じます。もう一度、状態を見ます。</p>
+  <p>第2章で学んだ方法で、空のファイルを作り、メモ帳で開いて書きます。</p>
+<pre><code>New-Item hello.txt
+notepad hello.txt</code></pre>
+  <p>メモ帳が開いたら、<code>hello git</code> と書き、<strong>最後に Enter で改行</strong>して保存（<code>Ctrl</code> + <code>S</code>）、メモ帳を閉じます。もう一度、状態を見ます。</p>
 <pre><code>git status</code></pre>
 <pre class="term"><span class="ps">PS C:\work\my-notes&gt; git status</span>
 <span class="out">On branch main
@@ -176,6 +177,18 @@ Changes to be committed:
     <strong class="title">メッセージは、まず英語（半角）で</strong>
     この章では、メッセージを英語で書きます。日本語のメッセージも、多くの環境では、そのまま使えて、正しく表示されます（チャレンジ3で試します）。ただし、環境によっては、<strong>表示だけ</strong>文字化けすることがあります（記録そのものは壊れません）。
   </div>
+  <div class="box warn">
+    <strong class="title"><code>-m</code> を付け忘れると</strong>
+    <code>-m</code> を付けずに、<code>git commit "メッセージ"</code> と打つと、次のエラーになります。
+<pre class="term"><span class="ps">PS C:\work\my-notes&gt; git commit "testcommit"</span>
+<span class="out">error: pathspec 'testcommit' did not match any file(s) known to git</span></pre>
+    「<code>testcommit</code> というファイルは、見つかりません」という意味です。Git は、<code>-m</code> がないと、メッセージを<strong>ファイルの名前</strong>だと思ってしまいます。<code>git commit -m "メッセージ"</code> と、<strong>メッセージの前に <code>-m</code></strong> を付けて、打ち直してください。
+    <ul>
+      <li>変更が何もないときに、<code>git commit</code> だけ打つと、<code>nothing to commit, working tree clean</code>（記録するものがない）と出ます。壊れてはいません。</li>
+      <li>変更を <code>add</code> したあとで、<code>-m</code> なしの <code>git commit</code> を打つと、<strong>メモ帳が開きます</strong>（第0章で、エディタをメモ帳にしたためです）。1行目に、メッセージを書いて、保存して閉じると、記録されます。<strong>何も書かずに閉じる</strong>と、<code>Aborting commit due to empty commit message.</code>（メッセージが空なので、中止）と出て、記録されません。これも、壊れてはいません。</li>
+    </ul>
+  </div>
+  <!-- TODO: Win11実機で確認：-m なしの git commit でメモ帳が開き、保存して閉じると記録されること -->
   <div class="box warn">
     <strong class="title">「Committer: … configured automatically」と出たら</strong>
     コミットのあとに、次のような警告が出ることがあります。

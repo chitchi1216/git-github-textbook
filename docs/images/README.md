@@ -33,3 +33,18 @@
 | `ch04-browser-auth.png` | 第4章 | 初めて `git push` したときに開く、ログイン・許可の画面 |
 | `ch04-edit-file.png` | 第4章 | GitHub の画面で `hello.txt` を編集して、「Commit changes」を押す画面 |
 
+## 追加済みの画像
+
+次の画像は、実機の画面から作成して、`docs/images/` に入っています。WSL のパス、メールアドレスは、黒く塗りつぶしてあります。
+
+| ファイル名 | 内容 |
+|---|---|
+| `ch00-git-installer.png` | Git のインストーラーの最初の画面 |
+| `ch00-github-profile.png` | GitHub のプロフィール画面（`chitchi1216`） |
+| `ch00-git-config-ng.png` | `git config --global --list` で `user.email` の行がない状態の例（マスク済み） |
+| `ch01-explorer-address-bar.png` | エクスプローラーのアドレスバー（パスが `¥` で表示される） |
+| `ch01-folder-options.png` | 「フォルダー オプション」の「表示」タブ（拡張子の設定） |
+| `ch02-input-mode.png` | 入力モード表示（「A」と「あ」） |
+
+まだ必要な画像は、上の表の「`ch00-github-signup.png`」「`ch00-powershell-open.png`」「`ch00-git-config.png`（3行そろった正しい状態）」「`ch01-explorer-extension.png`」「`ch02-explorer-vs-powershell.png`」「`ch02-notepad.png`」と、第4章の4枚です。
+

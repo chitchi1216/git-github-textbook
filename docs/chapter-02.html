@@ -7,7 +7,7 @@
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<header class="site"><a class="title" href="index.html">Git と GitHub 入門</a><span class="ver"><!--ver--><a href="https://github.com/chitchi1216/git-github-textbook/blob/main/CHANGELOG.md">版 0.4.1（ドラフト）</a> ・ 2026-10-11 ・ 作成者 <a href="https://github.com/chitchi1216">chitchi1216</a><!--/ver--></span></header>
+<header class="site"><a class="title" href="index.html">Git と GitHub 入門</a><span class="ver"><!--ver--><a href="https://github.com/chitchi1216/git-github-textbook/blob/main/CHANGELOG.md">版 0.4.2（ドラフト）</a> ・ 2026-10-11 ・ 作成者 <a href="https://github.com/chitchi1216">chitchi1216</a><!--/ver--></span></header>
 <main class="wrap">
   <p class="meta">第2章 ／ 目安 50〜70分</p>
   <h1>ターミナル入門</h1>
@@ -98,13 +98,13 @@
     <tr><td>ひとつ上のフォルダに戻る</td><td>「↑」ボタンを押す</td><td><code>cd ..</code></td></tr>
     <tr><td>学習用フォルダへ移動する</td><td>アドレスバーに <code>C:\work</code> と入力して Enter</td><td><code>cd C:\work</code></td></tr>
     <tr><td>新しいフォルダを作る</td><td>右クリック → 新規作成 → フォルダー</td><td><code>mkdir フォルダ名</code></td></tr>
-    <tr><td>空のテキストファイルを作る</td><td>右クリック → 新規作成 → テキスト ドキュメント</td><td><code>New-Item ファイル名.txt</code></td></tr>
+    <tr><td>空のテキストファイルを作る</td><td>右クリック → 新規作成 → テキスト ドキュメント（確認の画面は出ず、<strong>すぐにファイルができ、名前を変えられる状態</strong>になる）</td><td><code>New-Item ファイル名.txt</code></td></tr>
     <tr><td>ファイルを編集する</td><td>ダブルクリックで、メモ帳で開く</td><td><code>notepad ファイル名.txt</code></td></tr>
     <tr><td>ファイルの中身を見る</td><td>ダブルクリックで開く</td><td><code>cat ファイル名.txt</code></td></tr>
     <tr><td>今のフォルダをエクスプローラーで開く</td><td>（もともとエクスプローラーなので不要）</td><td><code>explorer .</code></td></tr>
     <tr><td>画面をきれいにする</td><td>—</td><td><code>cls</code></td></tr>
   </table>
-  <!-- TODO: Win11実機で確認：右クリックメニューの文言、ダブルクリックでメモ帳が開くか -->
+  <!-- TODO: Win11実機で確認：右クリックメニューの正確な項目名、ダブルクリックでメモ帳が開くか -->
   <p>表にある <code>.</code>（ドット1つ）は「今いるフォルダ」、<code>..</code>（ドット2つ）は「ひとつ上のフォルダ」を表す、特別な書き方です。</p>
 
   <h3>コマンドの名前は、英語の省略形</h3>
@@ -288,7 +288,6 @@ d-----        2026/10/11     10:30                work
 <pre class="term"><span class="out">mkdir : 指定された名前 C:\work の項目は既に存在します。</span></pre>
     これは、<code>work</code> フォルダがすでにある、という意味です。心配はいりません。そのまま次の <code>cd C:\work</code> に進んでください。<code>C:\work</code> を作れなかった場合は、第1章の「作れないときは」を見てください。
   </div>
-  <!-- TODO: Win11実機で確認：C:\work を、新規に作成できるか（権限） -->
 
   <h3>手順3：中身を見る</h3>
 <pre><code>ls</code></pre>
@@ -333,7 +332,7 @@ Mode                 LastWriteTime         Length Name
 
   <h3>手順8：ターミナルから、メモ帳を起動する</h3>
 <pre><code>notepad memo.txt</code></pre>
-  <p>メモ帳が開きます（「新しいファイルを作成しますか？」と聞かれたら、「はい」）。<code>hello</code> と書いて、<strong>最後に <code>Enter</code> を押して改行</strong>してから、保存してください（<code>Ctrl</code> + <code>S</code>）。保存したら、メモ帳を閉じます。</p>
+  <p>メモ帳が開きます。<code>hello</code> と書いて、<strong>最後に <code>Enter</code> を押して改行</strong>してから、保存してください（<code>Ctrl</code> + <code>S</code>）。保存したら、メモ帳を閉じます。</p>
   <div class="box">
     <strong class="title">ターミナルからアプリを起動できる</strong>
     <code>notepad</code> や <code>explorer</code> のように、アプリの名前を打つと、そのアプリが起動します。<code>notepad memo.txt</code> は「メモ帳で <code>memo.txt</code> を開いて」という指示です。メモ帳を開いたままでも、ターミナルに戻って、次のコマンドを打てます。
@@ -345,7 +344,6 @@ Mode                 LastWriteTime         Length Name
 <pre><code>cat memo.txt -Encoding UTF8</code></pre>
     この章の手順では、半角の英語（<code>hello</code>）だけを使うので、影響はありません。
   </div>
-  <!-- TODO: Win11実機で確認：notepad で、存在しないファイルを開いたときの「新しいファイルを作成しますか？」の文言 -->
 
   <h3>手順9：中身をターミナルで見て、ひとつ上へ戻る</h3>
 <pre><code>cat memo.txt
