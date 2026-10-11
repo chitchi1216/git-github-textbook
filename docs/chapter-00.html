@@ -135,6 +135,11 @@
     <img src="images/ch00-powershell-open.png" alt="スタートメニューで PowerShell を検索した画面" onerror="this.parentNode.classList.add('missing')">
     <figcaption>Windows キーを押して「PowerShell」と入力した画面</figcaption>
   </figure>
+  <div class="box warn">
+    <strong class="title">コマンドは必ず「半角英数」で打つ</strong>
+    日本語入力がオン（「あ」の状態）のままだと、スペースや記号（「"」「-」）が<strong>全角</strong>になり、コマンドが動きません。打つ前に <code>半角/全角</code> キーを押し、画面右下の入力モード表示が「A」になっていることを確認してください。名前の部分に日本語を入れるときだけ、一時的に日本語入力にします。
+  </div>
+  <!-- TODO: Win11実機で確認：入力モード表示の位置と見た目 -->
   <p>次の2行を<strong>1行ずつ</strong>入力して Enter を押します（「" "」の中は自分の名前とメールアドレスに置き換える）。</p>
 <pre><code>git config --global user.name "あなたの名前"
 git config --global user.email "GitHubに登録したメールアドレス"</code></pre>

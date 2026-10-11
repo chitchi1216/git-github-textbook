@@ -1,3 +1,9 @@
+/* 日本語フォントは「\」を「¥」の形で描くことがあるため、「\」だけ別フォントで描く */
+@font-face {
+  font-family: "bs-fix";
+  src: local("Consolas"), local("Cascadia Mono"), local("Segoe UI"), local("Arial");
+  unicode-range: U+005C;
+}
 :root {
   --bg: #ffffff;
   --fg: #1f2933;
@@ -31,7 +37,7 @@ body {
   margin: 0;
   background: var(--bg);
   color: var(--fg);
-  font-family: "Yu Gothic UI", "Meiryo", system-ui, sans-serif;
+  font-family: "bs-fix", "Yu Gothic UI", "Meiryo", system-ui, sans-serif;
   line-height: 1.85;
 }
 .wrap { max-width: 760px; margin: 0 auto; padding: 24px 16px 64px; }
@@ -70,7 +76,7 @@ nav.pager { display: flex; justify-content: space-between; gap: 12px; margin-top
 
 /* ---- 図解 (SVG) ---- */
 figure.diagram svg { background: transparent; border: 1px solid var(--border); }
-.d text { fill: var(--fg); font-family: "Yu Gothic UI", "Meiryo", system-ui, sans-serif; font-size: 14px; }
+.d text { fill: var(--fg); font-family: "bs-fix", "Yu Gothic UI", "Meiryo", system-ui, sans-serif; font-size: 14px; }
 .d .t-lg { font-size: 18px; font-weight: bold; }
 .d .t-md { font-size: 15px; font-weight: bold; }
 .d .t-sm { font-size: 13px; }
@@ -106,3 +112,6 @@ pre.term .out { color: #c0d4ee; }
   .d .arrowhead { fill: #aab6c4; }
   .d .muted { fill: #b4bfcc; }
 }
+
+table.ok-ng td.ok { color: var(--ok-border); font-weight: bold; }
+table.ok-ng td.ng { color: #d64545; font-weight: bold; }
