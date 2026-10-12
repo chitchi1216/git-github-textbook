@@ -69,4 +69,4 @@
 
 まだ必要な画像は、ありません（第4章まで、すべてそろいました）。
 
-本文では使っていない画像：`ch01-explorer-extension.png`（拡張子が表示されたエクスプローラー）、`ch05-diary-terminal.png` と `ch05-diary-github.png`（第5章の、最初に撮った `diary` の画面。`.gitignore` の書き間違いが写っていたため、`diary2` で撮り直した）。
+本文では使っていない画像：`ch01-explorer-extension.png`（拡張子が表示されたエクスプローラー）。
