@@ -7,7 +7,7 @@
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<header class="site"><a class="title" href="index.html">Git と GitHub 入門</a><span class="ver"><!--ver--><a href="https://github.com/chitchi1216/git-github-textbook/blob/main/CHANGELOG.md">版 0.5.2（ドラフト）</a> ・ 2026-10-12 ・ 作成者 <a href="https://github.com/chitchi1216">chitchi1216</a><!--/ver--></span></header>
+<header class="site"><a class="title" href="index.html">Git と GitHub 入門</a><span class="ver"><!--ver--><a href="https://github.com/chitchi1216/git-github-textbook/blob/main/CHANGELOG.md">版 0.5.3（ドラフト）</a> ・ 2026-10-12 ・ 作成者 <a href="https://github.com/chitchi1216">chitchi1216</a><!--/ver--></span></header>
 <main class="wrap">
   <p class="meta">第1章 ／ 目安 40〜60分</p>
   <h1>パソコンの仕組み</h1>
@@ -157,6 +157,29 @@
   <div class="box warn">
     <strong class="title">全角の「￥」が入ってしまうとき</strong>
     日本語入力がオン（「あ」の状態）だと、¥ キーを押すと、<strong>全角の「￥」が入ります</strong>。コマンドやパスを打つときは、<strong>半角/全角キーを押して、入力モードを「A」（半角英数）にしてから</strong>打ってください。画面右下の入力モード表示で確認できます。
+  </div>
+
+  <h3>「/」（スラッシュ）でも書ける</h3>
+  <p>この教材では、Windows のふつうの書き方に合わせて、パスを <code>C:\work\practice</code> のように「\」で書きます。でも実は、第2章から使う <strong>PowerShell</strong> や、第3章から使う <strong>Git</strong> では、<strong>「/」（スラッシュ）で区切っても動きます</strong>。</p>
+<pre><code>cd C:\work\practice     ← この教材の書き方
+cd C:/work/practice     ← これでも同じ場所に移動できる
+cd C:/work\practice     ← 混ぜても動く（でも、読みにくいのでおすすめしない）</code></pre>
+  <p>Mac や Linux ではパスを「/」で区切るため、ネットの資料や Git の説明には「/」のパスがよく出てきます。また、Git が表示するパスも、Windows で使っていても <code>docs/index.html</code> のように「/」です。<strong>「/」で書かれていても、そのまま使えることが多い</strong>と知っておくと、あわてずにすみます。</p>
+  <table class="ok-ng">
+    <tr><th>見た目</th><th>名前</th><th>パスやコマンドで使える？</th></tr>
+    <tr><td>/</td><td>スラッシュ（半角）</td><td class="ok">PowerShell や Git では使える（下の注意も読む）</td></tr>
+    <tr><td>／</td><td>スラッシュ（全角）。別の文字</td><td class="ng">使えない</td></tr>
+  </table>
+  <div class="box warn">
+    <strong class="title">「/」を使うときの注意</strong>
+    <ul>
+      <li><strong>迷ったら、この教材どおり「\」で書く。</strong>手順の説明や画面の写真は「\」で統一しています。見比べやすいように、慣れるまでは「\」で打つのがおすすめです。</li>
+      <li><strong>「/」で打っても、表示は「\」になる。</strong>たとえば <code>cd C:/work</code> のあとのプロンプトや <code>pwd</code> の結果は、<code>C:\work</code> と「\」で表示されます。間違えたわけではありません。<!-- TODO: Win11実機で確認 --></li>
+      <li><strong>Tab キーで補完すると、「\」に変わることがある。</strong>途中まで「/」で打っても、補完されたところは「\」になることがあります。どちらでも動くので、気にしなくて大丈夫です。<!-- TODO: Win11実機で確認 --></li>
+      <li><strong>古いコマンドでは、「/」が別の意味になる。</strong>コマンドプロンプト（<code>cmd</code>）の時代からあるコマンドでは、<code>dir /w</code> のように、「/」が<strong>オプション（命令の付け足し）の目印</strong>として使われます。そうしたコマンドにパスを渡すときは、「\」で書くほうが確実です。この教材で使うコマンドでは、困ることはありません。</li>
+      <li><strong>全角の「／」は使えない。</strong>「￥」と同じで、日本語入力がオンのまま打つと全角になります。半角英数（「A」）で打ちましょう。</li>
+      <li><strong>Mac / Linux では、「\」は使えない。</strong>逆向きは通じません。Windows 以外のパソコンでは、パスは「/」で書きます。</li>
+    </ul>
   </div>
 
   <details class="coffee">
