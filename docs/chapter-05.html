@@ -7,7 +7,7 @@
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<header class="site"><a class="title" href="index.html">Git と GitHub 入門</a><span class="ver"><!--ver--><a href="https://github.com/chitchi1216/git-github-textbook/blob/main/CHANGELOG.md">版 0.5.6（ドラフト）</a> ・ 2026-10-12 ・ 作成者 <a href="https://github.com/chitchi1216">chitchi1216</a><!--/ver--></span></header>
+<header class="site"><a class="title" href="index.html">Git と GitHub 入門</a><span class="ver"><!--ver--><a href="https://github.com/chitchi1216/git-github-textbook/blob/main/CHANGELOG.md">版 0.5.7（ドラフト）</a> ・ 2026-10-12 ・ 作成者 <a href="https://github.com/chitchi1216">chitchi1216</a><!--/ver--></span></header>
 <main class="wrap">
   <p class="meta">第5章 ／ 目安 60〜80分</p>
   <h1>一人で使いこなす：毎日の流れ・履歴を読む・取り消す</h1>
@@ -156,10 +156,14 @@ git commit -m "Add day 1"</code></pre>
   </ol>
 <pre><code>git remote add origin https://github.com/ユーザー名/diary.git
 git push -u origin main</code></pre>
+  <figure class="shot">
+    <img src="images/ch05-diary-push-terminal.png" alt="PowerShell で、diary.txt を作って記録し、git remote add と git push -u origin main までを打った画面" onerror="this.parentNode.classList.add('missing')">
+    <figcaption>手順3〜4を、実際に打った画面の例（手順2の続きで、フォルダ名とリポジトリ名は <code>diary2</code> です）。<code>diary.txt</code> には <code>I started using Git.</code> と書き、<code>Add day 1</code> で記録しています。そのあと、<code>git remote add</code> で GitHub と結びつけて、<code>git push -u origin main</code> で送っています。最後に <code>branch 'main' set up to track 'origin/main'.</code> と出れば、送れています</figcaption>
+  </figure>
   <p>GitHub の画面で、<code>.gitignore</code> と <code>diary.txt</code> があり、<strong><code>private.txt</code> が無い</strong>ことを、確かめてください。無視したファイルは、GitHub にも送られません。</p>
   <figure class="shot">
-    <img src="images/ch05-diary-github.png" alt="GitHub の diary リポジトリの画面。.gitignore と diary.txt の2つのファイルがあり、2 Commits と表示されている" onerror="this.parentNode.classList.add('missing')">
-    <figcaption><code>push</code> のあとの GitHub の画面。名前の横に「<strong>Private</strong>」と出ています。ファイルは <code>.gitignore</code> と <code>diary.txt</code> の2つだけで、<code>private.txt</code> はありません。右上の「<strong>2 Commits</strong>」は、手順2と手順3の、2回の記録です。下の「Add a README」は、押さなくて大丈夫です</figcaption>
+    <img src="images/ch05-diary2-github.png" alt="GitHub の diary2 リポジトリの画面。.gitignore と diary.txt の2つのファイルがあり、2 Commits と表示されている" onerror="this.parentNode.classList.add('missing')">
+    <figcaption><code>push</code> のあとの GitHub の画面（リポジトリ名は <code>diary2</code>）。名前の横に「<strong>Private</strong>」と出ています。ファイルは <code>.gitignore</code> と <code>diary.txt</code> の2つだけで、<code>private.txt</code> はありません。右上の「<strong>2 Commits</strong>」は、手順2と手順3の、2回の記録です。下の「Add a README」は、押さなくて大丈夫です</figcaption>
   </figure>
 
   <h3>手順5：2日目：毎日の流れで、記録する</h3>
