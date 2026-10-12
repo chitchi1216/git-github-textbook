@@ -7,7 +7,7 @@
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<header class="site"><a class="title" href="index.html">Git と GitHub 入門</a><span class="ver"><!--ver--><a href="https://github.com/chitchi1216/git-github-textbook/blob/main/CHANGELOG.md">版 0.5.5（ドラフト）</a> ・ 2026-10-12 ・ 作成者 <a href="https://github.com/chitchi1216">chitchi1216</a><!--/ver--></span></header>
+<header class="site"><a class="title" href="index.html">Git と GitHub 入門</a><span class="ver"><!--ver--><a href="https://github.com/chitchi1216/git-github-textbook/blob/main/CHANGELOG.md">版 0.5.6（ドラフト）</a> ・ 2026-10-12 ・ 作成者 <a href="https://github.com/chitchi1216">chitchi1216</a><!--/ver--></span></header>
 <main class="wrap">
   <p class="meta">第5章 ／ 目安 60〜80分</p>
   <h1>一人で使いこなす：毎日の流れ・履歴を読む・取り消す</h1>
@@ -119,6 +119,10 @@ nothing added to commit but untracked files present (use "git add" to track)</sp
   <p><code>.gitignore</code> そのものは、記録しておきます（どのファイルを無視するかも、大切な情報だからです）。</p>
 <pre><code>git add .gitignore
 git commit -m "Add .gitignore"</code></pre>
+  <figure class="shot">
+    <img src="images/ch05-gitignore-terminal.png" alt="PowerShell で、git init から .gitignore と private.txt を作り、ls -Force で確かめて、.gitignore を記録するまでを打った画面" onerror="this.parentNode.classList.add('missing')">
+    <figcaption>手順1〜2を、実際に打った画面の例（フォルダ名は <code>diary2</code> にしています）。<code>cat .gitignore</code> で、<code>private.txt</code> と書けたことを確かめています。<code>ls -Force</code>（<a href="chapter-03.html">第3章</a>）で見ると、<code>private.txt</code> はフォルダの中に<strong>ちゃんとあります</strong>。隠しフォルダの <code>.git</code> も見えています。この例は、メモ帳の代わりに <code>nvim</code>（文字で操作するエディター）を使い、コミットメッセージを日本語で書いていますが、流れは同じです</figcaption>
+  </figure>
   <div class="box">
     <strong class="title"><code>.gitignore</code> の書き方（よく使うもの）</strong>
     <table>
@@ -152,10 +156,6 @@ git commit -m "Add day 1"</code></pre>
   </ol>
 <pre><code>git remote add origin https://github.com/ユーザー名/diary.git
 git push -u origin main</code></pre>
-  <figure class="shot">
-    <img src="images/ch05-diary-terminal.png" alt="PowerShell で、git init から .gitignore と diary.txt の記録、git remote add と git push までを打った画面" onerror="this.parentNode.classList.add('missing')">
-    <figcaption>手順1〜4を、実際に打った画面の例。この例は、教材と次の点が違いますが、流れは同じです。メモ帳の代わりに <code>nvim</code>（文字で操作するエディター）を使い、コミットメッセージを日本語で書いています。また、<code>git init</code> を2回打ったので、2回目は「<strong>Reinitialized existing</strong>」（すでにあるリポジトリを、もう一度初期化した）と出ています（記録は消えません）。<code>cat diary.txt</code> の結果が読めない文字になっているのは、日本語で書いたためで、<strong>ファイルは壊れていません</strong>（<a href="chapter-02.html">第2章</a>の「文字化け」の話と同じです）。最後に <code>branch 'main' set up to track 'origin/main'.</code> と出れば、送れています</figcaption>
-  </figure>
   <p>GitHub の画面で、<code>.gitignore</code> と <code>diary.txt</code> があり、<strong><code>private.txt</code> が無い</strong>ことを、確かめてください。無視したファイルは、GitHub にも送られません。</p>
   <figure class="shot">
     <img src="images/ch05-diary-github.png" alt="GitHub の diary リポジトリの画面。.gitignore と diary.txt の2つのファイルがあり、2 Commits と表示されている" onerror="this.parentNode.classList.add('missing')">
