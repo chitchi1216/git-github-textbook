@@ -7,7 +7,7 @@
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<header class="site"><a class="title" href="index.html">Git と GitHub 入門</a><span class="ver"><!--ver--><a href="https://github.com/chitchi1216/git-github-textbook/blob/main/CHANGELOG.md">版 0.5.3（ドラフト）</a> ・ 2026-10-12 ・ 作成者 <a href="https://github.com/chitchi1216">chitchi1216</a><!--/ver--></span></header>
+<header class="site"><a class="title" href="index.html">Git と GitHub 入門</a><span class="ver"><!--ver--><a href="https://github.com/chitchi1216/git-github-textbook/blob/main/CHANGELOG.md">版 0.5.4（ドラフト）</a> ・ 2026-10-12 ・ 作成者 <a href="https://github.com/chitchi1216">chitchi1216</a><!--/ver--></span></header>
 <main class="wrap">
   <p class="meta">付録A</p>
   <h1>よく使うコマンド一覧</h1>
@@ -121,6 +121,7 @@
     <tr><td><code>..</code></td><td>ひとつ上のフォルダ</td><td><a href="chapter-02.html">第2章</a></td></tr>
     <tr><td><code>*</code></td><td>「何でも当てはまる」という記号（<code>*.txt</code> は、.txt で終わるファイルすべて）</td><td><a href="chapter-02.html">第2章</a></td></tr>
     <tr><td><code>\</code>（または <code>¥</code>）</td><td>パスの区切り。表示が <code>¥</code> でも、同じ文字</td><td><a href="chapter-01.html">第1章</a></td></tr>
+    <tr><td><code>/</code></td><td>PowerShell や Git では、パスの区切りに使ってもよい（下の A-9 の注意を参照）</td><td><a href="chapter-01.html#slash">第1章</a></td></tr>
   </table>
 
   <h2>A-8. コマンドの別名（エイリアス）</h2>
@@ -141,6 +142,18 @@
     <tr><td>絶対パス</td><td>ドライブ名（<code>C:</code>）から始まる。どこにいても、同じ場所を指す</td><td><code>C:\work\practice\memo.txt</code></td><td><a href="chapter-02.html">第2章</a></td></tr>
     <tr><td>相対パス</td><td>ドライブ名で始まらない。今いる場所からの行き方。今いる場所で、指す場所が変わる</td><td><code>practice</code>、<code>..</code>、<code>.\memo.txt</code></td><td><a href="chapter-02.html">第2章</a></td></tr>
   </table>
+  <div class="box warn">
+    <strong class="title">パスを「/」で書くときの注意</strong>
+    PowerShell や Git では、<code>C:/work/practice</code> のように「/」で区切っても動きます。くわしくは<a href="chapter-01.html#slash">第1章</a>を見てください。
+    <ul>
+      <li>この教材は「\」で統一しています。迷ったら「\」で書きます。</li>
+      <li>「/」で打っても、プロンプトや <code>pwd</code> の表示は「\」になります。</li>
+      <li>Tab キーで補完すると、「\」に変わります。</li>
+      <li><code>dir /w</code> のような、コマンドプロンプト（<code>cmd</code>）時代のコマンドでは、「/」はオプションの目印です。パスは「\」で書くほうが確実です。</li>
+      <li>全角の「／」は使えません。半角英数（「A」）で打ちます。</li>
+      <li>Mac / Linux では、「\」は使えません。パスは「/」で書きます。</li>
+    </ul>
+  </div>
 
   <nav class="pager">
     <a href="index.html">← 目次</a>
