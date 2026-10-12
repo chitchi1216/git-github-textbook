@@ -7,10 +7,10 @@
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<header class="site"><a class="title" href="index.html">Git と GitHub 入門</a><span class="ver"><!--ver--><a href="https://github.com/chitchi1216/git-github-textbook/blob/main/CHANGELOG.md">版 0.4.21（ドラフト）</a> ・ 2026-10-11 ・ 作成者 <a href="https://github.com/chitchi1216">chitchi1216</a><!--/ver--></span></header>
+<header class="site"><a class="title" href="index.html">Git と GitHub 入門</a><span class="ver"><!--ver--><a href="https://github.com/chitchi1216/git-github-textbook/blob/main/CHANGELOG.md">版 0.5.0（ドラフト）</a> ・ 2026-10-12 ・ 作成者 <a href="https://github.com/chitchi1216">chitchi1216</a><!--/ver--></span></header>
 <main class="wrap">
   <h1>Git と GitHub 入門</h1>
-  <p>パソコンの基本から始めて、4人でチーム開発ができるようになるための教材です。環境は <strong>Windows 11 の PowerShell とメモ帳</strong>を使います。</p>
+  <p>パソコンの基本から始めて、<strong>まず一人で Git と GitHub を使いこなし</strong>、そのあと、<strong>ほかの人と一緒に開発（共同開発）</strong>もできるようになるための教材です。一人でも、仲間と一緒でも学べます。環境は <strong>Windows 11 の PowerShell とメモ帳</strong>を使います。</p>
 
   <div class="box ok">
     <strong class="title">この教材も、GitHub で作られています</strong>
@@ -20,7 +20,7 @@
 
   <div class="box">
     <strong class="title">この教材の進め方</strong>
-    基本は一人で読み進める自習です。月に1回みんなで集まり、各章の「話し合おう」を題材にディスカッションします。わからないところはそのままにせず、集まりで質問してください。
+    基本は一人で読み進める自習です。第6章までは、すべて一人で進められます。仲間と一緒に学ぶ場合は、ときどき集まって、各章の「話し合おう・考えてみよう」を題材にディスカッションするのがおすすめです。一人で学ぶ場合は、同じ問いを、自分への質問として考えてみてください。
   </div>
 
   <figure class="diagram">
@@ -32,19 +32,19 @@
       <text class="t-sm" x="105" y="84" text-anchor="middle">準備・パソコンの仕組み</text>
       <text class="t-sm" x="105" y="104" text-anchor="middle">ターミナルに慣れる</text>
       <rect class="b2" x="225" y="22" width="190" height="104" rx="12"/>
-      <text class="t-sm muted" x="320" y="16" text-anchor="middle">STEP 2　第3〜4章</text>
+      <text class="t-sm muted" x="320" y="16" text-anchor="middle">STEP 2　第3〜6章</text>
       <text class="t-md" x="320" y="60" text-anchor="middle">Git を一人で使う</text>
-      <text class="t-sm" x="320" y="84" text-anchor="middle">記録する（commit）</text>
-      <text class="t-sm" x="320" y="104" text-anchor="middle">GitHub に送る（push）</text>
+      <text class="t-sm" x="320" y="84" text-anchor="middle">記録する・送る・戻す</text>
+      <text class="t-sm" x="320" y="104" text-anchor="middle">ブランチで試す</text>
       <rect class="b3" x="440" y="22" width="190" height="104" rx="12"/>
-      <text class="t-sm muted" x="535" y="16" text-anchor="middle">STEP 3　第5〜8章</text>
-      <text class="t-md" x="535" y="60" text-anchor="middle">チームで開発する</text>
-      <text class="t-sm" x="535" y="84" text-anchor="middle">ブランチ・Pull Request</text>
+      <text class="t-sm muted" x="535" y="16" text-anchor="middle">STEP 3　第7〜9章</text>
+      <text class="t-md" x="535" y="60" text-anchor="middle">ほかの人と開発する</text>
+      <text class="t-sm" x="535" y="84" text-anchor="middle">Pull Request</text>
       <text class="t-sm" x="535" y="104" text-anchor="middle">コンフリクト解消</text>
       <path class="ln" d="M203 74 H221" marker-end="url(#ar)"/>
       <path class="ln" d="M418 74 H436" marker-end="url(#ar)"/>
     </svg>
-    <figcaption>学習の全体像。3つの段階で、一人から4人の共同開発へ進む</figcaption>
+    <figcaption>学習の全体像。一人で使いこなしてから、ほかの人との共同開発へ進む</figcaption>
   </figure>
 
   <h2>目次</h2>
@@ -54,10 +54,11 @@
     <li><a href="chapter-02.html"><span class="no">第2章</span>ターミナル入門<span class="desc">エクスプローラーの操作とコマンドを見比べて、文字で操作する画面に慣れる</span></a></li>
     <li><a href="chapter-03.html"><span class="no">第3章</span>Git の基本：記録をつくる<span class="desc">init / status / add / commit / log / diff で、変更を記録して履歴を見る</span></a></li>
     <li><a href="chapter-04.html"><span class="no">第4章</span>GitHub と連携する：送る・受け取る<span class="desc">clone / push / pull で、自分のパソコンと GitHub の間で記録をやりとりする</span></a></li>
-    <li><a href="chapter-05.html"><span class="no">第5章</span>ブランチ：作業を枝分かれさせる<span class="desc">branch / switch / merge で、作業を分けて、あとで合流させる</span></a></li>
-    <li class="soon"><a href="#"><span class="no">第6章</span>Pull Request<span class="tag">準備中</span><span class="desc">ブランチを切って PR を出し、レビューを受けてマージする</span></a></li>
-    <li class="soon"><a href="#"><span class="no">第7章</span>コンフリクトの解消<span class="tag">準備中</span><span class="desc">衝突をわざと起こして、自分で直す</span></a></li>
-    <li class="soon"><a href="#"><span class="no">第8章</span>チーム開発演習<span class="tag">準備中</span><span class="desc">4人でルールを決め、Issue から PR まで一周する</span></a></li>
+    <li><a href="chapter-05.html"><span class="no">第5章</span>一人で使いこなす：毎日の流れ・履歴を読む・取り消す<span class="desc">.gitignore / show / restore / revert で、一人で安心して毎日使えるようにする</span></a></li>
+    <li><a href="chapter-06.html"><span class="no">第6章</span>ブランチ：作業を枝分かれさせる<span class="desc">branch / switch / merge で、試しの作業を分けて、あとで合流させる</span></a></li>
+    <li class="soon"><a href="#"><span class="no">第7章</span>Pull Request<span class="tag">準備中</span><span class="desc">ブランチを切って PR を出し、レビューを受けてマージする</span></a></li>
+    <li class="soon"><a href="#"><span class="no">第8章</span>コンフリクトの解消<span class="tag">準備中</span><span class="desc">衝突をわざと起こして、自分で直す</span></a></li>
+    <li class="soon"><a href="#"><span class="no">第9章</span>共同開発演習<span class="tag">準備中</span><span class="desc">ほかの人とルールを決め、Issue から PR まで一周する（一人の場合は、公開されているリポジトリへの修正提案で体験する）</span></a></li>
   </ol>
 
   <h2>付録</h2>

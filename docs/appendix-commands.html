@@ -7,7 +7,7 @@
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<header class="site"><a class="title" href="index.html">Git と GitHub 入門</a><span class="ver"><!--ver--><a href="https://github.com/chitchi1216/git-github-textbook/blob/main/CHANGELOG.md">版 0.4.21（ドラフト）</a> ・ 2026-10-11 ・ 作成者 <a href="https://github.com/chitchi1216">chitchi1216</a><!--/ver--></span></header>
+<header class="site"><a class="title" href="index.html">Git と GitHub 入門</a><span class="ver"><!--ver--><a href="https://github.com/chitchi1216/git-github-textbook/blob/main/CHANGELOG.md">版 0.5.0（ドラフト）</a> ・ 2026-10-12 ・ 作成者 <a href="https://github.com/chitchi1216">chitchi1216</a><!--/ver--></span></header>
 <main class="wrap">
   <p class="meta">付録A</p>
   <h1>よく使うコマンド一覧</h1>
@@ -72,11 +72,11 @@
     <tr><td><code>git config --global core.editor</code></td><td class="en-col">config ＝ configuration（設定）</td><td>Git が使うエディタを、メモ帳にする</td><td><code>git config --global core.editor notepad</code></td><td><a href="chapter-00.html">第0章</a></td></tr>
     <tr><td><code>git config --global --list</code></td><td class="en-col">config ＝ configuration（設定）、list（一覧）</td><td>登録した設定を確認する</td><td><code>git config --global --list</code></td><td><a href="chapter-00.html">第0章</a></td></tr>
     <tr><td><code>git config --global init.defaultBranch</code></td><td class="en-col">config ＝ configuration（設定）、branch（枝）</td><td>最初の枝の名前を、main にする（一度だけ）</td><td><code>git config --global init.defaultBranch main</code></td><td><a href="chapter-03.html">第3章</a></td></tr>
-    <tr><td><code>git config --global pull.rebase false</code></td><td class="en-col">config ＝ configuration（設定）、rebase（別の方法）</td><td>git pull で、他の人の変更を「合わせる（merge）」方法に決める（一度だけ）</td><td><code>git config --global pull.rebase false</code></td><td><a href="chapter-04.html">第4章</a></td></tr>
+    <tr><td><code>git config --global pull.rebase false</code></td><td class="en-col">config ＝ configuration（設定）、rebase（別の方法）</td><td>git pull で、GitHub の変更を「合わせる（merge）」方法に決める（一度だけ）</td><td><code>git config --global pull.rebase false</code></td><td><a href="chapter-04.html">第4章</a></td></tr>
   </table>
 
   <h2>A-6. Git の基本操作</h2>
-  <p>第3章〜第5章のコマンドを載せています。第6章以降も、順番に追加していきます。</p>
+  <p>第3章〜第6章のコマンドを載せています。第7章以降も、順番に追加していきます。</p>
   <table class="cmds">
     <tr><th>コマンド</th><th>もとの英語</th><th>意味</th><th>使用例</th><th>章</th></tr>
     <tr><td><code>git --version</code></td><td class="en-col">version（版）</td><td>Git のバージョンを表示する（インストールの確認）</td><td><code>git --version</code></td><td><a href="chapter-03.html">第3章</a></td></tr>
@@ -95,14 +95,21 @@
     <tr><td><code>git pull</code></td><td class="en-col">pull（引っ張る）</td><td>GitHub の記録を、自分のパソコンに受け取る（fetch ＋ merge）</td><td><code>git pull</code></td><td><a href="chapter-04.html">第4章</a></td></tr>
     <tr><td><code>git fetch</code></td><td class="en-col">fetch（取ってくる）</td><td>GitHub の最新情報を取ってくるだけ。手元のファイルは変わらない</td><td><code>git fetch</code></td><td><a href="chapter-04.html">第4章</a></td></tr>
     <tr><td><code>git clone</code></td><td class="en-col">clone（複製）</td><td>GitHub のリポジトリを、履歴ごと、まるごと複製する</td><td><code>git clone https://github.com/ユーザー名/my-notes.git my-notes-copy</code></td><td><a href="chapter-04.html">第4章</a></td></tr>
-    <tr><td><code>git branch</code></td><td class="en-col">branch（枝）</td><td>ブランチの一覧を表示する。* が、今いる枝</td><td><code>git branch</code></td><td><a href="chapter-05.html">第5章</a></td></tr>
-    <tr><td><code>git branch -v</code></td><td class="en-col"><strong>v</strong>erbose（くわしく）</td><td>各ブランチが指す、最新のコミットも表示する</td><td><code>git branch -v</code></td><td><a href="chapter-05.html">第5章</a></td></tr>
-    <tr><td><code>git switch</code></td><td class="en-col">switch（切り替える）</td><td>ブランチを切り替える</td><td><code>git switch main</code></td><td><a href="chapter-05.html">第5章</a></td></tr>
-    <tr><td><code>git switch -c</code></td><td class="en-col"><strong>c</strong>reate（作る）</td><td>ブランチを作って、そこへ切り替える</td><td><code>git switch -c add-notes</code></td><td><a href="chapter-05.html">第5章</a></td></tr>
-    <tr><td><code>git switch -</code></td><td class="en-col">—（直前の枝）</td><td>直前にいたブランチに戻る</td><td><code>git switch -</code></td><td><a href="chapter-05.html">第5章</a></td></tr>
-    <tr><td><code>git merge</code></td><td class="en-col">merge（合流させる）</td><td>別のブランチを、今いるブランチに合流させる</td><td><code>git merge add-notes</code></td><td><a href="chapter-05.html">第5章</a></td></tr>
-    <tr><td><code>git branch -d</code></td><td class="en-col"><strong>d</strong>elete（削除）</td><td>合流済みのブランチを消す。未合流なら止めてくれる</td><td><code>git branch -d add-notes</code></td><td><a href="chapter-05.html">第5章</a></td></tr>
-    <tr><td><code>git log --oneline --graph --all</code></td><td class="en-col">graph（図）、all（すべて）</td><td>すべてのブランチの履歴を、図で表示する</td><td><code>git log --oneline --graph --all</code></td><td><a href="chapter-05.html">第5章</a></td></tr>
+    <tr><td><code>git show</code></td><td class="en-col">show（見せる）</td><td>1つの記録の中身（誰が・いつ・何を変えたか）を表示する</td><td><code>git show 6e467d8</code></td><td><a href="chapter-05.html">第5章</a></td></tr>
+    <tr><td><code>git show ID:ファイル名</code></td><td class="en-col">show（見せる）</td><td>その記録のときの、ファイルの中身だけを表示する</td><td><code>git show 6e467d8:diary.txt</code></td><td><a href="chapter-05.html">第5章</a></td></tr>
+    <tr><td><code>git log -p</code></td><td class="en-col"><strong>p</strong>atch（変更の中身）</td><td>履歴を、変更の中身つきで表示する（画面が止まったら q）</td><td><code>git log -p</code></td><td><a href="chapter-05.html">第5章</a></td></tr>
+    <tr><td><code>git restore</code></td><td class="en-col">restore（元に戻す）</td><td>保存した変更を捨てて、最後の記録の状態に戻す。<strong>捨てた変更は戻らない</strong></td><td><code>git restore diary.txt</code></td><td><a href="chapter-05.html">第5章</a></td></tr>
+    <tr><td><code>git restore --staged</code></td><td class="en-col">staged（ステージに並べられた）</td><td>ステージから下ろす（add を取り消す）。ファイルの中身は変わらない</td><td><code>git restore --staged diary.txt</code></td><td><a href="chapter-05.html">第5章</a></td></tr>
+    <tr><td><code>git revert</code></td><td class="en-col">revert（元の状態に戻す）</td><td>記録を打ち消す、新しい記録を作る。push したあとでも安全</td><td><code>git revert 49d72cc</code></td><td><a href="chapter-05.html">第5章</a></td></tr>
+    <tr><td><code>.gitignore</code>（ファイル）</td><td class="en-col">ignore（無視する）</td><td>ここに書いたファイルは、Git に無視され、記録されない</td><td><code>private.txt</code>、<code>*.tmp</code> と1行ずつ書く</td><td><a href="chapter-05.html">第5章</a></td></tr>
+    <tr><td><code>git branch</code></td><td class="en-col">branch（枝）</td><td>ブランチの一覧を表示する。* が、今いる枝</td><td><code>git branch</code></td><td><a href="chapter-06.html">第6章</a></td></tr>
+    <tr><td><code>git branch -v</code></td><td class="en-col"><strong>v</strong>erbose（くわしく）</td><td>各ブランチが指す、最新のコミットも表示する</td><td><code>git branch -v</code></td><td><a href="chapter-06.html">第6章</a></td></tr>
+    <tr><td><code>git switch</code></td><td class="en-col">switch（切り替える）</td><td>ブランチを切り替える</td><td><code>git switch main</code></td><td><a href="chapter-06.html">第6章</a></td></tr>
+    <tr><td><code>git switch -c</code></td><td class="en-col"><strong>c</strong>reate（作る）</td><td>ブランチを作って、そこへ切り替える</td><td><code>git switch -c add-notes</code></td><td><a href="chapter-06.html">第6章</a></td></tr>
+    <tr><td><code>git switch -</code></td><td class="en-col">—（直前の枝）</td><td>直前にいたブランチに戻る</td><td><code>git switch -</code></td><td><a href="chapter-06.html">第6章</a></td></tr>
+    <tr><td><code>git merge</code></td><td class="en-col">merge（合流させる）</td><td>別のブランチを、今いるブランチに合流させる</td><td><code>git merge add-notes</code></td><td><a href="chapter-06.html">第6章</a></td></tr>
+    <tr><td><code>git branch -d</code></td><td class="en-col"><strong>d</strong>elete（削除）</td><td>合流済みのブランチを消す。未合流なら止めてくれる</td><td><code>git branch -d add-notes</code></td><td><a href="chapter-06.html">第6章</a></td></tr>
+    <tr><td><code>git log --oneline --graph --all</code></td><td class="en-col">graph（図）、all（すべて）</td><td>すべてのブランチの履歴を、図で表示する</td><td><code>git log --oneline --graph --all</code></td><td><a href="chapter-06.html">第6章</a></td></tr>
   </table>
 
   <h2>A-7. キー操作と、特別な記号</h2>
