@@ -63,9 +63,9 @@
 | `ch02-notepad.png` | メモ帳で `memo.txt` を開いた画面（第2章） |
 | `ch02-pwd-ls.png` | PowerShell で `pwd` と `ls` を打った画面（第2章と、第0章 0-10 で使用） |
 | `ch03-commit-editmsg.png` | `-m` なしの `git commit` で開く、メモ帳の画面（メールアドレスは塗りつぶし） |
-| `ch05-diary-terminal.png` | 第5章 手順1〜4（`git init` から `git push` まで）を PowerShell で打った画面（`nvim` を使用） |
+| `ch05-gitignore-terminal.png` | 第5章 手順1〜2（`git init` から `.gitignore` の記録まで。`ls -Force` で `private.txt` を確認）を PowerShell で打った画面（フォルダ名は `diary2`、`nvim` を使用） |
 | `ch05-diary-github.png` | 第5章 手順4のあとの GitHub の `diary` リポジトリ画面（`.gitignore` と `diary.txt`、2 Commits） |
 
 まだ必要な画像は、ありません（第4章まで、すべてそろいました）。
 
-本文では使っていない画像：`ch01-explorer-extension.png`（拡張子が表示されたエクスプローラー）。
+本文では使っていない画像：`ch01-explorer-extension.png`（拡張子が表示されたエクスプローラー）、`ch05-diary-terminal.png`（第5章 手順1〜4の画面。`.gitignore` の書き間違いが写っていたため、撮り直した）。
