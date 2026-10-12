@@ -7,7 +7,7 @@
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<header class="site"><a class="title" href="index.html">Git と GitHub 入門</a><span class="ver"><!--ver--><a href="https://github.com/chitchi1216/git-github-textbook/blob/main/CHANGELOG.md">版 0.4.21（ドラフト）</a> ・ 2026-10-11 ・ 作成者 <a href="https://github.com/chitchi1216">chitchi1216</a><!--/ver--></span></header>
+<header class="site"><a class="title" href="index.html">Git と GitHub 入門</a><span class="ver"><!--ver--><a href="https://github.com/chitchi1216/git-github-textbook/blob/main/CHANGELOG.md">版 0.5.1（ドラフト）</a> ・ 2026-10-12 ・ 作成者 <a href="https://github.com/chitchi1216">chitchi1216</a><!--/ver--></span></header>
 <main class="wrap">
   <p class="meta">第3章 ／ 目安 60〜80分</p>
   <h1>Git の基本：記録をつくる</h1>
@@ -26,7 +26,7 @@
   <ul>
     <li>「<code>報告書_最終.docx</code>」「<code>報告書_最終_修正版.docx</code>」「<code>報告書_最終_本当に最終.docx</code>」……のように、<strong>ファイルを何個も作らなくて済む。</strong>1つのファイルのまま、過去の状態に戻れる。</li>
     <li>「いつ、誰が、なぜ、変えたのか」が、<strong>記録として残る。</strong></li>
-    <li>複数人で作業しても、<strong>お互いの変更をまとめられる</strong>（第5章以降）。</li>
+    <li>パソコンが壊れても、GitHub に置いた記録から、元に戻せる（第4章）。ほかの人と作業しても、<strong>お互いの変更をまとめられる</strong>（第7章以降）。</li>
   </ul>
   <p>この章では、まず一人で、Git の基本の流れを体験します。</p>
 
@@ -95,7 +95,7 @@ git --version</code></pre>
   <p><code>git version …</code> と表示されれば OK です（数字は、人によって違います）。表示されないときは、第0章の「うまくいかないとき」を見てください。</p>
   <p>次に、これから作るリポジトリの「最初の枝の名前」を <code>main</code> にする設定をします。<strong>この設定は、一度だけ</strong>で大丈夫です。</p>
 <pre><code>git config --global init.defaultBranch main</code></pre>
-  <p class="etym">💡 「枝（ブランチ）」は第5章で学びます。今は、「GitHub の標準に、名前をそろえる設定」と思ってください。</p>
+  <p class="etym">💡 「枝（ブランチ）」は第6章で学びます。今は、「GitHub の標準に、名前をそろえる設定」と思ってください。</p>
 
   <h3>手順2：フォルダを作って、リポジトリにする</h3>
 <pre><code>mkdir my-notes
@@ -375,7 +375,7 @@ type .git\HEAD</code></pre>
       <p>多くの環境では、日本語のメッセージが、<strong>そのまま正しく表示されます。</strong>そのまま使えます。</p>
       <p>もし<strong>文字化け</strong>（意味の分からない文字）になったときは、Git の記録は正しくても、<strong>PowerShell の表示の設定</strong>が合っていないだけです。次のコマンドで、表示の設定を変えて、もう一度 <code>git log --oneline</code> を打ってみてください（今開いている PowerShell だけに効く、一時的な設定です）。</p>
 <pre><code>[Console]::OutputEncoding = [System.Text.Encoding]::UTF8</code></pre>
-      <p>日本語のメッセージが使えると、チームで「何をしたか」を、日本語で共有できます。どちらを使うかは、チームで話し合って決めましょう。</p>
+      <p>日本語のメッセージが使えると、あとで読み返すときに、「何をしたか」がすぐ分かります。どちらを使うかは、自分で（ほかの人と一緒に使うなら、話し合って）決めましょう。</p>
     </details>
   </div>
 
@@ -406,10 +406,10 @@ type .git\HEAD</code></pre>
     <p><code>git init</code> は、今いるフォルダを Git の管理対象にするため。<code>C:\work</code> のような大きな場所で打つと、その中のすべてのフォルダが対象になってしまう。</p>
   </details>
 
-  <h2>話し合おう（月1回の集まり用）</h2>
+  <h2>話し合おう・考えてみよう</h2>
   <ul>
     <li>Git の「add と commit の2段階」は、どんな場面で便利だと思いますか？</li>
-    <li>コミットメッセージを、日本語と英語のどちらで書くか、チームのルールを決めるなら、どうしますか？ その理由は？</li>
+    <li>コミットメッセージを、日本語と英語のどちらで書きますか？ その理由は？（ほかの人と一緒に使うなら、ルールをどう決めますか？）</li>
     <li>「変更の記録を残す」ことが、仕事や日常のどんな場面で役に立ちそうですか？</li>
   </ul>
 
