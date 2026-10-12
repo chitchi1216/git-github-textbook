@@ -3,7 +3,7 @@
 Git と GitHub 入門（教材）
 
 パソコンの基本から始めて、まず一人で Git と GitHub を使いこなし、そのあと、ほかの人と一緒に開発（共同開発）もできるようになるための教材です。一人でも、仲間と一緒でも学べます（人数の前提はありません）。
-環境は Windows 11 の PowerShell と VS Code を前提にしています。
+環境は Windows 11 の PowerShell とメモ帳を前提にしています（VS Code の導入は、今後の課題）。
 
 - 教材は `docs/` にあります（GitHub Pages で公開）
 - 公開 URL: https://chitchi1216.github.io/git-github-textbook/
