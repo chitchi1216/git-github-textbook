@@ -3,436 +3,412 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>第5章 ブランチ | Git と GitHub 入門</title>
+<title>第5章 一人で使いこなす | Git と GitHub 入門</title>
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<header class="site"><a class="title" href="index.html">Git と GitHub 入門</a><span class="ver"><!--ver--><a href="https://github.com/chitchi1216/git-github-textbook/blob/main/CHANGELOG.md">版 0.4.21（ドラフト）</a> ・ 2026-10-11 ・ 作成者 <a href="https://github.com/chitchi1216">chitchi1216</a><!--/ver--></span></header>
+<header class="site"><a class="title" href="index.html">Git と GitHub 入門</a><span class="ver"><!--ver--><a href="https://github.com/chitchi1216/git-github-textbook/blob/main/CHANGELOG.md">版 0.5.1（ドラフト）</a> ・ 2026-10-12 ・ 作成者 <a href="https://github.com/chitchi1216">chitchi1216</a><!--/ver--></span></header>
 <main class="wrap">
-  <p class="meta">第5章 ／ 目安 70〜90分</p>
-  <h1>ブランチ：作業を枝分かれさせる</h1>
+  <p class="meta">第5章 ／ 目安 60〜80分</p>
+  <h1>一人で使いこなす：毎日の流れ・履歴を読む・取り消す</h1>
 
   <div class="box">
     <strong class="title">この章でできるようになること</strong>
     <ul class="goals">
-      <li>ブランチ（枝）が何のためにあるかを、説明できる</li>
-      <li>ブランチを作り、切り替えて、作業できる</li>
-      <li>作業した枝を、<code>main</code> に合流（マージ）できる</li>
-      <li><code>git log --graph</code> で、枝分かれと合流の様子を読める</li>
+      <li>新しいリポジトリを、<strong>一人で、最初から</strong>作って、GitHub に置ける</li>
+      <li>「毎日の流れ」（<code>pull</code> → 作業 → <code>add</code> → <code>commit</code> → <code>push</code>）で、記録を続けられる</li>
+      <li>記録しないファイルを、<code>.gitignore</code> で決められる</li>
+      <li>過去の記録の中身を、<code>git show</code> で読める</li>
+      <li>失敗したときに、<code>git restore</code> と <code>git revert</code> で、元に戻せる</li>
     </ul>
   </div>
 
-  <h2>5-1. ブランチとは</h2>
-  <p>ここまでは、記録（コミット）を、<strong>一本道</strong>で積み重ねてきました。<strong>ブランチ</strong>（branch、枝）を使うと、この道を<strong>途中で枝分かれ</strong>させて、別々に作業を進められます。</p>
-  <div class="box">
-    <strong class="title">なぜ、枝分かれさせるの？</strong>
-    <ul>
-      <li><strong><code>main</code> を、いつも「動く状態」に保てる。</strong>試しの作業や、途中の作業は、別の枝でやります。</li>
-      <li><strong>作業ごとに、分けられる。</strong>「プロフィールを書く」「誤字を直す」など、1つの作業を1つの枝にします。</li>
-      <li><strong>4人が、同時に作業できる。</strong>それぞれが、自分の枝で作業すれば、お互いの作業を邪魔しません。</li>
-    </ul>
+  <h2>5-1. 一人で使うなら、<code>main</code> だけで十分</h2>
+  <p>第3章と第4章で、記録して（<code>commit</code>）、GitHub に送る（<code>push</code>）ところまでできました。<strong>一人で使うなら、枝（ブランチ）は使わず、<code>main</code> だけで十分です。</strong></p>
+  <p>この章では、新しい道具をたくさん覚えるのではなく、<strong>一人で、安心して、毎日使える</strong>ようになることをめざします。そのために大切なのは、次の2つです。</p>
+  <ul>
+    <li><strong>毎日の流れ</strong>が、手に馴染んでいること</li>
+    <li><strong>失敗しても、元に戻せる</strong>と知っていること</li>
+  </ul>
+  <div class="box ok">
+    <strong class="title">「戻せる」と分かると、こわくなくなる</strong>
+    Git のいちばんの良さは、「<strong>いつでも、前の状態に戻れる</strong>」ことです。戻し方を知っていれば、思い切って、ファイルを書き換えられます。
   </div>
+
+  <h2>5-2. 毎日の流れ</h2>
+  <p>一人で Git を使うときの、基本のくり返しです。これを、何も見ずにできるようになるのが、この章の目標です。</p>
   <figure class="diagram">
-    <svg class="d" viewBox="0 0 640 230" role="img" aria-label="main と add-notes の2つのブランチと HEAD を表したコミットの図">
-      <defs><marker id="e1" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path class="arrowhead" d="M0 0 L10 5 L0 10 z"/></marker></defs>
-      <path class="ln" d="M71 110 H179 M201 110 H309 M331 110 H439"/>
-      <circle cx="60" cy="110" r="12" class="b0"/><circle cx="190" cy="110" r="12" class="b0"/><circle cx="320" cy="110" r="12" class="b0"/><circle cx="450" cy="110" r="12" class="b2"/>
-      <text class="t-mono" x="60" y="146" text-anchor="middle" style="font-size:13px">3f2a9c1</text>
-      <text class="t-mono" x="190" y="146" text-anchor="middle" style="font-size:13px">7b1e4d8</text>
-      <text class="t-mono" x="320" y="146" text-anchor="middle" style="font-size:13px">c5d2e8a</text>
-      <text class="t-mono" x="450" y="146" text-anchor="middle" style="font-size:13px">e4f6a1b</text>
-      <rect class="b1" x="278" y="40" width="84" height="32" rx="8"/><text class="t-md" x="320" y="62" text-anchor="middle">main</text>
-      <path class="ln" d="M320 74 V94" marker-end="url(#e1)"/>
-      <rect class="b2" x="388" y="40" width="124" height="32" rx="8"/><text class="t-md" x="450" y="62" text-anchor="middle">add-notes</text>
-      <path class="ln" d="M450 74 V94" marker-end="url(#e1)"/>
-      <rect class="b3" x="560" y="40" width="64" height="32" rx="8"/><text class="t-md" x="592" y="62" text-anchor="middle">HEAD</text>
-      <path class="ln" d="M560 56 H516" marker-end="url(#e1)"/>
-      <text class="t-sm muted" x="320" y="196" text-anchor="middle">ブランチは「どのコミットを指しているか」を示す名札。HEAD は「今いる枝」を示す</text>
+    <svg class="d" viewBox="0 0 640 200" role="img" aria-label="毎日の流れ。pull、作業、status と diff で確認、add と commit、push の順にくり返す図">
+      <defs><marker id="f1" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path class="arrowhead" d="M0 0 L10 5 L0 10 z"/></marker></defs>
+      <rect class="b3" x="6" y="30" width="110" height="70" rx="10"/>
+      <text class="t-md" x="61" y="60" text-anchor="middle">① pull</text>
+      <text class="t-sm muted" x="61" y="84" text-anchor="middle">最新にする</text>
+      <rect class="b1" x="136" y="30" width="110" height="70" rx="10"/>
+      <text class="t-md" x="191" y="60" text-anchor="middle">② 作業</text>
+      <text class="t-sm muted" x="191" y="84" text-anchor="middle">メモ帳で編集</text>
+      <rect class="b1" x="266" y="30" width="110" height="70" rx="10"/>
+      <text class="t-md" x="321" y="60" text-anchor="middle">③ 確認</text>
+      <text class="t-sm muted" x="321" y="84" text-anchor="middle">status・diff</text>
+      <rect class="b2" x="396" y="30" width="110" height="70" rx="10"/>
+      <text class="t-md" x="451" y="60" text-anchor="middle">④ 記録</text>
+      <text class="t-sm muted" x="451" y="84" text-anchor="middle">add・commit</text>
+      <rect class="b3" x="526" y="30" width="108" height="70" rx="10"/>
+      <text class="t-md" x="580" y="60" text-anchor="middle">⑤ push</text>
+      <text class="t-sm muted" x="580" y="84" text-anchor="middle">GitHub に送る</text>
+      <path class="ln" d="M118 65 H132" marker-end="url(#f1)"/>
+      <path class="ln" d="M248 65 H262" marker-end="url(#f1)"/>
+      <path class="ln" d="M378 65 H392" marker-end="url(#f1)"/>
+      <path class="ln" d="M508 65 H522" marker-end="url(#f1)"/>
+      <path class="ln" d="M580 104 V150 H61 V104" marker-end="url(#f1)"/>
+      <text class="t-sm" x="320" y="174" text-anchor="middle">次の日も、①から、くり返す（②〜④は、1日に何回でもよい）</text>
     </svg>
-    <figcaption><code>main</code> は <code>c5d2e8a</code> を、<code>add-notes</code> は1つ先の <code>e4f6a1b</code> を指している。HEAD は <code>add-notes</code> にいる</figcaption>
+    <figcaption>毎日の流れ。始める前に <code>pull</code>、終わったら <code>push</code></figcaption>
   </figure>
   <table>
-    <tr><th>言葉</th><th>意味</th></tr>
-    <tr><td>ブランチ（branch）</td><td>枝。作業の流れに付ける「名札」。コピーを作るわけではないので、<strong>作るのも消すのも、一瞬</strong></td></tr>
-    <tr><td><code>main</code></td><td>いちばん基本になる枝。完成した、動く状態を置く</td></tr>
-    <tr><td><code>HEAD</code></td><td>「今、どの枝にいるか」を示す目印</td></tr>
-    <tr><td>マージ（merge）</td><td>別々に進んだ枝を、1つに合流させること</td></tr>
+    <tr><th>いつ</th><th>コマンド</th><th>なぜ</th></tr>
+    <tr><td>作業を始める前</td><td><code>git pull</code></td><td>別のパソコンや、GitHub の画面で変えた記録を、先に受け取るため（パソコン1台だけなら、何も起きないが、習慣にしておく）</td></tr>
+    <tr><td>記録する前</td><td><code>git status</code>・<code>git diff</code></td><td>「何を変えたか」を、自分の目で確かめるため</td></tr>
+    <tr><td>区切りがついたら</td><td><code>git add</code>・<code>git commit -m</code></td><td>1つの区切り（1つの変更）を、1つの記録にする</td></tr>
+    <tr><td>作業を終えるとき</td><td><code>git push</code></td><td>GitHub に置いておけば、パソコンが壊れても、記録が残る</td></tr>
   </table>
+  <div class="box">
+    <strong class="title">記録（commit）は、こまめに</strong>
+    「1日の終わりに、まとめて1回」よりも、<strong>「区切りがつくたびに、1回」</strong>のほうが、あとで戻しやすくなります。メッセージには、「何をしたか」を短く書きます。
+  </div>
 
-  <h2>5-2. 実習A：枝を作って、合流させる</h2>
-  <p>第4章までで使った <code>my-notes</code> で、<code>notes.txt</code> というファイルを、<strong>別の枝で</strong>作り、<code>main</code> に合流させます。</p>
+  <h2>5-3. 実際にやってみよう：一人で、最初から作る</h2>
+  <p>今度は、第3章・第4章の手順を見ながら、<strong>新しいリポジトリ <code>diary</code>（日記）</strong>を、一人で、最初から作ります。毎日1行ずつ、日記を書いて、記録していきます。</p>
   <div class="box warn">
     <strong class="title">打つ前に確認</strong>
     <ul>
       <li>入力モードは「半角英数」に。</li>
-      <li>場所は <code>C:\work\my-notes</code>（OneDrive の外）。<code>git</code> を打つ前に、プロンプトの場所を確かめます。</li>
-      <li>表示のコミットID（<code>3f2a9c1</code> など）は、人によって違います。</li>
+      <li>場所は <code>C:\work</code> の中（OneDrive の外）。<code>git</code> を打つ前に、プロンプトの場所を確かめます。</li>
+      <li>表示のコミットID（<code>6e467d8</code> など）は、人によって違います。</li>
     </ul>
   </div>
 
-  <h3>手順1：準備する</h3>
-<pre><code>cd C:\work\my-notes
-git status
-git pull
-git branch</code></pre>
-<pre class="term"><span class="ps">PS C:\work&gt; cd C:\work\my-notes</span>
-<span class="ps">PS C:\work\my-notes&gt; git status</span>
+  <h3>手順1：フォルダを作って、リポジトリにする</h3>
+<pre><code>cd C:\work
+mkdir diary
+cd diary
+git init</code></pre>
+<pre class="term"><span class="ps">PS C:\work\diary&gt; git init</span>
+<span class="out">Initialized empty Git repository in C:/work/diary/.git/</span></pre>
+  <p>第3章の手順2と同じです。<code>C:\work\diary</code> が、新しいリポジトリになりました。</p>
+
+  <h3>手順2：記録しないファイルを決める（.gitignore）</h3>
+  <p>フォルダの中には、<strong>記録したくない（GitHub に送りたくない）ファイル</strong>が、置かれることがあります。たとえば、自分だけの下書きや、パスワードを書いたメモです。そういうファイルの名前を、<strong><code>.gitignore</code></strong> という名前のファイルに書いておくと、Git は、そのファイルを<strong>無視</strong>します。</p>
+  <p>ここでは、<code>private.txt</code> を、記録しないファイルにします。</p>
+<pre><code>New-Item .gitignore
+notepad .gitignore</code></pre>
+  <p>メモ帳が開いたら、<code>private.txt</code> と1行書いて、<strong>最後に Enter で改行</strong>して、保存して閉じます。続けて、<code>private.txt</code> を作って、状態を見ます。</p>
+<pre><code>New-Item private.txt
+git status</code></pre>
+<pre class="term"><span class="ps">PS C:\work\diary&gt; git status</span>
+<span class="out">On branch main
+
+No commits yet
+
+Untracked files:
+  (use "git add &lt;file&gt;..." to include in what will be committed)
+	.gitignore
+
+nothing added to commit but untracked files present (use "git add" to track)</span></pre>
+  <p><code>.gitignore</code> は出ていますが、<strong><code>private.txt</code> は、出ていません。</strong>Git が、無視しているからです。<code>ls</code> で見ると、<code>private.txt</code> は、ちゃんとフォルダの中にあります。</p>
+  <p class="etym">💡 ignore ＝「無視する」。名前の最初の <code>.</code>（ドット）も、名前の一部です。忘れずに付けます。</p>
+  <p><code>.gitignore</code> そのものは、記録しておきます（どのファイルを無視するかも、大切な情報だからです）。</p>
+<pre><code>git add .gitignore
+git commit -m "Add .gitignore"</code></pre>
+  <div class="box">
+    <strong class="title"><code>.gitignore</code> の書き方（よく使うもの）</strong>
+    <table>
+      <tr><th>書き方</th><th>意味</th></tr>
+      <tr><td><code>private.txt</code></td><td>その名前のファイルを、無視する</td></tr>
+      <tr><td><code>*.tmp</code></td><td><code>.tmp</code> で終わるファイルを、すべて無視する（<code>*</code> は第2章の「何でも当てはまる」記号）</td></tr>
+      <tr><td><code>drafts/</code></td><td><code>drafts</code> フォルダの中を、まるごと無視する</td></tr>
+    </table>
+  </div>
+  <div class="box warn">
+    <strong class="title">すでに記録したファイルは、あとから書いても無視されない</strong>
+    <code>.gitignore</code> が効くのは、<strong>まだ記録していないファイル</strong>だけです。パスワードなどを書いたファイルは、<strong>記録する前に</strong>、<code>.gitignore</code> に書いておきましょう。
+  </div>
+
+  <h3>手順3：1日目の日記を書いて、記録する</h3>
+<pre><code>New-Item diary.txt
+notepad diary.txt</code></pre>
+  <p><code>day 1: I started using Git.</code> と書いて（最後に Enter）、保存して閉じます。日本語で書いても構いません。</p>
+<pre><code>git add diary.txt
+git commit -m "Add day 1"</code></pre>
+<pre class="term"><span class="ps">PS C:\work\diary&gt; git commit -m "Add day 1"</span>
+<span class="out">[main 6e467d8] Add day 1
+ 1 file changed, 1 insertion(+)
+ create mode 100644 diary.txt</span></pre>
+
+  <h3>手順4：GitHub に置く</h3>
+  <p>第4章の手順2〜4と同じです。分からなくなったら、第4章を見返してください。</p>
+  <ol>
+    <li>GitHub で、<strong>新しいリポジトリ <code>diary</code></strong> を作る（<strong>Private</strong>、<strong>「Add README」は Off</strong>、すべて空のまま）</li>
+    <li>表示された URL を使って、結びつけて、送る</li>
+  </ol>
+<pre><code>git remote add origin https://github.com/ユーザー名/diary.git
+git push -u origin main</code></pre>
+  <p>GitHub の画面で、<code>.gitignore</code> と <code>diary.txt</code> があり、<strong><code>private.txt</code> が無い</strong>ことを、確かめてください。無視したファイルは、GitHub にも送られません。</p>
+
+  <h3>手順5：2日目：毎日の流れで、記録する</h3>
+  <p>次の日になったつもりで、5-2 の「毎日の流れ」を、一周してみましょう。</p>
+<pre><code>git pull
+notepad diary.txt</code></pre>
+  <p>2行目に <code>day 2: I learned git diff.</code> と足して（最後に Enter）、保存して閉じます。記録する前に、<strong>何を変えたか</strong>を確かめます。</p>
+<pre><code>git status
+git diff</code></pre>
+<pre class="term"><span class="ps">PS C:\work\diary&gt; git diff</span>
+<span class="out">diff --git a/diary.txt b/diary.txt
+index 9827e9c..52f7f5c 100644
+--- a/diary.txt
++++ b/diary.txt
+@@ -1 +1,2 @@
+ day 1: I started using Git.
++day 2: I learned git diff.</span></pre>
+  <p>先頭に <code>+</code> が付いた行が、<strong>足した行</strong>です（第3章で学んだ <code>git diff</code> です）。思ったとおりの変更なら、記録して、送ります。</p>
+<pre><code>git add diary.txt
+git commit -m "Add day 2"
+git push</code></pre>
+  <p>これで、毎日の流れを、一周しました。</p>
+
+  <h2>5-4. 履歴を読む</h2>
+  <p>記録が増えてくると、「<strong>あの日、何を変えたんだっけ？</strong>」と、振り返りたくなります。<code>git log</code> で一覧を見て、<code>git show</code> で、1つの記録の中身を見ます。</p>
+<pre><code>git log --oneline</code></pre>
+<pre class="term"><span class="ps">PS C:\work\diary&gt; git log --oneline</span>
+<span class="out">9e6d741 (HEAD -&gt; main, origin/main) Add day 2
+6e467d8 Add day 1
+c3e2d5c Add .gitignore</span></pre>
+  <p>1日目の記録（<code>6e467d8</code>）の中身を見てみます。<strong>IDは、自分の画面に出たものを使ってください。</strong></p>
+<pre><code>git show 6e467d8</code></pre>
+<pre class="term"><span class="ps">PS C:\work\diary&gt; git show 6e467d8</span>
+<span class="out">commit 6e467d8bcffe7c07c9a50ea312a30189d217a3e4
+Author: あなたの名前 &lt;メールアドレス&gt;
+Date:   Mon Oct 12 10:15:04 2026 +0900
+
+    Add day 1
+
+diff --git a/diary.txt b/diary.txt
+new file mode 100644
+index 0000000..9827e9c
+--- /dev/null
++++ b/diary.txt
+@@ -0,0 +1 @@
++day 1: I started using Git.</span></pre>
+  <p><strong>誰が・いつ・何のために（メッセージ）・何を変えたか</strong>が、1つの画面で分かります。下半分は、<code>git diff</code> と同じ読み方です。画面が止まったら、<code>q</code> で抜けます（第3章の <code>git log</code> と同じです）。</p>
+  <p class="etym">💡 show ＝「見せる」。IDは、最初の7文字だけで、Git が見分けてくれます。</p>
+  <table>
+    <tr><th>やりたいこと</th><th>コマンド</th></tr>
+    <tr><td>記録の一覧を見る</td><td><code>git log --oneline</code></td></tr>
+    <tr><td>1つの記録の中身を見る</td><td><code>git show ID</code></td></tr>
+    <tr><td>一覧と、中身を、まとめて見る（新しい順）</td><td><code>git log -p</code></td></tr>
+    <tr><td>そのときの、ファイルの中身だけを見る</td><td><code>git show ID:ファイル名</code></td></tr>
+  </table>
+  <p class="etym">💡 <code>-p</code> は <strong>p</strong>atch（変更の中身）の頭文字です。</p>
+  <div class="box">
+    <strong class="title">GitHub の画面でも、同じものが見える</strong>
+    GitHub のリポジトリ画面で「<strong>Commits</strong>」を押し、1つの記録をクリックすると、<code>git show</code> と同じ内容が、色付きで見られます（足した行は緑、消した行は赤）。
+  </div>
+
+  <h2>5-5. 取り消す：3つの場面</h2>
+  <p>失敗には、<strong>「どこまで進んだか」</strong>によって、3つの場面があります。第3章の「3つの場所」（作業フォルダ・ステージ・リポジトリ）を思い出してください。</p>
+  <table>
+    <tr><th>場面</th><th>どこまで進んだか</th><th>戻し方</th></tr>
+    <tr><td>A</td><td>ファイルを変えて保存した（まだ <code>add</code> していない）</td><td><code>git restore ファイル名</code></td></tr>
+    <tr><td>B</td><td><code>add</code> した（まだ <code>commit</code> していない）</td><td><code>git restore --staged ファイル名</code></td></tr>
+    <tr><td>C</td><td><code>commit</code> した（<code>push</code> も、した）</td><td><code>git revert ID</code></td></tr>
+  </table>
+
+  <h3>場面A：保存した変更を、捨てる（restore）</h3>
+  <p>メモ帳で <code>diary.txt</code> を開き、中身を全部消して、<code>oops</code> とだけ書いて、保存して閉じてください（わざと失敗します）。</p>
+<pre><code>git status</code></pre>
+<pre class="term"><span class="ps">PS C:\work\diary&gt; git status</span>
 <span class="out">On branch main
 Your branch is up to date with 'origin/main'.
 
-nothing to commit, working tree clean</span>
-<span class="ps">PS C:\work\my-notes&gt; git branch</span>
-<span class="out">* main</span></pre>
-  <p><code>git branch</code> は、<strong>ブランチの一覧</strong>を出します。<strong><code>*</code> が付いている枝が、今いる枝</strong>です。今は、<code>main</code> だけです。<code>git status</code> が「きれい（<code>working tree clean</code>）」で、<code>pull</code> で最新になっていることを確かめてから、始めます。</p>
-  <p class="etym">💡 <code>branch</code> は「枝」という意味です。</p>
-
-  <h3>手順2：枝を作って、そこへ移る</h3>
-<pre><code>git switch -c add-notes
-git branch</code></pre>
-<pre class="term"><span class="ps">PS C:\work\my-notes&gt; git switch -c add-notes</span>
-<span class="out">Switched to a new branch 'add-notes'</span>
-<span class="ps">PS C:\work\my-notes&gt; git branch</span>
-<span class="out">* add-notes
-  main</span></pre>
-  <p><code>add-notes</code> という枝を作って、<strong>そこに移りました</strong>。<code>*</code> が <code>add-notes</code> に移っています。</p>
-  <p class="etym">💡 <code>switch</code> は「切り替える」。<code>-c</code> は <strong>c</strong>reate（作る）の頭文字で、「作ってから、切り替える」という意味です。</p>
+Changes not staged for commit:
+  (use "git add &lt;file&gt;..." to update what will be committed)
+  (use "git restore &lt;file&gt;..." to discard changes in working directory)
+	modified:   diary.txt</span></pre>
+  <p>2行目の説明に、<code>git restore &lt;file&gt;</code> で「変更を捨てる（discard）」と書いてあります。そのとおりに打ちます。</p>
+<pre><code>git restore diary.txt
+type diary.txt</code></pre>
+<pre class="term"><span class="ps">PS C:\work\diary&gt; git restore diary.txt</span>
+<span class="ps">PS C:\work\diary&gt; type diary.txt</span>
+<span class="out">day 1: I started using Git.
+day 2: I learned git diff.</span></pre>
+  <p><strong>最後に記録したときの状態</strong>に、戻りました。</p>
+  <p class="etym">💡 restore ＝「元に戻す」。</p>
   <div class="box warn">
-    <strong class="title">「a branch named 'add-notes' already exists」と出たら</strong>
-    <code>git switch -c add-notes</code> で、次のエラーが出ることがあります。
-<pre class="term"><span class="ps">PS C:\work\my-notes&gt; git switch -c add-notes</span>
-<span class="out">fatal: a branch named 'add-notes' already exists</span></pre>
-    「<code>add-notes</code> という名前のブランチが、すでにあります」という意味です。以前に、この手順を試して、作ってあったときに出ます。<strong>壊れてはいません。</strong>（<code>-c</code> は「新しく作る」なので、同じ名前があると、エラーになります。）
-    <p>まず、状況を確かめます。</p>
-<pre><code>git branch -v
-git log --oneline --graph --all</code></pre>
-    <ul>
-      <li><strong>合流済み</strong>のとき（<code>add-notes</code> が、<code>main</code> と同じコミットを指している）：<code>git branch -d add-notes</code> で片付けてから、もう一度 <code>git switch -c add-notes</code> を打ちます。</li>
-      <li><strong>まだ合流していない</strong>とき（<code>-d</code> が <code>not fully merged</code> と止める）：無理に消さずに、<strong>別の名前</strong>（たとえば <code>add-notes2</code>）で、作り直します。以降の <code>add-notes</code> は、<code>add-notes2</code> に読み替えてください。</li>
-    </ul>
-    すでにあるブランチに<strong>移るだけ</strong>なら、<code>-c</code> を付けずに、<code>git switch add-notes</code> と打ちます。
-  </div>
-  <div class="box">
-    <strong class="title">ブランチの名前の付け方</strong>
-    名前には、<strong>半角の英数字とハイフン（<code>-</code>）</strong>を使います。スペースは使えません。「何をする枝か」が分かる名前にします（例：<code>add-notes</code>、<code>fix-typo</code>）。
+    <strong class="title">捨てた変更は、戻らない</strong>
+    <code>git restore</code> で捨てた変更は、<strong>まだ記録していなかった</strong>ので、Git にも残っていません。本当に要らない変更のときだけ、使ってください。
   </div>
 
-  <h3>手順3：この枝で、作業して、記録する</h3>
-<pre><code>New-Item notes.txt
-notepad notes.txt</code></pre>
-  <p>メモ帳が開いたら、<code>my notes</code> と書いて、<strong>最後に Enter で改行</strong>して、保存して閉じます。続けて、記録します。</p>
-<pre><code>git add notes.txt
-git commit -m "Add notes.txt"
-git log --oneline</code></pre>
-<pre class="term"><span class="ps">PS C:\work\my-notes&gt; git add notes.txt</span>
-<span class="ps">PS C:\work\my-notes&gt; git commit -m "Add notes.txt"</span>
-<span class="out">[add-notes e4f6a1b] Add notes.txt
- 1 file changed, 1 insertion(+)
- create mode 100644 notes.txt</span>
-<span class="ps">PS C:\work\my-notes&gt; git log --oneline</span>
-<span class="out">e4f6a1b (HEAD -&gt; add-notes) Add notes.txt
-c5d2e8a (origin/main, main) Add third line
-7b1e4d8 Add second line to hello.txt
-3f2a9c1 Add hello.txt</span></pre>
-  <p>履歴を読んでみましょう。<code>add-notes</code> は、<code>main</code> より<strong>1つ先</strong>に進んでいます（図の状態です）。<code>main</code> は、まだ <code>Add third line</code> のままです。</p>
+  <h3>場面B：<code>add</code> を、取り消す（restore --staged）</h3>
+  <p>3行目に <code>day 3: restore is useful.</code> と足して保存し、<code>git add diary.txt</code> を打ちます。そのあとで、「まだ記録に入れたくない」と思ったとします。</p>
+<pre><code>git restore --staged diary.txt
+git status</code></pre>
+<pre class="term"><span class="ps">PS C:\work\diary&gt; git restore --staged diary.txt</span>
+<span class="ps">PS C:\work\diary&gt; git status</span>
+<span class="out">On branch main
+Your branch is up to date with 'origin/main'.
 
-  <h3>手順4：切り替えると、ファイルが「現れたり、消えたり」する</h3>
-  <p>ここが、ブランチの面白いところです。<code>main</code> に切り替えて、フォルダの中身を見てみましょう。</p>
-<pre><code>git switch main
-ls</code></pre>
-<pre class="term"><span class="ps">PS C:\work\my-notes&gt; git switch main</span>
-<span class="out">Switched to branch 'main'
-Your branch is up to date with 'origin/main'.</span>
-<span class="ps">PS C:\work\my-notes&gt; ls</span>
-<span class="out">
-    Directory: C:\work\my-notes
-
-Mode                 LastWriteTime         Length Name
-----                 -------------         ------ ----
--a----        2026/10/11     11:20             36 hello.txt</span></pre>
-  <p><strong><code>notes.txt</code> が、消えました！</strong>（エクスプローラーで開いたままにしておくと、目の前で消えるのも見られます。）では、元の枝に戻します。</p>
-<pre><code>git switch add-notes
-ls</code></pre>
-<pre class="term"><span class="ps">PS C:\work\my-notes&gt; git switch add-notes</span>
-<span class="out">Switched to branch 'add-notes'</span>
-<span class="ps">PS C:\work\my-notes&gt; ls</span>
-<span class="out">
-    Directory: C:\work\my-notes
-
-Mode                 LastWriteTime         Length Name
-----                 -------------         ------ ----
--a----        2026/10/11     11:20             36 hello.txt
--a----        2026/10/11     11:32             10 notes.txt</span></pre>
-  <p><code>notes.txt</code> が、<strong>戻ってきました</strong>。ファイルが消えたのではありません。<strong>ブランチを切り替えると、作業フォルダの中身が、その枝の状態に入れ替わる</strong>のです。</p>
-  <figure class="diagram">
-    <svg class="d" viewBox="0 0 640 200" role="img" aria-label="ブランチを切り替えると作業フォルダの中身が入れ替わる図">
-      <defs><marker id="e2" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="arrowhead" d="M0 0 L10 5 L0 10 z"/></marker></defs>
-      <rect class="b1" x="10" y="16" width="250" height="140" rx="12"/>
-      <text class="t-md" x="135" y="46" text-anchor="middle">main にいるとき</text>
-      <text class="t-sm" x="135" y="86" text-anchor="middle">📄 hello.txt</text>
-      <text class="t-sm muted" x="135" y="126" text-anchor="middle">（notes.txt は無い）</text>
-      <rect class="b2" x="380" y="16" width="250" height="140" rx="12"/>
-      <text class="t-md" x="505" y="46" text-anchor="middle">add-notes にいるとき</text>
-      <text class="t-sm" x="505" y="86" text-anchor="middle">📄 hello.txt</text>
-      <text class="t-sm" x="505" y="112" text-anchor="middle">📄 notes.txt</text>
-      <path class="ln" d="M264 86 H376" marker-start="url(#e2)" marker-end="url(#e2)"/>
-      <text class="t-mono" x="320" y="74" text-anchor="middle" style="font-size:13px">git switch</text>
-      <text class="t-sm muted" x="320" y="188" text-anchor="middle">同じフォルダの中身が、切り替えるたびに、その枝の状態に入れ替わる</text>
-    </svg>
-    <figcaption>「作業フォルダの見え方」を切り替えるのが、<code>git switch</code></figcaption>
-  </figure>
-  <div class="box warn">
-    <strong class="title">切り替える前に、<code>git status</code> で「きれい」を確かめる</strong>
-    まだ記録（<code>commit</code>）していない変更があるまま切り替えると、<strong>その変更が、切り替え先の枝に、ついてきます</strong>（または、エラーで止まります）。どの枝の変更か分からなくなるので、切り替える前は、<strong>記録しておく</strong>のが基本です。
-  </div>
-
-  <h3>手順5：<code>main</code> に合流させる（merge）</h3>
-  <p>作業が終わった枝を、<code>main</code> に合流させます。<strong>「合流させたい側」（<code>main</code>）に移ってから</strong>、<code>merge</code> します。</p>
-<pre><code>git switch main
-git merge add-notes</code></pre>
-<pre class="term"><span class="ps">PS C:\work\my-notes&gt; git switch main</span>
-<span class="out">Switched to branch 'main'
-Your branch is up to date with 'origin/main'.</span>
-<span class="ps">PS C:\work\my-notes&gt; git merge add-notes</span>
-<span class="out">Updating c5d2e8a..e4f6a1b
-Fast-forward
- notes.txt | 1 +
- 1 file changed, 1 insertion(+)
- create mode 100644 notes.txt</span></pre>
-  <p><code>Fast-forward</code>（早送り）と出ました。<code>main</code> が動いていなかったので、<code>main</code> の名札を、<strong>先に進めるだけ</strong>で済んだ、という意味です。<code>main</code> でも、<code>notes.txt</code> が見えるはずです。履歴の図も、見てみましょう。</p>
-<pre><code>git log --oneline --graph --all</code></pre>
-<pre class="term"><span class="ps">PS C:\work\my-notes&gt; git log --oneline --graph --all</span>
-<span class="out">* e4f6a1b (HEAD -&gt; main, add-notes) Add notes.txt
-* c5d2e8a (origin/main) Add third line
-* 7b1e4d8 Add second line to hello.txt
-* 3f2a9c1 Add hello.txt</span></pre>
-  <p class="etym">💡 <code>merge</code> は「併合する、合流させる」。<code>--graph</code> は「図にする」、<code>--all</code> は「すべての枝を」の意味です。</p>
-
-  <div class="box">
-    <strong class="title">コマンドの綴りを間違えると</strong>
-    <code>git merge</code> を <code>git marge</code> のように打ち間違えると、次のように、<strong>正しい綴りを、提案してくれます</strong>。
-<pre class="term"><span class="ps">PS C:\work\my-notes&gt; git marge add-notes</span>
-<span class="out">git: 'marge' is not a git command. See 'git --help'.
-
-The most similar command is
-        merge</span></pre>
-    「<code>marge</code> は、Git のコマンドではありません。いちばん似ているのは <code>merge</code> です」という意味です。壊れてはいません。<code>↑</code> キーで前のコマンドを呼び出して、直して、打ち直しましょう。
-  </div>
-
-  <h3>手順6：役目を終えた枝を、片付ける</h3>
-<pre><code>git branch -d add-notes
-git branch</code></pre>
-<pre class="term"><span class="ps">PS C:\work\my-notes&gt; git branch -d add-notes</span>
-<span class="out">Deleted branch add-notes (was e4f6a1b).</span>
-<span class="ps">PS C:\work\my-notes&gt; git branch</span>
-<span class="out">* main</span></pre>
-  <p>枝は、名札を消しただけです。<strong>記録（コミット）は、<code>main</code> に合流済みなので、消えません。</strong></p>
-  <p class="etym">💡 <code>-d</code> は <strong>d</strong>elete（削除）の頭文字です。</p>
-  <div class="box warn">
-    <strong class="title">小文字の <code>-d</code> が安全。大文字の <code>-D</code> は危険</strong>
-    まだ合流していない枝を <code>-d</code> で消そうとすると、<code>error: the branch '…' is not fully merged.</code> と出て、<strong>止めてくれます</strong>。これは、「合流していない記録が、失われるよ」という警告です。<strong>大文字の <code>-D</code> は、その警告を無視して、強制的に消します。</strong>意味が分かるまで、使わないでください。
-  </div>
-
-  <h3>手順7：GitHub に送る</h3>
-<pre><code>git push</code></pre>
-<pre class="term"><span class="ps">PS C:\work\my-notes&gt; git push</span>
-<span class="out">Enumerating objects: 4, done.
-Counting objects: 100% (4/4), done.
-Writing objects: 100% (3/3), 310 bytes | 310.00 KiB/s, done.
-Total 3 (delta 0), reused 0 (delta 0), pack-reused 0
-To https://github.com/chitchi1216/my-notes.git
-   c5d2e8a..e4f6a1b  main -&gt; main</span></pre>
-  <p>GitHub の <code>main</code> にも、<code>notes.txt</code> が届きました。</p>
-
-  <h3>実習A の流れ（まとめ）</h3>
-  <ol>
-    <li><code>git switch -c 枝の名前</code>：枝を作って、移る</li>
-    <li>作業して、<code>add</code> → <code>commit</code></li>
-    <li><code>git switch main</code>：合流先（<code>main</code>）に戻る</li>
-    <li><code>git merge 枝の名前</code>：合流させる</li>
-    <li><code>git branch -d 枝の名前</code>：枝を片付ける</li>
-  </ol>
-
-  <h2>5-3. 実習B：お互いが進んだあとの、合流</h2>
-  <p>実習A では、<code>main</code> が動いていなかったので、「早送り」で済みました。しかし、チームで作業すると、<strong>合流するまでの間に、<code>main</code> のほうも、進んでいる</strong>ことが、よくあります。その場合を体験します。</p>
-  <figure class="diagram">
-    <svg class="d" viewBox="0 0 640 270" role="img" aria-label="早送りの合流と、合流コミットを作る合流の2種類を比べた図">
-      <defs><marker id="e3" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path class="arrowhead" d="M0 0 L10 5 L0 10 z"/></marker></defs>
-      <rect class="b0" x="6" y="8" width="304" height="254" rx="12"/>
-      <text class="t-md" x="158" y="34" text-anchor="middle">main が動いていない場合</text>
-      <text class="t-sm muted" x="158" y="54" text-anchor="middle">→ 早送り（Fast-forward）</text>
-      <text class="t-sm muted" x="26" y="92">合流の前</text>
-      <path class="ln" d="M52 116 H152 M172 116 H252"/>
-      <circle cx="42" cy="116" r="10" class="b0"/><circle cx="162" cy="116" r="10" class="b0"/><circle cx="262" cy="116" r="10" class="b2"/>
-      <text class="t-sm" x="162" y="150" text-anchor="middle">main</text>
-      <text class="t-sm" x="262" y="150" text-anchor="middle">add-notes</text>
-      <text class="t-sm muted" x="26" y="188">合流のあと</text>
-      <path class="ln" d="M52 212 H152 M172 212 H252"/>
-      <circle cx="42" cy="212" r="10" class="b0"/><circle cx="162" cy="212" r="10" class="b0"/><circle cx="262" cy="212" r="10" class="b2"/>
-      <text class="t-sm" x="226" y="246" text-anchor="middle">main ＝ add-notes</text>
-      <rect class="b0" x="330" y="8" width="304" height="254" rx="12"/>
-      <text class="t-md" x="482" y="34" text-anchor="middle">main も進んでいる場合</text>
-      <text class="t-sm muted" x="482" y="54" text-anchor="middle">→ 合流コミットを作る</text>
-      <path class="ln" d="M372 150 H452 M462 150 L516 108 M462 150 L516 192 M526 108 L582 150 M526 192 L582 150"/>
-      <circle cx="362" cy="150" r="10" class="b0"/><circle cx="452" cy="150" r="10" class="b0"/><circle cx="522" cy="108" r="10" class="b1"/><circle cx="522" cy="192" r="10" class="b2"/><circle cx="592" cy="150" r="12" class="b3"/>
-      <text class="t-sm" x="522" y="86" text-anchor="middle">b.txt（main）</text>
-      <text class="t-sm" x="522" y="224" text-anchor="middle">a.txt（feature-a）</text>
-      <text class="t-md" x="592" y="184" text-anchor="middle">合流</text>
-      <text class="t-sm muted" x="482" y="252" text-anchor="middle">2つの流れを、ひとつにまとめる</text>
-    </svg>
-    <figcaption>左：名札を進めるだけ。右：2つの流れを合わせる「合流コミット」ができる</figcaption>
-  </figure>
-
-  <h3>手順1：枝 <code>feature-a</code> で、<code>a.txt</code> を作る</h3>
-<pre><code>git switch -c feature-a
-New-Item a.txt
-notepad a.txt</code></pre>
-  <p><code>a</code> と書いて（最後に Enter）保存、閉じて、記録します。</p>
-<pre><code>git add a.txt
-git commit -m "Add a.txt"</code></pre>
-
-  <h3>手順2：<code>main</code> に戻って、<code>main</code> でも作業する</h3>
-<pre><code>git switch main
-New-Item b.txt
-notepad b.txt</code></pre>
-  <p><code>b</code> と書いて（最後に Enter）保存、閉じて、記録します。</p>
-<pre><code>git add b.txt
-git commit -m "Add b.txt"</code></pre>
-  <p>これで、<code>feature-a</code> と <code>main</code> が、<strong>それぞれ別々に1つずつ進みました</strong>（図の右側の状態です）。</p>
-
-  <h3>手順3：合流させる</h3>
-<pre><code>git merge feature-a</code></pre>
-  <p><strong>メモ帳が開きます。</strong>最初の行に、<code>Merge branch 'feature-a'</code> と書かれています。これは、<strong>合流コミットのメッセージ</strong>です。何も変えずに、<strong>保存して（<code>Ctrl</code> + <code>S</code>）、メモ帳を閉じて</strong>ください（<code>#</code> で始まる行は、説明なので、無視されます）。メモ帳が開いている間は、ターミナルに <code>hint: Waiting for your editor to close the file...</code> と出ます。閉じると、<code>unix2dos</code> / <code>dos2unix</code> の行が出ます。第3章と同じ、無視してよいお知らせです。</p>
-<pre class="term"><span class="ps">PS C:\work\my-notes&gt; git merge feature-a</span>
-<span class="out">hint: Waiting for your editor to close the file... unix2dos: converting file C:/work/my-notes/.git/MERGE_MSG to DOS format...
-dos2unix: converting file C:/work/my-notes/.git/MERGE_MSG to Unix format...
-Merge made by the 'ort' strategy.
- a.txt | 1 +
- 1 file changed, 1 insertion(+)
- create mode 100644 a.txt</span></pre>
-  <p><code>Merge made by …</code> は、<strong>合流コミットが作られた</strong>という意味です。<code>ls</code> で見ると、<code>a.txt</code> も <code>b.txt</code> も、両方あるはずです。</p>
-
-  <h3>手順4：履歴の図を見る</h3>
-<pre><code>git log --oneline --graph --all</code></pre>
-<pre class="term"><span class="ps">PS C:\work\my-notes&gt; git log --oneline --graph --all</span>
-<span class="out">*   f1a29e4 (HEAD -&gt; main) Merge branch 'feature-a'
-|\
-| * 2b7c9d1 (feature-a) Add a.txt
-* | 6c3f0a8 Add b.txt
-|/
-* e4f6a1b Add notes.txt
-* c5d2e8a (origin/main) Add third line
-* 7b1e4d8 Add second line to hello.txt
-* 3f2a9c1 Add hello.txt</span></pre>
-  <p>枝分かれして、また1つに合流した様子が、<strong>図として</strong>読めます。<code>*</code> が1つのコミット、<code>|</code> や <code>\</code> <code>/</code> が、枝の流れです。</p>
-  <p>片付けて、GitHub に送ります。</p>
-<pre><code>git branch -d feature-a
+Changes not staged for commit:
+  (use "git add &lt;file&gt;..." to update what will be committed)
+  (use "git restore &lt;file&gt;..." to discard changes in working directory)
+	modified:   diary.txt</span></pre>
+  <p>ステージから、<strong>下ろされました</strong>（<code>Changes to be committed</code> から、<code>Changes not staged</code> に戻りました）。<strong>ファイルの中身（3行目）は、そのまま残っています。</strong>場面A と違い、何も失われません。</p>
+  <p class="etym">💡 staged ＝「ステージに並べられた」。<code>--staged</code> を付けると、「ステージから下ろす」だけになります。</p>
+  <p>確かめたら、もう一度 <code>add</code> して、記録して、送っておきましょう。</p>
+<pre><code>git add diary.txt
+git commit -m "Add day 3"
 git push</code></pre>
 
-  <h2>5-4. 第4章の <code>git pull</code> の、正体</h2>
-  <p>第4章で、<code>git pull</code> は「<code>fetch</code>（取ってくる）と <code>merge</code>（合わせる）を続けて行うコマンド」と説明しました。ここまで来れば、意味が分かります。</p>
-  <ul>
-    <li>GitHub の <code>main</code>（<code>origin/main</code>）を、取ってくる（<code>fetch</code>）</li>
-    <li>それを、自分の <code>main</code> に、<strong>マージする</strong>（<code>merge</code>）</li>
-  </ul>
-  <p>自分の <code>main</code> が進んでいなければ「早送り」、<strong>お互いが進んでいれば「合流コミット」</strong>になります。第4章のチャレンジ3で、メモ帳が開いたのは、そのためです。</p>
+  <h3>場面C：記録（commit）を、取り消す（revert）</h3>
+  <p>記録して、GitHub に送ったあとで、「<strong>あの記録は、間違いだった</strong>」と気づくこともあります。わざと、その場面を作ります。メモ帳で <code>diary.txt</code> の中身を<strong>全部消して</strong>保存し、記録して、送ってしまいます。</p>
+<pre><code>git add diary.txt
+git commit -m "Clean up diary"
+git push
+git log --oneline</code></pre>
+<pre class="term"><span class="ps">PS C:\work\diary&gt; git log --oneline</span>
+<span class="out">49d72cc (HEAD -&gt; main, origin/main) Clean up diary
+4958812 Add day 3
+9e6d741 Add day 2
+6e467d8 Add day 1
+c3e2d5c Add .gitignore</span></pre>
+  <p>取り消したい記録は、いちばん上の <code>49d72cc</code>（<code>Clean up diary</code>）です。<code>git revert</code> に、その ID を付けて打ちます。</p>
+<pre><code>git revert 49d72cc</code></pre>
+  <p><strong>メモ帳が開きます。</strong>最初の行に、<code>Revert "Clean up diary"</code> と書かれています。これは、<strong>「取り消した」という記録のメッセージ</strong>です。何も変えずに、<strong>保存して（<code>Ctrl</code> + <code>S</code>）、メモ帳を閉じて</strong>ください。第4章のチャレンジ3で、<code>pull</code> のときにメモ帳が開いたのと、同じです。閉じると、<code>unix2dos</code> / <code>dos2unix</code> の行が出ますが、無視してよいお知らせです。</p>
+<pre class="term"><span class="ps">PS C:\work\diary&gt; git revert 49d72cc</span>
+<span class="out">hint: Waiting for your editor to close the file... unix2dos: converting file C:/work/diary/.git/COMMIT_EDITMSG to DOS format...
+dos2unix: converting file C:/work/diary/.git/COMMIT_EDITMSG to Unix format...
+[main 6ff89fa] Revert "Clean up diary"
+ 1 file changed, 3 insertions(+)</span>
+<span class="ps">PS C:\work\diary&gt; type diary.txt</span>
+<span class="out">day 1: I started using Git.
+day 2: I learned git diff.
+day 3: restore is useful.</span>
+<span class="ps">PS C:\work\diary&gt; git log --oneline</span>
+<span class="out">6ff89fa (HEAD -&gt; main) Revert "Clean up diary"
+49d72cc (origin/main) Clean up diary
+4958812 Add day 3
+9e6d741 Add day 2
+6e467d8 Add day 1
+c3e2d5c Add .gitignore</span></pre>
+  <p>日記が、<strong>3行とも戻りました</strong>。履歴を見ると、<code>Clean up diary</code> は消えずに残り、その上に、<strong>「それを打ち消す記録」</strong>（<code>Revert "Clean up diary"</code>）が、新しく足されています。最後に、GitHub にも送ります。</p>
+<pre><code>git push</code></pre>
+  <p class="etym">💡 revert ＝「元の状態に戻す」。</p>
+  <figure class="diagram">
+    <svg class="d" viewBox="0 0 640 155" role="img" aria-label="revert は、間違えた記録を消さずに、打ち消す記録を新しく足す図">
+      <defs><marker id="f2" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path class="arrowhead" d="M0 0 L10 5 L0 10 z"/></marker></defs>
+      <path class="ln" d="M72 60 H178 M202 60 H308 M332 60 H438"/>
+      <circle cx="60" cy="60" r="12" class="b0"/><circle cx="190" cy="60" r="12" class="b0"/><circle cx="320" cy="60" r="12" class="b1"/><circle cx="450" cy="60" r="12" class="b2"/>
+      <text class="t-sm" x="60" y="96" text-anchor="middle">Add day 2</text>
+      <text class="t-sm" x="190" y="96" text-anchor="middle">Add day 3</text>
+      <text class="t-sm" x="320" y="96" text-anchor="middle">Clean up diary</text>
+      <text class="t-sm muted" x="320" y="116" text-anchor="middle">（間違い）</text>
+      <text class="t-sm" x="450" y="96" text-anchor="middle">Revert "Clean up…"</text>
+      <text class="t-sm muted" x="450" y="116" text-anchor="middle">（打ち消す記録）</text>
+      <path class="ln" d="M440 36 Q385 6 330 36" marker-end="url(#f2)"/>
+      <text class="t-sm muted" x="450" y="138" text-anchor="middle">→ 中身は「Add day 3」に戻る</text>
+    </svg>
+    <figcaption><code>revert</code> は、間違えた記録を消さない。「逆の変更」を、新しい記録として足す</figcaption>
+  </figure>
+  <div class="box ok">
+    <strong class="title"><code>revert</code> は、<code>push</code> したあとでも安全</strong>
+    <code>revert</code> は、過去の記録を<strong>消したり、書き換えたりしません</strong>。新しい記録を1つ足すだけなので、GitHub に送ったあとでも、ふつうに <code>git push</code> で送れます。「間違えた」ことも、「直した」ことも、履歴に正直に残ります。
+  </div>
+  <div class="box warn">
+    <strong class="title"><code>git reset --hard</code> と <code>git push --force</code> は、まだ使わない</strong>
+    ネットでは、記録を取り消す方法として、<code>git reset</code> がよく紹介されています。<code>reset</code> は、<strong>過去の記録そのものを、なかったことにする</strong>コマンドで、使い方を間違えると、記録が失われます。GitHub に送ったあとに使うと、<code>push</code> が拒否され、<code>--force</code>（強制）が必要になります。この教材では、<strong>取り消しは <code>revert</code></strong> にします。
+  </div>
 
-  <details class="coffee">
-    <summary>☕ コーヒーブレイク：「master」から「main」へ。<code>checkout</code> から <code>switch</code> へ<span class="skip">（読み飛ばしてOK）</span></summary>
-    <p><strong>「main」という名前の歴史</strong>　昔の Git では、最初の枝の名前は、<code>master</code> が標準でした。2020年ごろ、「<code>master</code>（主人）」という言葉が、人を支配する関係を連想させる、という指摘が広がりました。GitHub は、2020年10月から、新しく作るリポジトリの最初の枝を <code>main</code> にしました。Git 本体も、バージョン 2.28 で、最初の枝の名前を設定できる <code>init.defaultBranch</code> を追加しました。第3章で、この設定を行った理由です。古い資料に <code>master</code> と書かれていたら、<code>main</code> と同じ役割だと読み替えてください。</p>
-    <p><strong>「switch」というコマンド</strong>　ネットの古い手順では、ブランチの切り替えに <code>git checkout</code> が使われています。<code>checkout</code> は、「枝の切り替え」だけでなく、「ファイルを元に戻す」など、複数の役割を兼ねていて、初心者には分かりにくいものでした。そこで、2019年ごろ（Git 2.23）に、枝の切り替え専用の <code>git switch</code> が追加されました。この教材では <code>switch</code> を使いますが、<code>git checkout -b 枝の名前</code> は、<code>git switch -c 枝の名前</code> と同じ働きです。</p>
-    <p class="meta">※ 年代や経緯には、諸説あります。</p>
-  </details>
+  <h3>ここまでの流れ（まとめ）</h3>
+  <table>
+    <tr><th>やりたいこと</th><th>コマンド</th></tr>
+    <tr><td>記録しないファイルを決める</td><td><code>.gitignore</code> に、ファイル名を書く</td></tr>
+    <tr><td>1つの記録の中身を見る</td><td><code>git show ID</code></td></tr>
+    <tr><td>保存した変更を、捨てる（add 前）</td><td><code>git restore ファイル名</code></td></tr>
+    <tr><td><code>add</code> を取り消す（中身は残る）</td><td><code>git restore --staged ファイル名</code></td></tr>
+    <tr><td>記録を、打ち消す（push 後でもよい）</td><td><code>git revert ID</code></td></tr>
+  </table>
+  <!-- TODO: Win11実機で確認：.gitignore をメモ帳で開くときの挙動、git show の表示（日付の形）、git revert でメモ帳が開くときの表示（COMMIT_EDITMSG の unix2dos 行） -->
 
-  <h2>5-5. チャレンジ</h2>
-  <p>必須ではありません。実習A・B が終わった状態から、始めます。</p>
+  <h2>5-6. チャレンジ</h2>
+  <p>必須ではありません。5-5 が終わった状態から始めます。</p>
 
   <div class="challenge">
-    <strong class="title">🎯 チャレンジ1 <span class="level">★☆☆</span>　枝の一覧を、くわしく見る。前の枝へ戻る</strong>
-    <p>新しく枝 <code>try-it</code> を作って移り、<code>main</code> に戻ってください。そして、<strong>各枝が、どのコミットを指しているか</strong>が分かる一覧を、表示してください。さらに、<strong>直前にいた枝へ、一発で戻る</strong>方法を、試してください。</p>
+    <strong class="title">🎯 チャレンジ1 <span class="level">★☆☆</span>　1日目の日記を、ファイルを開かずに読む</strong>
+    <p>今の <code>diary.txt</code> には、3行あります。<strong>1日目の記録をしたときの <code>diary.txt</code> の中身</strong>を、メモ帳を使わず、ターミナルだけで表示してください。</p>
     <details>
       <summary>ヒント</summary>
-      <p>一覧は <code>git branch</code> に、<strong>v</strong>erbose（くわしく）の <code>-v</code> を付けます。「前の枝」は、<code>switch</code> のあとに、<code>-</code>（ハイフン）だけを付けます。</p>
+      <p>まず <code>git log --oneline</code> で、<code>Add day 1</code> の ID を調べます。5-4 の表の、いちばん下の行を使います。</p>
     </details>
     <details>
       <summary>こたえと解説</summary>
-<pre><code>git switch -c try-it
-git switch main
-git branch -v
-git switch -</code></pre>
-<pre class="term"><span class="ps">PS C:\work\my-notes&gt; git branch -v</span>
-<span class="out">* main   f1a29e4 Merge branch 'feature-a'
-  try-it f1a29e4 Merge branch 'feature-a'</span>
-<span class="ps">PS C:\work\my-notes&gt; git switch -</span>
-<span class="out">Switched to branch 'try-it'</span></pre>
-      <p><code>git branch -v</code> は、各枝が指す、<strong>最新のコミットのID</strong>と、メッセージを見せてくれます。<code>try-it</code> は、作ったばかりなので、<code>main</code> と同じコミットを指しています。<code>git switch -</code> は、<strong>直前にいた枝</strong>に戻ります。確かめたら、<code>git switch main</code> に戻り、<code>git branch -d try-it</code> で片付けましょう。</p>
+<pre><code>git log --oneline
+git show 6e467d8:diary.txt</code></pre>
+<pre class="term"><span class="ps">PS C:\work\diary&gt; git show 6e467d8:diary.txt</span>
+<span class="out">day 1: I started using Git.</span></pre>
+      <p><code>ID:ファイル名</code> の形で、<strong>そのときのファイルの中身</strong>だけを見られます。今のファイルは、変わりません。「前は、どう書いてあったっけ？」というときに便利です。</p>
     </details>
   </div>
 
   <div class="challenge">
-    <strong class="title">🎯 チャレンジ2 <span class="level">★★☆</span>　履歴の図を、読む</strong>
-    <p>次の図は、あるチームの履歴です。次の3つに答えてください。</p>
-<pre class="term"><span class="out">*   9a1c3e5 (HEAD -&gt; main) Merge branch 'fix-typo'
-|\
-| * 4d7b2f0 (fix-typo) Fix typo in README
-* | 8e5a6c1 Add profile page
-|/
-* 1b2c3d4 Initial commit</span></pre>
+    <strong class="title">🎯 チャレンジ2 <span class="level">★★☆</span>　<code>.gitignore</code> に、ルールを足す</strong>
+    <p><code>memo.tmp</code> と <code>draft.tmp</code> という2つのファイルを作ってください。そして、<strong><code>.tmp</code> で終わるファイルを、すべて無視する</strong>ように、<code>.gitignore</code> を変えて、記録してください。<code>git status</code> に、2つのファイルが出なくなれば、成功です。</p>
+    <details>
+      <summary>ヒント</summary>
+      <p>5-3 の手順2の「<code>.gitignore</code> の書き方」の表を見ます。<code>.gitignore</code> そのものを変えたので、<code>.gitignore</code> を <code>add</code>・<code>commit</code> します。</p>
+    </details>
+    <details>
+      <summary>こたえと解説</summary>
+<pre><code>New-Item memo.tmp
+New-Item draft.tmp
+git status
+notepad .gitignore</code></pre>
+      <p>最初の <code>git status</code> では、<code>memo.tmp</code> と <code>draft.tmp</code> が、<code>Untracked files</code> に出ます。メモ帳で、2行目に <code>*.tmp</code> と足して（最後に Enter）保存し、閉じます。</p>
+<pre><code>git status
+git add .gitignore
+git commit -m "Ignore tmp files"
+git push</code></pre>
+      <p>2回目の <code>git status</code> では、<code>.tmp</code> のファイルは出ずに、<code>modified: .gitignore</code> だけが出ます。<code>*</code> は「何でも当てはまる」記号なので、<code>*.tmp</code> で、<code>.tmp</code> で終わるファイルが、まとめて無視されます。</p>
+    </details>
+  </div>
+
+  <div class="challenge">
+    <strong class="title">🎯 チャレンジ3 <span class="level">★★★</span>　間違えた記録を、自分で見つけて、取り消す</strong>
+    <p>次の手順で、わざと失敗を作り、<strong>どの記録が間違いかを、自分で見つけて</strong>、取り消してください。</p>
     <ol>
-      <li>合流コミットは、どれですか？</li>
-      <li>枝 <code>fix-typo</code> では、何をしましたか？</li>
-      <li><code>main</code> では、<code>fix-typo</code> が作られたあと、何が足されましたか？</li>
+      <li><code>diary.txt</code> に <code>day 4: good day.</code> と足して、<code>add</code>・<code>commit</code>（メッセージ <code>Add day 4</code>）する。</li>
+      <li><code>diary.txt</code> の <strong>1行目だけ</strong>を消して、<code>add</code>・<code>commit</code>（メッセージ <code>Update diary</code>）する。</li>
+      <li><code>diary.txt</code> に <code>day 5: Git is fun.</code> と足して、<code>add</code>・<code>commit</code>（メッセージ <code>Add day 5</code>）し、<code>push</code> する。</li>
     </ol>
+    <p>あとで見ると、1行目が消えています。<strong>4日目と5日目の行は残したまま</strong>、1行目だけを戻すには、どうしますか？</p>
     <details>
       <summary>ヒント</summary>
-      <p>合流コミットは、メッセージが <code>Merge branch …</code> で、<strong>左側に、枝が2本つながっています</strong>。<code>*</code> の位置が、左（<code>main</code> 側）か、右（枝側）かを見ます。</p>
+      <p>メッセージだけでは、どの記録で1行目が消えたか、分かりにくいことがあります。<code>git log -p</code> で、<code>-</code>（消した行）が出ている記録を探します。<code>revert</code> は、<strong>いちばん新しい記録でなくても</strong>、取り消せます。</p>
     </details>
     <details>
       <summary>こたえと解説</summary>
-      <ol>
-        <li><code>9a1c3e5</code>（<code>Merge branch 'fix-typo'</code>）。2本の流れが合流している、いちばん上のコミットです。</li>
-        <li>右の枝（<code>*</code> が右側）の <code>4d7b2f0</code>。<strong>README の誤字を直しました</strong>（<code>Fix typo in README</code>）。</li>
-        <li>左側（<code>main</code>）の <code>8e5a6c1</code>。<strong>プロフィールのページを足しました</strong>（<code>Add profile page</code>）。</li>
-      </ol>
-      <p>2人が、<strong>お互いを邪魔せずに</strong>、別々の作業をして、あとで合流させた様子です。ブランチを使った共同作業の、基本の形です。</p>
+<pre><code>git log -p</code></pre>
+      <p><code>Update diary</code> の記録に、<code>-day 1: I started using Git.</code>（先頭が <code>-</code>）が出ています。これが、1行目を消した記録です。<code>q</code> で抜けて、その ID で取り消します。</p>
+<pre><code>git log --oneline
+git revert Update diaryのID
+type diary.txt
+git push</code></pre>
+      <p>メモ帳が開いたら、保存して閉じます。<code>type</code> で見ると、1行目が戻り、4日目・5日目の行も、そのまま残っています。<code>revert</code> は、<strong>「その記録で行った変更だけ」を打ち消す</strong>ので、あとの記録には、影響しません。</p>
+      <p>このように、<strong>メッセージが「Update diary」のように、あいまいだと、あとで探しにくくなります。</strong>「Remove first line」のように、何をしたかが分かるメッセージを書くと、未来の自分が助かります。</p>
     </details>
   </div>
 
-  <div class="challenge">
-    <strong class="title">🎯 チャレンジ3 <span class="level">★★★</span>　同じファイルを、別の場所で変更して、合流させる</strong>
-    <p>実習B では、別々のファイル（<code>a.txt</code> と <code>b.txt</code>）を変更しました。今度は、<strong>同じファイル <code>hello.txt</code> を、別の枝で変更</strong>します。</p>
-    <ol>
-      <li><code>main</code> にいる状態で、枝 <code>edit-first</code> を作って移る。</li>
-      <li><code>hello.txt</code> の<strong>1行目</strong>を、<code>hello Git!</code> に書き換えて、<code>add</code>・<code>commit</code> する。</li>
-      <li><code>main</code> に戻って、<code>hello.txt</code> の<strong>いちばん最後</strong>に、<code>fourth line</code> という行を足して、<code>add</code>・<code>commit</code> する。</li>
-      <li><code>main</code> で、<code>git merge edit-first</code> を打つ。メモ帳が開いたら、保存して閉じる。</li>
-    </ol>
-    <p>合流は、うまくいくでしょうか？ そのあと、<code>hello.txt</code> の中身は、どうなっていますか？</p>
-    <details>
-      <summary>ヒント</summary>
-      <p>Git は、ファイルを<strong>「行」の単位</strong>で見ています。変更した行が、離れているか、ぶつかっているかが、ポイントです。</p>
-    </details>
-    <details>
-      <summary>こたえと解説</summary>
-<pre class="term"><span class="ps">PS C:\work\my-notes&gt; git merge edit-first</span>
-<span class="out">Auto-merging hello.txt
-hint: Waiting for your editor to close the file... unix2dos: converting file C:/work/my-notes/.git/MERGE_MSG to DOS format...
-dos2unix: converting file C:/work/my-notes/.git/MERGE_MSG to Unix format...
-Merge made by the 'ort' strategy.
- hello.txt | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)</span>
-<span class="ps">PS C:\work\my-notes&gt; type hello.txt</span>
-<span class="out">hello Git!
-second line
-third line
-fourth line</span></pre>
-      <p><strong>うまくいきます。</strong>1行目を変えた変更と、最後に行を足した変更は、<strong>別の場所</strong>なので、Git が、自動で合わせてくれました（<code>Auto-merging</code>）。</p>
-      <div class="box">
-        <strong class="title">では、同じ行を変更したら？</strong>
-        <strong>同じファイルの、同じ行</strong>を、別々の枝で変更すると、Git は、どちらを採用すればよいか決められません。これが「<strong>コンフリクト（衝突）</strong>」で、第7章で、わざと起こして、解消します。
-      </div>
-    </details>
+  <div class="box ok">
+    <strong class="title">STEP 2 の仕上げ：しばらく、一人で使ってみる</strong>
+    次の章に進む前に、<strong>1〜2週間、自分のファイルを Git で記録してみる</strong>ことをおすすめします。日記、読書メモ、レシピ、仕事の手順書など、テキストで書けるものなら、何でも構いません。<code>diary</code> のように、新しいリポジトリを作り、毎日の流れ（<code>pull</code> → 作業 → <code>add</code> → <code>commit</code> → <code>push</code>）をくり返します。<strong>何も見ずに、毎日の流れができる</strong>ようになったら、次へ進みましょう。
   </div>
-  <!-- TODO: Win11実機で確認：メモ帳が開く挙動（merge 時）、ls の表示、git switch -、git branch -v の表示 -->
 
   <div class="box">
     <strong class="title">コマンドの早見表</strong>
@@ -441,36 +417,36 @@ fourth line</span></pre>
 
   <h2>確認クイズ</h2>
   <details>
-    <summary>Q1. ブランチを使うと、どんなよいことがありますか？</summary>
-    <p><code>main</code> を、動く状態に保てる。作業ごとに分けられる。複数人が、お互いを邪魔せずに、同時に作業できる。</p>
+    <summary>Q1. 「毎日の流れ」で、作業を始める前と、終えるときに打つコマンドは、それぞれ何ですか？</summary>
+    <p>始める前は <code>git pull</code>（最新にする）。終えるときは <code>git push</code>（GitHub に送る）。</p>
   </details>
   <details>
-    <summary>Q2. 枝を作って、そこへ移るコマンドは？</summary>
-    <p><code>git switch -c 枝の名前</code>。（<code>-c</code> は create）</p>
+    <summary>Q2. <code>.gitignore</code> に書いたファイルは、どうなりますか？</summary>
+    <p>Git に無視され、<code>git status</code> にも出ず、記録されない。GitHub にも送られない。ただし、すでに記録したファイルは、あとから書いても無視されない。</p>
   </details>
   <details>
-    <summary>Q3. <code>add-notes</code> を <code>main</code> に合流させるとき、どの枝にいてから、どのコマンドを打ちますか？</summary>
-    <p>合流させたい側の <code>main</code> に、<code>git switch main</code> で移ってから、<code>git merge add-notes</code> を打つ。</p>
+    <summary>Q3. <code>git restore ファイル名</code> と <code>git restore --staged ファイル名</code> の違いは？</summary>
+    <p><code>git restore ファイル名</code> は、保存した変更を<strong>捨てて</strong>、最後の記録の状態に戻す（捨てた変更は戻らない）。<code>--staged</code> を付けると、ステージから下ろすだけで、ファイルの中身は変わらない。</p>
   </details>
   <details>
-    <summary>Q4. ブランチを切り替えたら、ファイルが消えたように見えました。消えてしまったのですか？</summary>
-    <p>消えていない。作業フォルダの中身が、切り替え先の枝の状態に入れ替わっただけ。元の枝に戻せば、ファイルも戻る。</p>
+    <summary>Q4. <code>push</code> したあとで、記録が間違いだと気づきました。どうしますか？</summary>
+    <p><code>git revert ID</code> で、その記録を打ち消す、新しい記録を作る。そのあと <code>git push</code> する。過去の記録は消さないので、<code>push</code> したあとでも安全。</p>
   </details>
   <details>
-    <summary>Q5. 枝を消すとき、<code>-d</code> と <code>-D</code> のどちらを使うべきですか？ それはなぜですか？</summary>
-    <p>小文字の <code>-d</code>。合流していない記録が失われる場合は、止めてくれるため。大文字の <code>-D</code> は、警告を無視して強制的に消すので、意味が分かるまで使わない。</p>
+    <summary>Q5. 1つの記録の中身（誰が・いつ・何を変えたか）を見るコマンドは？</summary>
+    <p><code>git show ID</code>。ID は、<code>git log --oneline</code> で調べる。</p>
   </details>
 
-  <h2>話し合おう（月1回の集まり用）</h2>
+  <h2>話し合おう・考えてみよう</h2>
   <ul>
-    <li>ブランチの名前は、チームでどんなルールにしますか？（例：<code>作業の内容を表す英語</code>、<code>自分の名前-作業</code> など）</li>
-    <li>「<code>main</code> を、動く状態に保つ」ことは、どんな場面で大切だと思いますか？</li>
-    <li>枝を、いつ作り、いつ合流させて、いつ消すか。4人で、どんな流れにするとよさそうですか？</li>
+    <li>自分の仕事や生活で、Git で記録してみたいファイルは、何がありますか？</li>
+    <li>「区切りがついたら、1回記録する」の「区切り」は、あなたにとって、どのくらいの大きさですか？</li>
+    <li>これまでに、「前の状態に戻したい」と思ったことは、ありますか？ そのとき、<code>restore</code> や <code>revert</code> があったら、どう使いましたか？</li>
   </ul>
 
   <nav class="pager">
     <a href="chapter-04.html">← 第4章 GitHub と連携する</a>
-    <span class="meta">第6章は準備中</span>
+    <a href="chapter-06.html">第6章 ブランチ →</a>
   </nav>
 </main>
 <footer class="site-foot">

@@ -7,7 +7,7 @@
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<header class="site"><a class="title" href="index.html">Git と GitHub 入門</a><span class="ver"><!--ver--><a href="https://github.com/chitchi1216/git-github-textbook/blob/main/CHANGELOG.md">版 0.4.21（ドラフト）</a> ・ 2026-10-11 ・ 作成者 <a href="https://github.com/chitchi1216">chitchi1216</a><!--/ver--></span></header>
+<header class="site"><a class="title" href="index.html">Git と GitHub 入門</a><span class="ver"><!--ver--><a href="https://github.com/chitchi1216/git-github-textbook/blob/main/CHANGELOG.md">版 0.5.1（ドラフト）</a> ・ 2026-10-12 ・ 作成者 <a href="https://github.com/chitchi1216">chitchi1216</a><!--/ver--></span></header>
 <main class="wrap">
   <p class="meta">第0章 ／ 目安 50〜70分</p>
   <h1>はじめに・準備</h1>
@@ -50,11 +50,11 @@
     <li>「<strong>変更の履歴を見る</strong>」から、いつ、誰が、何を変えたかを見られます。これが、Git の「履歴」の実物です。</li>
     <li>学習が進んだら、この教材の誤字や分かりにくい説明を、<strong>自分で直して提案する</strong>練習（Pull Request）にも使う予定です。</li>
   </ul>
-  <p>今は、意味が分からなくて大丈夫です。「共同開発では、こういう道具が実際に使われているんだな」と知っておいてください。</p>
+  <p>今は、意味が分からなくて大丈夫です。「Git や GitHub は、こういうふうに実際に使われているんだな」と知っておいてください。</p>
 
   <h2>0-2. この教材でめざすこと（概要）</h2>
-  <p>この教材は、<strong>Git と GitHub を使って、4人で一緒にものづくり（共同開発）ができるようになる</strong>ことをめざします。プログラミングの経験がなくても、パソコンの基本から順番に進められるように作ってあります。</p>
-  <p>共同開発では、複数の人が同じファイルを少しずつ変更していきます。そのとき、<strong>誰が・いつ・何を変えたか</strong>を記録し、<strong>みんなの変更をひとつにまとめる</strong>仕組みが必要です。それを担うのが Git と GitHub です。</p>
+  <p>この教材は、<strong>まず一人で Git と GitHub を使いこなし、そのうえで、ほかの人と一緒にものづくり（共同開発）もできるようになる</strong>ことをめざします。プログラミングの経験がなくても、パソコンの基本から順番に進められるように作ってあります。<strong>一人でも、仲間と一緒でも</strong>学べます。</p>
+  <p>一人で使うだけでも、<strong>いつ・何を変えたか</strong>が記録に残り、<strong>いつでも前の状態に戻せる</strong>ようになります。ほかの人と一緒に作るときは、<strong>誰が</strong>変えたかも記録し、<strong>みんなの変更をひとつにまとめる</strong>ことができます。それを担うのが Git と GitHub です。</p>
   <figure class="diagram">
     <svg class="d" viewBox="0 0 640 150" role="img" aria-label="学習の3つの段階">
       <defs><marker id="a00" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path class="arrowhead" d="M0 0 L10 5 L0 10 z"/></marker></defs>
@@ -64,28 +64,37 @@
       <text class="t-sm" x="105" y="84" text-anchor="middle">準備・パソコンの仕組み</text>
       <text class="t-sm" x="105" y="104" text-anchor="middle">ターミナルに慣れる</text>
       <rect class="b2" x="225" y="22" width="190" height="104" rx="12"/>
-      <text class="t-sm muted" x="320" y="16" text-anchor="middle">STEP 2　第3〜4章</text>
+      <text class="t-sm muted" x="320" y="16" text-anchor="middle">STEP 2　第3〜6章</text>
       <text class="t-md" x="320" y="60" text-anchor="middle">Git を一人で使う</text>
-      <text class="t-sm" x="320" y="84" text-anchor="middle">記録する（commit）</text>
-      <text class="t-sm" x="320" y="104" text-anchor="middle">GitHub に送る（push）</text>
+      <text class="t-sm" x="320" y="84" text-anchor="middle">記録する・送る・戻す</text>
+      <text class="t-sm" x="320" y="104" text-anchor="middle">ブランチで試す</text>
       <rect class="b3" x="440" y="22" width="190" height="104" rx="12"/>
-      <text class="t-sm muted" x="535" y="16" text-anchor="middle">STEP 3　第5〜8章</text>
-      <text class="t-md" x="535" y="60" text-anchor="middle">チームで開発する</text>
-      <text class="t-sm" x="535" y="84" text-anchor="middle">ブランチ・Pull Request</text>
+      <text class="t-sm muted" x="535" y="16" text-anchor="middle">STEP 3　第7〜9章</text>
+      <text class="t-md" x="535" y="60" text-anchor="middle">ほかの人と開発する</text>
+      <text class="t-sm" x="535" y="84" text-anchor="middle">Pull Request</text>
       <text class="t-sm" x="535" y="104" text-anchor="middle">コンフリクト解消</text>
       <path class="ln" d="M203 74 H221" marker-end="url(#a00)"/>
       <path class="ln" d="M418 74 H436" marker-end="url(#a00)"/>
     </svg>
-    <figcaption>学習の全体像。3つの段階で、一人から4人の共同開発へ進む</figcaption>
+    <figcaption>学習の全体像。一人で使いこなしてから、ほかの人との共同開発へ進む</figcaption>
   </figure>
   <h3>最終ゴール</h3>
-  <p>次のことが、4人でできるようになります。</p>
+  <p><strong>一人で</strong>（STEP 2）、次のことができるようになります。</p>
   <ul>
-    <li>共有の置き場（GitHub のリポジトリ）に、自分の変更を送る</li>
-    <li>他の人の変更を、自分のパソコンに取り込む</li>
-    <li>自分の作業を別の枝（ブランチ）で進め、Pull Request で他の人に確認してもらってから取り込む</li>
+    <li>ファイルの変更を記録し、GitHub に置いて、毎日続ける</li>
+    <li>失敗しても、前の状態に戻す</li>
+    <li>試しの作業を別の枝（ブランチ）で進め、うまくいったら取り込む</li>
+  </ul>
+  <p><strong>ほかの人と一緒に</strong>（STEP 3）、次のことができるようになります。人数は問いません。</p>
+  <ul>
+    <li>共有の置き場（GitHub のリポジトリ）に、自分の変更を送り、他の人の変更を取り込む</li>
+    <li>Pull Request で他の人に確認してもらってから、変更を取り込む</li>
     <li>同じ場所を変更して衝突（コンフリクト）しても、自分たちで解消する</li>
   </ul>
+  <div class="box ok">
+    <strong class="title">一人で学んでいる人へ</strong>
+    STEP 2 までは、すべて一人で進められます。一人で使いこなせるようになるだけでも、十分に役立ちます。STEP 3 も、公開されているリポジトリ（この教材など）に修正を提案する方法で、一人で体験できるようにしていきます。
+  </div>
 
   <h2>0-3. 対象者</h2>
   <table>
@@ -95,7 +104,7 @@
         <ul>
           <li>普段、エクスプローラーでファイルやフォルダを扱っている</li>
           <li>Windows 11 のパソコンを使える</li>
-          <li>共同開発を、これから始めたい</li>
+          <li>ファイルの変更を、きちんと記録・管理したい（いつかは、ほかの人と一緒に作りたい）</li>
         </ul>
       </td>
       <td>
@@ -118,12 +127,12 @@
   <h2>0-4. 学び方</h2>
   <ul>
     <li><strong>基本は自習。</strong>各章は、およそ40〜70分で終わる量です。</li>
-    <li><strong>月に1回、みんなで集まってディスカッションします。</strong>各章の最後の「話し合おう」を題材にします。</li>
+    <li><strong>仲間と学ぶ場合は、ときどき集まって、ディスカッションするのがおすすめです。</strong>各章の最後の「話し合おう・考えてみよう」を題材にします。<strong>一人で学ぶ場合</strong>は、同じ問いを、自分への質問として考え、答えをメモしてみてください。</li>
     <li><strong>使う道具は、Windows 11 に入っているものを中心にします。</strong>ターミナルは PowerShell、文章を書くのは「メモ帳」です。高機能なエディタ（VS Code）は、必要になってから導入します。</li>
   </ul>
   <div class="box ok">
     <strong class="title">約束：壊しても大丈夫</strong>
-    この教材の練習は、練習用のフォルダの中だけで行います。失敗してもパソコンは壊れません。エラーが出たら、それは「うまくいかない例」として学べるチャンスです。分からないことは、そのままにせず、集まりで質問してください。
+    この教材の練習は、練習用のフォルダの中だけで行います。失敗してもパソコンは壊れません。エラーが出たら、それは「うまくいかない例」として学べるチャンスです。分からないことは、そのままにせず、エラーメッセージや、付録A「よく使うコマンド一覧」で調べてみてください（仲間と学んでいる場合は、集まりで質問しましょう）。
   </div>
 
   <h3>教材の読み方：ボックスの色の意味</h3>
@@ -148,8 +157,8 @@
     <p>本筋から少し離れた、豆知識の読み物です。読まなくても先へ進めますが、「なぜそうなっているのか」に興味がわいたら開いてみてください。</p>
   </details>
 
-  <h2>0-5. 最初に、アンケートに答える</h2>
-  <p>学習を始める前に、<strong>事前アンケート</strong>に答えてください。今のパソコンの使い方や、これまでの経験を知るためのものです。みなさんの状況に合わせて、教材や、月1回の集まりの進め方を調整するために使います。</p>
+  <h2>0-5. （グループで学ぶ場合）事前アンケートに答える</h2>
+  <p>グループで学ぶ場合は、学習を始める前に、<strong>事前アンケート</strong>に答えてください。今のパソコンの使い方や、これまでの経験を知るためのものです。みなさんの状況に合わせて、教材や、集まりの進め方を調整するために使います。<strong>一人で学ぶ場合は、この節は飛ばして構いません。</strong></p>
   <p style="text-align:center"><a class="btn" href="https://forms.gle/T41gGYNwpFr2Lam4A" target="_blank" rel="noopener">事前アンケートに答える（Google フォーム）</a></p>
   <ul>
     <li><strong>所要時間は、5分ほど</strong>です。</li>
@@ -159,7 +168,7 @@
   </ul>
   <div class="box">
     <strong class="title">アンケートが開けないとき</strong>
-    リンクを押しても開かないときは、ブラウザの別のタブや、別のブラウザで試してください。それでも開けなければ、集まりの場か、チャットで知らせてください。
+    リンクを押しても開かないときは、ブラウザの別のタブや、別のブラウザで試してください。それでも開けなければ、グループの世話役に知らせてください。
   </div>
 
   <h2>0-6. 準備の流れ</h2>
@@ -185,7 +194,7 @@
   <table>
     <tr><th>名前</th><th>一言でいうと</th></tr>
     <tr><td>Git</td><td>ファイルの変更履歴を記録する道具。自分のパソコンの中で動く</td></tr>
-    <tr><td>GitHub</td><td>Git の記録をインターネット上に置いて、みんなで共有するサービス</td></tr>
+    <tr><td>GitHub</td><td>Git の記録をインターネット上に置いておくサービス。別のパソコンや、ほかの人とも共有できる</td></tr>
     <tr><td>メモ帳</td><td>文字を書くための、Windows 標準のアプリ。この教材では、ファイルの編集に使う</td></tr>
   </table>
   <p>「Git」と「GitHub」は名前が似ていますが、別のものです。次の図で関係をつかんでください。</p>
@@ -204,12 +213,12 @@
       <rect class="b0" x="420" y="76" width="180" height="124" rx="10"/>
       <text class="t-lg" x="510" y="116" text-anchor="middle">GitHub</text>
       <text class="t-sm" x="510" y="146" text-anchor="middle">記録を置いて</text>
-      <text class="t-sm" x="510" y="166" text-anchor="middle">みんなで共有する場所</text>
+      <text class="t-sm" x="510" y="166" text-anchor="middle">置いておく・共有する場所</text>
       <path class="ln" d="M244 108 H396" marker-end="url(#a1)"/>
       <path class="ln" d="M396 170 H244" marker-end="url(#a1)"/>
       <text class="t-sm" x="320" y="98" text-anchor="middle">送る（push）</text>
       <text class="t-sm" x="320" y="192" text-anchor="middle">受け取る（pull）</text>
-      <text class="t-sm muted" x="320" y="252" text-anchor="middle">4人全員が、GitHub を通して同じ記録を見られる</text>
+      <text class="t-sm muted" x="320" y="252" text-anchor="middle">別のパソコンからも、ほかの人とも、GitHub を通して同じ記録を見られる</text>
     </svg>
     <figcaption>Git は自分のパソコンの中、GitHub はインターネット上。2つの間で記録をやりとりする</figcaption>
   </figure>
@@ -225,8 +234,8 @@
     <figcaption>GitHub のトップページ。メールアドレスを入力して「GitHub に登録」を押す。右上の「Sign in」は、<strong>すでにアカウントがある人</strong>用です。このあとの画面で、パスワードとユーザー名（使いたい名前）を入力します</figcaption>
   </figure>
   <div class="box warn">
-    <strong class="title">ユーザー名は他のメンバーにも見られます</strong>
-    ユーザー名は共同開発で他のメンバーにも表示されます。本名でなくてもよいので、チームの中で誰か分かる名前にしてください。
+    <strong class="title">ユーザー名は、ほかの人にも見られます</strong>
+    ユーザー名は、自分のページの URL になり、ほかの人にも表示されます。本名でなくて構いません。人に見られてもよい名前にしてください（仲間と学ぶ場合は、誰か分かる名前にしておくと便利です）。
   </div>
   <div class="box warn">
     <strong class="title">パスワードは使い回さない</strong>
@@ -332,7 +341,7 @@ core.editor=notepad</span></pre>
 + ~~~
     + CategoryInfo          : ObjectNotFound: (git:String) [], CommandNotFoundException
     + FullyQualifiedErrorId : CommandNotFoundException</span></pre>
-    PowerShell をいったん閉じて、開き直してから、もう一度試してください（インストールのあとは、開き直さないと、Git が見つからないことがあります）。それでもだめなら、月1回の集まりかチャットで質問してください。
+    PowerShell をいったん閉じて、開き直してから、もう一度試してください（インストールのあとは、開き直さないと、Git が見つからないことがあります）。それでもだめなら、表示されたエラーメッセージを、そのままインターネットで検索してみてください（仲間と学んでいる場合は、質問してください）。
     <br>これは、<strong>コマンドの名前を打ち間違えたとき</strong>にも出る、同じ形のエラーです（たとえば <code>gitt</code> と打つと、<code>'gitt'</code> として、同じ文言が出ます）。落ち着いて、綴りを確かめましょう。
   </div>
 
@@ -350,11 +359,11 @@ core.editor=notepad</span></pre>
     <p>半角英数（入力モード「A」）にしておく。日本語入力のままだと、スペースや記号が全角になり、コマンドが動かなくなる。</p>
   </details>
 
-  <h2>話し合おう（月1回の集まり用）</h2>
+  <h2>話し合おう・考えてみよう</h2>
   <ul>
     <li>インストールや設定で、つまずいたところはありましたか？</li>
     <li>GitHub のユーザー名はどんな基準でつけましたか？</li>
-    <li>共同開発に、期待していること、不安なことは何ですか？</li>
+    <li>Git や GitHub を使って、やってみたいこと、不安なことは何ですか？</li>
   </ul>
 
   <nav class="pager">
