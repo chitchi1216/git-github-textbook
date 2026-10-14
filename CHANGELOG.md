@@ -6,6 +6,7 @@
 ## 0.5.8（ドラフト）— 2026-10-14
 
 - 第0章 0-10: 手順1の検索で入力する文字を「windows powershell」に変更。検索画面の写真も、「windows powershell」と入力してベストマッチに「Windows PowerShell」が出たものに差し替え。説明文と、「PowerShell」と「Windows PowerShell」の注意書きの写真への言及を合わせて修正
+- 第2章: PowerShell を開く手順の入力も「windows powershell」に変更（第0章と統一）
 
 ## 0.5.7（ドラフト）— 2026-10-12
 
