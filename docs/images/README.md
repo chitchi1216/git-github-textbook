@@ -21,7 +21,7 @@
 | `ch00-github-signup.png` | 第0章 | https://github.com/signup の入力画面（入力前の状態でよい） |
 | `ch00-github-profile.png` | 第0章 | `https://github.com/chitchi1216` のプロフィール画面 |
 | `ch00-git-installer.png` | 第0章 | Git のインストーラー（最初の画面か、設定を選ぶ画面） |
-| `ch00-powershell-open.png` | 第0章 | スタートメニューで「PowerShell」と入力した画面 |
+| `ch00-powershell-open.png` | 第0章 | スタートメニューで「windows powershell」と入力した画面 |
 | `ch00-git-config.png` | 第0章 | PowerShell で `git config --global --list` を実行した画面（メールは隠す） |
 | `ch01-explorer-address-bar.png` | 第1章 | エクスプローラーのアドレスバーをクリックし、パスが文字で表示された画面 |
 | `ch02-explorer-vs-powershell.png` | 第2章 | 同じフォルダ（`practice`）を、エクスプローラーと PowerShell で並べた画面（アドレスバーとプロンプトが両方写るように） |
@@ -58,7 +58,7 @@
 | `ch01-folder-options.png` | 「フォルダー オプション」の「表示」タブ（赤枠：「登録されている拡張子は表示しない」にチェックを入れない） |
 | `ch02-input-mode.png` | 入力モード表示（「A」と「あ」） |
 | `ch04-browser-auth.png` | ブラウザの GitHub サインイン画面（第4章の認証） |
-| `ch00-powershell-open.png` | Windows の検索で「powershell」と入力した画面（第0章） |
+| `ch00-powershell-open.png` | Windows の検索で「windows powershell」と入力した画面（第0章） |
 | `ch02-explorer-vs-powershell.png` | エクスプローラーと PowerShell を並べた画面（第2章） |
 | `ch02-notepad.png` | メモ帳で `memo.txt` を開いた画面（第2章） |
 | `ch02-pwd-ls.png` | PowerShell で `pwd` と `ls` を打った画面（第2章と、第0章 0-10 で使用） |
