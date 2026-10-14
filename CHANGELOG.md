@@ -3,6 +3,11 @@
 版の付け方：`大.中.小`。章を追加したら「中」、誤字や表現の修正は「小」を上げる。
 版を上げるときは、`python3 tools/set_version.py 新しい版` を実行して、全ページのヘッダーを更新する。
 
+## 0.5.8（ドラフト）— 2026-10-14
+
+- 第0章 0-10: 手順1の検索で入力する文字を「windows powershell」に変更。検索画面の写真も、「windows powershell」と入力してベストマッチに「Windows PowerShell」が出たものに差し替え。説明文と、「PowerShell」と「Windows PowerShell」の注意書きの写真への言及を合わせて修正
+- 第2章: PowerShell を開く手順の入力も「windows powershell」に変更（第0章と統一）
+
 ## 0.5.7（ドラフト）— 2026-10-12
 
 - 第5章 手順4: 撮り直した実機の写真を追加（手順3〜4を PowerShell で打った画面）。GitHub の画面も、撮り直した `diary2` のものに差し替えた
