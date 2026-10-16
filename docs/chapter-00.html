@@ -9,7 +9,7 @@
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<header class="site"><a class="title" href="index.html">Git と GitHub 入門</a><span class="ver"><!--ver--><a href="https://github.com/chitchi1216/git-github-textbook/blob/main/CHANGELOG.md">版 0.5.10（ドラフト）</a> ・ 2026-10-15 ・ 作成者 <a href="https://github.com/chitchi1216">chitchi1216</a><!--/ver--></span></header>
+<header class="site"><a class="title" href="index.html">Git と GitHub 入門</a><span class="ver"><!--ver--><a href="https://github.com/chitchi1216/git-github-textbook/blob/main/CHANGELOG.md">版 0.5.11（ドラフト）</a> ・ 2026-10-16 ・ 作成者 <a href="https://github.com/chitchi1216">chitchi1216</a><!--/ver--></span></header>
 <main class="wrap">
   <p class="meta">第0章 ／ 目安 50〜70分</p>
   <h1>はじめに・準備</h1>
@@ -97,6 +97,10 @@
     <strong class="title">一人で学んでいる人へ</strong>
     STEP 2 までは、すべて一人で進められます。一人で使いこなせるようになるだけでも、十分に役立ちます。STEP 3 も、公開されているリポジトリ（この教材など）に修正を提案する方法で、一人で体験できるようにしていきます。
   </div>
+  <div class="box">
+    <strong class="title">この先にあるもの：AI と Git</strong>
+    最近は、AI に文書を書いてもらったり、作業の手順を整えてもらったりする場面が増えています。AI の道具の多くは、<strong>Git で管理されたフォルダ</strong>の中で働くように作られています。AI がファイルを書き換えても、Git があれば、<strong>どこが変わったかを確かめ、気に入らなければ元に戻せます</strong>（第5章）。この教材で学ぶことは、AI を使って日々の作業を楽にするための<strong>土台</strong>にもなります。
+  </div>
 
   <h2>0-3. 対象者</h2>
   <table>
@@ -121,10 +125,40 @@
   </table>
   <h3>用意するもの</h3>
   <ul>
-    <li><strong>Windows 11 のパソコン</strong>（自分でソフトをインストールできるもの。会社や学校のパソコンは、管理者に確認してください）</li>
+    <li><strong>Windows 11 のパソコン</strong>（Git をインストールできるもの。会社や学校のパソコンは、すぐ下の「会社や学校のパソコンで学ぶ人へ」を読んでください）</li>
     <li><strong>インターネットに接続できる環境</strong></li>
     <li><strong>メールアドレス</strong>（GitHub のアカウント登録に使います）</li>
   </ul>
+
+  <h3 id="work-pc">会社や学校のパソコンで学ぶ人へ</h3>
+  <p>会社や学校のパソコンは、<strong>ソフトのインストールに、管理者（情報システムの担当など）の許可が必要</strong>なことが多くあります。Git のインストール（0-9）で止まらないように、<strong>学習を始める前に</strong>、次の3つを確かめておきましょう。</p>
+  <div class="box warn">
+    <strong class="title">始める前に確かめる3つのこと</strong>
+    <ol>
+      <li><strong>Git をインストールしてよいか。</strong>インストールの途中で「このアプリがデバイスに変更を加えることを許可しますか？」と出て、<strong>管理者のパスワード</strong>を求められたら、自分では進められません。下の見本を使って、申請してください。</li>
+      <li><strong>GitHub を開けるか。</strong>ブラウザで <a href="https://github.com">https://github.com</a> を開いてみます。会社のネットワークの設定で、開けないことがあります。開けないときも、管理者に相談します。</li>
+      <li><strong>GitHub にファイルを置いてよいか（社内のルール）。</strong>会社によっては、外部のサービスにファイルを置くことに、決まりがあります。<strong>練習では、自分で書いた練習用の文章だけ</strong>を使い、<strong>仕事のファイル、お客様の情報、社内の資料は、置かないでください</strong>。</li>
+    </ol>
+  </div>
+  <p>申請するときは、次の見本を、自分の状況に合わせて書き換えて使ってください。</p>
+  <div class="template">件名：Git for Windows のインストールについてのお願い
+
+業務の効率化に向けた自己学習のため、次のソフトをインストールしたいと考えています。
+許可をいただけますでしょうか。
+
+・ソフトの名前：Git for Windows（無料・オープンソース）
+・入手先：https://git-scm.com/download/win （公式サイト）
+・使う目的：文書の変更履歴を記録する方法の学習
+・あわせて使うサービス：GitHub（https://github.com）
+・扱うデータ：自分で作った練習用の文章のみ（業務データは扱いません）</div>
+  <div class="box ok">
+    <strong class="title">許可を待つ間も、先に進めます</strong>
+    第1章「パソコンの仕組み」と第2章「ターミナル入門」は、<strong>Git がなくても</strong>進められます。0-8 で GitHub のアカウントを作ったら、0-9 と 0-10 は許可が出るまで後回しにして、第1章・第2章を先に進めて構いません。第3章を始める前に、0-9・0-10 に戻ってきてください。
+  </div>
+  <div class="box warn">
+    <strong class="title">ルールを、こっそり回り道しない</strong>
+    ネットには、管理者の許可なしで使える方法も紹介されていますが、会社や学校のルールに反することがあります。<strong>必ず、決められた手続きで</strong>進めてください。家のパソコンなど、自分で管理しているパソコンがあれば、そちらで学ぶのもよい方法です。
+  </div>
 
   <h2>0-4. 学び方</h2>
   <ul>
@@ -136,6 +170,24 @@
     <strong class="title">約束：壊しても大丈夫</strong>
     この教材の練習は、練習用のフォルダの中だけで行います。失敗してもパソコンは壊れません。エラーが出たら、それは「うまくいかない例」として学べるチャンスです。分からないことは、そのままにせず、エラーメッセージや、付録A「よく使うコマンド一覧」で調べてみてください（仲間と学んでいる場合は、集まりで質問しましょう）。
   </div>
+
+  <h3 id="pace">自分のペースで進めるために</h3>
+  <ul>
+    <li><strong>一度に1章、終わらせなくて大丈夫です。</strong>各章の冒頭の「目安」は、一章を通して進めたときの時間です。章の途中には「<strong>ここで一区切りしてOK</strong>」という目印があります。10〜20分しか時間がない日は、目印まで進めば十分です。目印には、<strong>次に再開するときの戻り方</strong>も書いてあります。</li>
+    <li><strong>まずは、第4章までの「一周」を目標にします。</strong>第4章まで進むと、「記録する → GitHub に送る → 受け取る」が、ひととおりできるようになります。</li>
+    <li><strong>必ずやるのは、各章の「実際にやってみよう」の手順です。</strong>「チャレンジ」「コーヒーブレイク」は、時間がなければ飛ばして構いません。あとから戻ってきて、取り組めます。</li>
+  </ul>
+  <div class="box ok">
+    <strong class="title">人と比べなくて大丈夫</strong>
+    進む速さは、人によって違います。時間がかかるのは、理解が足りないからではなく、<strong>ていねいに確かめながら進んでいる</strong>からです。この教材は、途中で止まっても、いつでも同じところから再開できるように作ってあります。仲間と学んでいる場合も、集まりは「進み具合の確認」ではなく、<strong>困ったことを持ち寄る場</strong>です。途中までしか進んでいなくても、安心して参加してください。
+  </div>
+  <h3 id="ask">困ったときの、質問のしかた</h3>
+  <p>うまくいかないときは、一人で長く悩まずに、質問してください。次の4つを書くと、相手に状況が伝わりやすく、早く解決します。</p>
+  <div class="template">① どの章の、どの手順か　（例：第3章 手順6）
+② 打ったコマンド　（そのままコピーして貼り付ける）
+③ 表示されたメッセージ　（赤い文字も含めて、そのままコピーして貼り付ける）
+④ 画面の写真　（Windows キー + Shift + S で、画面の一部を写せます）</div>
+  <p>ターミナルの文字は、<strong>マウスでなぞって選び、右クリック</strong>（または <code>Ctrl</code> + <code>C</code>）でコピーできます。メールアドレスなど、人に見せたくない部分は、消してから送ってください。</p>
 
   <h3>教材の読み方：ボックスの色の意味</h3>
   <div class="box">
@@ -191,6 +243,34 @@
     </svg>
     <figcaption>準備は3ステップ。上から順に進めます</figcaption>
   </figure>
+
+  <h3 id="ime">準備の前に：「半角英数」と「日本語」の切り替えを練習する</h3>
+  <p>この教材では、コマンドを、キーボードから打ちます。コマンドは、必ず<strong>半角英数</strong>（入力モード「A」）で打ちます。日本語入力（入力モード「あ」）のままだと、文字やスペースが<strong>全角</strong>（幅の広い文字）になり、コマンドが動きません。ここで一度、メモ帳で練習しておきましょう。</p>
+  <figure class="shot">
+    <img src="images/ch02-input-mode.png" alt="画面右下の入力モード表示。上が「A」、下が「あ」" onerror="this.parentNode.classList.add('missing')">
+    <figcaption>画面右下（時計の左あたり）の入力モード表示。上が「A」（半角英数）、下が「あ」（日本語）</figcaption>
+  </figure>
+  <ol>
+    <li>キーボードの <code>Windows</code> キーを押し、「メモ帳」と入力して、検索結果の「<strong>メモ帳</strong>」を選んで、Enter を押す</li>
+    <li>画面右下（時計の左あたり）を見る。「<strong>A</strong>」か「<strong>あ</strong>」が表示されている</li>
+    <li>キーボードの左上（<code>Esc</code> キーの下、数字の <code>1</code> の左）にある <code>半角/全角</code> キーを押す。押すたびに、「A」と「あ」が<strong>切り替わる</strong>ことを確かめる</li>
+    <li>「<strong>A</strong>」にして、<code>git --version</code> と打ち、Enter を押す</li>
+    <li>「<strong>あ</strong>」にして、同じキーを順に押す。<strong>ひらがなや、幅の広い文字</strong>が出て、下に線が付く（まだ確定していない状態）。<code>Esc</code> キーを何回か押すと、消える</li>
+    <li>もう一度「<strong>A</strong>」に戻す。メモ帳は、<strong>保存せずに閉じて</strong>構いません（「保存しますか？」と聞かれたら、「保存しない」）</li>
+  </ol>
+  <table>
+    <tr><th>入力モード</th><th>打った結果の例</th><th>コマンドとして</th></tr>
+    <tr><td>A（半角英数）</td><td><code>git --version</code></td><td>動く</td></tr>
+    <tr><td>あ（日本語）</td><td>「ぎｔ　ーーヴぇｒしおん」のように、ひらがなや全角の文字になる</td><td>動かない</td></tr>
+  </table>
+  <div class="box">
+    <strong class="title"><code>半角/全角</code> キーで切り替わらないとき</strong>
+    画面右下の「A」や「あ」の文字を、<strong>マウスでクリック</strong>しても、切り替えられます。それでも切り替わらないときは、メモ帳など、文字を打てる窓を一度クリックしてから、もう一度試してください（文字を打てる窓が選ばれていないと、表示が変わらないことがあります）。
+  </div>
+  <div class="box ok">
+    <strong class="title">迷ったら、まず「A」を確かめる</strong>
+    これから先、コマンドを打つ前は、<strong>画面右下が「A」になっているか</strong>を見るくせをつけましょう。名前など、日本語を入れたいところだけ、一時的に「あ」にして、打ち終わったら「A」に戻します。
+  </div>
 
   <h2>0-7. 登場するものを先に知る</h2>
   <table>
@@ -249,6 +329,11 @@
     <figcaption>登録後のプロフィール画面の例（ユーザー名 chitchi1216）</figcaption>
   </figure>
 
+  <div class="pause">
+    <strong class="title">☕ ここで一区切りしてOK</strong>
+    GitHub のアカウントができました。次は「0-9. Git をインストールする」からです。会社や学校のパソコンで、インストールの許可を待つ場合は、<a href="#work-pc">先に第1章・第2章へ進んで</a>構いません。
+  </div>
+
   <h2>0-9. Git をインストールする</h2>
   <ol>
     <li><a href="https://git-scm.com/download/win">https://git-scm.com/download/win</a> を開き、64-bit 版のインストーラーをダウンロードする</li>
@@ -288,12 +373,8 @@
   </figure>
   <div class="box warn">
     <strong class="title">コマンドは必ず「半角英数」で打つ</strong>
-    日本語入力がオン（「あ」の状態）のままだと、スペースや記号（「"」「-」）が<strong>全角</strong>になり、コマンドが動きません。打つ前に <code>半角/全角</code> キーを押し、画面右下（時計の左あたり）に、「A」か「あ」と表示されています。「A」になっていることを確認してください。名前の部分に日本語を入れるときだけ、一時的に日本語入力にします。
+    日本語入力がオン（「あ」の状態）のままだと、スペースや記号（「"」「-」）が<strong>全角</strong>になり、コマンドが動きません。打つ前に、画面右下（時計の左あたり）が「<strong>A</strong>」になっていることを確認してください。「あ」のときは、<code>半角/全角</code> キーを押して切り替えます（<a href="#ime">0-6 の練習</a>を参照）。名前の部分に日本語を入れるときだけ、一時的に日本語入力にします。
   </div>
-  <figure class="shot">
-    <img src="images/ch02-input-mode.png" alt="画面右下の入力モード表示。上が「A」、下が「あ」" onerror="this.parentNode.classList.add('missing')">
-    <figcaption>画面右下の入力モード表示。上が「A」（半角英数）、下が「あ」（日本語）。打つ前に、「A」になっているか確かめる</figcaption>
-  </figure>
   <h3>メールアドレスは、GitHub の「noreply アドレス」を使う</h3>
   <p>登録したメールアドレスは、これから作る<strong>記録（コミット）すべてに書き込まれます</strong>。公開リポジトリに送ると、誰でも見られます。公開されたアドレスを自動で集めるプログラムもあり、<strong>迷惑メールや詐欺メールが届く原因</strong>になります。</p>
   <p>そこで、この教材では、ふだん使っているメールアドレスの代わりに、GitHub が用意している<strong>公開用の代わりのアドレス（noreply アドレス）</strong>を登録します。noreply アドレスでも、記録は、自分の GitHub アカウントに正しく結びつきます。先に、自分の noreply アドレスを調べます。</p>
@@ -359,6 +440,21 @@ core.editor=notepad</span></pre>
     PowerShell をいったん閉じて、開き直してから、もう一度試してください（インストールのあとは、開き直さないと、Git が見つからないことがあります）。それでもだめなら、表示されたエラーメッセージを、そのままインターネットで検索してみてください（仲間と学んでいる場合は、質問してください）。
     <br>これは、<strong>コマンドの名前を打ち間違えたとき</strong>にも出る、同じ形のエラーです（たとえば <code>gitt</code> と打つと、<code>'gitt'</code> として、同じ文言が出ます）。落ち着いて、綴りを確かめましょう。
   </div>
+  <div class="box warn" id="zenkaku">
+    <strong class="title">全角の文字が混ざったときに出る表示</strong>
+    日本語入力のまま打つと、次のような表示が出ます。<strong>こういう表示が出たら、まず、入力モードが「A」になっているかを疑ってください。</strong>
+    <ul>
+      <li><code>git</code> の部分が全角（<code>ｇｉｔ</code>）になった：上と同じ「<strong>用語 'ｇｉｔ…' は、…認識されません</strong>」が出ます。<code>'</code> と <code>'</code> の間の文字が、<strong>幅の広い文字</strong>になっていることで見分けます。</li>
+      <li><code>git</code> のあとが全角になった：Git から「<code>… is not a git command</code>」（Git のコマンドではありません）や、「<code>unknown option</code>」（知らないオプション）という英語の表示が出ます。</li>
+      <li>名前を囲む <code>"</code> が全角（<code>”</code>）になった：エラーは出ませんが、<code>git config --global --list</code> で見ると、名前に <code>”</code> が付いています。<strong>半角の <code>"</code> で、もう一度打てば、上書きされます。</strong></li>
+    </ul>
+    直し方は、どれも同じです。<code>半角/全角</code> キーで「A」に戻し、<strong>全部、打ち直します</strong>。キーボードの <code>↑</code> キーで前のコマンドを呼び出して直すより、打ち直すほうが確実です。
+  </div>
+  <!-- TODO: Win11実機で確認：全角のスペースや「ｇｉｔ」を打ったときの、Windows PowerShell と Git の実際のエラー表示 -->
+  <figure class="shot">
+    <img src="images/ch00-zenkaku-error.png" alt="日本語入力のままコマンドを打ち、エラーになった PowerShell の画面" onerror="this.parentNode.classList.add('missing')">
+    <figcaption>日本語入力のまま打って、エラーになった画面の例</figcaption>
+  </figure>
 
   <h2>確認クイズ</h2>
   <details>

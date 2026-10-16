@@ -9,7 +9,7 @@
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<header class="site"><a class="title" href="index.html">Git と GitHub 入門</a><span class="ver"><!--ver--><a href="https://github.com/chitchi1216/git-github-textbook/blob/main/CHANGELOG.md">版 0.5.10（ドラフト）</a> ・ 2026-10-15 ・ 作成者 <a href="https://github.com/chitchi1216">chitchi1216</a><!--/ver--></span></header>
+<header class="site"><a class="title" href="index.html">Git と GitHub 入門</a><span class="ver"><!--ver--><a href="https://github.com/chitchi1216/git-github-textbook/blob/main/CHANGELOG.md">版 0.5.11（ドラフト）</a> ・ 2026-10-16 ・ 作成者 <a href="https://github.com/chitchi1216">chitchi1216</a><!--/ver--></span></header>
 <main class="wrap">
   <p class="meta">第3章 ／ 目安 60〜80分</p>
   <h1>Git の基本：記録をつくる</h1>
@@ -24,7 +24,15 @@
   </div>
 
   <h2>3-1. Git は「変更の記録を残す道具」</h2>
-  <p>第0章で、Git は「ファイルの変更履歴を記録する道具」と説明しました。具体的には、こんな場面で役に立ちます。</p>
+  <p>第0章で、Git は「ファイルの変更履歴を記録する道具」と説明しました。まず、身近な場面から考えてみます。<strong>職場の共有フォルダで、みんなで同じファイルを編集した</strong>ことはありませんか？ そのとき、こんな困りごとが起きがちです。</p>
+  <table>
+    <tr><th>共有フォルダで、よくある困りごと</th><th>Git を使うと</th></tr>
+    <tr><td>誰かが上書き保存して、<strong>自分が直した部分が消えていた</strong></td><td>保存のたびの「記録」が残るので、消える前の状態を取り出せる（第5章）。ほかの人と作業するときは、お互いの変更を<strong>まとめる</strong>仕組みがある（第7章以降）</td></tr>
+    <tr><td>いつの間にか内容が変わっていて、<strong>誰が、なぜ変えたのか分からない</strong></td><td>記録に「いつ・誰が・何を・なぜ」が残る（この章の <code>git log</code>）</td></tr>
+    <tr><td>「先週の版に戻したい」と思っても、<strong>古い版が残っていない</strong></td><td>記録した時点なら、いつでも戻せる（第5章）</td></tr>
+    <tr><td>念のためのコピーが増えて、<strong>どれが最新か分からない</strong></td><td>ファイルは1つのまま。古い版は、Git が裏で覚えている</td></tr>
+  </table>
+  <p>まとめると、Git は、こんな場面で役に立ちます。</p>
   <ul>
     <li>「<code>報告書_最終.docx</code>」「<code>報告書_最終_修正版.docx</code>」「<code>報告書_最終_本当に最終.docx</code>」……のように、<strong>ファイルを何個も作らなくて済む。</strong>1つのファイルのまま、過去の状態に戻れる。</li>
     <li>「いつ、誰が、なぜ、変えたのか」が、<strong>記録として残る。</strong></li>
@@ -75,6 +83,11 @@
   <div class="box">
     <strong class="title">なぜ、2段階（add と commit）なの？</strong>
     いくつかのファイルを変更したとき、<strong>「どの変更を、ひとつの記録にまとめるか」を選べる</strong>ようにするためです。たとえば、3つのファイルを変更しても、関係のある2つだけを <code>add</code> して、1つの記録にできます。写真で「写る人だけを並ばせてから、シャッターを押す」のと同じです。
+  </div>
+
+  <div class="pause">
+    <strong class="title">☕ ここで一区切りしてOK</strong>
+    次は「3-3. 実際にやってみよう」からです。
   </div>
 
   <h2>3-3. 実際にやってみよう</h2>
@@ -251,6 +264,11 @@ Date:   Sun Oct 11 10:45:12 2026 +0900
   <div class="box warn">
     <strong class="title"><code>--oneline</code> の、ハイフンは2つ</strong>
     <code>git log --oneline</code> の、<code>oneline</code> の前の<strong>ハイフンは、2つ</strong>です。<code>git log -oneline</code>（1つ）と打つと、<code>fatal: unrecognized argument: -oneline</code>（認識できない引数）というエラーになります。エラーが出たら、<code>↑</code> キーで直して、打ち直してください。
+  </div>
+
+  <div class="pause">
+    <strong class="title">☕ ここで一区切りしてOK</strong>
+    次は「手順8：もう一度、変更して、記録する」からです。再開するときは、PowerShell を開き、<code>cd C:\work\my-notes</code> で戻ってから、始めてください。
   </div>
 
   <h3>手順8：もう一度、変更して、記録する</h3>

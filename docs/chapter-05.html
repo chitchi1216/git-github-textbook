@@ -9,7 +9,7 @@
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<header class="site"><a class="title" href="index.html">Git と GitHub 入門</a><span class="ver"><!--ver--><a href="https://github.com/chitchi1216/git-github-textbook/blob/main/CHANGELOG.md">版 0.5.10（ドラフト）</a> ・ 2026-10-15 ・ 作成者 <a href="https://github.com/chitchi1216">chitchi1216</a><!--/ver--></span></header>
+<header class="site"><a class="title" href="index.html">Git と GitHub 入門</a><span class="ver"><!--ver--><a href="https://github.com/chitchi1216/git-github-textbook/blob/main/CHANGELOG.md">版 0.5.11（ドラフト）</a> ・ 2026-10-16 ・ 作成者 <a href="https://github.com/chitchi1216">chitchi1216</a><!--/ver--></span></header>
 <main class="wrap">
   <p class="meta">第5章 ／ 目安 60〜80分</p>
   <h1>一人で使いこなす：毎日の流れ・履歴を読む・取り消す</h1>
@@ -188,6 +188,16 @@ index 9827e9c..52f7f5c 100644
 git commit -m "Add day 2"
 git push</code></pre>
   <p>これで、毎日の流れを、一周しました。</p>
+  <div class="box">
+    <strong class="title">日記に慣れたら：ふだんの文書でも、同じ流れで</strong>
+    この章では日記を使いますが、流れ（書く → <code>git diff</code> で確かめる → <code>add</code> → <code>commit</code> → <code>push</code>）は、どんな文章でも同じです。慣れてきたら、<strong>会議のメモ、作業の手順書、チェックリスト</strong>など、ふだんの作業に近い文書を、自分で新しいリポジトリを作って管理してみてください。メモ帳で書ける <code>.txt</code> や <code>.md</code> のファイルが、Git と相性のよい形です。<br>
+    ただし、<strong>仕事の情報やお客様の情報は、GitHub に置かない</strong>でください（<a href="chapter-00.html#work-pc">第0章「会社や学校のパソコンで学ぶ人へ」</a>）。練習には、自分で書いた、人に見られても困らない内容を使います。
+  </div>
+
+  <div class="pause">
+    <strong class="title">☕ ここで一区切りしてOK</strong>
+    次は「5-4. 履歴を読む」からです。再開するときは、PowerShell を開き、<code>cd C:\work\diary</code> で戻ってから、始めてください。
+  </div>
 
   <h2>5-4. 履歴を読む</h2>
   <p>記録が増えてくると、「<strong>あの日、何を変えたんだっけ？</strong>」と、振り返りたくなります。<code>git log</code> で一覧を見て、<code>git show</code> で、1つの記録の中身を見ます。</p>
@@ -229,6 +239,10 @@ index 0000000..9827e9c
 
   <h2>5-5. 取り消す：3つの場面</h2>
   <p>失敗には、<strong>「どこまで進んだか」</strong>によって、3つの場面があります。第3章の「3つの場所」（作業フォルダ・ステージ・リポジトリ）を思い出してください。</p>
+  <div class="box ok">
+    <strong class="title">「戻せる」と分かると、安心して変えられる</strong>
+    共有フォルダでの作業では、「上書きしたら、元に戻せない」という心配がつきものでした。Git で記録していれば、<strong>記録した時点には、いつでも戻れます</strong>。この節では、わざと失敗して、実際に戻してみます。「戻せる」ことを一度体験しておくと、これから先、思い切ってファイルを変えられるようになります。
+  </div>
   <table>
     <tr><th>場面</th><th>どこまで進んだか</th><th>戻し方</th></tr>
     <tr><td>A</td><td>ファイルを変えて保存した（まだ <code>add</code> していない）</td><td><code>git restore ファイル名</code></td></tr>
@@ -339,6 +353,17 @@ c3e2d5c Add .gitignore</span></pre>
     <strong class="title"><code>git reset --hard</code> と <code>git push --force</code> は、まだ使わない</strong>
     ネットでは、記録を取り消す方法として、<code>git reset</code> がよく紹介されています。<code>reset</code> は、<strong>過去の記録そのものを、なかったことにする</strong>コマンドで、使い方を間違えると、記録が失われます。GitHub に送ったあとに使うと、<code>push</code> が拒否され、<code>--force</code>（強制）が必要になります。この教材では、<strong>取り消しは <code>revert</code></strong> にします。
   </div>
+
+  <details class="coffee">
+    <summary>☕ コーヒーブレイク：AI に文書を直してもらうときも、Git が役に立つ<span class="skip">（読み飛ばしてOK）</span></summary>
+    <p>AI に「この手順書を読みやすく直して」と頼むと、AI は、ファイルを<strong>まとめて書き換えて</strong>くれます。便利ですが、「どこを変えたのか」「大事な部分まで消していないか」が、気になります。この章で学んだことが、そのまま使えます。</p>
+    <ol>
+      <li><strong>頼む前に、記録する</strong>（<code>add</code> → <code>commit</code>）。これで「AI に頼む前の状態」が残ります。</li>
+      <li>AI が書き換えたら、<strong><code>git diff</code> で、変わったところを確かめる</strong>。<code>-</code> の行が消えた行、<code>+</code> の行が足された行です。</li>
+      <li>よければ、記録する。気に入らなければ、<strong><code>git restore</code> で、頼む前に戻す</strong>（場面A）。記録したあとで気づいたら、<strong><code>git revert</code></strong>（場面C）。</li>
+    </ol>
+    <p>AI を使った作業を手伝う道具の多くが、Git を前提にしているのは、このためです。「<strong>AI に任せても、確かめられる・戻せる</strong>」という安心感が、Git の大きな役割の1つです。</p>
+  </details>
 
   <h3>ここまでの流れ（まとめ）</h3>
   <table>

@@ -157,3 +157,10 @@ a.btn { display: inline-block; background: var(--accent); color: #fff; text-deco
 @media (prefers-color-scheme: dark) { a.btn { color: #0b1220; } }
 
 table.cmds td a[href^="chapter-"] { white-space: nowrap; }
+
+/* ---- ここで一区切り ---- */
+.pause { border-top: 2px dashed var(--border); border-bottom: 2px dashed var(--border); padding: 10px 4px; margin: 2em 0; color: var(--muted); font-size: .92rem; }
+.pause strong.title { display: block; color: var(--fg); margin-bottom: 2px; }
+
+/* ---- 申請文・質問文の見本 ---- */
+.template { white-space: pre-wrap; background: var(--code-bg); border: 1px solid var(--border); border-radius: 8px; padding: 12px 16px; font-size: .92rem; line-height: 1.7; }
