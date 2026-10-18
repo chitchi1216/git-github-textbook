@@ -9,7 +9,7 @@
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<header class="site"><a class="title" href="index.html">Git と GitHub 入門</a><span class="ver"><!--ver--><a href="https://github.com/chitchi1216/git-github-textbook/blob/main/CHANGELOG.md">版 0.5.11（ドラフト）</a> ・ 2026-10-16 ・ 作成者 <a href="https://github.com/chitchi1216">chitchi1216</a><!--/ver--></span></header>
+<header class="site"><a class="title" href="index.html">Git と GitHub 入門</a><span class="ver"><!--ver--><a href="https://github.com/chitchi1216/git-github-textbook/blob/main/CHANGELOG.md">版 0.5.12（ドラフト）</a> ・ 2026-10-18 ・ 作成者 <a href="https://github.com/chitchi1216">chitchi1216</a><!--/ver--></span></header>
 <main class="wrap">
   <p class="meta">第1章 ／ 目安 40〜60分</p>
   <h1>パソコンの仕組み</h1>
@@ -19,6 +19,7 @@
     <ul class="goals">
       <li>ファイルとフォルダの階層構造と「パス」を読める</li>
       <li>OS とアプリの関係、クラウドとは何かが分かる</li>
+      <li>AI のチャットと、パソコンで働く AI の道具の違い（どこでファイルを触るか）が分かる</li>
     </ul>
   </div>
 
@@ -334,6 +335,52 @@ cd C:/work\practice     ← 混ぜても動く（でも、読みにくいので�
   </figure>
   <p>GitHub も、その一つです。自分のパソコンにあるファイルの記録を、GitHub のサーバーに置くことで、別のパソコンやスマートフォンからも、同じ記録を見られるようになります。ほかの人と一緒に作るときは、離れた場所にいる人とも、同じ記録を共有できます。</p>
 
+  <h2>1-6. AI はどこで動いている？：チャットと、パソコンで働く AI</h2>
+  <p>AI の道具は、大きく2種類に分けられます。違いは、<strong>AI が「どこのファイル」を触るか</strong>です。</p>
+  <figure class="diagram">
+    <svg class="d" viewBox="0 0 640 290" role="img" aria-label="チャットの AI はベンダーのサーバーのサンドボックスで作業し、パソコンで働く AI はあなたのパソコンのフォルダを直接読み書きする図">
+      <defs><marker id="a7" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="arrowhead" d="M0 0 L10 5 L0 10 z"/></marker></defs>
+      <text class="t-md" x="160" y="18" text-anchor="middle">① チャットの AI</text>
+      <rect class="b1" x="10" y="30" width="300" height="52" rx="10"/>
+      <text class="t-md" x="160" y="52" text-anchor="middle">あなたのパソコン</text>
+      <text class="t-sm" x="160" y="72" text-anchor="middle">ブラウザやアプリで、会話するだけ</text>
+      <path class="ln" d="M160 86 V112" marker-start="url(#a7)" marker-end="url(#a7)"/>
+      <rect class="b3" x="10" y="116" width="300" height="164" rx="10"/>
+      <text class="t-md" x="160" y="138" text-anchor="middle">AI の会社のサーバー（クラウド）</text>
+      <rect class="b0" x="30" y="150" width="260" height="40" rx="8"/>
+      <text class="t-sm" x="160" y="175" text-anchor="middle">AI（考える・コードを書く）</text>
+      <rect class="b2" x="30" y="204" width="260" height="62" rx="8"/>
+      <text class="t-md" x="160" y="228" text-anchor="middle">サンドボックス</text>
+      <text class="t-sm" x="160" y="250" text-anchor="middle">使い捨ての作業場。ここで動かす</text>
+      <text class="t-md" x="480" y="18" text-anchor="middle">② パソコンで働く AI</text>
+      <rect class="b3" x="330" y="30" width="300" height="52" rx="10"/>
+      <text class="t-md" x="480" y="52" text-anchor="middle">AI の会社のサーバー（クラウド）</text>
+      <text class="t-sm" x="480" y="72" text-anchor="middle">AI（考える・コードを書く）</text>
+      <path class="ln" d="M480 86 V112" marker-start="url(#a7)" marker-end="url(#a7)"/>
+      <rect class="b1" x="330" y="116" width="300" height="164" rx="10"/>
+      <text class="t-md" x="480" y="138" text-anchor="middle">あなたのパソコン</text>
+      <rect class="b0" x="350" y="150" width="260" height="40" rx="8"/>
+      <text class="t-sm" x="480" y="175" text-anchor="middle">Claude Code・Codex・Cowork など</text>
+      <rect class="b2" x="350" y="204" width="260" height="62" rx="8"/>
+      <text class="t-md" x="480" y="228" text-anchor="middle">あなたのフォルダ</text>
+      <text class="t-sm" x="480" y="250" text-anchor="middle">ファイルを、直接読み書きする</text>
+    </svg>
+    <figcaption>「考える」のは、どちらもクラウドの AI。違うのは、<strong>ファイルを触る「手」が、どこにあるか</strong></figcaption>
+  </figure>
+  <h3>① チャットの AI：作業場は、AI の会社のサンドボックス</h3>
+  <p>ブラウザやスマートフォンで AI と会話する「チャット」は、基本的に、<strong>あなたのパソコンのファイルを触りません</strong>。</p>
+  <p>では、チャットで「グラフを作って」と頼むと、どこでプログラムが動いているのでしょうか。答えは、<strong>AI の会社のサーバーの中にある「サンドボックス」</strong>です。サンドボックスは「砂場」という意味で、<strong>外とは切り離された、使い捨ての作業場</strong>です。AI はそこでコードを書いて動かし、できた結果だけを、あなたの画面に返します。ファイルを添付したときも、そのコピーがサンドボックスへ送られるだけで、パソコンの元のファイルは変わりません。</p>
+  <h3>② パソコンで働く AI：作業場は、あなたのパソコン</h3>
+  <p>一方、<strong>Claude Code</strong>、<strong>Codex</strong>、<strong>Cowork</strong> などの道具は、<strong>あなたのパソコンの中のフォルダ</strong>で働きます。ファイルを読んだり、書き換えたり、ターミナルでコマンドを打ったりもします（第2章で学ぶ、あのターミナルです）。考えるのはクラウドの AI ですが、<strong>手を動かす場所は、あなたのパソコン</strong>です。</p>
+  <div class="box warn">
+    <strong class="title">パソコンで働く AI には、「確かめる・戻す」仕組みが必要</strong>
+    チャットの AI が失敗しても、壊れるのは使い捨てのサンドボックスだけです。でも、パソコンで働く AI は、<strong>あなたの本物のファイル</strong>を書き換えます。だからこそ、<strong>どこが変わったかを確かめ、気に入らなければ元に戻せる</strong> Git が役に立ちます（第3章・第5章）。この教材で、ファイル・パス・ターミナル・Git の基本から学ぶのは、そのためでもあります。
+  </div>
+  <div class="box">
+    <strong class="title">クラウドで動く版もある</strong>
+    Claude Code や Codex には、AI の会社のサーバー上の作業場で動く版もあります。その場合は、<strong>GitHub のリポジトリ</strong>を作業場に写して作業し、結果を GitHub に送ってきます。どちらの場合も、Git と GitHub が、AI と人のあいだの「受け渡しの場所」になります。
+  </div>
+
   <h2>確認クイズ</h2>
   <details>
     <summary>Q1. <code>C:\Users\hanako\Desktop\plan.md</code> で、ファイルはどれですか？</summary>
@@ -343,11 +390,16 @@ cd C:/work\practice     ← 混ぜても動く（でも、読みにくいので�
     <summary>Q2. GitHub にあるものはどこに保存されていますか？</summary>
     <p>インターネットの向こうにある、GitHub のサーバー。</p>
   </details>
+  <details>
+    <summary>Q3. チャットの AI に「グラフを作って」と頼みました。プログラムは、どこで動いていますか？</summary>
+    <p>AI の会社のサーバーの中の「サンドボックス」（外と切り離された、使い捨ての作業場）。あなたのパソコンのファイルは変わりません。一方、Claude Code・Codex・Cowork などは、あなたのパソコンのフォルダで、ファイルを直接読み書きします。</p>
+  </details>
 
   <h2>話し合おう・考えてみよう</h2>
   <ul>
     <li>普段のファイルの整理方法を、振り返ってみましょう（仲間がいれば、教え合ってみましょう）。デスクトップに置く派ですか？ フォルダに分ける派ですか？</li>
     <li>「保存し忘れて内容が消えた」経験はありますか？</li>
+    <li>AI に、自分のパソコンのファイルを直接書き換えてもらうとしたら、どんなことが心配ですか？ その心配は、どうすれば減らせそうですか？</li>
   </ul>
 
   <nav class="pager">
