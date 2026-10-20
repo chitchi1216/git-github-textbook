@@ -3,6 +3,10 @@
 版の付け方：`大.中.小`。章を追加したら「中」、誤字や表現の修正は「小」を上げる。
 版を上げるときは、`python3 tools/set_version.py 新しい版` を実行して、全ページのヘッダーを更新する。
 
+## 0.5.14（ドラフト）— 2026-10-20
+
+- 第3章「Git の基本」と第4章「GitHub と連携する」を、それぞれ A4 横1枚にまとめたインフォグラフィックを追加（`docs/infographic/ch03-git.png` / `.pdf`、`docs/infographic/ch04-github.png` / `.pdf`）
+
 ## 0.5.13（ドラフト）— 2026-10-20
 
 - 第2章「ターミナル入門」を A4 横1枚にまとめたインフォグラフィックを追加（`docs/infographic/ch02-terminal.png`、`docs/infographic/ch02-terminal.pdf`）
