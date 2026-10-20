@@ -66,11 +66,6 @@
 | `ch05-gitignore-terminal.png` | 第5章 手順1〜2（`git init` から `.gitignore` の記録まで。`ls -Force` で `private.txt` を確認）を PowerShell で打った画面（フォルダ名は `diary2`、`nvim` を使用） |
 | `ch05-diary-push-terminal.png` | 第5章 手順3〜4（`diary.txt` の記録から `git push -u origin main` まで）を PowerShell で打った画面（`diary2`） |
 | `ch05-diary2-github.png` | 第5章 手順4のあとの GitHub の `diary2` リポジトリ画面（`.gitignore` と `diary.txt`、2 Commits） |
-
-まだ必要な画像：
-
-| ファイル名 | 章 | 撮るもの |
-|---|---|---|
-| `ch00-zenkaku-error.png` | 第0章 0-10 | 日本語入力のまま `ｇｉｔ　－－ｖｅｒｓｉｏｎ` などを打って、エラーになった PowerShell の画面（「用語 'ｇｉｔ…' は…認識されません」が見えるように） |
+| `ch00-zenkaku-error.png` | 日本語入力のまま `ｇｉｔ　ｓｔａｔｕｓ` と打って、エラーになった PowerShell の画面（「用語 'ｇｉｔ' は、…認識されません」。第0章 0-10） |
 
 本文では使っていない画像：`ch01-explorer-extension.png`（拡張子が表示されたエクスプローラー）。
