@@ -164,3 +164,18 @@ table.cmds td a[href^="chapter-"] { white-space: nowrap; }
 
 /* ---- 申請文・質問文の見本 ---- */
 .template { white-space: pre-wrap; background: var(--code-bg); border: 1px solid var(--border); border-radius: 8px; padding: 12px 16px; font-size: .92rem; line-height: 1.7; }
+
+/* ---- トップページのお知らせ（カード） ---- */
+.notice { margin: 1.6em 0 2em; }
+.notice h2 { margin-top: 1em; }
+.cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 14px; margin: 1em 0; }
+.card { border: 1px solid var(--border); border-top: 4px solid var(--accent); border-radius: 10px; padding: 12px 16px; background: var(--bg); font-size: .93rem; line-height: 1.75; min-width: 0; }
+.card.must { border-top-color: #d64545; }
+.card.warn { border-top-color: var(--warn-border); background: var(--warn-bg); }
+.card.ok { border-top-color: var(--ok-border); }
+.card .tag { display: inline-block; font-size: .78rem; color: var(--muted); border: 1px solid var(--border); border-radius: 999px; padding: 0 10px; margin-bottom: 4px; }
+.card strong.title { display: block; font-size: 1.02rem; margin-bottom: 4px; }
+.card p { margin: .4em 0; }
+.card pre { margin: .4em 0; padding: 8px 12px; }
+.card p code { white-space: nowrap; }
+.card .note { color: var(--muted); font-size: .88rem; }
