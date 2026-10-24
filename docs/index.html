@@ -9,10 +9,50 @@
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<header class="site"><a class="title" href="index.html">Git と GitHub 入門</a><span class="ver"><!--ver--><a href="https://github.com/chitchi1216/git-github-textbook/blob/main/CHANGELOG.md">版 0.5.14（ドラフト）</a> ・ 2026-10-20 ・ 作成者 <a href="https://github.com/chitchi1216">chitchi1216</a><!--/ver--></span></header>
+<header class="site"><a class="title" href="index.html">Git と GitHub 入門</a><span class="ver"><!--ver--><a href="https://github.com/chitchi1216/git-github-textbook/blob/main/CHANGELOG.md">版 0.5.15（ドラフト）</a> ・ 2026-10-24 ・ 作成者 <a href="https://github.com/chitchi1216">chitchi1216</a><!--/ver--></span></header>
 <main class="wrap">
   <h1>Git と GitHub 入門</h1>
   <p>パソコンの基本から始めて、<strong>まず一人で Git と GitHub を使いこなし</strong>、そのあと、<strong>ほかの人と一緒に開発（共同開発）</strong>もできるようになるための教材です。一人でも、仲間と一緒でも学べます。環境は <strong>Windows 11 の PowerShell とメモ帳</strong>を使います。</p>
+
+  <section class="notice" aria-labelledby="notice-2026-10">
+    <h2 id="notice-2026-10">⚠ 大切なお知らせ：アプリを最新版にしてください</h2>
+    <p class="meta">2026年10月24日 時点の情報です。2026年10月に、インドの認証局 eMudhra の証明書に問題が見つかりました（悪用されると、偽の GitHub に気づかずつながってしまうおそれがあります）。同じ時期に、PHP の脆弱性も見つかっています。これから学ぶ人も、すでに学習を始めている人も、次のカードを確認してください。</p>
+    <div class="cards">
+      <div class="card must">
+        <span class="tag">全員</span>
+        <strong class="title">すでに Git を入れた人は、Git を最新版に</strong>
+        <p>PowerShell で <code>git --version</code> を打ちます。<code>2.56.0.windows.3</code> より古いときは、次のコマンドで更新します。</p>
+        <pre><code>git update-git-for-windows</code></pre>
+        <p class="note">これから第0章で Git を入れる人は、教材の手順どおりに入れれば最新版になるので、この作業は不要です。</p>
+      </div>
+      <div class="card must">
+        <span class="tag">全員</span>
+        <strong class="title">Windows とブラウザも最新版に</strong>
+        <p>「設定」→「Windows Update」で更新を確かめ、再起動します。Chrome や Edge は、一度閉じて開き直すと更新されます。主なブラウザと Windows は、問題の証明書をすでに使えなくしています。</p>
+      </div>
+      <div class="card">
+        <span class="tag">VS Code を使う人</span>
+        <strong class="title">VS Code と拡張機能を最新版に</strong>
+        <p>メニューの「ヘルプ」→「更新の確認」で更新します。拡張機能も、左の「拡張機能」の画面で更新があれば更新します。VS Code の Git の機能は、パソコンに入れた Git を使うので、<strong>上の Git の更新も必要</strong>です。</p>
+      </div>
+      <div class="card">
+        <span class="tag">Claude Code を使う人</span>
+        <strong class="title">Claude Code（と Node.js）を最新版に</strong>
+        <p><code>claude update</code> で更新します。npm で入れた人は、<strong>Node.js も更新</strong>します。<code>node --version</code> で確かめ、22.23.4 / 24.22.1 / 26.12.1 より古ければ、Node.js の公式サイトから最新版を入れ直します。</p>
+      </div>
+      <div class="card warn">
+        <span class="tag">AI を使う人・会社のパソコン</span>
+        <strong class="title">証明書のエラーを「確認しない」設定で消さない</strong>
+        <p><code>SSL certificate problem</code> などが出たとき、Claude Code などの AI やネットの記事が「確認を止める」設定（<code>http.sslVerify false</code> や <code>NODE_TLS_REJECT_UNAUTHORIZED=0</code>）を勧めることがあります。<strong>これは使わないでください。</strong>偽の相手を見分けられなくなります。アプリを更新しても直らないときは、表示をそのまま添えて管理者に相談します（<a href="chapter-00.html#work-pc">第0章</a>）。</p>
+      </div>
+      <div class="card ok">
+        <span class="tag">PHP について</span>
+        <strong class="title">この教材では、作業は不要です</strong>
+        <p>見つかった PHP の脆弱性は、PHP で動く Web サーバーの問題です。この教材では PHP を使わず、教材のページも PHP を使っていません。ほかの用途で PHP を使っている人は、PHP を最新版（8.5.12 / 8.4.27 / 8.3.36 / 8.2.35 以降）に更新してください。</p>
+      </div>
+    </div>
+    <p class="meta">参考：<a href="https://github.com/git-for-windows/git/releases">Git for Windows のリリース</a> ／ <a href="https://gihyo.jp/article/2026/10/emudhra-ca-key-compromise-dev-tools-fixes">gihyo.jp の解説（eMudhra）</a></p>
+  </section>
 
   <div class="box ok">
     <strong class="title">この教材も、GitHub で作られています</strong>
