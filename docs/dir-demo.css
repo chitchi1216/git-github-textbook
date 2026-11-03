@@ -56,6 +56,11 @@ ul.tree ul { margin-left: 14px; padding-left: 14px; border-left: 2px solid var(-
 /* 画面に出さない読み上げ用の状況 */
 .sr { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
 
+/* 左サイドバー（toc.css）が出ている広い画面では、サイドバーの分だけ見本の幅を減らす */
+@media (min-width: 1100px) {
+  body.has-sidenav .stage { width: min(1040px, 100vw - 328px); margin-left: calc((100% - min(1040px, 100vw - 328px)) / 2); }
+}
+
 /* 動きが苦手な人向け：動きを止める */
 @media (prefers-reduced-motion: reduce) {
   .node.here, .node.left, .explain.ng, #term .caret { animation: none; }

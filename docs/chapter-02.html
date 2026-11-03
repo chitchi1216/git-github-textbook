@@ -7,9 +7,10 @@
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="icon" href="favicon.png" sizes="32x32" type="image/png">
 <link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="toc.css">
 </head>
 <body>
-<header class="site"><a class="title" href="index.html">Git と GitHub 入門</a><span class="ver"><!--ver--><a href="https://github.com/chitchi1216/git-github-textbook/blob/main/CHANGELOG.md">版 0.6.0（ドラフト）</a> ・ 2026-11-03 ・ 作成者 <a href="https://github.com/chitchi1216">chitchi1216</a><!--/ver--></span></header>
+<header class="site"><a class="title" href="index.html">Git と GitHub 入門</a><span class="ver"><!--ver--><a href="https://github.com/chitchi1216/git-github-textbook/blob/main/CHANGELOG.md">版 0.7.0（ドラフト）</a> ・ 2026-11-03 ・ 作成者 <a href="https://github.com/chitchi1216">chitchi1216</a><!--/ver--></span></header>
 <main class="wrap">
   <p class="meta">第2章 ／ 目安 50〜70分</p>
   <h1>ターミナル入門</h1>
@@ -22,6 +23,14 @@
       <li>フォルダとファイルを、コマンドで作れる</li>
       <li>ターミナルから、メモ帳を起動して、ファイルを編集できる</li>
     </ul>
+  </div>
+
+  <div class="callout-demo slim">
+    <span class="cd-ico" aria-hidden="true">🖱</span>
+    <div class="cd-body">
+      <span class="cd-text"><strong>フォルダや <code>cd</code> が分かりにくいとき</strong>は、先に「動かして学ぶ」を試してみてください。</span>
+    </div>
+    <a class="btn" href="dir-demo.html">動かして学ぶ →</a>
   </div>
 
   <h2>2-1. ターミナルとは</h2>
@@ -182,10 +191,13 @@
     </svg>
     <figcaption>フォルダの出入りは、<code>cd</code> で行う</figcaption>
   </figure>
-  <div class="box">
-    <strong class="title">🖱 動かして確かめよう</strong>
-    「現在地」や <code>cd</code> のイメージがつかみにくいときは、ボタンを押すと木の図が動く練習ページを使ってみてください。実際のパソコンには何も起きないので、安心して試せます。<br>
-    → <a href="dir-demo.html">動かして学ぶ：ディレクトリと現在地</a>
+  <div class="callout-demo">
+    <span class="cd-ico" aria-hidden="true">🖱</span>
+    <div class="cd-body">
+      <strong class="cd-title">動かして学ぼう：ディレクトリと現在地</strong>
+      <span class="cd-text">ボタンを押すと、フォルダの木と PowerShell の画面が一緒に動きます。「今どこにいるか」「<code>cd</code> で何が起きるか」を、目で見て確かめられます。実際のパソコンには何も起きません。</span>
+    </div>
+    <a class="btn" href="dir-demo.html">試してみる →</a>
   </div>
 
   <h2>2-4. 絶対パスと相対パス</h2>
@@ -616,5 +628,6 @@ type C:\work\practice\memo.txt</code></pre>
   <a href="https://github.com/chitchi1216/git-github-textbook">ソースを見る</a> ／
   <a href="https://github.com/chitchi1216/git-github-textbook/commits/main">変更の履歴を見る</a>
 </footer>
+<script src="toc.js"></script>
 </body>
 </html>
