@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self'; img-src 'self'; font-src 'self'; base-uri 'none'; form-action 'none'">
+<title>動かして学ぶ ディレクトリと現在地 | Git と GitHub 入門</title>
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="icon" href="favicon.png" sizes="32x32" type="image/png">
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="dir-demo.css">
+</head>
+<body>
+<header class="site"><a class="title" href="index.html">Git と GitHub 入門</a><span class="ver"><!--ver--><a href="https://github.com/chitchi1216/git-github-textbook/blob/main/CHANGELOG.md">版 0.6.0（ドラフト）</a> ・ 2026-11-03 ・ 作成者 <a href="https://github.com/chitchi1216">chitchi1216</a><!--/ver--></span></header>
+<main class="wrap">
+  <p class="meta">第2章の補足 ／ 目安 10〜15分</p>
+  <h1>動かして学ぶ：ディレクトリと現在地</h1>
+
+  <div class="box">
+    <strong class="title">この補足でできるようになること</strong>
+    <ul class="goals">
+      <li>「ディレクトリ」が、エクスプローラーの「フォルダ」と同じものだと分かる</li>
+      <li>フォルダの「木」の上で、今どこにいるかを思い描ける</li>
+      <li><code>pwd</code>・<code>ls</code>・<code>cd</code> で、現在地がどう動くか説明できる</li>
+    </ul>
+  </div>
+
+  <h2>1. ディレクトリ ＝ フォルダ</h2>
+  <p><strong>ディレクトリ</strong>は、エクスプローラーの<strong>フォルダ</strong>と、同じものです。ターミナルの世界では、フォルダのことを「ディレクトリ」と呼びます（PowerShell の <code>ls</code> の表示にも、「Directory（ディレクトリ）」と出てきます）。</p>
+  <p>フォルダは、フォルダの中にフォルダを入れられるので、全体は<strong>木を逆さにしたような形</strong>になります。ターミナルは、この木のどこか<strong>1か所に立っている</strong>と考えてください。その場所が<strong>現在地</strong>です。</p>
+  <ul>
+    <li><code>pwd</code> ＝ 「今、どこ？」と聞く</li>
+    <li><code>ls</code> ＝ 「この部屋に、何がある？」と聞く</li>
+    <li><code>cd</code> ＝ 「別の部屋へ、移動する」</li>
+  </ul>
+
+  <h2>2. 動かしてみよう</h2>
+  <p>下のボタンを押すと、<strong>左の木</strong>と<strong>右の画面</strong>が一緒に動きます。ここは練習用の見本なので、実際のパソコンには何も起きません。何度押しても大丈夫です。</p>
+
+  <!-- TODO: cd の失敗時の日本語エラー文（「パス '…' が存在しないため検出できません。」）は、Windows 実機での完全一致を未確認。実機で確認したら、このコメントを消す -->
+  <div class="stage">
+  <div class="demo">
+    <section>
+      <h3>📂 フォルダの木（緑が現在地）</h3>
+      <div id="tree" aria-label="フォルダの木。緑の枠が現在地"></div>
+    </section>
+    <section>
+      <h3>⬛ PowerShell（見本）</h3>
+      <pre class="term" id="term" role="log" aria-label="ターミナルの見本の画面"></pre>
+    </section>
+  </div>
+
+  <div class="explain info" id="explain" role="status"></div>
+  <p class="sr" id="status" role="status" aria-live="polite"></p>
+
+  <div class="btns">
+    <div class="row"><span class="lbl">見る・戻る</span>
+      <button type="button" data-cmd="pwd">pwd</button>
+      <button type="button" data-cmd="ls">ls</button>
+      <button type="button" data-cmd="cd ..">cd ..</button>
+    </div>
+    <div class="row"><span class="lbl">中へ入る<small>相対パス＝今いる場所からの道案内</small></span>
+      <button type="button" data-cmd="cd practice">cd practice</button>
+      <button type="button" data-cmd="cd my-notes">cd my-notes</button>
+      <button type="button" data-cmd="cd Users">cd Users</button>
+      <button type="button" data-cmd="cd taro">cd taro</button>
+    </div>
+    <div class="row"><span class="lbl">住所で行く<small>絶対パス＝どこからでも同じ場所</small></span>
+      <button type="button" class="abs" data-cmd="cd C:\work">cd C:\work</button>
+      <button type="button" class="abs" data-cmd="cd C:\work\practice">cd C:\work\practice</button>
+      <button type="button" class="abs" data-cmd="cd C:\Users\taro">cd C:\Users\taro</button>
+    </div>
+    <div class="row"><span class="lbl"></span><button type="button" class="reset" id="reset">↺ 最初の場所（C:\work）に戻す</button></div>
+  </div>
+  </div>
+  <p class="meta">※ 実際の <code>ls</code> は、更新日時なども表示します。ここでは、分かりやすいように簡単にしています。</p>
+
+  <h2>3. ミッションに挑戦</h2>
+  <ol>
+    <li><code>cd practice</code> で中に入り、<code>ls</code> で何があるか見る。<code>pwd</code> で現在地も確かめる。</li>
+    <li><code>cd ..</code> を2回押して、<code>C:\</code> まで戻る。木の上で、現在地はどう動いた？</li>
+    <li><code>cd C:\Users\taro</code> で移動してから、<code>cd practice</code> を押す。<strong>エラーになります</strong>。なぜでしょう？</li>
+    <li>続けて <code>cd C:\work\practice</code> を押す。今度は、成功します。さっきとの違いは？</li>
+  </ol>
+  <details>
+    <summary>3 と 4 の答え</summary>
+    <p><code>practice</code> は<strong>相対パス</strong>なので、「今いる場所の中の practice」を探します。<code>C:\Users\taro</code> の中には <code>practice</code> がないので、エラーになります。</p>
+    <p><code>C:\work\practice</code> は<strong>絶対パス</strong>（住所）です。ドライブ名から全部書いてあるので、今どこにいても同じ場所に行けます。</p>
+  </details>
+
+  <div class="box ok">
+    <strong class="title">まとめ</strong>
+    ターミナルは、いつもフォルダの木の「どこか1か所」に立っています。コマンドは<strong>今いる場所に対して</strong>実行されます。困ったら、<code>pwd</code> で場所を確かめましょう。Git も、「今いるフォルダ」の記録を管理する道具です。
+  </div>
+
+  <nav class="pager">
+    <a href="chapter-02.html">← 第2章 ターミナル入門</a>
+    <a href="index.html">目次へ →</a>
+  </nav>
+</main>
+<footer class="site-foot">
+  この教材は GitHub で作られ、公開されています。
+  <a href="https://github.com/chitchi1216/git-github-textbook">ソースを見る</a> ／
+  <a href="https://github.com/chitchi1216/git-github-textbook/commits/main">変更の履歴を見る</a>
+</footer>
+<script src="dir-demo.js"></script>
+</body>
+</html>
