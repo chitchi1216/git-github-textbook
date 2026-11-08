@@ -89,6 +89,9 @@ figure.diagram svg { background: transparent; border: 1px solid var(--border); }
 .d .ln { stroke: var(--muted); stroke-width: 1.8; fill: none; }
 .d .arrowhead { fill: var(--muted); }
 
+/* ---- 動画 ---- */
+figure.video video { display: block; width: 100%; height: auto; aspect-ratio: 16 / 9; background: #000; border: 1px solid var(--border); border-radius: 8px; }
+
 /* ---- スクリーンショット差し込み枠 ---- */
 figure.shot img { display: block; max-width: 100%; height: auto; margin: 0 auto; border: 1px solid var(--border); border-radius: 8px; }
 figure.shot.missing img { display: none; }
