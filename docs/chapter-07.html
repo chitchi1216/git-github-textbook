@@ -1,0 +1,504 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>第7章 Pull Request | Git と GitHub 入門</title>
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="icon" href="favicon.png" sizes="32x32" type="image/png">
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="toc.css">
+</head>
+<body>
+<header class="site"><a class="title" href="index.html">Git と GitHub 入門</a><span class="ver"><!--ver--><a href="https://github.com/chitchi1216/git-github-textbook/blob/main/CHANGELOG.md">版 0.8.0（ドラフト）</a> ・ 2026-11-12 ・ 作成者 <a href="https://github.com/chitchi1216">chitchi1216</a><!--/ver--></span></header>
+<main class="wrap">
+  <p class="meta">第7章 ／ 目安 70〜90分</p>
+  <h1>Pull Request：枝を GitHub で合流させる</h1>
+
+  <div class="box">
+    <strong class="title">この章でできるようになること</strong>
+    <ul class="goals">
+      <li>Pull Request（PR）が何のためにあるかを、説明できる</li>
+      <li>作業した枝を、GitHub に送れる（<code>git push -u origin 枝の名前</code>）</li>
+      <li>GitHub の画面で、PR を作り、変更を見直して、合流（マージ）できる</li>
+      <li>合流のあと、手元と GitHub の枝を、片付けられる</li>
+    </ul>
+  </div>
+
+  <h2>7-1. Pull Request とは</h2>
+  <p>第6章では、作業した枝を、<strong>自分のパソコンの中で</strong> <code>git merge</code> して、<code>main</code> に合流させました。この章では、同じ「合流」を、<strong>GitHub の画面で</strong>行います。そのための仕組みが、<strong>Pull Request</strong>（プルリクエスト。略して <strong>PR</strong>）です。</p>
+  <p>PR は、ひとことで言うと、<strong>「この枝を、<code>main</code> に合流させてください」という提案</strong>です。提案には、「何を変えたか」が、画面で一覧になって付いてきます。それを見て、問題がなければ、ボタンで合流させます。</p>
+  <div class="box">
+    <strong class="title">一人なのに、なぜ「提案」するの？</strong>
+    <ul>
+      <li><strong>合流の前に、変更を「見直す」場ができる。</strong>手元の <code>git merge</code> は、打てば、すぐに合流します。PR では、変更の一覧を、落ち着いて見直してから、合流できます。</li>
+      <li><strong>「なぜ変えたか」が、記録に残る。</strong>PR の説明は、あとから、いつでも読み返せます。</li>
+      <li><strong>ほかの人との作業でも、まったく同じ流れになる。</strong>共同開発では、ほかの人に見直し（<strong>レビュー</strong>）を頼んでから、合流させます。一人のうちに、流れに慣れておくと、第9章で困りません。</li>
+    </ul>
+  </div>
+  <figure class="diagram">
+    <svg class="d" viewBox="0 0 640 260" role="img" aria-label="push で枝を GitHub に送り、PR で main に合流させ、pull で受け取る流れの図">
+      <defs><marker id="f1" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path class="arrowhead" d="M0 0 L10 5 L0 10 z"/></marker></defs>
+      <rect class="b0" x="10" y="16" width="200" height="200" rx="14"/>
+      <text class="t-md" x="110" y="44" text-anchor="middle">あなたのパソコン</text>
+      <rect class="b2" x="40" y="66" width="140" height="34" rx="8"/><text class="t-md" x="110" y="89" text-anchor="middle">add-profile</text>
+      <rect class="b1" x="40" y="156" width="140" height="34" rx="8"/><text class="t-md" x="110" y="179" text-anchor="middle">main</text>
+      <rect class="b3" x="330" y="16" width="300" height="200" rx="14"/>
+      <text class="t-md" x="480" y="44" text-anchor="middle">GitHub</text>
+      <rect class="b2" x="350" y="66" width="140" height="34" rx="8"/><text class="t-md" x="420" y="89" text-anchor="middle">add-profile</text>
+      <rect class="b1" x="350" y="156" width="140" height="34" rx="8"/><text class="t-md" x="420" y="179" text-anchor="middle">main</text>
+      <path class="ln" d="M184 83 H346" marker-end="url(#f1)"/>
+      <text class="t-md" x="265" y="74" text-anchor="middle">① push</text>
+      <path class="ln" d="M420 104 V152" marker-end="url(#f1)"/>
+      <text class="t-sm" x="502" y="124">② PR（提案）</text>
+      <text class="t-sm" x="502" y="146">③ マージ</text>
+      <path class="ln" d="M346 173 H184" marker-end="url(#f1)"/>
+      <text class="t-md" x="265" y="164" text-anchor="middle">④ pull</text>
+      <text class="t-sm muted" x="320" y="248" text-anchor="middle">合流（マージ）を、手元ではなく、GitHub の画面で行う</text>
+    </svg>
+    <figcaption>① 枝を GitHub に送る → ② PR を作る → ③ GitHub で <code>main</code> に合流させる → ④ 手元の <code>main</code> に受け取る</figcaption>
+  </figure>
+  <table>
+    <tr><th>言葉</th><th>意味</th><th>名前の由来</th></tr>
+    <tr><td>Pull Request（PR）</td><td>「この枝を、合流させてください」という提案。GitHub の画面で作る</td><td>pull ＝ 引っ張る、request ＝ お願い</td></tr>
+    <tr><td>レビュー（review）</td><td>変更を見直して、問題がないか確かめること</td><td>review ＝ 見直す</td></tr>
+    <tr><td>base（ベース）</td><td>合流<strong>先</strong>の枝。ふつうは <code>main</code></td><td>base ＝ 土台</td></tr>
+    <tr><td>compare（コンペア）</td><td>合流させ<strong>たい</strong>枝。作業した枝</td><td>compare ＝ 比べる</td></tr>
+    <tr><td>マージ（merge）</td><td>合流させること。第6章と同じ</td><td>merge ＝ 合流させる</td></tr>
+  </table>
+  <table>
+    <tr><th></th><th>第6章（手元で合流）</th><th>第7章（PR で合流）</th></tr>
+    <tr><td>合流させる場所</td><td>自分のパソコン</td><td>GitHub</td></tr>
+    <tr><td>合流させる操作</td><td><code>git merge 枝の名前</code></td><td>画面の「Merge pull request」ボタン</td></tr>
+    <tr><td>合流の前の見直し</td><td>自分で <code>git diff</code> などを打つ</td><td>変更の一覧が、画面に付いてくる</td></tr>
+    <tr><td>手元の <code>main</code> への反映</td><td>合流した時点で、反映済み</td><td><code>git pull</code> で受け取る</td></tr>
+  </table>
+
+  <h2>7-2. 実習A：枝を GitHub に送る</h2>
+  <p>第4章・第6章で使った <code>my-notes</code> で、自己紹介のファイル <code>profile.txt</code> を、<strong>別の枝で</strong>作り、その枝を GitHub に送ります。</p>
+  <div class="box warn">
+    <strong class="title">打つ前に確認</strong>
+    <ul>
+      <li>入力モードは「半角英数」に。</li>
+      <li>場所は <code>C:\work\my-notes</code>（OneDrive の外）。<code>git</code> を打つ前に、プロンプトの場所を確かめます。</li>
+      <li>表示のコミットID（<code>2e1f0d9</code> など）や、URL の <code>chitchi1216</code> は、人によって違います。URL は、自分の GitHub のユーザー名に読み替えてください。</li>
+      <li><code>profile.txt</code> には、本名や住所など、<strong>知られたくないことは書かない</strong>でください。この章では、趣味などで十分です。</li>
+    </ul>
+  </div>
+
+  <h3>手順1：準備する</h3>
+<pre><code>cd C:\work\my-notes
+git switch main
+git status
+git pull</code></pre>
+<pre class="term"><span class="ps">PS C:\work&gt; cd C:\work\my-notes</span>
+<span class="ps">PS C:\work\my-notes&gt; git switch main</span>
+<span class="out">Already on 'main'
+Your branch is up to date with 'origin/main'.</span>
+<span class="ps">PS C:\work\my-notes&gt; git status</span>
+<span class="out">On branch main
+Your branch is up to date with 'origin/main'.
+
+nothing to commit, working tree clean</span>
+<span class="ps">PS C:\work\my-notes&gt; git pull</span>
+<span class="out">Already up to date.</span></pre>
+  <p>第6章と同じく、<strong><code>main</code> にいて、「きれい」で、最新</strong>になっていることを確かめてから、始めます。<code>Already on 'main'</code> は「すでに <code>main</code> にいます」、<code>Already up to date.</code> は「すでに最新です」という意味です。</p>
+
+  <h3>手順2：枝を作って、作業して、記録する</h3>
+<pre><code>git switch -c add-profile
+New-Item profile.txt
+notepad profile.txt</code></pre>
+  <p>メモ帳が開いたら、<code>Hello! I am learning Git.</code> と書いて、<strong>最後に Enter で改行</strong>して、保存して閉じます。続けて、記録します。</p>
+<pre><code>git add profile.txt
+git commit -m "Add profile.txt"</code></pre>
+<pre class="term"><span class="ps">PS C:\work\my-notes&gt; git commit -m "Add profile.txt"</span>
+<span class="out">[add-profile 2e1f0d9] Add profile.txt
+ 1 file changed, 1 insertion(+)
+ create mode 100644 profile.txt</span></pre>
+  <p>ここまでは、第6章とまったく同じです。違うのは、ここからです。第6章では <code>main</code> に戻って <code>git merge</code> しましたが、今回は、<strong>枝のまま、GitHub に送ります</strong>。</p>
+
+  <h3>手順3：枝を、GitHub に送る</h3>
+<pre><code>git push -u origin add-profile</code></pre>
+<pre class="term"><span class="ps">PS C:\work\my-notes&gt; git push -u origin add-profile</span>
+<span class="out">Enumerating objects: 4, done.
+Counting objects: 100% (4/4), done.
+Writing objects: 100% (3/3), 320 bytes | 320.00 KiB/s, done.
+Total 3 (delta 0), reused 0 (delta 0), pack-reused 0
+remote:
+remote: Create a pull request for 'add-profile' on GitHub by visiting:
+remote:      https://github.com/chitchi1216/my-notes/pull/new/add-profile
+remote:
+To https://github.com/chitchi1216/my-notes.git
+ * [new branch]      add-profile -&gt; add-profile
+branch 'add-profile' set up to track 'origin/add-profile'.</span></pre>
+  <p>読んでみましょう。</p>
+  <ul>
+    <li><code>* [new branch] add-profile -&gt; add-profile</code>：GitHub に、<strong>新しい枝 <code>add-profile</code> ができた</strong>。</li>
+    <li><code>remote: Create a pull request for 'add-profile' …</code>：GitHub からの「この枝の PR を作るなら、この URL へ」という<strong>案内</strong>。</li>
+    <li><code>branch 'add-profile' set up to track 'origin/add-profile'.</code>：手元の <code>add-profile</code> の送り先を、GitHub の <code>add-profile</code> として<strong>覚えた</strong>。</li>
+  </ul>
+  <p class="etym">💡 <code>-u</code> は <strong>u</strong>pstream（上流＝送り先）の頭文字です。第4章で <code>git push -u origin main</code> と打ったのと、同じ意味です。一度覚えさせれば、この枝では、次から <code>git push</code> だけで送れます。</p>
+  <div class="box warn">
+    <strong class="title">「src refspec add-profile does not match any」と出たら</strong>
+    「<code>add-profile</code> という枝が、手元に見つかりません」という意味です。<strong>枝の名前の打ち間違い</strong>か、<strong>まだ1回も記録（<code>commit</code>）していない</strong>ことが、よくある原因です。<code>git branch</code> で枝の名前を、<code>git log --oneline</code> で記録を、確かめてから、打ち直します。
+  </div>
+
+  <h2>7-3. 実習B：PR を作る</h2>
+  <p>ここからは、<strong>ブラウザ</strong>で、GitHub の <code>my-notes</code> のページを開いて、操作します。</p>
+
+  <h3>手順1：「Compare &amp; pull request」を押す</h3>
+  <p><code>my-notes</code> のページの上のほうに、黄色い帯で「<strong>add-profile had recent pushes</strong>」（<code>add-profile</code> に、最近 push がありました）と出ています。その右の、緑の「<strong>Compare &amp; pull request</strong>」ボタンを押します。</p>
+  <figure class="shot">
+    <img src="images/ch07-compare-pr-button.png" alt="my-notes のページに出る、黄色い帯と「Compare &amp; pull request」ボタン" onerror="this.parentNode.classList.add('missing')">
+    <figcaption>push の直後に出る、黄色い帯と「Compare &amp; pull request」ボタン</figcaption>
+  </figure>
+  <div class="box">
+    <strong class="title">ボタンが見当たらないとき</strong>
+    黄色い帯は、しばらくすると消えます。そのときは、次のどちらかで、同じ画面を開けます。
+    <ul>
+      <li>手順3の <code>git push</code> の出力にあった URL（<code>https://github.com/…/my-notes/pull/new/add-profile</code>）を、ブラウザで開く。</li>
+      <li>ページ上の「<strong>Pull requests</strong>」タブ → 緑の「<strong>New pull request</strong>」→ 右側の「compare:」で <code>add-profile</code> を選ぶ → 変更の比較が表示されたら、緑の「<strong>Create pull request</strong>」を押す。ここで初めて、タイトルと説明の入力欄が出ます（最後に、もう一度、同じ名前のボタンで PR を作ります）。</li>
+    </ul>
+  </div>
+
+  <h3>手順2：向きを確かめて、タイトルと説明を書く</h3>
+  <p>「<strong>Open a pull request</strong>」（PR を開く）という画面になります。まず、上のほうの<strong>向き</strong>を確かめます。</p>
+<pre class="term"><span class="out">base: main  ←  compare: add-profile</span></pre>
+  <p>「<code>add-profile</code> を、<code>main</code> に合流させる」という向きです。<strong>矢印は、合流する方向</strong>を表しています。その横に、緑の文字で「<strong>Able to merge.</strong>」（合流できます）と出ていれば、問題ありません。</p>
+  <p>次に、入力欄を書きます。</p>
+  <ul>
+    <li><strong>タイトル</strong>（Add a title）：記録が1つだけなら、そのメッセージ（<code>Add profile.txt</code>）が、自動で入っています。そのままで構いません。</li>
+    <li><strong>説明</strong>（Add a description）：何を、なぜ変えたかを書きます。今回は、次のように書いてみましょう（書き方は、7-6 でくわしく見ます）。</li>
+  </ul>
+<pre><code>profile.txt を追加しました。自己紹介を書いておくためです。</code></pre>
+  <p>書けたら、下の緑の「<strong>Create pull request</strong>」（PR を作る）ボタンを押します。</p>
+  <figure class="shot">
+    <img src="images/ch07-open-pr.png" alt="「Open a pull request」の画面。base: main と compare: add-profile、タイトルと説明の入力欄" onerror="this.parentNode.classList.add('missing')">
+    <figcaption>「Open a pull request」の画面。上に向き（base ← compare）、下にタイトルと説明の入力欄がある</figcaption>
+  </figure>
+
+  <h3>手順3：できた PR を、眺める</h3>
+  <p>PR ができました。タイトルの横に <code>#1</code> のような<strong>番号</strong>が付き、緑の「<strong>Open</strong>」（開いている＝まだ合流していない）という印が出ています。画面には、いくつかの<strong>タブ</strong>があります。</p>
+  <table>
+    <tr><th>タブ</th><th>見られるもの</th></tr>
+    <tr><td>Conversation（会話）</td><td>PR の説明と、コメントのやりとり。合流のボタンも、ここにある</td></tr>
+    <tr><td>Commits（コミット）</td><td>この PR に含まれる記録の一覧</td></tr>
+    <tr><td>Files changed（変更されたファイル）</td><td>変更の中身。<code>git diff</code> の画面版</td></tr>
+  </table>
+  <p class="meta">※ PR の番号は、リポジトリの中で、1から順に付きます。以前に PR を作ったことがあれば、<code>#2</code> などになります。</p>
+
+  <div class="pause">
+    <strong class="title">☕ ここで一区切りしてOK</strong>
+    次は「7-4. 実習C」からです。PR は、合流させるまで、開いたまま残っています。再開するときは、PowerShell を開き、<code>cd C:\work\my-notes</code> で戻ってから、ブラウザで <code>my-notes</code> の「Pull requests」タブを開いてください。
+  </div>
+
+  <h2>7-4. 実習C：自分で見直す</h2>
+  <p>合流させる前に、変更を<strong>見直し</strong>ます。共同開発では、ほかの人が行う「レビュー」を、今回は、自分で行います。</p>
+
+  <h3>手順1：「Files changed」で、変更を見る</h3>
+  <p>PR の「<strong>Files changed</strong>」タブを開きます。<code>profile.txt</code> の<strong>緑の行</strong>（<code>+</code> の付いた行）が、今回、追加された行です。第3章の <code>git diff</code> と同じ読み方です。</p>
+  <p>見るだけでなく、次の3つを<strong>確かめる</strong>のが、見直し（レビュー）です。</p>
+  <ul>
+    <li><strong>変えるつもりのファイルだけか。</strong>関係のないファイルや、消すつもりのない行が、混ざっていないか。</li>
+    <li><strong>誤字や、書き漏らしがないか。</strong></li>
+    <li><strong>公開したくない情報がないか。</strong>本名、住所、メールアドレス、パスワードなどが、書かれていないか。</li>
+  </ul>
+  <figure class="shot">
+    <img src="images/ch07-files-changed.png" alt="「Files changed」タブ。profile.txt に追加された行が緑で表示されている" onerror="this.parentNode.classList.add('missing')">
+    <figcaption>「Files changed」タブ。追加された行は緑、削除された行は赤で表示される</figcaption>
+  </figure>
+
+  <h3>手順2：行に、コメントを付けてみる</h3>
+  <p>行の上にマウスを置くと、行番号の横に、青い「<strong>+</strong>」が出ます。押すと、<strong>その行へのコメント</strong>を書けます。ためしに、次のように書いて、「<strong>Comment</strong>」（画面によっては「<strong>Add single comment</strong>」）を押してみましょう。「<strong>Start a review</strong>」（レビューを始める）は、コメントを何個かためて、まとめて送るためのものです。今回は、選ばなくて大丈夫です。</p>
+<pre><code>趣味も書いておきたい。</code></pre>
+  <p>コメントは、「Conversation」タブにも表示されます。共同開発では、こうして「ここは、こう直したほうがいい」と、行を指して、やりとりします。</p>
+  <div class="box">
+    <strong class="title">自分の PR は、自分で「承認」できない</strong>
+    レビューには、「承認する（<strong>Approve</strong>）」という操作もあります。ただし、<strong>自分が作った PR は、自分で承認できません</strong>（画面で選べなくなっています）。承認は、ほかの人に頼むものだからです。ほかの人に頼むときは、PR の画面の右側の「<strong>Reviewers</strong>」（レビューする人）に、相手を指定します。第9章で、使います。
+  </div>
+
+  <h3>手順3：直して、もう一度送る</h3>
+  <p>コメントに書いたとおり、趣味を足します。<strong>PowerShell に戻って</strong>、<code>add-profile</code> にいることを確かめてから、作業します。</p>
+<pre><code>git branch
+notepad profile.txt</code></pre>
+  <p><code>* add-profile</code> になっていれば、大丈夫です。メモ帳で、2行目に <code>Hobby: walking</code>（趣味：散歩。好きな趣味に変えてOK）と書いて、<strong>最後に Enter で改行</strong>して、保存して閉じます。記録して、送ります。</p>
+<pre><code>git add profile.txt
+git commit -m "Add hobby to profile.txt"
+git push</code></pre>
+<pre class="term"><span class="ps">PS C:\work\my-notes&gt; git commit -m "Add hobby to profile.txt"</span>
+<span class="out">[add-profile 5b4a3c2] Add hobby to profile.txt
+ 1 file changed, 1 insertion(+)</span>
+<span class="ps">PS C:\work\my-notes&gt; git push</span>
+<span class="out">Enumerating objects: 5, done.
+Counting objects: 100% (5/5), done.
+Writing objects: 100% (3/3), 330 bytes | 330.00 KiB/s, done.
+Total 3 (delta 0), reused 0 (delta 0), pack-reused 0
+To https://github.com/chitchi1216/my-notes.git
+   2e1f0d9..5b4a3c2  add-profile -&gt; add-profile</span></pre>
+  <p>実習A で <code>-u</code> を付けたので、今度は <strong><code>git push</code> だけ</strong>で、<code>add-profile</code> に送れました。</p>
+  <p>ブラウザに戻って、PR のページを<strong>再読み込み</strong>（<code>F5</code>）します。「Commits」タブの記録が <strong>2つ</strong>に増え、「Files changed」にも、2行目が加わっているはずです。<strong>PR は、作ったあとも、同じ枝に push するだけで、自動で更新されます。</strong>直してから、作り直す必要はありません。</p>
+
+  <h2>7-5. 実習D：合流させて、片付ける</h2>
+
+  <h3>手順1：GitHub で、合流させる</h3>
+  <p>PR の「<strong>Conversation</strong>」タブの下のほうに、緑の「<strong>Merge pull request</strong>」（PR を合流させる）ボタンがあります。押すと、確認の欄が出るので、「<strong>Confirm merge</strong>」（合流を確定する）を押します。</p>
+  <figure class="shot">
+    <img src="images/ch07-merge-button.png" alt="Conversation タブの下にある「Merge pull request」ボタン" onerror="this.parentNode.classList.add('missing')">
+    <figcaption>「Merge pull request」ボタン。押したあと、「Confirm merge」で確定する</figcaption>
+  </figure>
+  <p>印が、紫の「<strong>Merged</strong>」（合流済み）に変わりました。GitHub の <code>main</code> に、<code>profile.txt</code> が届いています。</p>
+  <div class="box">
+    <strong class="title">ボタンの右の「▼」は、今は触らない</strong>
+    「Merge pull request」の右の <code>▼</code> では、合流のさせ方を選べます。この教材では、最初に選ばれている「<strong>Create a merge commit</strong>」（合流コミットを作る）だけを使います。第6章の実習B と同じ、「合流コミット」ができる方法です。
+  </div>
+
+  <h3>手順2：GitHub の枝を、片付ける</h3>
+  <p>合流させると、すぐ下に「<strong>Delete branch</strong>」（枝を削除する）ボタンが出ます。押して、GitHub の <code>add-profile</code> を消します。</p>
+  <figure class="shot">
+    <img src="images/ch07-delete-branch.png" alt="合流のあとに出る「Pull request successfully merged and closed」と「Delete branch」ボタン" onerror="this.parentNode.classList.add('missing')">
+    <figcaption>合流のあとに出る「Delete branch」ボタン</figcaption>
+  </figure>
+  <p>第6章の <code>git branch -d</code> と同じく、消えるのは<strong>名札だけ</strong>です。記録は <code>main</code> に合流済みなので、消えません。PR のページも、そのまま残ります。</p>
+
+  <h3>手順3：手元の <code>main</code> に、受け取る</h3>
+  <p><strong>PowerShell に戻ります。</strong>GitHub で合流させただけなので、手元の <code>main</code> は、まだ古いままです。<code>main</code> に移って、受け取ります。</p>
+<pre><code>git switch main
+git pull</code></pre>
+<pre class="term"><span class="ps">PS C:\work\my-notes&gt; git switch main</span>
+<span class="out">Switched to branch 'main'
+Your branch is up to date with 'origin/main'.</span>
+<span class="ps">PS C:\work\my-notes&gt; git pull</span>
+<span class="out">remote: Enumerating objects: 1, done.
+remote: Counting objects: 100% (1/1), done.
+remote: Total 1 (delta 0), reused 0 (delta 0), pack-reused 0 (from 0)
+Unpacking objects: 100% (1/1), 920 bytes | 61.00 KiB/s, done.
+From https://github.com/chitchi1216/my-notes
+   f1a29e4..9c8d7e6  main       -&gt; origin/main
+Updating f1a29e4..9c8d7e6
+Fast-forward
+ profile.txt | 2 ++
+ 1 file changed, 2 insertions(+)
+ create mode 100644 profile.txt</span></pre>
+  <p class="meta">※ <code>git switch main</code> のあとの <code>up to date</code>（最新です）は、「最後に GitHub を確かめたときの情報では」という意味です。GitHub で合流させたことは、<code>pull</code> するまで、手元の Git には分かりません。</p>
+  <p>手元の <code>main</code> にも、<code>profile.txt</code> が届きました。履歴の図を見てみましょう。</p>
+<pre><code>git log --oneline --graph --all</code></pre>
+<pre class="term"><span class="ps">PS C:\work\my-notes&gt; git log --oneline --graph --all</span>
+<span class="out">*   9c8d7e6 (HEAD -&gt; main, origin/main) Merge pull request #1 from chitchi1216/add-profile
+|\
+| * 5b4a3c2 (origin/add-profile, add-profile) Add hobby to profile.txt
+| * 2e1f0d9 Add profile.txt
+|/
+*   f1a29e4 Merge branch 'feature-a'</span></pre>
+  <p>いちばん上に、GitHub が作った<strong>合流コミット</strong>（<code>Merge pull request #1 …</code>）があります。メッセージに、<strong>PR の番号</strong>が入っているので、あとから「どの PR で合流したか」をたどれます。（下に、第6章までの記録が続きます。）</p>
+
+  <h3>手順4：手元の枝と、名残を片付ける</h3>
+<pre><code>git branch -d add-profile
+git fetch --prune
+git branch -a</code></pre>
+<pre class="term"><span class="ps">PS C:\work\my-notes&gt; git branch -d add-profile</span>
+<span class="out">Deleted branch add-profile (was 5b4a3c2).</span>
+<span class="ps">PS C:\work\my-notes&gt; git fetch --prune</span>
+<span class="out">From https://github.com/chitchi1216/my-notes
+ - [deleted]         (none)     -&gt; origin/add-profile</span>
+<span class="ps">PS C:\work\my-notes&gt; git branch -a</span>
+<span class="out">* main
+  remotes/origin/main</span></pre>
+  <ul>
+    <li><code>git branch -d add-profile</code>：手元の枝を消します（第6章と同じ）。</li>
+    <li><code>git fetch --prune</code>：手元には、「GitHub に <code>add-profile</code> がある」という<strong>古い情報</strong>（<code>origin/add-profile</code>）が残っています。GitHub で消えた枝の情報を、手元からも<strong>刈り取ります</strong>。<code>(none)</code> の行は「<code>origin/add-profile</code> を消した」という意味です。</li>
+    <li><code>git branch -a</code>：手元の枝に加えて、<strong>GitHub の枝の情報</strong>（<code>remotes/origin/…</code>）も、まとめて表示します。<code>main</code> だけになっていれば、片付け完了です。</li>
+  </ul>
+  <p class="etym">💡 <code>prune</code> は、庭木の「枝を刈り込む」という意味です。<code>-a</code> は <strong>a</strong>ll（すべて）の頭文字です。</p>
+
+  <h3>PR の流れ（まとめ）</h3>
+  <ol>
+    <li><code>git switch -c 枝の名前</code>：枝を作って、移る</li>
+    <li>作業して、<code>add</code> → <code>commit</code></li>
+    <li><code>git push -u origin 枝の名前</code>：枝を GitHub に送る</li>
+    <li>GitHub で、PR を作る（Compare &amp; pull request → Create pull request）</li>
+    <li>「Files changed」で見直す。直すなら、手元で <code>commit</code> → <code>git push</code></li>
+    <li>Merge pull request → Confirm merge → Delete branch</li>
+    <li><code>git switch main</code> → <code>git pull</code> → <code>git branch -d 枝の名前</code> → <code>git fetch --prune</code></li>
+  </ol>
+  <div class="box">
+    <strong class="title">GitHub の画面だけでも、PR を作れる</strong>
+    第4章のチャレンジ1で、GitHub の画面で <code>hello.txt</code> を編集したとき、「Commit changes」の画面に、<code>Create a new branch for this commit and start a pull request</code>（この記録のために新しい枝を作り、PR を始める）という選択肢がありました。これを選ぶと、GitHub が<strong>枝を作り</strong>（名前は <code>ユーザー名-patch-1</code> のように自動で付きます。変えてもOK）、そのまま「Open a pull request」の画面に進みます。そこからあとは、この章の 7-3 の手順2と同じです。
+    <ul>
+      <li>誤字を1文字直すような<strong>小さな変更</strong>なら、この方法が手軽です。</li>
+      <li>合流させたあとは、手元で <code>git switch main</code> → <code>git pull</code> → <code>git fetch --prune</code> を打ちます。枝は GitHub にしか作られていないので、<code>git branch -d</code> は要りません。</li>
+    </ul>
+  </div>
+  <!-- TODO: Win11実機で確認：git push -u origin add-profile の出力（remote: の案内）、GitHub の各画面の表記（Compare & pull request、Able to merge、行コメントの Comment（Add single comment）、New pull request からの比較画面、Merge pull request、Delete branch）、git pull・git fetch --prune・git branch -a の表示 -->
+
+  <h2>7-6. 伝わる PR の書き方</h2>
+  <p>PR の説明は、<strong>未来の自分や、ほかの人への手紙</strong>です。半年後に読み返しても分かるように、次の3つを書く習慣をつけましょう。</p>
+  <table>
+    <tr><th>項目</th><th>書くこと</th></tr>
+    <tr><td>何を</td><td>何を変えたか。ファイル名や、変えた中身</td></tr>
+    <tr><td>なぜ</td><td>なぜ変えたか。<strong>いちばん大切</strong>。変更の中身は画面で見られるが、理由は書かないと残らない</td></tr>
+    <tr><td>確かめたこと</td><td>動くか、表示が正しいかなど、自分で確かめたこと</td></tr>
+  </table>
+  <p>見本です。説明の欄には、この形のまま書けます。</p>
+<pre><code>## 何を
+profile.txt に、自己紹介と趣味を書きました。
+
+## なぜ
+自分のリポジトリを見た人に、どんな人が書いているか分かるようにするためです。
+
+## 確かめたこと
+- Files changed で、2行が追加されていることを見ました。</code></pre>
+  <p>説明の欄では、<code>##</code> で始まる行が<strong>見出し</strong>に、<code>-</code> で始まる行が<strong>箇条書き</strong>になります（「<strong>Markdown</strong>」という書き方です）。入力欄の上の「<strong>Preview</strong>」タブを押すと、仕上がりを確かめられます。</p>
+  <div class="box">
+    <strong class="title">PR は、小さく分ける</strong>
+    1つの PR には、<strong>1つの作業</strong>だけを入れます（第6章の「1つの作業を1つの枝に」と同じ考えです）。「プロフィールを書く」と「誤字を直す」は、別々の PR にします。小さい PR ほど、見直しやすく、間違いに気づきやすくなります。
+  </div>
+
+  <details class="coffee">
+    <summary>☕ コーヒーブレイク：なぜ「Pull」Request なのか<span class="skip">（読み飛ばしてOK）</span></summary>
+    <p>自分が送る（push）のに、なぜ「pull（引っ張る）」と呼ぶのでしょうか。それは、<strong>相手の立場</strong>から見た言葉だからです。「私の変更を、あなたのリポジトリに<strong>引っ張って（pull して）</strong>ください」というお願い（request）、という意味です。</p>
+    <p>もともと Git には、「私の変更を、取り込んでください」という依頼文を作って、<strong>メールで送る</strong>仕組みがありました。GitHub は、このやりとりを、ブラウザの画面でできるようにしました。そのため、同じ「Pull Request」の名前が使われています。</p>
+    <p>なお、GitHub とよく似たサービスの <strong>GitLab</strong> では、同じ仕組みを「<strong>Merge Request</strong>（合流のお願い）」と呼びます。こちらは、合流させる側から見た名前です。呼び名は違っても、中身は同じです。</p>
+    <p class="meta">※ 年代や経緯には、諸説あります。</p>
+  </details>
+
+  <h2>7-7. チャレンジ</h2>
+  <p>必須ではありません。実習A〜D が終わった状態から、始めます。</p>
+
+  <div class="challenge">
+    <strong class="title">🎯 チャレンジ1 <span class="level">★☆☆</span>　合流済みの PR を、探す</strong>
+    <p>合流させた PR は、「Pull requests」タブの一覧から、消えたように見えます。<strong>実習で作った PR を、もう一度、開いてください。</strong></p>
+    <details>
+      <summary>ヒント</summary>
+      <p>一覧の上に、「<strong>Open</strong>」と「<strong>Closed</strong>」の2つの切り替えがあります。</p>
+    </details>
+    <details>
+      <summary>こたえと解説</summary>
+      <p>「Pull requests」タブで、「<strong>Closed</strong>」（閉じたもの）を押します。紫の印の付いた PR が、合流済みのものです。一覧に最初に出るのは、<strong>まだ開いている（Open）PR だけ</strong>です。合流させた PR は「閉じた」扱いになりますが、消えたわけではありません。説明やコメントも、いつでも読み返せます。</p>
+    </details>
+  </div>
+
+  <div class="challenge">
+    <strong class="title">🎯 チャレンジ2 <span class="level">★★☆</span>　合流させずに、PR を閉じる</strong>
+    <p>試してみたけれど、やっぱり要らない、という変更もあります。枝 <code>try-close</code> で、<code>hello.txt</code> の最後に <code>test line</code> という行を足して記録し、GitHub に送って PR を作ってください。そして、<strong>合流させずに</strong>、PR を閉じて、GitHub と手元の枝を片付けてください。</p>
+    <details>
+      <summary>ヒント</summary>
+      <p>PR の「Conversation」タブの下のほうに、「Merge pull request」のほかに、<strong>「Close pull request」</strong>（PR を閉じる）ボタンがあります。手元では、<strong>先に <code>git fetch --prune</code> で名残を刈り取ってから</strong>、枝を消します。手元の枝は <code>main</code> に<strong>合流していない</strong>ので、第6章の「<code>-d</code> と <code>-D</code>」を、思い出してください。</p>
+    </details>
+    <details>
+      <summary>こたえと解説</summary>
+<pre><code>git switch main
+git switch -c try-close
+notepad hello.txt
+git add hello.txt
+git commit -m "Add test line"
+git push -u origin try-close</code></pre>
+      <p>GitHub で PR を作ったら、「<strong>Close pull request</strong>」を押します。印が、赤の「<strong>Closed</strong>」になります（紫の「Merged」とは違います）。出てきた「Delete branch」で、GitHub の枝を消します。</p>
+      <p>手元では、<code>main</code> に戻り、<strong>先に名残を刈り取ってから</strong>、枝を消そうとします。</p>
+<pre><code>git switch main
+git fetch --prune
+git branch -d try-close</code></pre>
+<pre class="term"><span class="ps">PS C:\work\my-notes&gt; git branch -d try-close</span>
+<span class="out">error: the branch 'try-close' is not fully merged
+hint: If you are sure you want to delete it, run 'git branch -D try-close'</span></pre>
+      <p><code>not fully merged</code>（合流していない）と、止められました。（<code>hint:</code> の行は、Git の版によって、少し違うことがあります。）<strong>今回は「要らない」と分かっていて、捨てる</strong>ので、ここは大文字の <code>-D</code> で消します。</p>
+<pre><code>git branch -D try-close</code></pre>
+      <div class="box warn">
+        <strong class="title">順番に注意：<code>fetch --prune</code> が先</strong>
+        <code>push -u</code> で送り先を覚えさせた枝では、<code>-d</code> は「<strong>送り先（<code>origin/try-close</code>）に、送ってあるか</strong>」を先に確かめます。名残（<code>origin/try-close</code>）が手元に残っている間は、「送ってあるから大丈夫」と判断して、警告を出しながらも、<strong>消してしまいます</strong>。名残を刈り取ってからなら、今いる <code>main</code> に合流しているかで判断するので、止めてくれます。
+      </div>
+      <p><code>main</code> の <code>hello.txt</code> には、<code>test line</code> は入っていません。<strong>PR は「提案」なので、合流させなければ、<code>main</code> は変わりません。</strong>閉じた PR も、「Closed」の一覧に残ります。</p>
+    </details>
+  </div>
+
+  <div class="challenge">
+    <strong class="title">🎯 チャレンジ3 <span class="level">★★★</span>　2つの PR を、同時に出す</strong>
+    <p>次の2つの作業を、<strong>別々の枝・別々の PR</strong> にして、2つとも開いた状態にしてから、順に合流させてください。</p>
+    <ol>
+      <li>枝 <code>add-todo</code>：<code>todo.txt</code> を作り、<code>buy milk</code> と書く</li>
+      <li>枝 <code>add-links</code>：<code>links.txt</code> を作り、<code>https://github.com</code> と書く</li>
+    </ol>
+    <p>最後に、手元の <code>main</code> に、両方のファイルが届いていることを確かめてください。</p>
+    <details>
+      <summary>ヒント</summary>
+      <p>2つ目の枝を作る前に、<strong><code>git switch main</code> で、<code>main</code> に戻ってから</strong>作ります。<code>add-todo</code> にいるまま作ると、<code>add-links</code> に <code>todo.txt</code> も入ってしまいます。</p>
+    </details>
+    <details>
+      <summary>こたえと解説</summary>
+<pre><code>git switch main
+git switch -c add-todo
+New-Item todo.txt
+notepad todo.txt
+git add todo.txt
+git commit -m "Add todo.txt"
+git push -u origin add-todo
+
+git switch main
+git switch -c add-links
+New-Item links.txt
+notepad links.txt
+git add links.txt
+git commit -m "Add links.txt"
+git push -u origin add-links</code></pre>
+      <p>GitHub で、2つの PR を作ります。「Pull requests」タブに、<strong>2つが並んで</strong>開いているはずです。それぞれの「Files changed」には、<strong>自分の枝のファイルだけ</strong>が出ています。1つずつ「Merge pull request」→「Confirm merge」→「Delete branch」と進めます。1つ目を合流させたあとでも、2つ目は「This branch has no conflicts with the base branch」（合流先の枝と、ぶつかるところはありません）と出て、そのまま合流できます。<strong>別々のファイル</strong>を変えたからです。</p>
+<pre><code>git switch main
+git pull
+git branch -d add-todo
+git branch -d add-links
+git fetch --prune
+ls</code></pre>
+      <p><code>ls</code> で、<code>todo.txt</code> と <code>links.txt</code> の両方が見えれば、成功です。作業ごとに枝と PR を分けておけば、<strong>片方だけを先に合流させたり、片方だけを取りやめたり</strong>できます。</p>
+      <div class="box">
+        <strong class="title">2つの PR が、同じ行を変えていたら？</strong>
+        1つ目を合流させたあと、2つ目の PR に「<strong>This branch has conflicts that must be resolved</strong>」（解決が必要な衝突があります）と出て、そのままでは合流できません。これが、第6章で触れた「<strong>コンフリクト（衝突）</strong>」です。次の第8章で、わざと起こして、解消します。
+      </div>
+    </details>
+  </div>
+  <!-- TODO: Win11実機で確認：Close pull request・Closed の表示、fetch --prune のあとの git branch -d の拒否（not fully merged と hint: 行）・git branch -D の表示、2つの PR を順に合流させたときの表示 -->
+
+  <div class="box">
+    <strong class="title">コマンドの早見表</strong>
+    この章のコマンドは、<a href="appendix-commands.html">付録A「よく使うコマンド一覧」</a>にも載せています。
+  </div>
+
+  <h2>確認クイズ</h2>
+  <details>
+    <summary>Q1. Pull Request（PR）とは、ひとことで言うと、何ですか？</summary>
+    <p>「この枝を、<code>main</code>（などの枝）に合流させてください」という提案。GitHub の画面で作り、変更の一覧を見直してから、合流させる。</p>
+  </details>
+  <details>
+    <summary>Q2. 枝 <code>add-profile</code> を、初めて GitHub に送るコマンドは？</summary>
+    <p><code>git push -u origin add-profile</code>。<code>-u</code> で送り先を覚えさせるので、この枝では、次から <code>git push</code> だけで送れる。</p>
+  </details>
+  <details>
+    <summary>Q3. PR を作ったあとで、直したいところが見つかりました。PR を作り直す必要がありますか？</summary>
+    <p>ない。手元の同じ枝で直して、<code>commit</code> → <code>git push</code> すれば、PR は自動で更新される。</p>
+  </details>
+  <details>
+    <summary>Q4. GitHub で PR を合流させました。手元の <code>main</code> にも、すぐに変更が入っていますか？</summary>
+    <p>入っていない。合流したのは GitHub の <code>main</code> だけ。<code>git switch main</code> → <code>git pull</code> で、手元に受け取る。</p>
+  </details>
+  <details>
+    <summary>Q5. GitHub で「Delete branch」を押したのに、<code>git branch -a</code> に <code>remotes/origin/add-profile</code> が残っています。どうすれば消えますか？</summary>
+    <p><code>git fetch --prune</code>。GitHub で消えた枝の、手元に残った古い情報を、刈り取る。</p>
+  </details>
+
+  <h2>話し合おう・考えてみよう</h2>
+  <ul>
+    <li>一人で作業するとき、手元の <code>git merge</code> と、PR での合流を、どう使い分けますか？</li>
+    <li>ほかの人の PR を見直す（レビューする）とき、どんなことに気をつけて、コメントを書きますか？ 言われてうれしいコメント、つらいコメントは、どんなものでしょう？</li>
+    <li>半年後の自分が、PR の説明を読み返したとき、「書いておいてよかった」と思うのは、どんなことでしょう？</li>
+  </ul>
+
+  <nav class="pager">
+    <a href="chapter-06.html">← 第6章 ブランチ</a>
+    <span class="meta">第8章は準備中</span>
+  </nav>
+</main>
+<footer class="site-foot">
+  この教材は GitHub で作られ、公開されています。
+  <a href="https://github.com/chitchi1216/git-github-textbook">ソースを見る</a> ／
+  <a href="https://github.com/chitchi1216/git-github-textbook/commits/main">変更の履歴を見る</a>
+</footer>
+<script src="toc.js"></script>
+</body>
+</html>

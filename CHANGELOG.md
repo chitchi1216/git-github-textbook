@@ -3,6 +3,18 @@
 版の付け方：`大.中.小`。章を追加したら「中」、誤字や表現の修正は「小」を上げる。
 版を上げるときは、`python3 tools/set_version.py 新しい版` を実行して、全ページのヘッダーを更新する。
 
+## 0.8.0（ドラフト）— 2026-11-12
+
+- 第7章「Pull Request：枝を GitHub で合流させる」（`docs/chapter-07.html`）を追加した。一人で進められる流れ（枝を push → PR を作る → 自分で見直す → GitHub で合流 → 手元を片付ける）。人にレビューを頼む方法（Reviewers）は紹介だけにし、第9章で扱う
+  - 7-1 PR とは（第6章の手元の合流との比較表と図）／7-2 実習A `git push -u origin add-profile`／7-3 実習B PR を作る／7-4 実習C Files changed での見直し・行コメント・追加の push／7-5 実習D Merge pull request・Delete branch・`git pull`・`git fetch --prune`／7-6 伝わる PR の書き方（何を・なぜ・確かめたこと）／コーヒーブレイク（名前の由来、GitLab の Merge Request）／7-7 チャレンジ3問／確認クイズ・話し合おう
+  - 7-5 のまとめのあとに「GitHub の画面だけでも、PR を作れる」の囲みを追加（第4章 チャレンジ1の「Create a new branch for this commit and start a pull request は第7章で使う」の予告を回収）
+  - dog のレビュー（CH07-01〜05）を反映：チャレンジ2を「`fetch --prune` → `-d`（止まる）→ `-D`」の順にし、送り先を覚えさせた枝の `-d` の判定を説明（付録A の `git branch -d` も補足）／行コメントの送信ボタンを「Comment（画面によっては Add single comment）」に／「New pull request」からの道順に比較画面の「Create pull request」を追加／コーヒーブレイクでコマンド名（`git request-pull`）を出さない説明に／7-4 に見直しの3つの観点を追加
+  - 合流のさせ方は、初期設定の「Create a merge commit」だけを使う。`main` の保護（ルールセット）は扱わない
+  - GitHub の画面の写真5枚は、撮影リスト（`docs/images/README.md`）に追加した。撮るまでは画像枠だけを表示する
+- 付録A: `git push -u origin 枝の名前`、`git fetch --prune`、`git branch -a`、`git branch -D` を追加
+- 目次（`index.html`）・左サイドバー（`toc.js`）の第7章を公開に切り替え、第6章の末尾に第7章へのリンクを追加
+  - 画面の写真と Win11 実機の確認が済んでいないため、第7章には目次・サイドバーとも「作成中」の印を付けた。サイドバーは `CHAPTERS` の `tag` で出し分ける（完成したら `tag` を消す）
+
 ## 0.7.1（ドラフト）— 2026-11-08
 
 - 第0章 0-7: 全体を先に見渡す紹介動画（1分9秒、`docs/videos/intro-powershell-git.mp4`）を追加した。第0話「PowerShell の使い方」と第1話「Git と GitHub の使い方」をつないだもの

@@ -44,6 +44,11 @@
 | `ch04-repo-after-push.png` | `push` のあとの GitHub のリポジトリ画面（メールアドレスは塗りつぶし。第4章） |
 | `ch04-browser-auth.png` | 第4章 | 初めて `git push` したときに開く、ログイン・許可の画面 |
 | `ch04-edit-file.png` | 第4章 | GitHub の画面で `hello.txt` を編集して、「Commit changes」を押す画面 |
+| `ch07-compare-pr-button.png` | 第7章 | `git push -u origin add-profile` の直後の `my-notes` のページ（黄色い帯「add-profile had recent pushes」と「Compare & pull request」ボタン） |
+| `ch07-open-pr.png` | 第7章 | 「Open a pull request」の画面（`base: main ← compare: add-profile`、Able to merge、タイトルと説明の入力欄） |
+| `ch07-files-changed.png` | 第7章 | PR の「Files changed」タブ（`profile.txt` の追加行が緑。できれば行コメントも写す） |
+| `ch07-merge-button.png` | 第7章 | PR の「Conversation」タブの下にある「Merge pull request」ボタン |
+| `ch07-delete-branch.png` | 第7章 | 合流のあとの「Pull request successfully merged and closed」と「Delete branch」ボタン（紫の Merged の印も写す） |
 
 ## 追加済みの画像
 

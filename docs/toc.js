@@ -2,6 +2,7 @@
  * 外部ライブラリなし・通信なし。画面の文字は textContent だけで作る（innerHTML は使わない）。
  * JavaScript が使えないときは、サイドバーが出ないだけで、ページはそのまま読める。
  * 章を増やしたら、下の CHAPTERS に1行足す（準備中の章は file を null にする）。
+ * 公開したが、まだ書き足している章は tag: '作成中' を付ける（完成したら tag を消す）。
  */
 (function () {
   'use strict';
@@ -14,7 +15,7 @@
     { no: '第4章', title: 'GitHub と連携する：送る・受け取る', file: 'chapter-04.html' },
     { no: '第5章', title: '一人で使いこなす', file: 'chapter-05.html' },
     { no: '第6章', title: 'ブランチ：作業を枝分かれさせる', file: 'chapter-06.html' },
-    { no: '第7章', title: 'Pull Request', file: null },
+    { no: '第7章', title: 'Pull Request', file: 'chapter-07.html', tag: '作成中' },
     { no: '第8章', title: 'コンフリクトの解消', file: null },
     { no: '第9章', title: '共同開発演習', file: null }
   ];
@@ -58,6 +59,7 @@
     a.setAttribute('href', c.file);
     a.appendChild(el('span', 'no', c.no));
     a.appendChild(el('span', 'tt', c.title));
+    if (c.tag) a.appendChild(el('span', 'tag', c.tag));
     li.appendChild(a);
     if (c.file === here) {
       li.className = 'current';
